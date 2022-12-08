@@ -2,16 +2,16 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "datapmsi",
+    "title": "Exploiter les data PMSI avec R",
     "section": "",
-    "text": "news\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nOct 22, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nOct 19, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "If you a"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this blog"
+    "text": "About this blog aaa"
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -26,5 +26,61 @@
     "title": "Welcome To My Blog",
     "section": "",
     "text": "Since this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "index.html#pré-requis",
+    "href": "index.html#pré-requis",
+    "title": "Exploiter les data PMSI avec R",
+    "section": "Pré-requis",
+    "text": "Pré-requis\nsdqsd\n\nInstall latest version of RStudio, v2022.07.0-548 or later\nInstall latest version of Quarto (v1.0.36 or greater)\ntidyverse packages and friends\n\nggplot2, readr, tibble, dplyr, tidyr, forcats, stringr, lubridate, here, systemfonts, scales\n\nextension packages\n\nggrepel, ggforce, ggtext, ggdist, ggbeeswarm, gghalves, ggblur, patchwork\n\n\n\npkg_list <- c(\n  \"tidyverse\", \"gt\", \"gtExtras\", \"reactable\", \"ggiraph\", \"here\", \"quarto\",\n  \"rmarkdown\", \"gtsummary\", \"palmerpenguins\", \"fs\", \"skimr\"\n  )\ninstall.packages(pkg_list)"
+  },
+  {
+    "objectID": "index.html#pédagogie",
+    "href": "index.html#pédagogie",
+    "title": "Exploiter les data PMSI avec R",
+    "section": "Pédagogie",
+    "text": "Pédagogie\nqsdqd"
+  },
+  {
+    "objectID": "index.html#packages",
+    "href": "index.html#packages",
+    "title": "Exploiter les data PMSI avec R",
+    "section": "Packages",
+    "text": "Packages\n\ntidyverse packages and friends\n\nggplot2, readr, tibble, dplyr, tidyr, forcats, stringr, lubridate, here, systemfonts, scales\n\nextension packages\n\nggrepel, ggforce, ggtext, ggdist, ggbeeswarm, gghalves, ggblur, patchwork\n\n\n\npkg_list <- c(\n  \"tidyverse\", \"gt\", \"gtExtras\", \"reactable\", \"ggiraph\", \"here\", \"quarto\",\n  \"rmarkdown\", \"gtsummary\", \"palmerpenguins\", \"fs\", \"skimr\"\n  )\ninstall.packages(pkg_list)"
+  },
+  {
+    "objectID": "dataset_mco.html",
+    "href": "dataset_mco.html",
+    "title": "Jeux PMSI MCO",
+    "section": "",
+    "text": "sdfsf"
+  },
+  {
+    "objectID": "formations/pmsi_mco_requete.html",
+    "href": "formations/pmsi_mco_requete.html",
+    "title": "PMSI MCO Requête",
+    "section": "",
+    "text": "Note\n\n\n\nDepending on learner questions - the exact timing is subject to change."
+  },
+  {
+    "objectID": "formations/pmsi_mco_requete.html#tarif",
+    "href": "formations/pmsi_mco_requete.html#tarif",
+    "title": "PMSI MCO Requête",
+    "section": "Tarif",
+    "text": "Tarif"
+  },
+  {
+    "objectID": "formations/pmsi_mco_requete.html#bulletin-dinscription",
+    "href": "formations/pmsi_mco_requete.html#bulletin-dinscription",
+    "title": "PMSI MCO Requête",
+    "section": "Bulletin d’inscription",
+    "text": "Bulletin d’inscription"
+  },
+  {
+    "objectID": "formations/pmsi_mco_requete_day1_module1.html",
+    "href": "formations/pmsi_mco_requete_day1_module1.html",
+    "title": "PMSI MCO Requête - Module ‘Les essentiels’",
+    "section": "",
+    "text": "Liste des requêtes\n\nsdfs\nsfdf"
   }
 ]

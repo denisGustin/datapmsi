@@ -59,7 +59,6 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -78,16 +77,21 @@ ul.task-list li input[type="checkbox"] {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page">About</a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-jeux-de-données" role="button" data-bs-toggle="dropdown" aria-expanded="false">Jeux de données</a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-jeux-de-données">    
+        <li>
+    <a class="dropdown-item" href="./dataset_mco.html">
+ <span class="dropdown-text">Jeux PMSI MCO</span></a>
   </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/"><i class="bi bi-github" role="img">
-</i> 
- </a>
+        <li>
+    <a class="dropdown-item" href="./about.html">
+ <span class="dropdown-text">Jeux PMSI SSR</span></a>
   </li>  
+    </ul>
+  </li>
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com"><i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://github.com/denisGustin/datapmsi"><i class="bi bi-github" role="img">
 </i> 
  </a>
   </li>  
@@ -226,6 +230,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Blog codé avec <a href="https://quarto.org/">Quarto</a></div>   
+    <div class="nav-footer-right">© Copyright 2022, DATAMIS</div>
+  </div>
+</footer>
 
 
 

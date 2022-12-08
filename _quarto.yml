@@ -3,17 +3,42 @@ project:
 
 website:
   title: "Data PMSI"
+  description: "Formations PMSI MCO, PMSI SSR avec R et tidyverse"
   navbar:
-    right:
-      - about.qmd
+    background: "#447099"
+    right: 
+      - text: "Jeux de données"
+        menu:
+          - href: "dataset_mco.qmd"
+            text: "Jeux PMSI MCO"
+          - href: "dataset_ssr.qmd"
+            text: "Jeux PMSI SSR"
       - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+        href: https://github.com/denisGustin/datapmsi
+
+  sidebar: 
+    style: docked
+    contents: 
+      - section: "Formations MCO"
+        contents: 
+          - href: formations/pmsi_mco_requete.qmd
+            text: "Requêtes MCO"
+          - href: formations/pmsi_mco_requete_avance.qmd
+            text: "Requêtes MCO [Avancé]"
+          - href: formations/pmsi_mco_tableau.qmd
+            text: "Tableau MCO"
+      - section: "Formations SSR"
+        contents:
+          - href: formations/pmsi_ssr_requete.qmd
+            text: "Requêtes SSR"
+
+  page-footer:
+    left: "Blog codé avec [Quarto](https://quarto.org/)"
+    right: "&copy; Copyright 2022, DATAMIS"
+    
 format:
   html:
-    theme: cosmo
-    css: styles.css
-
-editor: visual
-
+    theme: 
+      - cosmo
+      - style.css
+    toc: true

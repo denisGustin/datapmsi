@@ -1,0 +1,12 @@
+---
+title: "PMSI MCO Requête - Module 'Les essentiels'"
+lang: fr
+---
+
+# Contenu  
+
+
+# Liste des requêtes [extrait]
+
+- sdfs
+- sfdf

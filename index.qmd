@@ -1,14 +1,37 @@
 ---
-title: "datapmsi"
-listing:
-  contents: posts
-  sort: "date desc"
-  type: default
-  categories: true
-  sort-ui: false
-  filter-ui: false
-page-layout: full
-title-block-banner: true
+title: "<span style='font-family: Boska; font-size: 2.75rem; font-weight: 800;'>Exploiter les data PMSI avec R</span>"
+lang: fr
 ---
 
-test
+# Introduction  
+
+If you a
+
+
+# Pré-requis  
+
+sdqsd
+
+- Install latest version of RStudio, [`v2022.07.0-548` or later](https://www.rstudio.com/products/rstudio/download/#download)
+
+- Install [latest version of Quarto](https://quarto.org/docs/get-started/) (`v1.0.36` or greater)
+
+## Packages 
+
+-   **tidyverse packages and friends**
+    -   ggplot2, readr, tibble, dplyr, tidyr, forcats, stringr, lubridate, here, systemfonts, scales
+-   **extension packages**
+    -   ggrepel, ggforce, ggtext, ggdist, ggbeeswarm, gghalves, ggblur, patchwork
+
+```{r pkg-list}
+#| eval: false
+pkg_list <- c(
+  "tidyverse", "gt", "gtExtras", "reactable", "ggiraph", "here", "quarto",
+  "rmarkdown", "gtsummary", "palmerpenguins", "fs", "skimr"
+  )
+install.packages(pkg_list)
+```
+
+# Pédagogie  
+
+qsdqd
