@@ -665,26 +665,27 @@ Sachant qu’un script classique PMSI (exemple : produire un case mix simple) va
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># même fonctionnement avec la fonction dplyr::mutate() dont le premier argument "invisible"</span></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># est le tibble produit par ce qui précède le %&gt;% </span></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># la fonction dplyr::mutate() permet de créer ou modifier des variables</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">date_entree_um =</span> <span class="fu">as.Date</span>(date_entree_um), <span class="at">date_sortie_um =</span> <span class="fu">as.Date</span>(date_sortie_um)) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># la fonction strinr::str_sub() permet d'extraire une partie d'une suite de caractères</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">cmd =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(ghm,<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>jeu_resultat</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co"># si je veux uniquement les 2 premiers traitements</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># je mets en commentaire les lignes inutilisées : très souple pour "jouer" avec un script</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>jeu_resultat <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(jeu, ghm <span class="sc">==</span> <span class="st">"04M203"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um)</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dplyr::mutate(jeu2, date_entree_um = as.Date(date_entree_um), date_sortie_um = as.Date(date_sortie_um)) %&gt;% </span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dplyr::mutate(jeu3, cmd = stringr::str_sub(ghm,1,2))</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>jeu_resultat</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co"># autre intérêt : je réitère très facilement pour un autre ghm </span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="co"># en changeant juste à un seul endroit (dans le filter) le code ghm</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>jeu_resultat <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(jeu, ghm <span class="sc">==</span> <span class="st">"19M024"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">date_entree_um =</span> <span class="fu">as.Date</span>(date_entree_um), <span class="at">date_sortie_um =</span> <span class="fu">as.Date</span>(date_sortie_um)) <span class="sc">%&gt;%</span></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">cmd =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(ghm,<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>jeu_resultat</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">date_entree_um =</span> <span class="fu">as.Date</span>(date_entree_um),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">date_sortie_um =</span> <span class="fu">as.Date</span>(date_sortie_um)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># la fonction strinr::str_sub() permet d'extraire une partie d'une suite de caractères</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">cmd =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(ghm,<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>jeu_resultat</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># si je veux uniquement les 2 premiers traitements</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co"># je mets en commentaire les lignes inutilisées : très souple pour "jouer" avec un script</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>jeu_resultat <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(jeu, ghm <span class="sc">==</span> <span class="st">"04M203"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dplyr::mutate(jeu2, date_entree_um = as.Date(date_entree_um), date_sortie_um = as.Date(date_sortie_um)) %&gt;% </span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dplyr::mutate(jeu3, cmd = stringr::str_sub(ghm,1,2))</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>jeu_resultat</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="co"># autre intérêt : je réitère très facilement pour un autre ghm </span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="co"># en changeant juste à un seul endroit (dans le filter) le code ghm</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>jeu_resultat <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(jeu, ghm <span class="sc">==</span> <span class="st">"19M024"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">date_entree_um =</span> <span class="fu">as.Date</span>(date_entree_um), <span class="at">date_sortie_um =</span> <span class="fu">as.Date</span>(date_sortie_um)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">cmd =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(ghm,<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>jeu_resultat</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Constat :<br>
 Le code est lisible : on voit bien ce qui se passe dans chaque ligne.<br>
@@ -923,7 +924,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">Blog codé avec <a href="https://quarto.org/">Quarto</a></div>   
-    <div class="nav-footer-right"><a href="about.html">Mentions légales</a> | © Copyright 2023 - DATAMIS</div>
+    <div class="nav-footer-right"><a href="../about.qmd">Mentions légales</a> | © Copyright 2023 - DATAMIS</div>
   </div>
 </footer>
 

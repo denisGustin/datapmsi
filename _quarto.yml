@@ -55,7 +55,7 @@ website:
             text: "Graphiques PSY"
   page-footer:
     left: "Blog codé avec [Quarto](https://quarto.org/)"
-    right: "[Mentions légales](about.html) | &copy; Copyright 2023 - DATAMIS"
+    right: "[Mentions légales](../about.html) | &copy; Copyright 2023 - DATAMIS"
     
 format:
   html:
