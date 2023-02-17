@@ -3,6 +3,116 @@ title: "Jeux PMSI MCO"
 lang: fr
 ---
 
-# Jeux 
+# Introduction  
 
-sdfsf
+Nous décrivons ici 3 jeux de données MCO :  
+
+- un jeu appelé `mini_fake_dataset_mco`, librement téléchargeable, pour tester son environnement R et vérifier que tout fonctionne en amont d'une formation Data PMSI avec R  
+- un jeu assez complet appelé `fake_dataset_mco` utilisé pour les exercices et modules en code living des formations MCO  
+- des jeux issus de l'activité d'un établissement MCO, récupérables gratuitement et sans limite de temps via l'[accès Standard de PMSISoft](https://www.pmsisoft.com/acces_pmsisoft_mco.html){target="_blank"}   
+
+Ces 3 jeux de données sont cohérents entre eux en terme de type et d'intitulés de variables. Les exercices corrigés fournis en livrable des formations peuvent donc être réalisés sur ces 3 jeux.  
+
+# `mini_fake_dataset_mco`  
+
+## Caractéristiques
+
+`mini_fake_dataset_mco` est un mini jeu simili RUM très simple, conçu par nos soins, d'une trentaine de lignes et de 27 variables.  
+
+Les données fake du jeu sont réalistes en terme de cohérence des valeurs (par exemple lien entre DP et GHM).  
+
+Les variables correspondent à un sous-ensemble des variables de la partie fixe du fichier des RSS groupés ([année PMSI 2022, version 121](https://www.atih.sante.fr/sites/default/files/public/content/4230/formats_mco2022.xlsx)). 
+
+Ce mini jeu est proposé à des fins de test de l'environnement R pour les formations **Data PMSI avec R** et de réalisation des [pré-requis R](base_R.qmd) de ces formations
+
+`mini_fake_dataset_mco` est une extraction aléatoire du jeu `fake_dataset_mco`  
+
+`mini_fake_dataset_mco` est un fichier JSON, librement téléchargeable.  
+
+```{r dataset_mini_fake_dataset_mco}
+#| eval: true
+#| echo: false
+#| warning: false
+library(jsonlite)
+library(dplyr) 
+
+jeu <- jsonlite::fromJSON("data/mini_fake_dataset_mco.json")
+dplyr::glimpse(jeu)
+```
+
+## Télécharger
+
+Dernière version : *30 décembre 2022*  
+
+-   Créer (si pas déjà présent) un sous-répertoire `data` dans le répertoire de votre projet R dédié à la formation (voir ["Créer un projet"](base_R.qmd#créer-un-projet-et-un-premier-fichier-.r))
+
+-   [Télécharger le fichier JSON `mini_fake_dataset_mco`](../data/mini_fake_dataset_mco.json) (clic droit sur le lien et choisir "Enregistrer le lien sous") dans le répertoire `data`
+
+-   Charger le `mini_fake_dataset_mco` via le code ci-dessous à exécuter  
+
+```{r dataset_mini_fake_dataset_mco_upload}
+#| eval: false
+#| echo: true
+# chargement du package jsonlite 
+library(jsonlite)
+
+jeu <- jsonlite::fromJSON("data/mini_fake_dataset_mco.json")
+jeu
+```
+
+Vous pouvez alors réaliser les exercices des [pré-requis R](base_R.qmd) des formations **Data PMSI MCO avec R**.  
+
+Vous êtes alors certains de pouvoir importer et charger dans votre environnement R le jeu `fake_dataset_mco` communiqué aux participants des formations Data PMSI avec R pour le champ MCO.  
+
+# `fake_dataset_mco`  
+
+## Caractéristiques  
+
+Dernière version : *02 février 2023*  
+
+Le jeu `fake_dataset_mco` est conçu par nos soins, de manière semi-automatique sur des mini-séries de séjours semblables (exemple : une série de 10 séjours simili chirurgie traumatique du genou  avec des codages les plus fréquents pour cette prise en charge) et manuellement (exemple : séjours multi-rum, introduction d'atypies, un séjour anormalement long, un séjour multi_rum avec 1 rum entièrement en année N-1, etc...).  
+
+Nous essayons de rester réalistes, mais nous ne garantissons aucunement la cohérence métier entre les variables.  
+
+L'objectif du jeu `fake_dataset_mco` est pédagogique du point de vue de l'utilisation de R pour requêter et exploiter les données PMSI MCO. Son but n'est pas d'apprendre le codage PMSI.  
+
+Le jeu se compose de 6 tables[^1] réunies sous forme d'une liste de tibble[^2], accessibles via un seul fichier JSON :  
+`rss` (sur le modèle du jeu `mini_fake_dataset_mco` mais avec plus de lignes et de variables)  
+`rsa`  
+`das`  
+`ccam`  
+`dmi`  
+`ficium`  
+
+Pour des raisons pratiques d'élaboration et de maintenance :  
+-  Les dates d'entrée commencent quasi systématiquement le 1er jour d'un mois avec des durées de séjour de moins de 30 jours et une attribution aléatoire des mois.  
+-  Pas de séjours multi-RUM de plus de 3 RUM  
+-  Relative cohérence métier entre tables rum, das, ccam  
+-  Activité concentrée sur des prises en charge les plus communes en MCO avec les codages les plus communs  
+-  Pas de variable date de naissance, mais une variable générée d'âge toujours >= 18 ans  
+-  Pas de simili CMD 14 ou 15  
+
+Les types et intitulés des variables des différentes tables sont cohérents avec les formats PMSI.  
+
+Le jeu `fake_dataset_mco` est régulièrement mis à jour pour l'enrichir, illustrer une situation particulière ou produire une atypie.  
+
+Le fichier JSON du jeu est envoyé aux participants au début des formations concernées.  
+
+# Données établissement
+
+[PMSISoft](https://www.pmsisoft.com){target="_blank"} est le logiciel d'analyse PMSI accessible en ligne en hébergement de santé certifié (HDS) que nous développons essentiellement en R.  
+
+PMSISoft propose 2 accès :  
+- un [accès Standard](https://www.pmsisoft.com/acces_pmsisoft_mco.html){target="_blank"}, gratuit et permanent, ouvert aux établissements de santé    
+- un accès Professionnel
+
+Tout établissement de santé peut demander, via son médecin DIM attitré, pour chacun de ses établissement un accès PMSISoft Standard.  
+
+Via l'accès PMSISoft Standard, le médecin DIM peut alors récupérer ses données PMSI, depuis 2019, au format JSON **avec une structure identique à `fake_dataset_mco`** (même tables, mêmes variables).  
+
+Il peut ainsi participer aux formations **Data PMSI avec R** avec son propre jeu de données ou, après la formation, exécuter les scripts de la formation (livrables de la formation) avec les données de ses établissements, en toute indépendance, sans limite de temps.  
+
+[Demander un accès PMSISoft Standard](https://www.lespmsi.com/contact-pmsisoft/){target="_blank"} (avec l'objet "Demande accès PMSISoft Standard")
+
+[^1]: les exercices des formations s'appuient aussi sur de mini jeux publiés directement dans le code R (exemples : un tibble de quelques lignes simili anohosp, le tibble de correspondance entre numéro et intitulé des mois, ...)  
+[^2]: les intitulés des tibbles (`rss`, `ficium`, ...) sont des abus de langage pratiques. Ils seraient à lire plus précisément comme `simili rss`, `simili ficium`  

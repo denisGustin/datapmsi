@@ -1,33 +1,78 @@
 ---
-title: "PMSI MCO Requête"
+title: "<span style='font-family: Boska; font-size: 2.75rem; font-weight: 800;'>Formation Requêtes MCO</span>"
 lang: fr
 ---
 
 ::: {.callout-note}
-Depending on learner questions - the exact timing is subject to change.
+## Prochaines dates
+Journée 1 : vendredi 24 mars 2023  
+Journée 2 : vendredi 31 mars 2023
 :::
 
 
 # Programme Journée 1
 
-| Time          | Activity                                              |
+| Horaires      | Modules                                               |
 |:--------------|:------------------------------------------------------|
-| 09:00 - 10:30 | [Module "Les essentiels"](pmsi_mco_requete_day1_module1.html) |
-| 10:30 - 11:00 | *Pause - Echanges*                                        |
-| 11:00 - 12:30 | [Authoring with Markdown and more](materials/02-authoring.html)  |
+| 09:00 - 10:30 | [Requêtes PMSI MCO de base (1ere partie)](pmsi_mco_requete_day1_module1.html) |
+| 10:30 - 11:00 | [*Pause - Echanges*](../pause.qmd)                                        |
+| 11:00 - 12:30 | [Spécificités des données PMSI MCO](pmsi_mco_requete_day1_module2.html)  |
 | 12:30 - 13:30 | *Pause méridienne*                                         |
-| 13:30 - 15:00 | [Computation and Editors](materials/03-computation-editors.html)                                |
-| 15:00 - 15:30 | *Coffee break*                                        |
-| 15:30 - 17:00 | [Static reports and documents](materials/04-static-documents.html)|
-
+| 13:30 - 15:00 | [Enrichissement des données PMSI MCO](pmsi_mco_requete_day1_module3.html)                                |
+| 15:00 - 15:30 | [*Pause - Echanges*](../pause.qmd)                                |
+| 15:30 - 17:00 | [Scripts PMSI MCO (1ere partie)](pmsi_mco_requete_day1_module4.html)|
 
 # Programme Journée 2
 
+| Horaires      | Modules                                               |
+|:--------------|:------------------------------------------------------|
+| 09:00 - 10:30 | [Données PMSI MCO "bien rangés" (tidy)](pmsi_mco_requete_day2_module1.html) |
+| 10:30 - 11:00 | [*Pause - Echanges*](../pause.qmd)                                      |
+| 11:00 - 12:30 | [Requêtes PMSI MCO de base (2eme partie)](pmsi_mco_requete_day2_module2.html)  |
+| 12:30 - 13:30 | *Pause méridienne*                                         |
+| 13:30 - 15:00 | [Produire des case-mix PMSI MCO](pmsi_mco_requete_day2_module3.html)                                |
+| 15:00 - 15:30 | [*Pause - Echanges*](../pause.qmd)                                     |
+| 15:30 - 17:00 | [Scripts PMSI MCO (2eme partie)](pmsi_mco_requete_day2_module4.html)|
+
+# Pré-requis  
+
+## Pré-requis PMSI
+
+La formation **Requêtes MCO** suppose une maîtrise professionnelle du PMSI MCO :
+
+-  règles (définitions, vocabulaire)
+-  structures de données (rss, rsa, fichcomp, ficium, anohosp/vidhosp, fichsup, …)
+-  référentiels (CIM-10, CCAM à usage PMSI, DMI, UCD en sus, …)
+-  documentations (guides méthodologiques, manuels de groupages, cahiers des charges, …)
+-  contrôles qualité (requêtes, OVALIDE, …)
+-  analyses (case mix, reporting, fouilles de données, …)  
+
+Remarque : la pratique du codage n’est pas nécessaire, même si codé ou avoir déjà codé des dossiers est un plus pour appréhender les problématiques.
+
+## Pré-requis R
+
+[Explications détaillées](../base_R.qmd)
 
 # S'inscrire
 
 ## Tarif  
 
-## Bulletin d'inscription
+Le tarif est de 720 € (en exonération de TVA, dont 80€ de certification Qualiopi) par participant par journée.  
 
+## Inscription
 
+[Téléchager le bulletin de pré-inscription](https://www.lespmsi.com/bon_de_commande_formation_requetes_mco.pdf)  
+
+A réception du bulletin de pré-inscription renseignée et signée, nous vous enverrons la convention de formation, les conditions générales de vente (CGV) et le règlement intérieur de la formation.  
+
+Règlement à l'issue de la formation.  
+
+La formation comprend de 3 à 10 participants.  
+
+La formation est opérée par l'organisme de formation [FormaTIM](https://www.formatim.fr/){target="_blank"}, certifié Qualiopi.  
+
+![](logo_qualiopi.png)
+
+Le label QUALIOPI certifie la qualité des formations proposées et valide la prise en charge par les financeurs.  
+
+La certification qualité a été délivrée à FormaTIM au titre de la catégorie d’action : ACTIONS DE FORMATION  

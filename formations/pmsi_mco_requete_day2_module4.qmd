@@ -1,0 +1,28 @@
+---
+title: "<span style='font-family: Boska; font-size: 2.75rem; font-weight: 800;'>Scripts PMSI MCO (2eme partie)</span>"
+subtitle: "Journée 2 de la formation Requêtes MCO<br>15:30-17:00"
+lang: fr
+---
+
+# Contenu du module  
+
+-   Quel périmètre pour un script PMSI MCO ?
+-   Enchaînement de scripts  
+-   Scripts complexes avec mise en oeuvre des fonctions et requêtes vues dans la formation  
+-   Faire d'un script une fonction  
+
+# Exemples
+
+Liste non exhaustive de scripts PMSI codés dans ce module en code living :  
+
+-   Tableau de comparaison pour une pathologie des DMS associées à chaque DAS avec les DMS ScanSanté pour cette pathologie
+-   Casemix selon thésaurus de codage issus de regroupement de listes de classification en -D 
+-   Analyses via thésaurus maison  
+-   Repérage des séjours avec une durée de séjour plus proche de la DMS nationale d'un niveau de sévérité plus élevé  
+-   Analyses dérivées de tableaux OVALIDE recodés  
+-   Calcul valorisation T2A brute des séjours à partir de données rsa rapatriées  
+-   Valorisation T2A modulée par attribution de poids aux UM  
+
+# Packages et fonctions
+
+[Liste de packages et fonctions utilisés dans la formation Requêtes MCO](../package_function_mco.qmd)

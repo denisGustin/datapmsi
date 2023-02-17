@@ -1,0 +1,29 @@
+---
+title: "Prestations"
+lang: fr
+---
+
+## Formations inter-établissements Data PMSI avec R 
+
+Voir le catalogue des formations **Data PMSI avec R** et le [planning des journées](planning.qmd)
+
+## Formations dédiées Data PMSI avec R  
+
+Nous pouvons réaliser chaque formation inter-établissement **Data PMSI avec R** sur site pour un établissement ou un regroupement d'établissements. Dans ce cadre, via un entretien amont, nous pouvons personnaliser les exercices et les exemples des modules au périmètre du ou des établissements concernés.  
+
+Nous pouvons aussi concevoir des formations **Data PMSI avec R** spécifique pour un établissement.  
+
+[Contactez-nous pour toute demande](https://www.lespmsi.com/contact-pmsisoft){target="_blank"} (avec l'objet "Question formation Data PMSI avec R")
+
+## Conseils et développements Data PMSI avec R 
+
+Nous pouvons, à distance ou sur site, intervenir, au titre de consultant ou développeur R pour data PMSI et données de santé : 
+
+Exemples d'interventions :  
+- composition de scripts R documentés  
+- réalisation de rapports PDF personnalisés et automatisés  
+- conseil dans l'organisation et la production des analyses data PMSI et santé  
+
+Chacune de nos interventions se fait avec l'accord et sous le contrôle du médecin DIM et de la politique de gestion des données de l'établissement.  
+
+[Contactez-nous pour toute question](https://www.lespmsi.com/contact-pmsisoft){target="_blank"} (avec l'objet "Question formation Data PMSI avec R")

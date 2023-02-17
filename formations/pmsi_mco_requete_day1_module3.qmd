@@ -1,0 +1,32 @@
+---
+title: "<span style='font-family: Boska; font-size: 2.75rem; font-weight: 800;'>Enrichissement des données PMSI MCO</span>"
+subtitle: "Journée 1 de la formation Requêtes MCO<br>13:30-15:00"
+lang: fr
+---
+
+# Contenu du module  
+
+-   Enrichissement avec des référentiels PMSI
+    -   Le package refpmsi
+    -   Des tables ScanSanté
+    -   Des référentiels maison
+-   Traitements en R des spécificités PMSI MCO : annualisation au 1er mars, codes supprimés ou ajoutés chaque année
+-   Rapprochement entre données PMSI  
+
+# Exemples
+
+Liste non exhaustive de requêtes PMSI codées dans ce module en code living :  
+
+-   Rapatriement des libellés CIM-10 pour les DP, DR et DAS  
+-   Rapatriement des CMA  
+-   Rapatriement informations CCAM à partir du référentiel de la CCAM à usage PMSI  
+-   Enrichissement avec informations du FICIUM
+-   Rapatriement des GHS et informations liées via les rsa
+-   Rapatriement référentiel GHS
+-   Pour une racine de GHM, récupération de liste des codages de la base nationale à partir de tableaux [ScanSante](https://www.scansante.fr/)
+-   Enrichissement avec les libellés des mois  
+-   Thésaurus à partir des listes en -D et en -A du manuel de groupage MCO  
+
+# Packages et fonctions
+
+[Liste de packages et fonctions utilisés dans la formation Requêtes MCO](../package_function_mco.qmd)

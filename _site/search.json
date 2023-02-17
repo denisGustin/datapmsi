@@ -2,16 +2,16 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Exploiter les data PMSI avec R",
+    "title": "Formations Data PMSI avec R",
     "section": "",
-    "text": "If you a"
+    "text": "Comment devenir autonome dans l’analyse PMSI de ses établissements"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "Qui sommes-nous ?",
     "section": "",
-    "text": "About this blog aaa"
+    "text": "Mentions légales :\nDATAMIS\nN° SIRET : 843 777 509 00012\nCoordonnées : 31, avenue de Ségur 75007 PARIS\nNous contacter"
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -44,7 +44,7 @@
   {
     "objectID": "index.html#packages",
     "href": "index.html#packages",
-    "title": "Exploiter les data PMSI avec R",
+    "title": "Formations [data PMSI avec R]",
     "section": "Packages",
     "text": "Packages\n\ntidyverse packages and friends\n\nggplot2, readr, tibble, dplyr, tidyr, forcats, stringr, lubridate, here, systemfonts, scales\n\nextension packages\n\nggrepel, ggforce, ggtext, ggdist, ggbeeswarm, gghalves, ggblur, patchwork\n\n\n\npkg_list <- c(\n  \"tidyverse\", \"gt\", \"gtExtras\", \"reactable\", \"ggiraph\", \"here\", \"quarto\",\n  \"rmarkdown\", \"gtsummary\", \"palmerpenguins\", \"fs\", \"skimr\"\n  )\ninstall.packages(pkg_list)"
   },
@@ -53,34 +53,496 @@
     "href": "dataset_mco.html",
     "title": "Jeux PMSI MCO",
     "section": "",
-    "text": "sdfsf"
+    "text": "Nous décrivons ici 3 jeux de données MCO :\n\nun jeu appelé mini_fake_dataset_mco, librement téléchargeable, pour tester son environnement R et vérifier que tout fonctionne en amont d’une formation Data PMSI avec R\n\nun jeu assez complet appelé fake_dataset_mco utilisé pour les exercices et modules en code living des formations MCO\n\ndes jeux issus de l’activité d’un établissement MCO, récupérables gratuitement et sans limite de temps via l’accès Standard de PMSISoft\n\nCes 3 jeux de données sont cohérents entre eux en terme de type et d’intitulés de variables. Les exercices corrigés fournis en livrable des formations peuvent donc être réalisés sur ces 3 jeux."
   },
   {
     "objectID": "formations/pmsi_mco_requete.html",
     "href": "formations/pmsi_mco_requete.html",
-    "title": "PMSI MCO Requête",
+    "title": "Formation Requêtes MCO",
     "section": "",
-    "text": "Note\n\n\n\nDepending on learner questions - the exact timing is subject to change."
+    "text": "Prochaines dates\n\n\n\nJournée 1 : vendredi 24 mars 2023\nJournée 2 : vendredi 31 mars 2023"
   },
   {
     "objectID": "formations/pmsi_mco_requete.html#tarif",
     "href": "formations/pmsi_mco_requete.html#tarif",
-    "title": "PMSI MCO Requête",
+    "title": "Formation Requêtes MCO",
     "section": "Tarif",
-    "text": "Tarif"
+    "text": "Tarif\nLe tarif est de 720 € (en exonération de TVA, dont 80€ de certification Qualiopi) par participant par journée."
   },
   {
     "objectID": "formations/pmsi_mco_requete.html#bulletin-dinscription",
     "href": "formations/pmsi_mco_requete.html#bulletin-dinscription",
-    "title": "PMSI MCO Requête",
+    "title": "Formation Requêtes MCO",
     "section": "Bulletin d’inscription",
-    "text": "Bulletin d’inscription"
+    "text": "Bulletin d’inscription\nTéléchager le bulletin d’inscription\nLa formation est opérée par l’organisme de formation FormaTIM.\n\nLe label QUALIOPI certifie la qualité des formations proposées et valide la prise en charge par les financeurs.\nLa certification qualité a été délivrée à FormaTIM au titre de la catégorie d’action : ACTIONS DE FORMATION"
   },
   {
     "objectID": "formations/pmsi_mco_requete_day1_module1.html",
     "href": "formations/pmsi_mco_requete_day1_module1.html",
-    "title": "PMSI MCO Requête - Module ‘Les essentiels’",
+    "title": "Requêtes PMSI MCO de base (1ere partie)",
     "section": "",
-    "text": "Liste des requêtes\n\nsdfs\nsfdf"
+    "text": "Exemples\nListe non exhaustive de requêtes PMSI codées dans ce module en code living :\n\nRécupération de l’activité d’un regroupement d’UM\nCalcul de nombre de RUM et de séjours par regroupement C, M, K, Z\nCodage du controle Qualité OVALIDE “1.Q.1.CC – Nombre de séjours avec confirmation de codage parmi les GHM concernés”\nSéjours d’une UM type SI ou REA sans IG2 codé ou avec IGS2 en dessous d’un seuil\nFiltrer une activité par rapport à des dates\nSéjours avec tous les codages représentés d’un protocole\nRepérage de passages dans un ou plusieurs UM\nCalcul de l’âge en années et journées\nNe retenir que les >+75 ans entrés par un service donné\n\n\n\nPackages et fonctions\nListe de packages et fonctions utilisés dans la formation Requêtes MCO"
+  },
+  {
+    "objectID": "planning.html",
+    "href": "planning.html",
+    "title": "Planning des formations Date PMSI avec R",
+    "section": "",
+    "text": "Journée 1 : vendredi 24 mars 2023\nJournée 2 : vendredi 31 mars 2023"
+  },
+  {
+    "objectID": "planning.html#requêtes-mco-avancé",
+    "href": "planning.html#requêtes-mco-avancé",
+    "title": "Planning des formations Date PMSI avec R",
+    "section": "Requêtes MCO [avancé]",
+    "text": "Requêtes MCO [avancé]\nA venir"
+  },
+  {
+    "objectID": "index.html#ces-formations-sont-elles-pour-moi",
+    "href": "index.html#ces-formations-sont-elles-pour-moi",
+    "title": "Formations Data PMSI avec R",
+    "section": "Ces formations sont-elles pour moi ?",
+    "text": "Ces formations sont-elles pour moi ?\nCes formations vous conviendront si vous répondez oui à ces questions :\n\nSouhaitez-vous créer vous-mêmes des requêtes et des analyses PMSI, sans avoir à passer par un service informatique ou des outils et logiciels chers et propriétaires ?\nAppréciez-vous de pouvoir tester rapidement vos intuitions et réflexions sur la production PMSI de vos établissements ?\nSouhaitez-vous construire et faire vivre votre propre catalogue d’analyses PMSI, entièrement reproductibles ?\nSouhaitez-vous pouvoir travailler avec les data scientists santé ?"
+  },
+  {
+    "objectID": "prestation.html#formations-dédiée-data-pmsi-avec-r",
+    "href": "prestation.html#formations-dédiée-data-pmsi-avec-r",
+    "title": "Prestations",
+    "section": "Formations dédiée Data PMSI avec R",
+    "text": "Formations dédiée Data PMSI avec R\nNous pouvons réaliser chaque formation inter-établissement Data PMSI avec R sur site pour un établissement ou un regroupement d’établissements. Dans ce cadre, via un entretien amont, nous pouvons personnaliser les exercices et les exemples des modules au périmètre du ou des établissements concernés.\nNous pouvons aussi concevoir des formations Data PMSI avec R spécifique pour un établissement.\nContactez-nous pour toute demande"
+  },
+  {
+    "objectID": "prestation.html#conseils-et-développements-data-pmsi-avec-r",
+    "href": "prestation.html#conseils-et-développements-data-pmsi-avec-r",
+    "title": "Prestations",
+    "section": "Conseils et développements Data PMSI avec R",
+    "text": "Conseils et développements Data PMSI avec R\nNous pouvons, à distance ou sur site, intervenir, au titre de consultant ou développeur R pour data PMSI et données de santé :\nExemples d’interventions :\n- composition de scripts R documentés\n- réalisation de rapports PDF personnalisés et automatisés\n- conseil dans l’organisation et la production des analyses data PMSI et santé\nChacune de nos interventions se fait avec l’accord et sous le contrôle du médecin DIM et de la politique de gestion des données de l’établissement.\nContactez-nous pour toute question (avec l’objet “Question formation Data PMSI avec R”)"
+  },
+  {
+    "objectID": "index.html#objectifs-dapprentissage",
+    "href": "index.html#objectifs-dapprentissage",
+    "title": "Formations Data PMSI avec R",
+    "section": "Objectifs d’apprentissage",
+    "text": "Objectifs d’apprentissage\nLes formations Data PMSI avec R s’adressent aux professionnels du PMSI ou aux professionnels amenés à manipuler des données issues du PMSI.\nCes formations, organisées par champ PMSI, visent à permettre aux professionnels du PMSI ou liées au PMSI de produire eux-mêmes, directement à partir des données PMSI brutes de leurs établissements, de manière efficace, des traitements et analyses PMSI de haute qualité, performantes, reproductibles et documentées.\nAprès chaque formation Data PMSI avec R, les participants acquièrent une savoir-faire R minimal pour une première autonomie en contexte PMSI MCO, une vision de ce qu’il faut savoir et maîtriser en R pour le PMSI et une bibliothèque de requêtes et de scripts d’analyses PMSI en R à décliner sur l’activité de leurs établissements.\nPendant la journée ou les 2 journées de la formation, les participants découvrent et apprennent, à travers des exemples concrets et gradués, les familles d’analyse PMSI possibles et réalistes aujourd’hui avec R.\nIls s’exercent, en live coding avec le formateur, à produire ces analyses PMSI avec R sur des jeux de données simili PMSI réalistes et/ou sur les données PMSI de leurs établissements."
+  },
+  {
+    "objectID": "index.html#pourquoi-r",
+    "href": "index.html#pourquoi-r",
+    "title": "Formations Data PMSI avec R",
+    "section": "Pourquoi R ?",
+    "text": "Pourquoi R ?\nR est un langage open source, mature, optimisé pour les statistiques et la manipulation de données structurées, très utilisé depuis des années en santé publique.1\nL’arrivée à maturité de la famille de package tidyverse depuis 2 ou 3 ans, en terme de fonctionnalités, documentation et performance, facilite grandement, pour les professionnels du PMSI, l’utilisation de R pour les traitements PMSI.\nR a une masse critique d’utilisateurs qui assure sa pérennité.\nR est gratuit et open source. Cela veut donc dire que vous pouvez travailler tout de suite sans demander l’autorisation ou de budget à personne.\nLa documentation R est infinie, adaptée à tous les niveaux.\nLes professionnels du PMSI qui utilisent R ont maintenant un écosystème dédié (prestations, packages PMSI, blogs, échanges entre professionnels, service en ligne)."
+  },
+  {
+    "objectID": "formations/pmsi_mco_requete_day1_module2.html",
+    "href": "formations/pmsi_mco_requete_day1_module2.html",
+    "title": "Spécificités des données PMSI MCO",
+    "section": "",
+    "text": "Exemples\nListe non exhaustive de manipulations réalisées dans ce module en code living :\n\nProduction des variables CMD, CMKZ, RGHM\nIdentification activité avec DP en Z\nProduction variables mois et année\nExtrema et moyenne IGS2 sur un périmètre\nImport fichier source txt ou JSON\nExport JSON en sortie de script\nExport csv et excel en sortie de script\n\n\n\nPackages et fonctions\nListe de packages et fonctions utilisés dans la formation Requêtes MCO"
+  },
+  {
+    "objectID": "formations/pmsi_mco_requete_day1_module3.html",
+    "href": "formations/pmsi_mco_requete_day1_module3.html",
+    "title": "Enrichissement des données PMSI MCO",
+    "section": "",
+    "text": "Exemples\nListe non exhaustive de requêtes PMSI codées dans ce module en code living :\n\nRapatriement des libellés CIM-10 pour les DP, DR et DAS\n\nRapatriement des CMA\n\nRapatriement informations CCAM à partir du référentiel de la CCAM à usage PMSI\n\nEnrichissement avec informations du FICIUM\nRapatriement des GHS et informations liées via les rsa\nRapatriement référentiel GHS\nPour une racine de GHM, récupération de liste des codages de la base nationale à partir de tableaux ScanSante\nEnrichissement avec les libellés des mois\n\nThésaurus à partir des listes en -D et en -A du manuel de groupage MCO\n\n\n\nPackages et fonctions\nListe de packages et fonctions utilisés dans la formation Requêtes MCO"
+  },
+  {
+    "objectID": "formations/pmsi_mco_requete_day1_module4.html",
+    "href": "formations/pmsi_mco_requete_day1_module4.html",
+    "title": "Scripts PMSI MCO (1ere partie)",
+    "section": "",
+    "text": "Exemples\nListe non exhaustive de scripts PMSI codés dans ce module en code living :\n\nUn script classique : construction de la table des codages CIM avec indication de la position de chaque codage\nSéjours avec au moins 1 codage CIM ou une famille de codages CIM, indépendamment de la position de codage\nActivité avec codage CCAM d’anesthésie seule\nSéjours longs selon plusieurs règles (seuil d’un nombre de journées, > 2,5x DMS national, > 2x DMS du GHM dans l’établissement)\nPour une racine de GHM, liste des codages DAS de la base nationale non représentés dans l’établissement\nListe des séjours T0, T1 et T2\nDédoublonnage des codages par séjour\nFile active à partir de l’anohosp ou du vidhosp\n\n\n\nPackages et fonctions\nListe de packages et fonctions utilisés dans la formation Requêtes MCO"
+  },
+  {
+    "objectID": "formations/pmsi_mco_requete_day2_module1.html",
+    "href": "formations/pmsi_mco_requete_day2_module1.html",
+    "title": "Données PMSI MCO “bien rangés” (tidy)",
+    "section": "",
+    "text": "Exemples\nListe non exhaustive de requêtes PMSI codées dans ce module en code living :\n\nEclatement d’une activité par mois avec une colonne par mois\nHomogénéisation du type de données par colonne\nCréation de colonnes par sévérité\n\nExemples de traitement classique en “accordéon” en PMSI MCO\n\n\n\nPackages et fonctions\nListe de packages et fonctions utilisés dans la formation Requêtes MCO"
+  },
+  {
+    "objectID": "formations/pmsi_mco_requete_day2_module2.html",
+    "href": "formations/pmsi_mco_requete_day2_module2.html",
+    "title": "Requêtes PMSI MCO de base (2eme partie)",
+    "section": "",
+    "text": "Exemples\nListe non exhaustive de requêtes PMSI codées dans ce module en code living :\n\nSéjours niveau n avec au moins 1 CMA niveau > n\nSéjours avec une même famille de codage en DP/DR versus DAS\nSéjours multi-UM avec passage dans une certaine UM dans le dernier rum\nCodage post évênement intra-séjour\n\nExtraction des journées sans codage CCAM\nCalcul du total des journées du séjour rattaché à chaque rum\nProportion par rapport à la 1ere valeur d’un regroupement\nDMS associé à un codage CIM\nCalculer le nombre d’occurrences à venir d’un codage après une 1ere occurence de codage de ce codage\nIdentification du ou des rum le(s) plus long(s) dans les séjours multi_rum\nRepérage de séquences journalières consécutives de codage CCAM\n\nSéjours d’au moins 3 jours sans une certaine famille de DAS codé au moins 1 fois\n\n\n\nPackages et fonctions\nListe de packages et fonctions utilisés dans la formation Requêtes MCO"
+  },
+  {
+    "objectID": "formations/pmsi_mco_requete_day2_module3.html",
+    "href": "formations/pmsi_mco_requete_day2_module3.html",
+    "title": "Produire des case-mix PMSI MCO",
+    "section": "",
+    "text": "Exemples\nListe non exhaustive d’analyses PMSI codées dans ce module en code living :\n\nTri d’un casemix en C,M,Z,K selon un ordre prédifini par le médecin DIM\nCasemix GHM par DMI\nCasemix d’activité par mois\nForcer, pour un mois donné, la présence à 0 séjour d’un GHM représenté dans l’année mais non représenté ce mois donné\nRegrouper l’activité en dessous d’un seuil dans une catégorie “Autre”\nCasemix par UM et 6eme position (J,T,1,2,3,4)\nCasemix des DMS par codage selon leur position\nCase mix par mode d’entrée, provenance, mode de sortie, destination\nCalculs selon différentes définitions du nombre de journée en PMSI MCO\nCase mix des séjours en T (T0, T1 et T2)\nFusionner plusieurs colonnes\nAjouter une ligne de type “Total”\n\n\n\nPackages et fonctions\nListe de packages et fonctions utilisés dans la formation Requêtes MCO"
+  },
+  {
+    "objectID": "formations/pmsi_mco_requete_day2_module4.html",
+    "href": "formations/pmsi_mco_requete_day2_module4.html",
+    "title": "Scripts PMSI MCO (2eme partie)",
+    "section": "",
+    "text": "Exemples\nListe non exhaustive de scripts PMSI codés dans ce module en code living :\n\nTableau de comparaison pour une pathologie des DMS associées à chaque DAS avec les DMS ScanSanté pour cette pathologie\nCasemix selon thésaurus de codage issus de regroupement de listes de classification en -D\nAnalyses via thésaurus maison\n\nRepérage des séjours avec une durée de séjour plus proche de la DMS nationale d’un niveau de sévérité plus élevé\n\nAnalyses dérivées de tableaux OVALIDE recodés\n\nCalcul valorisation T2A brute des séjours à partir de données rsa rapatriées\n\nValorisation T2A modulée par attribution de poids aux UM\n\n\n\nPackages et fonctions\nListe de packages et fonctions utilisés dans la formation Requêtes MCO"
+  },
+  {
+    "objectID": "base_R.html",
+    "href": "base_R.html",
+    "title": "Pré-requis R",
+    "section": "",
+    "text": "Temps de lecture et mise en pratique : 1 heure à 2 heures"
+  },
+  {
+    "objectID": "base_R.html#introduction",
+    "href": "base_R.html#introduction",
+    "title": "Pré-requis R",
+    "section": "Introduction",
+    "text": "Introduction\nLes formations Data PMSI avec R supposent que les participants disposent d’un environnement R de travail opérationnel avec au moins un jeu de données PMSI chargé et les packages R nécessaires à la formation.\nCette note est à consulter et pratiquer avant de participer à une de nos formations Data PMSI avec R. Nous vous invitons à copier/coller et exécuter les blocs de code proposés ci-dessous en s’assurant que vous les comprenez bien.\nCette note est volontairement simplifiée au maximum, avec donc quelques abus de langage assumés1\nSi vous pratiquez déjà R, vous pouvez vous contenter d’un survol de la note, créer un projet dédié à la formation et charger les packages et le jeu de données mini_fake_dataset_mco.\nLes supports et ressources en ligne pour apprendre et pratiquer R sont innombrables. On y trouve toute l’aide possible.\n2 ressources en français récentes, didactiques et accessibles pour apprendre R :\nIntroduction à R et au tidyverse par Julien Barnier\nanalyse-R par Joseph Larmarange\nRessources R et PMSI :\nY a du PMSI dans R\nPackage refpmsi\nContactez-nous pour toute question (avec l’objet “Question formation Data PMSI avec R”)"
+  },
+  {
+    "objectID": "base_R.html#installer-r",
+    "href": "base_R.html#installer-r",
+    "title": "Pré-requis R",
+    "section": "Installer R",
+    "text": "Installer R\nR s’installe sous Windows comme un simple exécutable (comme GENRSA ou GENRHA par exemple).\nTélécharger R dans sa dernière version\nAccepter les options par défaut jusqu’à la fin de l’installation.\nNous recommandons une version de R >= à la version 4.1.0 de mai 2021.\nHistorique des versions de R"
+  },
+  {
+    "objectID": "base_R.html#installer-r-studio",
+    "href": "base_R.html#installer-r-studio",
+    "title": "Pré-requis R",
+    "section": "Installer R Studio",
+    "text": "Installer R Studio\nAprès avoir installé R, nous installons R Studio qui est l’environnement de développement de référence pour R.\nPlus exactement, nous allons télécharger la version open source de R Studio, appelée “R Studio Desktop”.\nR Studio Desktop s’installe comme un exécutable.\nTélécharger R Studio Desktop\nNous recommandons une version de R Studio Desktop >= à la version 12.07.02\nHistorique des versions de R Studio Desktop\nA ce stade, vous disposez d’une icône R Studio sur votre bureau pour ouvrir R Studio.\nTuto avec copies écrans pour installer R et R Studio\nTuto pour découvrir R Studio\nAutre tuto"
+  },
+  {
+    "objectID": "base_R.html#créer-un-projet",
+    "href": "base_R.html#créer-un-projet",
+    "title": "Pré-requis R",
+    "section": "Créer un projet",
+    "text": "Créer un projet\nque l’on propose d’appeler formation_data_pmsi\nouvrir un premier fichier intro.R\nvalider une ligne en cliquant sur entrée à la fin de la ligne exemple d’iris\n\n# les lignes pour commenter du code commencent par #\n\n# <- permet d'attribuer une valeur à une variable (raccourci R Studio pour <- : alt + 6)\n# il y a des bonnes pratiques de nommage des variables : elles sont appliquées dans cette note\n\n# cliquer sur \"entrée\" à la fin chaque ligne de code pour l'exécuter\n\n# exemple avec le jeu de données iris, natif dans R : le jeu de données s'affiche \niris\n\n# penser à sauvegarder votre script R régulièrement et, à minima, avant de quitter R Studio. \n# en quittant R Studio, ne jamais sauvegarder le .Rdata quand R Studio vous le demande"
+  },
+  {
+    "objectID": "base_R.html#vecteur-data-frame-et-list",
+    "href": "base_R.html#vecteur-data-frame-et-list",
+    "title": "Pré-requis R",
+    "section": "Vecteur, data frame et list",
+    "text": "Vecteur, data frame et list\nRemarques :"
+  },
+  {
+    "objectID": "base_R.html#charger-des-packages",
+    "href": "base_R.html#charger-des-packages",
+    "title": "Pré-requis R",
+    "section": "Charger des packages",
+    "text": "Charger des packages\nUn package est une réunion cohérente de fonctions et de données que l’on va pouvoir utiliser en appelant ses fonctions et ses données sans avoir à se préoccuper de la façon dont elles sont codées.\nUne fois installée, un package sera à charger à chaque nouvelle session R Studio.\nLes packages d’intérêt général et validés après une série poussée de tests sont disponibles sur le CRAN. C’est essentiellement parmi ces packages que nous allons faire notre marché.\n\nLe tidyverse\nLes packages les plus utiles dans les formations Data PMSI avec R sont les packages d’une collection cohérente de packages appelée tidyverse.\nTidyverse est une sorte méta-package. En chargeant le tidyverse, on charge tous les packages du tidyverse en une fois.\nPrincipaux packages du tidyverse utilisés en analyse PMSI : - dplyr (package qui fournit les fonctions de base pour résoudre les problèmes de manipulation de données les plus courants comme filtre, trier, sélectionner des colonnes, ajouter une colonne, compter des lignes, …) - tidyr (package pour créer des structures “bien rangées” - tidy en anglais -) - stringr (package pour manipuler des chaînes de caractères) - tibble (package pour manipuler spécifiquement les tibbles) - ggplot2 (package pour produire des graphiques)\nDans le tidyverse, on trouve aussi les packages lubridate (pour manipuler des dates), purrr (pour programmation fonctionnelle), forcats (pour manipuler des facteurs), …\nInstallation des packages du tidyverse\n\n# suffisant pour les formations [Requêtes MCO], [Requêtes SSR] et [Requêtes PSY]\nvect_pkg <- c(\"tidyverse\")\n\n# la fonction install.packages() installe la dernière version des packages du tidyverse\ninstall.packages(vect_pkg)\n\n\n\nAutres packages CRAN\nEn fonction des formations Data PMSI avec R, on peut charger d’autres packages du CRAN : - gt, gtExtras pour les formations [Tableaux] - ggrepel, ggtext pour les formations [Graphiques] - data.table pour la formation [Requêtes MCO [Avancé]\nLa liste des packages utilisés dans une formation est indiquée dans les pré-requis de la formation concernée.\n\n\nLe package refpmsi\nrefpmsi est un package de référentiels PMSI qui permet de récupérer et travailler avec les référentiels PMSI annualisés et normalisés pour R.\nLe chargement de ce package qui n’est pas sur le CRAN est spécifique.\n\n# Exemple des packages chargées pour la formation [Requêtes MCO]\npkg_list <- c(\n  \"tidyverse\", \"gt\", \"gtExtras\", \"reactable\", \"ggiraph\", \"here\", \"quarto\",\n  \"rmarkdown\", \"gtsummary\", \"palmerpenguins\", \"fs\", \"skimr\"\n  )\ninstall.packages(pkg_list)\n\nVoir aussi la documentation de refpmsi en ligne"
+  },
+  {
+    "objectID": "base_R.html#avoir-compris-le-fonctionnement-du-pipe",
+    "href": "base_R.html#avoir-compris-le-fonctionnement-du-pipe",
+    "title": "Pré-requis R",
+    "section": "Avoir compris le fonctionnement du pipe %>%",
+    "text": "Avoir compris le fonctionnement du pipe %>%\nLe fonctionnement avec le pipe %>% est fondamental. C’est ce qui permet de construire des scripts lisibles, complexes, testables et maintenables.\nL’idée de base est la suivante : puisque, pour la quasi-totalité des fonctions R et spécialement pour les fonctions du tidyverse, le premier argument de ces fonctions est un data frame (sur lequel va s’appliquer la fonction)4 et qu’un script consiste, dans son principe, à enchaîner des traitements successifs, on va passer directement le résultat de chaque traitement (qui est donc un tbl modifié) au traitement suivant via le pipe %>%\nIllustrons avec le mini_fake_dataset_mco que nous avons chargé ci-dessus en lui appliquant quelques traitements simples (voir rubrique “Quelques manipulations simples” ci-dessous).\nPremière approche : on enregistre le résultat de chaque traitement dans une variable\n\n# premier traitement : on filtre les RUM groupé en 04M023\njeu1 <- dplyr::filter(jeu, ghm == \"04M203\")\njeu1\n# second traitement : on sélectionne quelques variables\njeu2 <- dplyr::select(jeu1, ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um)\njeu2\n# troisième traitement : on transforme les 2 variables date_entree_um et date_sortie_um au format date\njeu3 <- dplyr::mutate(jeu2, date_entree_um = as.Date(date_entree_um),\n                      date_sortie_um = as.Date(date_sortie_um))\njeu3\n# 4eme traitement : on créé la variable cmd en récupérant les 2 premières positions du ghm\njeu4 <- dplyr::mutate(jeu3, cmd = stringr::str_sub(ghm,1,2))\njeu4\n\nConstat : On a un tbl d’entrée (jeu) et on veut un tbl résultat.\nAvec cette approche, on génère 4 tbl. Sachant qu’un script classique PMSI (exemple : un case mix simple) va se composer d’une dizaine de traitements et qu’on enchaîne souvent plusieurs suites de traitements, on voit bien que c’est très rapidement ingérable et illisible avec des dizaines de résultats intermédiaires et des risques constants d’erreur de saisie.\nDeuxième approche : composition de fonctions\n\n# on reprend les 4 traitements de la 1ère approche en partant du dernier traitement dont le tbl est le résultat\n# du 3eme traitement, etc...\ndplyr::mutate(dplyr::mutate(dplyr::select(dplyr::filter(jeu, ghm == \"04M203\"), ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um), date_entree_um = as.Date(date_entree_um), date_sortie_um = as.Date(date_sortie_um)), cmd = stringr::str_sub(ghm,1,2))\n\nConstat : Cela se passe de commentaires !\nL’approche avec le pipe `%>%\n\n# le tbl final est directement enregistré dans une variable que l'on nomme ici jeu_resultat\n# raccourci R Studio pour le pipe : ctrl + shift (la flêche vers le haut) + M\njeu_resultat <- dplyr::filter(jeu, ghm == \"04M203\") %>% \n    # il n'y a plus de premier argument affiché dans la fonction dplyr::select\n    # car le pipe a transféré dans dplyr::select() le tibble issu du traitement de la ligne précédente\n    dplyr::select(ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um) %>% \n    dplyr::mutate(jeu2, date_entree_um = as.Date(date_entree_um), date_sortie_um = as.Date(date_sortie_um)) %>% \n    dplyr::mutate(jeu3, cmd = stringr::str_sub(ghm,1,2))\njeu_resultat\n\n# uniquement les 2 premiers traitements\njeu_resultat <- dplyr::filter(jeu, ghm == \"04M203\") %>% \n    dplyr::select(ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um)\n    # dplyr::mutate(jeu2, date_entree_um = as.Date(date_entree_um), date_sortie_um = as.Date(date_sortie_um)) %>% \n    # dplyr::mutate(jeu3, cmd = stringr::str_sub(ghm,1,2))\njeu_resultat\n\n# réitération du code en changeant uniquement le ghm\njeu_resultat <- dplyr::filter(jeu, ghm == \"19M024\") %>% \n    dplyr::select(ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um)\n    dplyr::mutate(jeu2, date_entree_um = as.Date(date_entree_um), date_sortie_um = as.Date(date_sortie_um)) %>%\n    dplyr::mutate(jeu3, cmd = stringr::str_sub(ghm,1,2))\njeu_resultat\n\nConstats :\nLe code est lisible : on voit bien ce qui se passe à chaque traitement.\nJe peux documenter chaque traitement. Je n’ai que 2 tbl : le tbl d’origine qui ne bouge pas et le tbl résultat.\nJe peux tester une suite de traitements en supprimant le pipe à l’endroit voulu.\nJe peux modifier un traitement sans modifier les autres ni tout reprendre (manipulation très fréquente en PMSI où on va tester des hypothèses et des codages à la volée)."
+  },
+  {
+    "objectID": "base_R.html#charger-un-jeu-de-données",
+    "href": "base_R.html#charger-un-jeu-de-données",
+    "title": "Pré-requis R",
+    "section": "Charger un jeu de données",
+    "text": "Charger un jeu de données\nLa traduction anglaise de jeu de données est dataset. On parlera donc indifféremment de jeux de données ou de dataset\nPour tester le bon fonctionnement et être opérationnel en début de formation, nous avons construit et mettons à disposition mini_fake_dataset_mco, un mini jeu de données simili PMSI MCO.\nPremière étape : dans le répertoire du projet formation_data_pmsi, créer un sous-répertoire data\nSeconde étape : télécharger le fichier mini_fake_dataset_mco.json dans le sous-répertoire data\nTroisième étape : charger le dataset dans R via le code ci-dessous\n\n# Ce chargement se fait avec le package jsonlite\nlibrary(jsonlite)\n\n# Le jeu est chargé dans la variable jeu qui est un dataframe\njeu <- jsonlite::fromJSON(\"data/mini_fake_dataset_mco.json\")\n# on vérifie que jeu est bien un data frame avec la fonction is.data.frame()\nis.data.frame(jeu)\n\n# pour faciliter son exploitation, on passe ce jeu en tibble avec la fonction as_tibble du package tibble:: \n# ici on écrase le df jeu par le nouveau tbl jeu qui a le même nom de variable\njeu <- tibble::as_tibble(jeu)\n\nQuatrième étape : vérification\n\ndplyr::glimpse(jeu)\n\nLe résultat est le suivant :\n\n\nRows: 30\nColumns: 27\n$ ghm                                        <chr> \"06M041\", \"04M05T\", \"04M203~\n$ code_retour                                <chr> \"000\", \"000\", \"000\", \"000\",~\n$ nas                                        <chr> \"1740\", \"435\", \"1684\", \"125~\n$ no_rum                                     <chr> \"1\", \"1\", \"1\", \"1\", \"1\", \"1~\n$ age                                        <int> 72, 58, 59, 55, 71, 87, 65,~\n$ sexe                                       <chr> \"F\", \"F\", \"H\", \"F\", \"F\", \"H~\n$ no_um                                      <chr> \"um01\", \"um01\", \"um01\", \"um~\n$ type_aut_lit_dedie                         <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ mode_entree_um                             <chr> \"8\", \"8\", \"8\", \"8\", \"8\", \"8~\n$ provenance_um                              <chr> \"5\", \"5\", \"5\", \"5\", \"5\", \"5~\n$ mode_sortie_um                             <chr> \"6\", \"8\", \"6\", \"8\", \"8\", \"6~\n$ destination_um                             <chr> \"1\", \"NA\", \"1\", \"NA\", \"NA\",~\n$ nb_seances                                 <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, ~\n$ nb_das                                     <int> 1, 3, 1, 0, 0, 0, 0, 1, 1, ~\n$ nb_ccam                                    <int> 0, 3, 3, 3, 3, 5, 2, 3, 1, ~\n$ dp                                         <chr> \"K625\", \"J181\", \"J9600\", \"N~\n$ dr                                         <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ igs_2                                      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, ~\n$ confirmation_codage_rss                    <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ conversion_hc                              <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ raac                                       <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ contexte_patient_surveillance_particuliere <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ admin_produit_rh                           <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ rescrit_tarifaire                          <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ cat_nb_inter_tot                           <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ date_entree_um                             <chr> \"2022-07-01\", \"2022-03-01\",~\n$ date_sortie_um                             <chr> \"2022-07-02\", \"2022-03-02\",~\n\n\nPour les formations, nous mettons à disposition des participants un jeu de données plus fournis avec plus de lignes et différents tibbles.\nNous recommandons aux participants médecins DIM de récupérer les données PMSI de leurs établissements au format JSON via PMSISoft Standard\nLes noms des variables de nos fake dataset PMSI sont ceux des exports PMSISoft Standard en JSON : les médecins DIM peuvent donc ainsi coder en R, pendant la formation, sur les données PMSI de leurs établissements."
+  },
+  {
+    "objectID": "base_R.html#quelques-manipulations-simples",
+    "href": "base_R.html#quelques-manipulations-simples",
+    "title": "Pré-requis R",
+    "section": "Quelques manipulations simples",
+    "text": "Quelques manipulations simples\nA partir du jeu mini_fake_dataset_mco que nous avons chargé ci-dessus, quelques traitements basiques avec des fonctions du tidyverse\nfonction dplyr::filter()\nPour filtrer des lignes5\nDans la formation requêtes MCO, nous verrons de nombreuses options et exemples pour filtrer les données PMSI.\n\n# filter fonctionne avec les valeurs logiques. \n# Ici no_um == \"um01\" teste cette condition sur chaque ligne. \n# si le code UM est bien \"um01\", no_um == \"um01\" produit la valeur TRUE et donc filter retient la ligne\njeu %>% dplyr::filter(no_um == \"um01\")\n\n# 2 filtrages\njeu %>% \n    dplyr::filter(no_um == \"um01\") %>% \n    dplyr::filter(age >= 75)\n# ou plus directement les 2 filtrages dans un seul traitement où & = ET logique\njeu %>% dplyr::filter(no_um == \"um01\" & age >= 75)\n\n# sélectionne de quelques colonnes\n# en PMSI, on a souvent beaucoup de colonnes. Il y a des raccourcis (voir la formation)\njeu %>% dplyr::select(ghm,nas,no_rum,dp)\n\n# on\n# après sélection de quelques colonnes, tri sur l'âge\njeu %>% \n    dplyr::select(ghm,nas,no_rum,no_um,dp,age) %>% \n    dplyr::arrange(age)\n# tri descendant avec l'option desc() dans arrange\njeu %>% \n    dplyr::select(ghm,nas,no_rum,no_um,dp,age) %>% \n    dplyr::arrange(desc(age))\n\ncim_lib\n# cim_lib <- refpmsi::refpmsi(\"cim_lib\")\ncim_lib\ncim_10 <- refpmsi::refpmsi(\"cim\")\nglimpse(cim_10)\n# rappel : les codes autorisés en DP ont la valeur 0 (voir le kit de la nomenclature CIM PMSI sur le site de l'ATIH)\ncim_dp_2022 <- cim_10 %>%\n    # je sélectionne les variables qui m'intéressent\n    dplyr::select(cim_code,cim_tmco,annee_pmsi,cim_lib) %>% \n    dplyr::filter(annee_pmsi == \"2022\") %>% \n    dplyr::filter(cim_tmco == 0)\ncim_dp_2022 %>% View\ncim__non_dp_2022 <- cim_10 %>%\n    # je sélectionne les variables qui m'intéressent\n    dplyr::select(cim_code,cim_tmco,annee_pmsi,cim_lib) %>% \n    dplyr::filter(annee_pmsi == \"2022\") %>% \n    dplyr::filter(cim_tmco != 0)\ncim_non_dp_2022 %>% View\n\ndplyr::select() Pour sélectionner des variables\n\n# on sélectionne quelques colonnes par leur nom\njeu %>% dplyr::select(ghm,nas,no_rum,dp)\n\n# en PMSI, on a souvent beaucoup de colonnes. Il y a des raccourcis (voir la formation)\n\n# on\n# après sélection de quelques colonnes, tri sur l'âge\njeu %>% \n    dplyr::select(ghm,nas,no_rum,no_um,dp,age) %>% \n    dplyr::arrange(age)\n# tri descendant avec l'option desc() dans arrange\njeu %>% \n    dplyr::select(ghm,nas,no_rum,no_um,dp,age) %>% \n    dplyr::arrange(desc(age))\n\ncim_lib\n# cim_lib <- refpmsi::refpmsi(\"cim_lib\")\ncim_lib\ncim_10 <- refpmsi::refpmsi(\"cim\")\nglimpse(cim_10)\n# rappel : les codes autorisés en DP ont la valeur 0 (voir le kit de la nomenclature CIM PMSI sur le site de l'ATIH)\ncim_dp_2022 <- cim_10 %>%\n    # je sélectionne les variables qui m'intéressent\n    dplyr::select(cim_code,cim_tmco,annee_pmsi,cim_lib) %>% \n    dplyr::filter(annee_pmsi == \"2022\") %>% \n    dplyr::filter(cim_tmco == 0)\ncim_dp_2022 %>% View\ncim__non_dp_2022 <- cim_10 %>%\n    # je sélectionne les variables qui m'intéressent\n    dplyr::select(cim_code,cim_tmco,annee_pmsi,cim_lib) %>% \n    dplyr::filter(annee_pmsi == \"2022\") %>% \n    dplyr::filter(cim_tmco != 0)\ncim_non_dp_2022 %>% View\n\ndplyr::arrange() Pour trier selon une ou plusieurs colonnes\n\n# on sélectionne quelques colonnes par leur nom\njeu %>% dplyr::select(ghm,nas,no_rum,dp)\n\n# en PMSI, on a souvent beaucoup de colonnes. Il y a des raccourcis (voir la formation)\n\n# on\n# après sélection de quelques colonnes, tri sur l'âge\njeu %>% \n    dplyr::select(ghm,nas,no_rum,no_um,dp,age) %>% \n    dplyr::arrange(age)\n# tri descendant avec l'option desc() dans arrange\njeu %>% \n    dplyr::select(ghm,nas,no_rum,no_um,dp,age) %>% \n    dplyr::arrange(desc(age))\n\ncim_lib\n# cim_lib <- refpmsi::refpmsi(\"cim_lib\")\ncim_lib\ncim_10 <- refpmsi::refpmsi(\"cim\")\nglimpse(cim_10)\n# rappel : les codes autorisés en DP ont la valeur 0 (voir le kit de la nomenclature CIM PMSI sur le site de l'ATIH)\ncim_dp_2022 <- cim_10 %>%\n    # je sélectionne les variables qui m'intéressent\n    dplyr::select(cim_code,cim_tmco,annee_pmsi,cim_lib) %>% \n    dplyr::filter(annee_pmsi == \"2022\") %>% \n    dplyr::filter(cim_tmco == 0)\ncim_dp_2022 %>% View\ncim__non_dp_2022 <- cim_10 %>%\n    # je sélectionne les variables qui m'intéressent\n    dplyr::select(cim_code,cim_tmco,annee_pmsi,cim_lib) %>% \n    dplyr::filter(annee_pmsi == \"2022\") %>% \n    dplyr::filter(cim_tmco != 0)\ncim_non_dp_2022 %>% View\n\ncodes CIM-10 2022 autorisés en DP\n\n# on sélectionne quelques colonnes par leur nom\njeu %>% dplyr::select(ghm,nas,no_rum,dp)\n\n# en PMSI, on a souvent beaucoup de colonnes. Il y a des raccourcis (voir la formation)\n\n# on\n# après sélection de quelques colonnes, tri sur l'âge\njeu %>% \n    dplyr::select(ghm,nas,no_rum,no_um,dp,age) %>% \n    dplyr::arrange(age)\n# tri descendant avec l'option desc() dans arrange\njeu %>% \n    dplyr::select(ghm,nas,no_rum,no_um,dp,age) %>% \n    dplyr::arrange(desc(age))\n\ncim_lib\n# cim_lib <- refpmsi::refpmsi(\"cim_lib\")\ncim_lib\ncim_10 <- refpmsi::refpmsi(\"cim\")\nglimpse(cim_10)\n# rappel : les codes autorisés en DP ont la valeur 0 (voir le kit de la nomenclature CIM PMSI sur le site de l'ATIH)\ncim_dp_2022 <- cim_10 %>%\n    # je sélectionne les variables qui m'intéressent\n    dplyr::select(cim_code,cim_tmco,annee_pmsi,cim_lib) %>% \n    dplyr::filter(annee_pmsi == \"2022\") %>% \n    dplyr::filter(cim_tmco == 0)\ncim_dp_2022 %>% View\ncim__non_dp_2022 <- cim_10 %>%\n    # je sélectionne les variables qui m'intéressent\n    dplyr::select(cim_code,cim_tmco,annee_pmsi,cim_lib) %>% \n    dplyr::filter(annee_pmsi == \"2022\") %>% \n    dplyr::filter(cim_tmco != 0)\ncim_non_dp_2022 %>% View\n\non ne préfixe pas les fonctions natives R. Exemple : nrow() et pas base::nrow()"
+  },
+  {
+    "objectID": "index.html#connaissance-et-pratique-du-pmsi",
+    "href": "index.html#connaissance-et-pratique-du-pmsi",
+    "title": "Formations Data PMSI avec R",
+    "section": "Connaissance et pratique du PMSI",
+    "text": "Connaissance et pratique du PMSI\nToutes les formations Data PMSI avec R supposent une maîtrise professionnelle du PMSI, en particulier du champ PMSI de la formation (MCO, SSR, PSY) :\n\nrègles (définitions, vocabulaire)\nstructures de données (rss, rsa, fichcomp, ficium, vidhosp, fichsup, rhs, rha, rps, raa, …)\nréférentiels (CIM-10, CCAM à usage PMSI, DMI, UCD en sus, CSARR, …)\ndocumentations (guides méthodologiques, manuels de groupages, cahiers des charges, …)\ncontrôles qualité (requêtes, OVALIDE, …)\nanalyses (case mix, reporting, fouilles de données, …)\n\nRemarque : la pratique du codage n’est pas nécessaire, même si codé ou avoir déjà codé des dossiers est un plus pour appréhender les problématiques."
+  },
+  {
+    "objectID": "index.html#installer-lenvironnment-de-travail-en-r",
+    "href": "index.html#installer-lenvironnment-de-travail-en-r",
+    "title": "Formations [data PMSI avec R]",
+    "section": "Installer l’environnment de travail en R",
+    "text": "Installer l’environnment de travail en R\nlien"
+  },
+  {
+    "objectID": "index.html#section",
+    "href": "index.html#section",
+    "title": "Formations [data PMSI avec R]",
+    "section": "",
+    "text": "Install latest version of RStudio, v2022.07.0-548 or later\nInstall latest version of Quarto (v1.0.36 or greater)"
+  },
+  {
+    "objectID": "index.html#installer-lenvironnment-de-travail-r",
+    "href": "index.html#installer-lenvironnment-de-travail-r",
+    "title": "Formations [data PMSI avec R]",
+    "section": "Installer l’environnment de travail R",
+    "text": "Installer l’environnment de travail R\nlien"
+  },
+  {
+    "objectID": "index.html#disposer-dun-environnment-de-travail-r",
+    "href": "index.html#disposer-dun-environnment-de-travail-r",
+    "title": "Formations Data PMSI avec R",
+    "section": "Disposer d’un environnment de travail R",
+    "text": "Disposer d’un environnment de travail R\nCela suppose d’avoir :\n\nInstaller R et R Studio\ncréer un projet dédié à la formation et un premier fichier .R\nCharger les packages nécessaires\nExplications détaillées"
+  },
+  {
+    "objectID": "base_R.html#type-de-données-vecteur-data-frametibble-et-liste",
+    "href": "base_R.html#type-de-données-vecteur-data-frametibble-et-liste",
+    "title": "Pré-requis R",
+    "section": "Type de données, vecteur, data frame/tibble et liste",
+    "text": "Type de données, vecteur, data frame/tibble et liste\nIl y a 4 mots/concepts à avoir bien compris : les types de données, les vecteurs, les data frames ou tibbles et les listes\nNous les exposons ci-dessous avec des exemples issus de données simili PMSI, à exécuter dans le fichier intro.R\nType de données\nChaque information (un code CIM, un code d’UM, un initulé, une valorisation T2A, un nombre d’actes, …) relève d’un type de données.\nIl y a 4 types principaux de données (logical, character, integer, numeric) que nous illustrons ci-dessous\n\n# les lignes pour commenter du code commencent par #\n# <- permet d'attribuer une valeur à une variable (raccourci R Studio pour <- : alt + 6)\n# il y a des bonnes pratiques de nommage des variables : elles sont appliquées dans cette note et nous les exposerons dans la formation\n\n\n# type logical \n# 2 valeurs possibles : TRUE ou FALSE\n\n# exemple. Pour indiquer que l'UM 14 devra être exclu d'une analyse\nis_um <- \"\"\n\n# type character\n# valeurs avec du texte\n\ncode_cim <- \"\"\ncode_cim\n\nVecteur\nRemarques :"
+  },
+  {
+    "objectID": "base_R.html#type-de-données-vecteur-data-frametibble-et-list",
+    "href": "base_R.html#type-de-données-vecteur-data-frametibble-et-list",
+    "title": "Pré-requis R",
+    "section": "Type de données, vecteur, data frame/tibble et list",
+    "text": "Type de données, vecteur, data frame/tibble et list\nIl y a 4 mots/concepts à connaître : les types de données, les vecteurs, les data frames ou tibbles et les listes\nNous les exposons ci-dessous avec des exemples issus de données simili PMSI, à exécuter dans le fichier intro.R\nType de données\nChaque information (un code CIM, un code d’UM, un initulé, une valorisation T2A, un nombre d’actes, …) relève d’un type de données.\nIl y a 4 types principaux de données (logical, character, integer, numeric) que nous illustrons ci-dessous2\n\n# type logical \n# 2 valeurs possibles : TRUE ou FALSE\n# exemple. Pour indiquer qu'on excluera les moins de 18 ans d'une analyse\nage_moins_18 <- FALSE\nage_moins_18\n\n# type character\n# valeurs avec du texte. Bien indiquer les \"\"\ncode_cim <- \"S42700\"\ncode_cim\n\n# type integer\n# valeurs entières\nseuil_acte <- 4\nseuil_acte\n\n# type numeric\n# valeurs réelles. Avec . au lieu de , pour les décimals\nvalo_t2a <- 13467.89\nvalo_t2a\n\nVecteur\nUn vecteur est un ensemble de valeurs du même type.\nOn parlera ainsi d’un vecteur logique, d’un vecteur character, etc…\n\n# un vecteur est créé par la fonction c()\n## ici un vecteur de codes UM\nmes_um <- c(\"UM01\",\"UM02\",\"UM03\",\"UM04\")\nmes_um\n    \n# nombre d'élements d'un vecteur avec la fonction length()\nlength(mes_um)\n\n# extraction d'un élément par sa position\n## ici extraction du 2eme élément\nmes_um[2]\n\n# extraction de plusieurs éléments via un vecteur des positions à extraire\n## ici extraction des positions 2 et 4\npositions_recherchees <- c(2,4)\nmes_um[positions_recherchees]\n# ou plus directement\nmes_um[c(2,4)]\n\n# une donnée manquante est indiquée par NA (comme Non Available)\ndestination_um <- c(NA,NA,2,7,NA)\ndestination_UM[1]\n\n# on peut attribuer un nom à chaque éléments du vecteur avec la fonction names()\nnoms_um <- c(\"Ortho\",\"Pédiatrie\",\"Gynéco\",\"Urgences\")\nnames(mes_um) <- noms_um\n\nData frame/tibble\nUn data frame ou tableau de données est une liste de vecteurs indépendants.\nUn data frame est donc constitué de colonnes de même longueur (même nombre de lignes) qui peuvent être de types différents.\nLe jeu de données mini_fake_dataset_mco, librement téléchargeable (voir ci-dessous), est ainsi un data frame composé de 27 colonnes.\nLes référentiels du package de données refpmsi (par exemple le référentiel cim de la CIM-10 à usage PMSI de 2019 à 2022) sont des data frames.\nAbréviation courante : df\nUn tibble est un data frame “enrichi” dans l’environnement du tidyverse3. En pratique, parce qu’on travaille essentiellement avec les packages du tidyverse, on parlera de tibble (abréviation tbl)\nOn parlera indifféremment de colonnes ou de variables : une variable d’un tibble correspond à une colonne\n\n# création d'un mini-data frame simili RUM\n\ndf\n\nList\nUne list, au sens R, est une collection de structures de données (valeurs uniques, vecteurs, tibbles, list) Une image pour visualiser : une list est une commode dont chaque tiroir contient des objects différents, des pulls dans le premier tiroir, des assiettes dans le second tiroir, rien dans le troisième, un seul livre dans le quatrième.\nUne list est donc la structure de données la plus souple, la plus puissante, mais aussi la plus complexe à manipuler.\nLe jeu de données de la formation est une list de tibbles (un tbl simili partie fixe des RUM, un tbl simili actes CCAM, un tble simili DAS, un tbl de DMI, un tbl simili ficium) : nous manipulons donc un seul objet au lieu de 5 objets\n\njeu <- jsonlite::fromJSON(\"mini_fake_dataset_mco.json\")\n# il s'agit d'un data frame. On le vérifie avec la fonction is.data.frame()\nis.data.frame(jeu)\n\n# pour faciliter son exploitation, on va passer ce jeu en tibble \n# avec la fonction as_tibble du package tibble:: \n# ici on écrase donc l'ancien df jeu par le nouveau tbl jeu avec le même nom de variable\njeu <- tibble::as_tibble(jeu)"
+  },
+  {
+    "objectID": "index.html#manipuler-à-minima-r",
+    "href": "index.html#manipuler-à-minima-r",
+    "title": "Formations Data PMSI avec R",
+    "section": "Manipuler à minima R",
+    "text": "Manipuler à minima R\nExplications détaillées"
+  },
+  {
+    "objectID": "base_R.html#créer-un-projet-et-un-premier-fichier-.r",
+    "href": "base_R.html#créer-un-projet-et-un-premier-fichier-.r",
+    "title": "Pré-requis R",
+    "section": "Créer un projet et un premier fichier .R",
+    "text": "Créer un projet et un premier fichier .R\n\nCréer un projet\nNous allons maintenant créer un projet sous R Studio que l’on propose d’appeler formation_data_pmsi.\nCe projet va regrouper tous les fichiers .R et autres informations en lien avec les exerices, données et scripts de la formation.\nPremière étape : on crée (à priori à la racine C:), un répertoire avec l’intitulé formation_data_pmsi.\nSeconde étape : dans R Studio, on crée le projet formation_data_pmsi en le rattachant au répertoire que l’on vient de créer à la première étape via File > New Project > Existing Directory\nUn tuto\nAutre tuto\nDésormais, une fois ouvert R Studio, on ouvrira ce projet formation_data_pmsi via File > Open Project\n\n\nMon premier fichier .R\nNous créons un premier fichier .R dans lequel nous allons sauvegarder les codes R de requêtes et analyses PMSI.\nPour créer un fichier .R : File > New File > R Script\nUn fichier “untitled1” apparaît dans le quadrant haut gauche (le quadrant éditeur de texte, de code).\nEn cliquant sur l’icône “Sauvegarder” de ce quadrant, vous saisissez le nom du fichier, par exemple “intro.R”\nPremières lignes de code (à copier/coller)\n\n# les lignes de commentaires commencent par #\n\n# cliquer sur alt + entrée à la fin chaque ligne de code pour exécuter la ligne\n\n# première saisie. Il s'agit du très classique jeu de données iris, natif dans R\n# le jeu de données s'affiche dans la console\niris\n\n# appel d'une fonction \n# nrow() = fonction native de R calculant le nombre de lignes d'un tableau de données\nnrow(iris)\n\n# <- permet d'attribuer une valeur à une variable (raccourci R Studio pour <- : alt + 6)\n# il y a des bonnes pratiques de nommage des variables : elles sont appliquées dans cette note\na <- 1\na\n\nPenser à sauvegarder votre script R régulièrement et, à minima, avant de quitter R Studio.\nEn quittant R Studio, ne jamais sauvegarder le .RData si R Studio vous le demande\nUn tuto\nContactez-nous pour toute question (avec l’objet “Question formation Data PMSI avec R”)"
+  },
+  {
+    "objectID": "pedagogie.html",
+    "href": "pedagogie.html",
+    "title": "Pédagogie",
+    "section": "",
+    "text": "La pédagogie des formations Data PMSI avec R est conçue et adaptée aux constats et objectifs suivants :\n\nles participants sont des professionnels du PMSI ou liés au PMSI. Ils maîtrisent le PMSI.\nles participants disposent d’un environnement de travail R et ont déjà, à minima, coder quelques lignes en R (Voir Pré-requis R)\nles participants sont familiers des requêtes et analyses PMSI\nles participants cherchent à devenir autonomes dans leurs travaux quotidiens d’analyses du PMSI avec R\nles participants attendent une vision claire des types d’analyses possibles, en fonction de leur montée en compétence progressive des codes de manipulations des données PMSI avec R\nles participants attendent de pratiquer, de bout en bout (des données brutes PMSI aux résultats d’analyse), des analyses PMSI avec R\nles participants sont intéressés à disposer d’un ensemble de scripts PMSI en R qu’ils pourront reproduire, décliner et approfondir sur les données PMSI de leurs établissements\n\n\n\n\nLa démarche principale des formations Data PMSI avec R consiste à partir de situations d’analyses PMSI issues du terrain pour les coder en R et, ainsi, apprendre et pratiquer la grammaire R nécessaire mais juste suffisante, pour réaliser les analyses voulus.\nChaque formation Data PMSI avec R est conçue de manière graduée pour introduire à chaque nouvelle analyse, des codages R de plus en plus complexes en lien avec l’objectif de la formation (requêtes, scripts, tableaux, graphiques).\nChaque formation Data PMSI avec R est donc constituée d’une suite de modules qui permettent de réaliser des analyses PMSI de plus en plus complexes.\nLe dispositif des formations s’articule autour de séances de live coding à partir de jeux de données PMSI réalistes, d’exercices à réaliser par les participants avec correction du formateur et de mise à disposition de scripts R documentés.\n\n\n\nLe live coding en direct consiste, pour le formateur, à écrire et commenter le code à haute voix pendant qu’il enseigne le pourquoi et les caractéristiques du code en train de s’écrire.\nLe formateur explique les différents éléments et principes pertinents pour que les apprenants comprennent le code.\nLes participants sont invités, dans le même temps, à écrire et à exécuter le même code sur leur poste de travail.\nDans cette opération, les participants assimilent le codage et recontrent leurs éventuels points de douleur (= les enchaînements de code qui leur paraissent bizarres ou incompréhensibles). Ils sollicitent alors le formateur pour comprendre et progresser en direct.\nUne séquence de live coding en direct dure de quelques minutes à 30 minutes maximum. Elle est généralement composée de 3 phases :\n\nexposé de la problématique PMSI et de l’algorithmique permettant, à partir d’un ensemble de données PMSI brutes ou déjà retravaillées, d’arriver au résultat voulu.\ncodage R en direct par le formateur avec les participants qui reproduisent le codage en direct. Le formateur commente le codage en direct avec d’éventuels aller-retours dans le script en cours de codage et des apartés techniques.\ntemps de débrief avec les participants : alternatives de codage R, retours d’expérience du formateur, réponses aux questions des participants.\n\nUn module d’1h30 est ainsi généralement constitué d’une dizaine de séquences.\nPour aller plus loin : Papier “Ten quick tips for teaching with participatory live coding”\n\n\n\nChaque journée de formation est ponctuée d’exercices, mis à disposition des participants.\nUn exercice comprend une problématique PMSI, des indications de résolution et, le plus souvent, sur la base des jeux de données fournis, le résultat attendu : il est attendu que le participant compose le codage R pour parvenir au résultat.\nLes corrections d’exercices sont fournies aux participants soit lors de la 2eme journée de formation du programme (pour les formations de 2 journées), soit quelques jours après la formation (pour les formations d’une journée).\n\n\n\nLa documentation est constituée de scripts R documentés directement dans le code qui peuvent être repris par les participants à l’issue de chaque formation.\nLa documentation est envoyée aux participants, en même temps que les corrections d’exercices, à l’issue de la formation.\nDes liens vers des ressources open souce sont régulièrement proposés pour les aspects strictement R de la formation."
+  },
+  {
+    "objectID": "pedagogie.html#avant-la-formation",
+    "href": "pedagogie.html#avant-la-formation",
+    "title": "Pédagogie",
+    "section": "Avant la formation",
+    "text": "Avant la formation\nLes participants lisent, réalisent et valident les pré-requis PMSI et pré-requis R de la formation.\nLes participants répondent au questionnaire d’auto-évaluation qui leur ait envoyé avant la formation.\nLes participants font le point sur les analyses PMSI qu’ils souhaient coder en R."
+  },
+  {
+    "objectID": "pedagogie.html#pendant-la-formation",
+    "href": "pedagogie.html#pendant-la-formation",
+    "title": "Pédagogie",
+    "section": "Pendant la formation",
+    "text": "Pendant la formation\nChaque journée des formations Data PMSI avec R est constituée de 4 modules en ligne, 2 le matin et 2 l’après-midi.\nChaque module est divisé en séquences de live coding en direct (voir rubrique ci-dessus).\nLes temps de pause et d’échanges permettent au formateur de répondre aux questions des participants et de reprendre, si nécessaire, certains points du module précédent.\nEn fin de journée, les exercices (voir rubrique ci-dessus) sont exposés et envoyés aux participants."
+  },
+  {
+    "objectID": "pedagogie.html#après-la-formation",
+    "href": "pedagogie.html#après-la-formation",
+    "title": "Pédagogie",
+    "section": "Après la formation",
+    "text": "Après la formation\nUne évaluation à chaud est envoyée aux participants à l’issue de chaque formation.\nLa correction des exercices est envoyée aux participants quelques jours après la formation."
+  },
+  {
+    "objectID": "prestation.html",
+    "href": "prestation.html",
+    "title": "Prestations",
+    "section": "",
+    "text": "Voir le catalogue des formations Data PMSI avec R et le planning des journées"
+  },
+  {
+    "objectID": "dataset_mco.html#charger-mini_fake_dataset_mco",
+    "href": "dataset_mco.html#charger-mini_fake_dataset_mco",
+    "title": "Jeux PMSI MCO",
+    "section": "Charger mini_fake_dataset_mco",
+    "text": "Charger mini_fake_dataset_mco\n\nlibrary(jsonlite)\nlibrary(dplyr) # dplyr est un des packages du tidyverse\n\nCe jeu est librement téléchargeable et régulièrement mis à jour.\nNous invitons les participants à déposer mini_fake_dataset_mco dans le sous-répertoire data du répertoire du projet R dédié à la formation"
+  },
+  {
+    "objectID": "dataset_mco.html#caractéristiques-fake_dataset_mco",
+    "href": "dataset_mco.html#caractéristiques-fake_dataset_mco",
+    "title": "Jeux PMSI MCO",
+    "section": "Caractéristiques fake_dataset_mco",
+    "text": "Caractéristiques fake_dataset_mco\nLes variables des différents tibbles sont homothétiques au cahier des charges des formats PMSI.\nNous avons construit fake_dataset_mco manuellement et par génération aléatoire de mini-séquence de regroupements de variables (par exemple : une série de 10 séjours ambulatoires aux urgences avec un GHM donné et choix DP parmi une liste de DP).\nPour faciliter sa mise à jour annuelle, les dates d’entrée d’UM sont toutes calées au 1er jour des mois avec choix aléatoires des mois.\nLes dates des situations particulières (illustration d’une situation séjour multi-RUM avec 1 RUM entièrement en année N-1, séjours multi-RUM) ont été gérées manuellement, au cas par cas.\nLes nom des variables sont celles utilisées dans PMSISoft Standard."
+  },
+  {
+    "objectID": "formations/pmsi_mco_requete.html#cgv",
+    "href": "formations/pmsi_mco_requete.html#cgv",
+    "title": "Formation Requêtes MCO",
+    "section": "CGV",
+    "text": "CGV"
+  },
+  {
+    "objectID": "package_function_mco.html",
+    "href": "package_function_mco.html",
+    "title": "Packages et fonctions R des formations Data PMSI avec R",
+    "section": "",
+    "text": "Liste quasi exhaustive des packages et fonctions R utilisés dans la formation.\nFonctions R de base : all(), any(), as.Date(), cumsum(), ifelse(), is.na(), match(), readRDS(), sum(), which()\nPackage dplyr : across(), add_count(), arrange(), case_when(), count(), cur_data(), distinct(), filter(), first(), full_join(), glimpse(), group_by(), if_all(), if_any(), inner_join(), lag(), last(), lead(), left_join(), mutate(), n(), n_distinct(), pull(), relocate(), right_join(), row_number(), rowwise(), select(), semi_join(), slice(), summarise(),\nPackage tidyr : complete(), drop_na(), pivot_longer(), pivot_wider(), unite()\nPackage stringr : str_c(), str_detect(), str_extract(), str_sub(), str_unique()\nPackage readr : read_csv(), read_csv2(), read_delim(), write.csv(), write.csv2()\nPackage lubridate : ymd()\nPackage tibble : enframe(), tibble()\nPackage tidyselect : all_of(), any_of(), contains(), ends_with(), everything(), starts_with(), where()\nPackage jsonlite : fromJSON(), toJSON()\npackage data.table : rleid(), uniqueN()\nPackage refpmsi : refpmsi()"
+  },
+  {
+    "objectID": "package_function_mco.html#formation-requêtes-mco-avancé",
+    "href": "package_function_mco.html#formation-requêtes-mco-avancé",
+    "title": "Packages et fonctions R des formations Data PMSI avec R",
+    "section": "Formation Requêtes MCO [Avancé]",
+    "text": "Formation Requêtes MCO [Avancé]\nA venir"
+  },
+  {
+    "objectID": "dataset_mco.html#caractéristiques-1",
+    "href": "dataset_mco.html#caractéristiques-1",
+    "title": "Jeux PMSI MCO",
+    "section": "Caractéristiques",
+    "text": "Caractéristiques\nDernière version : 02 février 2023\nLe jeu fake_dataset_mco est conçu par nos soins, de manière semi-automatique sur des mini-séries de séjours semblables (exemple : une série de 10 séjours simili chirurgie traumatique du genou avec des codages les plus fréquents pour cette prise en charge) et manuellement (exemple : séjours multi-rum, introduction d’atypies, un séjour anormalement long, un séjour multi_rum avec 1 rum entièrement en année N-1, etc…).\nNous essayons de rester réalistes, mais nous ne garantissons aucunement la cohérence métier entre les variables.\nL’objectif du jeu fake_dataset_mco est pédagogique du point de vue de l’utilisation de R pour requêter et exploiter les données PMSI MCO. Son but n’est pas d’apprendre le codage PMSI.\nLe jeu se compose de 6 tables1 réunies sous forme d’une liste de tibble2, accessibles via un seul fichier JSON :\nrss (sur le modèle du jeu mini_fake_dataset_mco mais avec plus de lignes et de variables)\nrsa\ndas\nccam\ndmi\nficium\nPour des raisons pratiques d’élaboration et de maintenance :\n- Les dates d’entrée commencent quasi systématiquement le 1er jour d’un mois avec des durées de séjour de moins de 30 jours et une attribution aléatoire des mois.\n- Pas de séjours multi-RUM de plus de 3 RUM\n- Relative cohérence métier entre tables rum, das, ccam\n- Activité concentrée sur des prises en charge les plus communes en MCO avec les codages les plus communs\n- Pas de variable date de naissance, mais une variable générée d’âge toujours >= 18 ans\n- Pas de simili CMD 14 ou 15\nLes types et intitulés des variables des différentes tables sont cohérents avec les formats PMSI.\nLe jeu fake_dataset_mco est régulièrement mis à jour pour l’enrichir, illustrer une situation particulière ou produire une atypie.\nLe fichier JSON du jeu est envoyé aux participants au début des formations concernées."
+  },
+  {
+    "objectID": "index.html#un-environnment-de-travail-r",
+    "href": "index.html#un-environnment-de-travail-r",
+    "title": "Formations Data PMSI avec R",
+    "section": "Un environnment de travail R",
+    "text": "Un environnment de travail R\nCela suppose d’avoir :\n\nInstaller R et R Studio\ncréer un projet dédié à la formation et un premier fichier .R\nCharger les packages nécessaires\nExplications détaillées"
+  },
+  {
+    "objectID": "pause.html",
+    "href": "pause.html",
+    "title": "Pause et échanges",
+    "section": "",
+    "text": "C’est l’occasion de revenir sur des points précis et d’apporter des compléments d’informations ou des retours d’expérience."
+  },
+  {
+    "objectID": "index.html#pré-requis-pmsi-connaissance-et-pratique-du-pmsi",
+    "href": "index.html#pré-requis-pmsi-connaissance-et-pratique-du-pmsi",
+    "title": "Formations Data PMSI avec R",
+    "section": "Pré-requis PMSI : connaissance et pratique du PMSI",
+    "text": "Pré-requis PMSI : connaissance et pratique du PMSI\nToutes les formations Data PMSI avec R supposent une maîtrise professionnelle du PMSI, en particulier du champ PMSI de la formation (MCO, SSR, PSY) :\n\nrègles (définitions, vocabulaire)\nstructures de données (rss, rsa, fichcomp, ficium, vidhosp, fichsup, rhs, rha, rps, raa, …)\nréférentiels (CIM-10, CCAM à usage PMSI, DMI, UCD en sus, CSARR, …)\ndocumentations (guides méthodologiques, manuels de groupages, cahiers des charges, …)\ncontrôles qualité (requêtes, OVALIDE, …)\nanalyses (case mix, reporting, fouilles de données, …)\n\nRemarque : la pratique du codage n’est pas nécessaire, même si codé ou avoir déjà codé des dossiers est un plus pour appréhender les problématiques."
+  },
+  {
+    "objectID": "index.html#pré-requis-r-un-environnment-de-travail-r",
+    "href": "index.html#pré-requis-r-un-environnment-de-travail-r",
+    "title": "Formations Data PMSI avec R",
+    "section": "## Pré-requis R : un environnment de travail R",
+    "text": "## Pré-requis R : un environnment de travail R\nExplications détaillées"
+  },
+  {
+    "objectID": "index.html#pré-requis-pmsi",
+    "href": "index.html#pré-requis-pmsi",
+    "title": "Formations Data PMSI avec R",
+    "section": "Pré-requis PMSI",
+    "text": "Pré-requis PMSI\nToutes les formations Data PMSI avec R supposent une maîtrise professionnelle du PMSI, en particulier du champ PMSI de la formation (MCO, SSR, PSY) :\n\nrègles (définitions, vocabulaire)\nstructures de données (rss, rsa, fichcomp, ficium, vidhosp, fichsup, rhs, rha, rps, raa, …)\nréférentiels (CIM-10, CCAM à usage PMSI, DMI, UCD en sus, CSARR, …)\ndocumentations (guides méthodologiques, manuels de groupages, cahiers des charges, …)\ncontrôles qualité (requêtes, OVALIDE, …)\nanalyses (case mix, reporting, fouilles de données, …)\n\nRemarque : la pratique du codage n’est pas nécessaire, même si codé ou avoir déjà codé des dossiers est un plus pour appréhender les problématiques."
+  },
+  {
+    "objectID": "index.html#pré-requis-r",
+    "href": "index.html#pré-requis-r",
+    "title": "Formations Data PMSI avec R",
+    "section": "Pré-requis R",
+    "text": "Pré-requis R\nExplications détaillées"
+  },
+  {
+    "objectID": "formations/pmsi_mco_requete.html#pré-requis-pmsi",
+    "href": "formations/pmsi_mco_requete.html#pré-requis-pmsi",
+    "title": "Formation Requêtes MCO",
+    "section": "Pré-requis PMSI",
+    "text": "Pré-requis PMSI\nLa formation Requêtes MCO suppose une maîtrise professionnelle du PMSI MCO :\n\nrègles (définitions, vocabulaire)\nstructures de données (rss, rsa, fichcomp, ficium, anohosp/vidhosp, fichsup, …)\nréférentiels (CIM-10, CCAM à usage PMSI, DMI, UCD en sus, …)\ndocumentations (guides méthodologiques, manuels de groupages, cahiers des charges, …)\ncontrôles qualité (requêtes, OVALIDE, …)\nanalyses (case mix, reporting, fouilles de données, …)\n\nRemarque : la pratique du codage n’est pas nécessaire, même si codé ou avoir déjà codé des dossiers est un plus pour appréhender les problématiques."
+  },
+  {
+    "objectID": "formations/pmsi_mco_requete.html#pré-requis-r",
+    "href": "formations/pmsi_mco_requete.html#pré-requis-r",
+    "title": "Formation Requêtes MCO",
+    "section": "Pré-requis R",
+    "text": "Pré-requis R\nExplications détaillées"
+  },
+  {
+    "objectID": "formations/pmsi_mco_requete.html#inscription",
+    "href": "formations/pmsi_mco_requete.html#inscription",
+    "title": "Formation Requêtes MCO",
+    "section": "Inscription",
+    "text": "Inscription\nTéléchager le bulletin de pré-inscription\nA réception du bulletin de pré-inscription renseignée et signée, nous vous enverrons la convention de formation, les conditions générales de vente (CGV) et le règlement intérieur de la formation.\nRèglement à l’issue de la formation.\nLa formation comprend de 3 à 10 participants.\nLa formation est opérée par l’organisme de formation FormaTIM, certifé Qualiopi.\n\nLe label QUALIOPI certifie la qualité des formations proposées et valide la prise en charge par les financeurs.\nLa certification qualité a été délivrée à FormaTIM au titre de la catégorie d’action : ACTIONS DE FORMATION"
+  },
+  {
+    "objectID": "dataset_mco.html#caractéristiques",
+    "href": "dataset_mco.html#caractéristiques",
+    "title": "Jeux PMSI MCO",
+    "section": "Caractéristiques",
+    "text": "Caractéristiques\nmini_fake_dataset_mco est un mini jeu simili RUM très simple, conçu par nos soins, d’une trentaine de lignes et de 27 variables.\nLes données fake du jeu sont réalistes en terme de cohérence des valeurs (par exemple lien entre DP et GHM).\nLes variables correspondent à un sous-ensemble des variables de la partie fixe du fichier des RSS groupés (année PMSI 2022, version 121).\nCe mini jeu est proposé à des fins de test de l’environnement R pour les formations Data PMSI avec R et de réalisation des pré-requis R de ces formations\nmini_fake_dataset_mco est une extraction aléatoire du jeu fake_dataset_mco\nmini_fake_dataset_mco est un fichier JSON, librement téléchargeable.\n\n\nRows: 30\nColumns: 27\n$ ghm                                        <chr> \"06M041\", \"04M05T\", \"04M203~\n$ code_retour                                <chr> \"000\", \"000\", \"000\", \"000\",~\n$ nas                                        <chr> \"1740\", \"435\", \"1684\", \"125~\n$ no_rum                                     <chr> \"1\", \"1\", \"1\", \"1\", \"1\", \"1~\n$ age                                        <int> 72, 58, 59, 55, 71, 87, 65,~\n$ sexe                                       <chr> \"F\", \"F\", \"H\", \"F\", \"F\", \"H~\n$ no_um                                      <chr> \"um01\", \"um01\", \"um01\", \"um~\n$ type_aut_lit_dedie                         <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ mode_entree_um                             <chr> \"8\", \"8\", \"8\", \"8\", \"8\", \"8~\n$ provenance_um                              <chr> \"5\", \"5\", \"5\", \"5\", \"5\", \"5~\n$ mode_sortie_um                             <chr> \"6\", \"8\", \"6\", \"8\", \"8\", \"6~\n$ destination_um                             <chr> \"1\", \"NA\", \"1\", \"NA\", \"NA\",~\n$ nb_seances                                 <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, ~\n$ nb_das                                     <int> 1, 3, 1, 0, 0, 0, 0, 1, 1, ~\n$ nb_ccam                                    <int> 0, 3, 3, 3, 3, 5, 2, 3, 1, ~\n$ dp                                         <chr> \"K625\", \"J181\", \"J9600\", \"N~\n$ dr                                         <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ igs_2                                      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, ~\n$ confirmation_codage_rss                    <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ conversion_hc                              <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ raac                                       <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ contexte_patient_surveillance_particuliere <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ admin_produit_rh                           <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ rescrit_tarifaire                          <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ cat_nb_inter_tot                           <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ date_entree_um                             <chr> \"2022-07-01\", \"2022-03-01\",~\n$ date_sortie_um                             <chr> \"2022-07-02\", \"2022-03-02\",~"
+  },
+  {
+    "objectID": "dataset_mco.html#télécharger",
+    "href": "dataset_mco.html#télécharger",
+    "title": "Jeux PMSI MCO",
+    "section": "Télécharger",
+    "text": "Télécharger\nDernière version : 30 décembre 2022\n\nCréer (si pas déjà présent) un sous-répertoire data dans le répertoire de votre projet R dédié à la formation (voir “Créer un projet”)\nTélécharger le fichier JSON mini_fake_dataset_mco (clic droit sur le lien et choisir “Enregistrer le lien sous”) dans le répertoire data\nCharger le mini_fake_dataset_mco via le code ci-dessous à exécuter\n\n\n# chargement du package jsonlite \nlibrary(jsonlite)\n\njeu <- jsonlite::fromJSON(\"data/mini_fake_dataset_mco.json\")\njeu\n\nVous pouvez alors réaliser les exercices des pré-requis R des formations Data PMSI MCO avec R.\nVous êtes alors certains de pouvoir importer et charger dans votre environnement R le jeu fake_dataset_mco communiqué aux participants des formations Data PMSI avec R pour le champ MCO."
+  },
+  {
+    "objectID": "prestation.html#formations-dédiées-data-pmsi-avec-r",
+    "href": "prestation.html#formations-dédiées-data-pmsi-avec-r",
+    "title": "Prestations",
+    "section": "Formations dédiées Data PMSI avec R",
+    "text": "Formations dédiées Data PMSI avec R\nNous pouvons réaliser chaque formation inter-établissement Data PMSI avec R sur site pour un établissement ou un regroupement d’établissements. Dans ce cadre, via un entretien amont, nous pouvons personnaliser les exercices et les exemples des modules au périmètre du ou des établissements concernés.\nNous pouvons aussi concevoir des formations Data PMSI avec R spécifique pour un établissement.\nContactez-nous pour toute demande (avec l’objet “Question formation Data PMSI avec R”)"
+  },
+  {
+    "objectID": "base_R.html#ere-étape-installer-r",
+    "href": "base_R.html#ere-étape-installer-r",
+    "title": "Pré-requis R",
+    "section": "1ere étape : Installer R",
+    "text": "1ere étape : Installer R\nR s’installe sous Windows comme un simple exécutable (comme GENRSA ou GENRHA par exemple).\nTélécharger R dans sa dernière version\nAccepter les options par défaut jusqu’à la fin de l’installation.\nNous recommandons une version de R >= à la version 4.1.0 de mai 2021.\nHistorique des versions de R"
+  },
+  {
+    "objectID": "base_R.html#eme-étape-installer-r-studio",
+    "href": "base_R.html#eme-étape-installer-r-studio",
+    "title": "Pré-requis R",
+    "section": "2eme étape : Installer R Studio",
+    "text": "2eme étape : Installer R Studio\nAprès avoir installé R, nous installons R Studio qui est l’environnement de développement de référence pour R.\nPlus exactement, nous allons télécharger la version open source de R Studio, appelée “R Studio Desktop”.\nR Studio Desktop s’installe comme un exécutable.\nTélécharger R Studio Desktop\nNous recommandons une version de R Studio Desktop >= à la version 12.07.02\nHistorique des versions de R Studio Desktop\nA ce stade, vous disposez d’une icône R Studio sur votre bureau pour ouvrir R Studio.\nTuto avec copies écrans pour installer R et R Studio\nTuto pour découvrir R Studio\nAutre tuto"
+  },
+  {
+    "objectID": "base_R.html#eme-étape-créer-un-projet-et-un-premier-fichier-.r",
+    "href": "base_R.html#eme-étape-créer-un-projet-et-un-premier-fichier-.r",
+    "title": "Pré-requis R",
+    "section": "3eme étape : Créer un projet et un premier fichier .R",
+    "text": "3eme étape : Créer un projet et un premier fichier .R\n\nCréer un projet\nNous allons maintenant créer un projet sous R Studio que l’on propose d’appeler formation_data_pmsi.\nCe projet va regrouper tous les fichiers .R et autres informations en lien avec les exerices, données et scripts de la formation.\nPremière étape : on crée (à priori à la racine C:), un répertoire avec l’intitulé formation_data_pmsi.\nSeconde étape : dans R Studio, on crée le projet formation_data_pmsi en le rattachant au répertoire que l’on vient de créer à la première étape via File > New Project > Existing Directory\nUn tuto\nAutre tuto\nDésormais, une fois ouvert R Studio, on ouvrira ce projet formation_data_pmsi via File > Open Project\n\n\nMon premier fichier .R\nNous créons un premier fichier .R dans lequel nous allons sauvegarder les codes R des requêtes et analyses PMSI de la formation.\nPour créer un fichier .R : File > New File > R Script\nUn fichier “untitled1” apparaît dans le quadrant haut gauche (le quadrant éditeur de code).\nEn cliquant sur l’icône “Sauvegarder” de ce quadrant, vous saisissez le nom du fichier, par exemple “intro.R”\nPremières lignes de code (à copier/coller)\n\n# les lignes de commentaires commencent par #\n\n# cliquer sur alt + entrée à la fin chaque ligne de code pour exécuter la ligne\n\n# première saisie. Il s'agit du très classique jeu de données iris, natif dans R\n# le jeu de données s'affiche dans la console\niris\n\n# appel d'une fonction \n# nrow() = fonction native de R calculant le nombre de lignes d'un tableau de données\nnrow(iris)\n\n# <- permet d'attribuer une valeur à une variable (raccourci R Studio pour <- : alt + 6)\n# il y a des bonnes pratiques de nommage des variables : elles sont appliquées dans cette note\na <- 1\na\n\nPenser à sauvegarder votre script R régulièrement et, à minima, avant de quitter R Studio.\nEn quittant R Studio, ne jamais sauvegarder le .RData si R Studio vous le demande\nUn tuto\nContactez-nous pour toute question (avec l’objet “Question formation Data PMSI avec R”)"
+  },
+  {
+    "objectID": "base_R.html#eme-étape-4-choses-à-connaître",
+    "href": "base_R.html#eme-étape-4-choses-à-connaître",
+    "title": "Pré-requis R",
+    "section": "4eme étape : 4 choses à connaître",
+    "text": "4eme étape : 4 choses à connaître\nIl y a 4 concepts à connaître : les types de données, les vecteurs, les data frames ou tibbles et les lists\nNous les exposons ci-dessous, à minima, avec des exemples issus de données simili PMSI, à exécuter dans le fichier intro.R\nType de données\nChaque information (un code CIM, un code d’UM, un initulé, une valorisation T2A, un nombre d’actes, la catégorisation d’âge “adulte” versus “moins 18 ans”, un seuil, …) relève d’un type de données.\nIl y a 4 types principaux de données (logical, character, integer, numeric) que nous illustrons ci-dessous2\n\n# type logical \n# 2 valeurs possibles : TRUE ou FALSE\n# exemple. Pour indiquer qu'on excluera les moins de 18 ans d'une analyse\nage_moins_18 <- FALSE\nage_moins_18\n\n# type character\n# valeurs avec du texte. Bien indiquer les \"\"\ncode_cim <- \"S42700\"\ncode_cim\n\n# type integer\n# valeurs entières\nseuil_acte <- 4\nseuil_acte\n\n# type numeric\n# valeurs réelles. Avec . au lieu de , pour les décimals\nvalo_t2a <- 13467.89\nvalo_t2a\n\nVecteur\nUn vecteur est un ensemble de valeurs du même type.\nOn parlera ainsi d’un vecteur logique, d’un vecteur character, etc…\n\n# un vecteur est créé par la fonction c()\n## ici un vecteur de codes UM\nmes_um <- c(\"UM01\",\"UM02\",\"UM03\",\"UM04\")\nmes_um\n    \n# nombre d'élements d'un vecteur avec la fonction length()\nlength(mes_um)\n\n# extraction d'un élément par sa position\n## ici extraction du 2eme élément du vecteur\nmes_um[2]\n\n# extraction de plusieurs éléments via un vecteur des positions à extraire\n## ici extraction des positions 2 et 4\npositions_recherchees <- c(2,4)\nmes_um[positions_recherchees]\n# ou plus directement\nmes_um[c(2,4)]\n\n# une donnée manquante est indiquée par NA (comme Non Available)\ndestination_um <- c(NA,NA,2,7,NA)\ndestination_UM[1]\ndestination_UM[3]\n\n# on peut attribuer un nom à chaque éléments du vecteur avec la fonction names()\nnoms_um <- c(\"Ortho\",\"Pédiatrie\",\"Gynéco\",\"Urgences\")\nnames(mes_um) <- noms_um\nmes_um\n\nData frame/tibble\nUn data frame ou tableau de données est une liste de vecteurs indépendants.\nUn data frame est donc constitué de colonnes de même longueur (même nombre de lignes) qui peuvent être de types différents.\nLe jeu de données mini_fake_dataset_mco, librement téléchargeable (voir ci-dessous), est ainsi un data frame composé de 27 colonnes.\nLes référentiels du package de données refpmsi (par exemple le référentiel cim de la CIM-10 à usage PMSI de 2019 à 2022) sont des data frames.\nAbréviation courante : df\nUn tibble est un data frame “enrichi” dans l’environnement du tidyverse3.\nEn pratique, parce qu’on travaille essentiellement avec les packages du tidyverse, on parlera de tibble (abréviation : tbl)\nOn parlera indifféremment de colonnes ou de variables : une variable d’un tibble correspond à une colonne\nList\nUne list, au sens R, est une collection de structures de données (valeurs uniques, vecteurs, tibbles, list).\nUne image pour visualiser : une list est une commode dont chaque tiroir contient des objects différents, des pulls dans le premier tiroir, des assiettes dans le second tiroir, rien dans le troisième, un seul livre dans le quatrième.\nUne list est donc la structure de données la plus souple, la plus puissante, mais aussi la plus complexe à manipuler.\nLe jeu de données fake_dataset_mco des formations MCO est ainsi une list de tibbles (un tbl simili partie fixe des RSS, un tbl simili RSA, un tbl simili actes CCAM, un tble simili DAS, un tbl de DMI, un tbl simili ficium) : nous manipulons donc un seul objet au lieu de 6 objets."
+  },
+  {
+    "objectID": "base_R.html#eme-étapes-installer-et-charger-les-packages",
+    "href": "base_R.html#eme-étapes-installer-et-charger-les-packages",
+    "title": "Pré-requis R",
+    "section": "5eme étapes : Installer et charger les packages",
+    "text": "5eme étapes : Installer et charger les packages\nUn package est une réunion cohérente de fonctions et de données que l’on va pouvoir utiliser en appelant ses fonctions et ses données sans avoir à se préoccuper de la façon dont elles sont codées.\nUne fois installé, un package sera à charger à chaque nouvelle session R Studio.\nLes packages d’intérêt général et validés après une série poussée de tests sont disponibles sur le CRAN. C’est essentiellement parmi ces packages que nous allons faire notre marché.\nL’installation d’un package est réalisée une fois pour toute (sauf mise à jour du package).\nEn revanche, à chaque nouvelle session R Studio, nous allons devoir charger les packages nécessaires (voir ci-dessous “Chargement des packages”).\n\nLe tidyverse\nLes packages les plus utiles dans les formations Data PMSI avec R sont les packages d’une collection cohérente de packages appelée tidyverse.\nLe tidyverse est une sorte méta-package. En chargeant le tidyverse, on charge tous les packages du tidyverse en une fois.\nPrincipaux packages du tidyverse utilisés en analyse PMSI :\n- dplyr (package qui fournit les fonctions de base pour résoudre les problèmes de manipulation de données les plus courants comme filtre, trier, sélectionner des colonnes, ajouter une colonne, compter des lignes, …) - tidyr (package pour créer des structures “bien rangées” - tidy en anglais -) - stringr (package pour manipuler des chaînes de caractères) - tibble (package pour manipuler spécifiquement les tibbles) - ggplot2 (package pour produire des graphiques)\nDans le tidyverse, on trouve aussi les packages lubridate (pour manipuler des dates), purrr (pour programmation fonctionnelle), forcats (pour manipuler des facteurs), …\nInstallation des packages du tidyverse\n\n# suffisant pour les formations [Requêtes MCO], [Requêtes SSR] et [Requêtes PSY]\nvect_pkg <- c(\"tidyverse\")\n\n# la fonction install.packages() installe la dernière version des packages du tidyverse\ninstall.packages(vect_pkg)\n\n\n\nLe package refpmsi\nrefpmsi est un package de référentiels PMSI qui permet de récupérer et travailler avec les référentiels PMSI annualisés et normalisés pour R.\nLe chargement de ce package qui n’est pas sur le CRAN est spécifique.\nVoir la documentation de refpmsi pour installer refpmsi.\n\n\nAutres packages CRAN\nEn fonction des formations Data PMSI avec R, on peut installer d’autres packages du CRAN :\n- gt, gtExtras pour les formations [Tableaux]\n- ggrepel, ggtext pour les formations [Graphiques]\n- data.table pour la formation Requêtes MCO [Avancé]\nLa liste des packages et fonctions utilisés dans une formation est indiquée dans la présenttion de la formation concernée.\n\n\nChargement des packages\nMaintenant que nous avons installé les packages nécessaires, nous allons les charger.\nLe code ci-dessous est donc à exécuter à chaque nouvelle session de travail, raison pour laquelle on dispose généralement en tête du fichier .R sur lequel on travaille un code, comme celui proposé ci-dessous, pour charger ces packages.\n\n# Charger un package. Ici le package dplyr \nlibrary(dplyr)\n\n# Code proposé pour charger rapidement plusieurs packages\n# A copier/coller tel quel\n# lapply est une fonction qui va \"appliquer\" la fonction library à chaque élément du vecteur list_packages\n# la fonction invisible() est un confort pour ne pas afficher des informations\nlist_packages <- c(\"dplyr\",\"tibble\",\"tidyr\",\"stringr\",\"jsonlite\",\"refpmsi\")\ninvisible(lapply(list_packages, library, character.only = TRUE))\n\n# Alternative avec le package pacman\npacman::p_load(char = list_packages)"
+  },
+  {
+    "objectID": "base_R.html#eme-étape-charger-un-jeu-de-données",
+    "href": "base_R.html#eme-étape-charger-un-jeu-de-données",
+    "title": "Pré-requis R",
+    "section": "6eme étape : Charger un jeu de données",
+    "text": "6eme étape : Charger un jeu de données\nLa traduction anglaise de jeu de données est dataset. On parlera donc indifféremment de jeux de données ou de dataset\nPour tester le bon fonctionnement et être opérationnel en début de formation, nous avons construit et mettons à disposition mini_fake_dataset_mco, un mini jeu de données simili PMSI MCO, cohérent avec les jeux de données mis à disposition pour une formation Data PMSI avec R.\nLe jeu mini_fake_dataset_mco (qui est simplement un fichier texte) est à télécharger librement et à déposer dans un sous-répertoire data (on pourrait l’appeler autrement) à créer dans le répertoire formation_data_pmsi.\nPuis nous exécutons le code ci-dessous\n\n# On a chargé la suite de packages list_packages : voir étape 5\n\n# Le jeu est chargé dans la variable jeu qui est un dataframe\njeu <- jsonlite::fromJSON(\"data/mini_fake_dataset_mco.json\")\n# on vérifie que jeu est bien un data frame avec la fonction is.data.frame()\nis.data.frame(jeu)\n\n# pour faciliter son exploitation, on passe ce jeu en tibble avec la fonction as_tibble du package tibble:: \n# ici on écrase le df jeu par le nouveau tbl jeu qui a le même nom de variable\njeu <- tibble::as_tibble(jeu)\n\n# on vérifie que le jeu est bien chargé\n# la fonction glimpse() du package dplyr fournit un résumé pratique d'un dataset  \ndplyr::glimpse(jeu)\n\nLe résultat est le suivant :\n\n\nRows: 30\nColumns: 27\n$ ghm                                        <chr> \"06M041\", \"04M05T\", \"04M203~\n$ code_retour                                <chr> \"000\", \"000\", \"000\", \"000\",~\n$ nas                                        <chr> \"1740\", \"435\", \"1684\", \"125~\n$ no_rum                                     <chr> \"1\", \"1\", \"1\", \"1\", \"1\", \"1~\n$ age                                        <int> 72, 58, 59, 55, 71, 87, 65,~\n$ sexe                                       <chr> \"F\", \"F\", \"H\", \"F\", \"F\", \"H~\n$ no_um                                      <chr> \"um01\", \"um01\", \"um01\", \"um~\n$ type_aut_lit_dedie                         <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ mode_entree_um                             <chr> \"8\", \"8\", \"8\", \"8\", \"8\", \"8~\n$ provenance_um                              <chr> \"5\", \"5\", \"5\", \"5\", \"5\", \"5~\n$ mode_sortie_um                             <chr> \"6\", \"8\", \"6\", \"8\", \"8\", \"6~\n$ destination_um                             <chr> \"1\", \"NA\", \"1\", \"NA\", \"NA\",~\n$ nb_seances                                 <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, ~\n$ nb_das                                     <int> 1, 3, 1, 0, 0, 0, 0, 1, 1, ~\n$ nb_ccam                                    <int> 0, 3, 3, 3, 3, 5, 2, 3, 1, ~\n$ dp                                         <chr> \"K625\", \"J181\", \"J9600\", \"N~\n$ dr                                         <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ igs_2                                      <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, ~\n$ confirmation_codage_rss                    <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ conversion_hc                              <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ raac                                       <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ contexte_patient_surveillance_particuliere <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ admin_produit_rh                           <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ rescrit_tarifaire                          <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ cat_nb_inter_tot                           <lgl> NA, NA, NA, NA, NA, NA, NA,~\n$ date_entree_um                             <chr> \"2022-07-01\", \"2022-03-01\",~\n$ date_sortie_um                             <chr> \"2022-07-02\", \"2022-03-02\",~\n\n\nPour les formations, nous mettons à disposition des participants le jeu de données fake_dataset_mco plus fourni avec plus de lignes et différents tibbles.\nNous recommandons aux participants médecins DIM de récupérer les données PMSI de leurs établissements au format JSON via l’accès Standard de PMSISoft\nLes noms des variables de nos fake dataset PMSI sont ceux des exports de l’accès Standard de PMSISoft en JSON : les médecins DIM peuvent donc ainsi coder en R, pendant la formation, sur les données PMSI de leurs établissements."
+  },
+  {
+    "objectID": "base_R.html#eme-étape-le-pipe-et-son-fonctionnement",
+    "href": "base_R.html#eme-étape-le-pipe-et-son-fonctionnement",
+    "title": "Pré-requis R",
+    "section": "7eme étape : Le pipe %>% et son fonctionnement",
+    "text": "7eme étape : Le pipe %>% et son fonctionnement\nComprendre ce qu’est et comment fonctionne le pipe %>% est fondamental.\nC’est ce qui permet de construire des scripts lisibles, complexes, testables et maintenables.\nL’idée de base est la suivante : puisque, pour la quasi-totalité des fonctions R et spécialement pour les fonctions du tidyverse, le premier argument de ces fonctions est un data frame (sur lequel va s’appliquer la fonction)4 et qu’un script consiste, dans son principe, à enchaîner des traitements successifs, on va passer directement le résultat de chaque traitement (qui est donc un tibble modifié) au traitement suivant via le pipe %>%\nIllustrons avec le mini_fake_dataset_mco que nous avons chargé à l’étape 6 en lui appliquant quelques traitements simples (voir étape 8 “Quelques manipulations simples” ci-dessous).\nPremière approche sans le %>% : on enregistre le résultat de chaque traitement dans une variable\n\n# on reprend la variable jeu créée lors de l'étape 6\n\n# premier traitement : on filtre les RUM groupé en 04M023 avec la fonction filter() du package dplyr \n# on préfixe les fonctions avec leur package en codant dplyr::filter()\n# on pourrait coder aussi filter() sans référence au package  \n# on constate que le premier argument de la fonction filter() est bien un data frame, \n# ici jeu qui est notre jeu de données\njeu1 <- dplyr::filter(jeu, ghm == \"04M203\")\njeu1\n\n# second traitement : on sélectionne quelques variables\njeu2 <- dplyr::select(jeu1, ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um)\njeu2\n\n# troisième traitement : on transforme les 2 variables date_entree_um et date_sortie_um au format date\njeu3 <- dplyr::mutate(jeu2, date_entree_um = as.Date(date_entree_um),\n                      date_sortie_um = as.Date(date_sortie_um))\njeu3\n\n# 4eme traitement : on créé la variable cmd en récupérant les 2 premières positions du ghm\njeu4 <- dplyr::mutate(jeu3, cmd = stringr::str_sub(ghm,1,2))\njeu4\n\nConstat :\nOn a un tibble d’entrée (jeu) et on veut un tibble résultat.\nAvec cette approche, on génère 4 tibble pour arriver au résultat voulu.\nSachant qu’un script classique PMSI (exemple : produire un case mix simple) va se composer d’une dizaine de traitements et qu’on enchaîne souvent plusieurs suites de traitements, on voit bien que cela devient très rapidement ingérable et illisible avec des dizaines de résultats intermédiaires et des risques constants d’erreur de saisie.\nDeuxième approche : composition de fonctions\n\n# on reprend les 4 traitements de la 1ère approche \n# en partant du dernier traitement dont le tibble est le résultat\n# puis du 3eme traitement, etc...\ndplyr::mutate(dplyr::mutate(dplyr::select(dplyr::filter(jeu, ghm == \"04M203\"), ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um),\n                            date_entree_um = as.Date(date_entree_um),\n                            date_sortie_um = as.Date(date_sortie_um)),\n              cmd = stringr::str_sub(ghm,1,2))\n\nConstat : Cela se passe de commentaires !\nL’approche avec le pipe `%>%\n\n# le tibble final est directement enregistré dans une variable que l'on nomme ici jeu_resultat\n# le raccourci R Studio pour le pipe %>% est ctrl + shift (la flêche vers le haut) + M\njeu_resultat <- dplyr::filter(jeu, ghm == \"04M203\") %>% \n    # dans la fonction dplyr::select(), il n'y a plus de premier argument affiché\n    # car le pipe a transféré dans le premier argument de la fonction dplyr::select() le tibble\n    # issu du traitement de la ligne précédente\n    dplyr::select(ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um) %>% \n    # même fonctionnement avec la fonction dplyr::mutate() dont le premier argument \"invisible\"\n    # est le tibble produit par ce qui précède le %>% \n    # la fonction dplyr::mutate() permet de créer ou modifier des variables\n    dplyr::mutate(date_entree_um = as.Date(date_entree_um), date_sortie_um = as.Date(date_sortie_um)) %>% \n    # la fonction strinr::str_sub() permet d'extraire une partie d'une suite de caractères\n    dplyr::mutate(cmd = stringr::str_sub(ghm,1,2))\njeu_resultat\n\n# si je veux uniquement les 2 premiers traitements\n# je mets en commentaire les lignes inutilisées : très souple pour \"jouer\" avec un script\njeu_resultat <- dplyr::filter(jeu, ghm == \"04M203\") %>% \n    dplyr::select(ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um)\n    # dplyr::mutate(jeu2, date_entree_um = as.Date(date_entree_um), date_sortie_um = as.Date(date_sortie_um)) %>% \n    # dplyr::mutate(jeu3, cmd = stringr::str_sub(ghm,1,2))\njeu_resultat\n\n# autre intérêt : je réitère très facilement pour un autre ghm \n# en changeant juste à un seul endroit (dans le filter) le code ghm\njeu_resultat <- dplyr::filter(jeu, ghm == \"19M024\") %>% \n    dplyr::select(ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um) %>% \n    dplyr::mutate(date_entree_um = as.Date(date_entree_um), date_sortie_um = as.Date(date_sortie_um)) %>%\n    dplyr::mutate(cmd = stringr::str_sub(ghm,1,2))\njeu_resultat\n\nConstat :\nLe code est lisible : on voit bien ce qui se passe dans chaque ligne.\nJe peux documenter chaque ligne.\nJe n’ai que 2 tibble : le tibble d’origine qui ne bouge pas et le tibble résultat.\nJe peux tester une suite de lignes de code en supprimant le pipe à l’endroit voulu.\nJe peux modifier un traitement sans modifier les autres ni tout reprendre (manipulation très fréquente en PMSI où on va tester des hypothèses et des codages à la volée)."
+  },
+  {
+    "objectID": "base_R.html#eme-étape-quelques-manipulations-simples",
+    "href": "base_R.html#eme-étape-quelques-manipulations-simples",
+    "title": "Pré-requis R",
+    "section": "8eme étape : Quelques manipulations simples",
+    "text": "8eme étape : Quelques manipulations simples\nA partir du jeu mini_fake_dataset_mco que nous avons chargé à l’étape 6, quelques manipulations basiques avec des fonctions du tidyverse permettant de voir aussi le fonctionnement du pipe %>%\n\nfonction dplyr::filter()\nPour filtrer des lignes5\n\n# filter() fonctionne avec les valeurs logiques. \n# ici no_um == \"um01\" teste cette condition sur chaque ligne, donc avec une réponse attendue TRUE ou FALSE\n# si le code UM est bien \"um01\", no_um == \"um01 produit la valeur TRUE et donc filter retient la ligne\njeu %>% dplyr::filter(no_um == \"um01\")\n\n# 2 filtrages successives\njeu %>% \n    dplyr::filter(no_um == \"um01\") %>% \n    dplyr::filter(age >= 75)\n# ou plus directement les 2 filtrages dans un seul traitement où & est le ET logique\njeu %>% dplyr::filter(no_um == \"um01\" & age >= 75)\n\n\n\nfonction dplyr::select()\nPour sélectionner des variables\n\n# Sélection de quelques variables par leur nom\njeu %>% dplyr::select(ghm,nas,no_rum,dp)\n# en PMSI, on a souvent beaucoup de colonnes.\n# on verra dans la formation comment sélectionner intelligemment parmi beaucoup de variables\n\n\n\nfonction dplyr::mutate()\nPour ajouter ou modifier des variables\n\n# création d'un variable cmd\njeu %>% dplyr::mutate(cmd = stringr::str_sub(ghm,1,2))\n\n\n\nfonction dplyr::arrange()\nPour trier selon une ou plusieurs colonnes\n\n# Tri ascendant sur l'âge après sélection de variables\njeu %>% \n    dplyr::select(ghm,nas,no_rum,no_um,dp,age) %>% \n    dplyr::arrange(age)\n# tri descendant avec l'option desc() dans arrange()\njeu %>% \n    dplyr::select(ghm,nas,no_rum,no_um,dp,age) %>% \n    dplyr::arrange(desc(age))\n\n\n\nexercices\nCodes CIM-10 autorisés en DP\n\n# Récupération du référentiel  CIM-10\ncim_10 <- refpmsi::refpmsi(\"cim\")\ndplyr::glimpse(cim_10)\n\ncim_dp_2022 <- cim_10 %>%\n    # sélection des variables qui nous intéressent\n    dplyr::select(cim_code,cim_tmco,annee_pmsi,cim_lib) %>% \n    dplyr::filter(annee_pmsi == \"2022\") %>% \n    # rappel : les codes autorisés en DP ont la valeur 0 \n    # (voir le kit de la nomenclature CIM PMSI sur le site de l'ATIH)\n    dplyr::filter(cim_tmco == 0)\n# résultat : 13 357 codes \ncim_dp_2022 %>% View\n\n# Et les codes CIM-10 non autorisés en DP \ncim__non_dp_2022 <- cim_10 %>%\n    dplyr::select(cim_code,cim_tmco,annee_pmsi,cim_lib) %>% \n    dplyr::filter(annee_pmsi == \"2022\") %>% \n    dplyr::filter(cim_tmco != 0)\ncim_non_dp_2022 %>% View\n\nRUM le plus long d’une sous CMD\n\njeu1 <- jeu %>% \n    dplyr::select(nas,no_rum,ghm,date_sortie_um,date_entree_um) %>% \n    dplyr::mutate(sous_cmd = stringr::str_sub(ghm,1,3)) %>% \n    dplyr::mutate(date_sortie_um = as.Date(date_sortie_um), date_entree_um = as.Date(date_entree_um)) %>% \n    dplyr::mutate(duree_rum = date_sortie_um - date_entree_um) %>% \n    dplyr::filter(sous_cmd == \"04M\") %>% \n    dplyr::mutate(duree_rum = date_sortie_um - date_entree_um) %>% \n    dplyr::filter(duree_rum == max(duree_rum))\n# résultat : le rum 2 du nas 411 avec 34 journées PMSI\njeu1"
+  },
+  {
+    "objectID": "base_R.html#résumé",
+    "href": "base_R.html#résumé",
+    "title": "Pré-requis R",
+    "section": "Résumé",
+    "text": "Résumé\nEn résumé :\n\non a installé R et R Studio\non a créé un projet et un premier fichier .R, on sait créer des fichiers .R\non a retenu les noms et compris, dans une première approche, ce que sont :\n\nles types de données logical, character, integer, numeric\nles vecteurs\nles data frames (ou tableaux de données) et les tibbles (= des data frames améliorés)\nles lists\n\non a compris ce qu’est un package, on a installé les packages nécessaires\non sait charger les packages nécessaires à chaque nouvelle session R Studio\non sait ce qu’est le tidyverse (= une collection de packages pratiques) et on a commencé à se familiariser avec les noms des principaux packages (dplyr, tidyr, stringr, refpmsi)\non a chargé le jeu mini_fake_dataset_mco et vérifié qu’on le voyait bien\non a compris le fonctionnement et l’intérêt du %>%\non a exécuté et compris le code des quelques manipulations simples, on a commencé à se familiariser avec les fonctions très courantes comme dplyr::filter, dplyr::select, dplyr::mutate, dplyr::arrange, refpmsi::refpmsi\n\nContactez-nous pour toute question (avec l’objet “Question formation Data PMSI avec R”)"
+  },
+  {
+    "objectID": "base_R.html#eme-étape-minimum-à-connaître",
+    "href": "base_R.html#eme-étape-minimum-à-connaître",
+    "title": "Pré-requis R",
+    "section": "4eme étape : Minimum à connaître",
+    "text": "4eme étape : Minimum à connaître\nIl y a 4 concepts à connaître : les types de données, les vecteurs, les data frames ou tibbles et les lists\nNous les exposons ci-dessous, à minima, avec des exemples issus de données simili PMSI, à exécuter dans le fichier intro.R\nType de données\nChaque information (un code CIM, un code d’UM, un initulé, une valorisation T2A, un nombre d’actes, la catégorisation d’âge “adulte” versus “moins 18 ans”, un seuil, …) relève d’un type de données.\nIl y a 4 types principaux de données (logical, character, integer, numeric) que nous illustrons ci-dessous2\n\n# type logical \n# 2 valeurs possibles : TRUE ou FALSE\n# exemple. Pour indiquer qu'on excluera les moins de 18 ans d'une analyse\nage_moins_18 <- FALSE\nage_moins_18\n\n# type character\n# valeurs avec du texte. Bien indiquer les \"\"\ncode_cim <- \"S42700\"\ncode_cim\n\n# type integer\n# valeurs entières\nseuil_acte <- 4\nseuil_acte\n\n# type numeric\n# valeurs réelles. Avec . au lieu de , pour les décimals\nvalo_t2a <- 13467.89\nvalo_t2a\n\nVecteur\nUn vecteur est un ensemble de valeurs du même type.\nOn parlera ainsi d’un vecteur logique, d’un vecteur character, etc…\n\n# un vecteur est créé par la fonction c()\n## ici un vecteur de codes UM\nmes_um <- c(\"UM01\",\"UM02\",\"UM03\",\"UM04\")\nmes_um\n    \n# nombre d'élements d'un vecteur avec la fonction length()\nlength(mes_um)\n\n# extraction d'un élément par sa position\n## ici extraction du 2eme élément du vecteur\nmes_um[2]\n\n# extraction de plusieurs éléments via un vecteur des positions à extraire\n## ici extraction des positions 2 et 4\npositions_recherchees <- c(2,4)\nmes_um[positions_recherchees]\n# ou plus directement\nmes_um[c(2,4)]\n\n# une donnée manquante est indiquée par NA (comme Non Available)\ndestination_um <- c(NA,NA,2,7,NA)\ndestination_UM[1]\ndestination_UM[3]\n\n# on peut attribuer un nom à chaque éléments du vecteur avec la fonction names()\nnoms_um <- c(\"Ortho\",\"Pédiatrie\",\"Gynéco\",\"Urgences\")\nnames(mes_um) <- noms_um\nmes_um\n\nData frame/tibble\nUn data frame ou tableau de données est une liste de vecteurs indépendants.\nUn data frame est donc constitué de colonnes de même longueur (même nombre de lignes) qui peuvent être de types différents.\nLe jeu de données mini_fake_dataset_mco, librement téléchargeable (voir ci-dessous), est ainsi un data frame composé de 27 colonnes.\nLes référentiels du package de données refpmsi (par exemple le référentiel cim de la CIM-10 à usage PMSI de 2019 à 2022) sont des data frames.\nAbréviation courante : df\nUn tibble est un data frame “enrichi” dans l’environnement du tidyverse3.\nEn pratique, parce qu’on travaille essentiellement avec les packages du tidyverse, on parlera de tibble (abréviation : tbl)\nOn parlera indifféremment de colonnes ou de variables : une variable d’un tibble correspond à une colonne\nList\nUne list, au sens R, est une collection de structures de données (valeurs uniques, vecteurs, tibbles, list).\nUne image pour visualiser : une list est une commode dont chaque tiroir contient des objects différents, des pulls dans le premier tiroir, des assiettes dans le second tiroir, rien dans le troisième, un seul livre dans le quatrième.\nUne list est donc la structure de données la plus souple, la plus puissante, mais aussi la plus complexe à manipuler.\nLe jeu de données fake_dataset_mco des formations MCO est ainsi une list de tibbles (un tbl simili partie fixe des RSS, un tbl simili RSA, un tbl simili actes CCAM, un tble simili DAS, un tbl de DMI, un tbl simili ficium) : nous manipulons donc un seul objet au lieu de 6 objets."
   }
 ]

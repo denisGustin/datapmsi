@@ -6,6 +6,13 @@ website:
   description: "Formations PMSI MCO, PMSI SSR avec R et tidyverse"
   navbar:
     background: "#447099"
+    left: 
+      - href: planning.qmd
+        text: "Planning des formations"
+      - href: pedagogie.qmd
+        text: "Pédagogie"
+      - href: prestation.qmd
+        text: "Prestations"
     right: 
       - text: "Jeux de données"
         menu:
@@ -13,9 +20,10 @@ website:
             text: "Jeux PMSI MCO"
           - href: "dataset_ssr.qmd"
             text: "Jeux PMSI SSR"
+          - href: "dataset_psy.qmd"
+            text: "Jeux PMSI PSY"
       - icon: github
         href: https://github.com/denisGustin/datapmsi
-
   sidebar: 
     style: docked
     contents: 
@@ -26,15 +34,28 @@ website:
           - href: formations/pmsi_mco_requete_avance.qmd
             text: "Requêtes MCO [Avancé]"
           - href: formations/pmsi_mco_tableau.qmd
-            text: "Tableau MCO"
+            text: "Tableaux MCO"
+          - href: formations/pmsi_mco_plot.qmd
+            text: "Graphiques MCO"
       - section: "Formations SSR"
         contents:
           - href: formations/pmsi_ssr_requete.qmd
             text: "Requêtes SSR"
-
+          - href: formations/pmsi_ssr_tableau.qmd
+            text: "Tableaux SSR"
+          - href: formations/pmsi_ssr_plot.qmd
+            text: "Graphiques SSR"
+      - section: "Formations PSY"
+        contents:
+          - href: formations/pmsi_psy_requete.qmd
+            text: "Requêtes PSY"
+          - href: formations/pmsi_psy_tableau.qmd
+            text: "Tableaux PSY"
+          - href: formations/pmsi_psy_plot.qmd
+            text: "Graphiques PSY"
   page-footer:
     left: "Blog codé avec [Quarto](https://quarto.org/)"
-    right: "&copy; Copyright 2022, DATAMIS"
+    right: "[Mentions légales](about.html) | &copy; Copyright 2023 - DATAMIS"
     
 format:
   html:

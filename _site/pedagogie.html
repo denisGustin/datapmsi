@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data PMSI - Formations Data PMSI avec R</title>
+<title>Data PMSI - Pédagogie</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./planning.html">Planning des formations</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./pedagogie.html">Pédagogie</a>
+    <a class="nav-link active" href="./pedagogie.html" aria-current="page">Pédagogie</a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./prestation.html">Prestations</a>
@@ -119,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Formations Data PMSI avec R</span></h1>
+      <h1 class="quarto-secondary-nav-title">Pédagogie</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -221,19 +221,21 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Sur cette page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <li><a href="#principes-pédagogiques" id="toc-principes-pédagogiques" class="nav-link active" data-scroll-target="#principes-pédagogiques">Principes pédagogiques</a>
   <ul class="collapse">
-  <li><a href="#objectifs-dapprentissage" id="toc-objectifs-dapprentissage" class="nav-link" data-scroll-target="#objectifs-dapprentissage">Objectifs d’apprentissage</a></li>
-  <li><a href="#ces-formations-sont-elles-pour-moi" id="toc-ces-formations-sont-elles-pour-moi" class="nav-link" data-scroll-target="#ces-formations-sont-elles-pour-moi">Ces formations sont-elles pour moi ?</a></li>
-  <li><a href="#pourquoi-r" id="toc-pourquoi-r" class="nav-link" data-scroll-target="#pourquoi-r">Pourquoi R ?</a></li>
+  <li><a href="#constats-et-objectifs" id="toc-constats-et-objectifs" class="nav-link" data-scroll-target="#constats-et-objectifs">Constats et objectifs</a></li>
+  <li><a href="#démarche" id="toc-démarche" class="nav-link" data-scroll-target="#démarche">Démarche</a></li>
+  <li><a href="#live-coding-en-direct" id="toc-live-coding-en-direct" class="nav-link" data-scroll-target="#live-coding-en-direct">Live coding en direct</a></li>
+  <li><a href="#exercices" id="toc-exercices" class="nav-link" data-scroll-target="#exercices">Exercices</a></li>
+  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation">Documentation</a></li>
   </ul></li>
-  <li><a href="#pré-requis" id="toc-pré-requis" class="nav-link" data-scroll-target="#pré-requis">Pré-requis</a>
+  <li><a href="#déroulé-des-formations" id="toc-déroulé-des-formations" class="nav-link" data-scroll-target="#déroulé-des-formations">Déroulé des formations</a>
   <ul class="collapse">
-  <li><a href="#pré-requis-pmsi" id="toc-pré-requis-pmsi" class="nav-link" data-scroll-target="#pré-requis-pmsi">Pré-requis PMSI</a></li>
-  <li><a href="#pré-requis-r" id="toc-pré-requis-r" class="nav-link" data-scroll-target="#pré-requis-r">Pré-requis R</a></li>
+  <li><a href="#avant-la-formation" id="toc-avant-la-formation" class="nav-link" data-scroll-target="#avant-la-formation">Avant la formation</a></li>
+  <li><a href="#pendant-la-formation" id="toc-pendant-la-formation" class="nav-link" data-scroll-target="#pendant-la-formation">Pendant la formation</a></li>
+  <li><a href="#après-la-formation" id="toc-après-la-formation" class="nav-link" data-scroll-target="#après-la-formation">Après la formation</a></li>
   </ul></li>
-  <li><a href="#pédagogie" id="toc-pédagogie" class="nav-link" data-scroll-target="#pédagogie">Pédagogie</a></li>
-  <li><a href="#formateur" id="toc-formateur" class="nav-link" data-scroll-target="#formateur">Formateur</a></li>
+  <li><a href="#etat-desprit" id="toc-etat-desprit" class="nav-link" data-scroll-target="#etat-desprit">Etat d’esprit</a></li>
   </ul>
 </nav>
     </div>
@@ -242,7 +244,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Formations Data PMSI avec R</span></h1>
+<h1 class="title d-none d-lg-block">Pédagogie</h1>
 </div>
 
 
@@ -256,94 +258,88 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p><span style="font-size: 1.75rem; font-weight: 400;">Comment devenir autonome dans l’analyse PMSI de ses établissements</span></p>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Prochaines formations
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>✍️ <a href="./formations/pmsi_mco_requete.html">Requêtes MCO sur 2 journées</a><br>
-🗓️ <strong>vendredi 24 mars et vendredi 31 mars 2023</strong><br>
-⏰ 09:00 - 17:00<br>
-🏨 En ligne</p>
-</div>
-</div>
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<section id="objectifs-dapprentissage" class="level2">
-<h2 class="anchored" data-anchor-id="objectifs-dapprentissage">Objectifs d’apprentissage</h2>
-<p>Les formations <strong>Data PMSI avec R</strong> s’adressent aux professionnels du PMSI ou aux professionnels amenés à manipuler des données issues du PMSI.</p>
-<p>Ces formations, organisées par champ PMSI, visent à permettre aux professionnels du PMSI ou liées au PMSI de produire eux-mêmes, directement à partir des données PMSI brutes de leurs établissements, de manière efficace, des traitements et analyses PMSI de haute qualité, performantes, reproductibles et documentées.</p>
-<p>Après chaque formation <strong>Data PMSI avec R</strong>, les participants acquièrent une savoir-faire R minimal pour une première autonomie en contexte PMSI MCO, une vision de ce qu’il faut savoir et maîtriser en R pour le PMSI et une bibliothèque de requêtes et de scripts d’analyses PMSI en R à décliner sur l’activité de leurs établissements.</p>
-<p>Pendant la journée ou les 2 journées de la formation, les participants découvrent et apprennent, à travers des exemples concrets et gradués, les familles d’analyse PMSI possibles et réalistes aujourd’hui avec R.</p>
-<p>Ils s’exercent, en live coding avec le formateur, à produire ces analyses PMSI avec R sur des jeux de données simili PMSI réalistes et/ou sur les données PMSI de leurs établissements.</p>
-</section>
-<section id="ces-formations-sont-elles-pour-moi" class="level2">
-<h2 class="anchored" data-anchor-id="ces-formations-sont-elles-pour-moi">Ces formations sont-elles pour moi ?</h2>
-<p>Ces formations vous conviendront si vous répondez oui à ces questions :</p>
+<section id="principes-pédagogiques" class="level1">
+<h1>Principes pédagogiques</h1>
+<section id="constats-et-objectifs" class="level2">
+<h2 class="anchored" data-anchor-id="constats-et-objectifs">Constats et objectifs</h2>
+<p>La pédagogie des formations <strong>Data PMSI avec R</strong> est conçue et adaptée aux constats et objectifs suivants :</p>
 <ul>
-<li>Souhaitez-vous créer vous-mêmes des requêtes et des analyses PMSI, sans avoir à passer par un service informatique ou des outils et logiciels chers et propriétaires ?</li>
-<li>Appréciez-vous de pouvoir tester rapidement vos intuitions et réflexions sur la production PMSI de vos établissements ?</li>
-<li>Souhaitez-vous construire et faire vivre votre propre catalogue d’analyses PMSI, entièrement reproductibles ?</li>
-<li>Souhaitez-vous pouvoir travailler avec les data scientists santé ?</li>
+<li><p>les participants sont des professionnels du PMSI ou liés au PMSI. Ils maîtrisent le PMSI.</p></li>
+<li><p>les participants disposent d’un environnement de travail R et ont déjà, à minima, coder quelques lignes en R (Voir <a href="./base_R.html">Pré-requis R</a>)</p></li>
+<li><p>les participants sont familiers des requêtes et analyses PMSI</p></li>
+<li><p>les participants cherchent à devenir autonomes dans leurs travaux quotidiens d’analyses du PMSI avec R</p></li>
+<li><p>les participants attendent une vision claire des types d’analyses possibles, en fonction de leur montée en compétence progressive des codes de manipulations des données PMSI avec R</p></li>
+<li><p>les participants attendent de pratiquer, de bout en bout (des données brutes PMSI aux résultats d’analyse), des analyses PMSI avec R</p></li>
+<li><p>les participants sont intéressés à disposer d’un ensemble de scripts PMSI en R qu’ils pourront reproduire, décliner et approfondir sur les données PMSI de leurs établissements</p></li>
 </ul>
 </section>
-<section id="pourquoi-r" class="level2">
-<h2 class="anchored" data-anchor-id="pourquoi-r">Pourquoi R ?</h2>
-<p>R est un langage open source, mature, optimisé pour les statistiques et la manipulation de données structurées, très utilisé depuis des années en santé publique.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>L’arrivée à maturité de la famille de package tidyverse depuis 2 ou 3 ans, en terme de fonctionnalités, documentation et performance, facilite grandement, pour les professionnels du PMSI, l’utilisation de R pour les traitements PMSI.</p>
-<p>R a une masse critique d’utilisateurs qui assure sa pérennité.</p>
-<p>R est gratuit et open source. Cela veut donc dire que vous pouvez travailler tout de suite sans demander l’autorisation ou de budget à personne.</p>
-<p>La documentation R est infinie, adaptée à tous les niveaux.</p>
-<p>Les professionnels du PMSI qui utilisent R ont maintenant un écosystème dédié (prestations, packages PMSI, blogs, échanges entre professionnels, service en ligne).</p>
+<section id="démarche" class="level2">
+<h2 class="anchored" data-anchor-id="démarche">Démarche</h2>
+<p>La démarche principale des formations <strong>Data PMSI avec R</strong> consiste à partir de situations d’analyses PMSI issues du terrain pour les coder en R et, ainsi, apprendre et pratiquer la grammaire R nécessaire mais juste suffisante, pour réaliser les analyses voulus.</p>
+<p>Chaque formation <strong>Data PMSI avec R</strong> est conçue de manière graduée pour introduire à chaque nouvelle analyse, des codages R de plus en plus complexes en lien avec l’objectif de la formation (requêtes, scripts, tableaux, graphiques).</p>
+<p>Chaque formation <strong>Data PMSI avec R</strong> est donc constituée d’une suite de modules qui permettent de réaliser des analyses PMSI de plus en plus complexes.</p>
+<p>Le dispositif des formations s’articule autour de séances de live coding à partir de jeux de données PMSI réalistes, d’exercices à réaliser par les participants avec correction du formateur et de mise à disposition de scripts R documentés.</p>
 </section>
-</section>
-<section id="pré-requis" class="level1">
-<h1>Pré-requis</h1>
-<section id="pré-requis-pmsi" class="level2">
-<h2 class="anchored" data-anchor-id="pré-requis-pmsi">Pré-requis PMSI</h2>
-<p>Toutes les formations <strong>Data PMSI avec R</strong> supposent une maîtrise professionnelle du PMSI, en particulier du champ PMSI de la formation (MCO, SSR, PSY) :</p>
+<section id="live-coding-en-direct" class="level2">
+<h2 class="anchored" data-anchor-id="live-coding-en-direct">Live coding en direct</h2>
+<p>Le live coding en direct consiste, pour le formateur, à écrire et commenter le code à haute voix pendant qu’il enseigne le pourquoi et les caractéristiques du code en train de s’écrire.</p>
+<p>Le formateur explique les différents éléments et principes pertinents pour que les apprenants comprennent le code.</p>
+<p>Les participants sont invités, dans le même temps, à écrire et à exécuter le même code sur leur poste de travail.</p>
+<p>Dans cette opération, les participants assimilent le codage et recontrent leurs éventuels points de douleur (= les enchaînements de code qui leur paraissent bizarres ou incompréhensibles). Ils sollicitent alors le formateur pour comprendre et progresser en direct.</p>
+<p>Une séquence de live coding en direct dure de quelques minutes à 30 minutes maximum. Elle est généralement composée de 3 phases :</p>
 <ul>
-<li>règles (définitions, vocabulaire)</li>
-<li>structures de données (rss, rsa, fichcomp, ficium, vidhosp, fichsup, rhs, rha, rps, raa, …)</li>
-<li>référentiels (CIM-10, CCAM à usage PMSI, DMI, UCD en sus, CSARR, …)</li>
-<li>documentations (guides méthodologiques, manuels de groupages, cahiers des charges, …)</li>
-<li>contrôles qualité (requêtes, OVALIDE, …)</li>
-<li>analyses (case mix, reporting, fouilles de données, …)</li>
+<li><p>exposé de la problématique PMSI et de l’algorithmique permettant, à partir d’un ensemble de données PMSI brutes ou déjà retravaillées, d’arriver au résultat voulu.</p></li>
+<li><p>codage R en direct par le formateur avec les participants qui reproduisent le codage en direct. Le formateur commente le codage en direct avec d’éventuels aller-retours dans le script en cours de codage et des apartés techniques.</p></li>
+<li><p>temps de débrief avec les participants : alternatives de codage R, <strong>retours d’expérience du formateur</strong>, réponses aux questions des participants.</p></li>
 </ul>
-<p>Remarque : la pratique du codage n’est pas nécessaire, même si codé ou avoir déjà codé des dossiers est un plus pour appréhender les problématiques.</p>
+<p>Un module d’1h30 est ainsi généralement constitué d’une dizaine de séquences.</p>
+<p>Pour aller plus loin : <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008090" target="_blank">Papier “Ten quick tips for teaching with participatory live coding”</a></p>
 </section>
-<section id="pré-requis-r" class="level2">
-<h2 class="anchored" data-anchor-id="pré-requis-r">Pré-requis R</h2>
-<p><a href="./base_R.html">Explications détaillées</a></p>
+<section id="exercices" class="level2">
+<h2 class="anchored" data-anchor-id="exercices">Exercices</h2>
+<p>Chaque journée de formation est ponctuée d’exercices, mis à disposition des participants.</p>
+<p>Un exercice comprend une problématique PMSI, des indications de résolution et, le plus souvent, sur la base des jeux de données fournis, le résultat attendu : il est attendu que le participant compose le codage R pour parvenir au résultat.</p>
+<p>Les corrections d’exercices sont fournies aux participants soit lors de la 2eme journée de formation du programme (pour les formations de 2 journées), soit quelques jours après la formation (pour les formations d’une journée).</p>
+</section>
+<section id="documentation" class="level2">
+<h2 class="anchored" data-anchor-id="documentation">Documentation</h2>
+<p>La documentation est constituée de scripts R documentés directement dans le code qui peuvent être repris par les participants à l’issue de chaque formation.</p>
+<p>La documentation est envoyée aux participants, en même temps que les corrections d’exercices, à l’issue de la formation.</p>
+<p>Des liens vers des ressources open souce sont régulièrement proposés pour les aspects strictement R de la formation.</p>
 </section>
 </section>
-<section id="pédagogie" class="level1">
-<h1>Pédagogie</h1>
-<p><a href="./pedagogie.html">Explications détaillées</a></p>
+<section id="déroulé-des-formations" class="level1">
+<h1>Déroulé des formations</h1>
+<section id="avant-la-formation" class="level2">
+<h2 class="anchored" data-anchor-id="avant-la-formation">Avant la formation</h2>
+<p>Les participants lisent, réalisent et valident les pré-requis PMSI et <a href="./base_R.html">pré-requis R</a> de la formation.</p>
+<p>Les participants répondent au questionnaire d’auto-évaluation qui leur ait envoyé avant la formation.</p>
+<p>Les participants font le point sur les analyses PMSI qu’ils souhaient coder en R.</p>
 </section>
-<section id="formateur" class="level1">
-<h1>Formateur</h1>
-<p>Denis Gustin est ingénieur et le concepteur et développeur de <a href="https://www.pmsisoft.com" target="_blank">PMSISoft</a>, logiciel d’analyse PMSI développé principalement en R.<br>
-Il est spécialiste en données PMSI avec plus de 15 ans d’expérience dans les différents PMSI et intervient régulièrement, en tant que formateur et consultant, dans des établissements de santé sur des problématiques d’analyses PMSI et de données de santé.<br>
-Il développe et maintient le package R de données PMSI <a href="https://denisgustin.github.io/refpmsi/index.html" target="_blank">refpmsi::</a>.<br>
-Il anime le blog <a href="https://www.lespmsi.com" target="_blank">lespmsi.com</a></p>
+<section id="pendant-la-formation" class="level2">
+<h2 class="anchored" data-anchor-id="pendant-la-formation">Pendant la formation</h2>
+<p>Chaque journée des formations <strong>Data PMSI avec R</strong> est constituée de 4 modules en ligne, 2 le matin et 2 l’après-midi.</p>
+<p>Chaque module est divisé en séquences de live coding en direct (voir rubrique ci-dessus).</p>
+<p>Les temps de pause et d’échanges permettent au formateur de répondre aux questions des participants et de reprendre, si nécessaire, certains points du module précédent.</p>
+<p>En fin de journée, les exercices (voir rubrique ci-dessus) sont exposés et envoyés aux participants.</p>
+</section>
+<section id="après-la-formation" class="level2">
+<h2 class="anchored" data-anchor-id="après-la-formation">Après la formation</h2>
+<p>Une évaluation à chaud est envoyée aux participants à l’issue de chaque formation.</p>
+<p>La correction des exercices est envoyée aux participants quelques jours après la formation.</p>
+</section>
+</section>
+<section id="etat-desprit" class="level1">
+<h1>Etat d’esprit</h1>
+<p>Le rythme des formations <strong>Data PMSI R avec R</strong> est soutenu. Ces formations s’adressent à des professionnels entraînés, à l’aise avec un exercice intellectuel prolongé.</p>
+<p>Les formations <strong>Data PMSI avec R</strong> s’adressent à plusieurs participants (de 3 à 10). Chaque participant s’engage, dans ses échanges avec le formateur, à un effort de conceptualisation et de généralisation, pour que la réponse du formateur à ses questions bénéficie à tous les participants.</p>
+<p>Plus généralement, le formateur et les participants partagent une approche exigeante, curieuse et ouverte des problématiques traitées.</p>
+<p><a href="https://www.lespmsi.com/contact-pmsisoft" target="_blank">Contactez-nous pour toute question</a> (avec l’objet “Question formation Data PMSI avec R”)</p>
 
 
 </section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notes de bas de page</h2>
-
-<ol>
-<li id="fn1"><p>Python est évidemment une alternative avec des avantages réels sur certains aspects par rapport à R pour certaines analyses PMSI. Nous développons d’ailleurs régulièrement en Python. Mais nous estimons que Python est plus difficile d’accès pour des non-informaticients (ce que sont les professionnels du PMSI) et moins riche en fonctions “toutes prêtes” pour de nombreux traitements PMSI (tableaux, graphiques).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

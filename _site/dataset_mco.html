@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -78,6 +141,17 @@ ul.task-list li input[type="checkbox"] {
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./planning.html">Planning des formations</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./pedagogie.html">Pédagogie</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./prestation.html">Prestations</a>
+  </li>  
+</ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-jeux-de-données" role="button" data-bs-toggle="dropdown" aria-expanded="false">Jeux de données</a>
@@ -89,6 +163,10 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="./dataset_ssr.html">
  <span class="dropdown-text">Jeux PMSI SSR</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./dataset_psy.html">
+ <span class="dropdown-text">Jeux PMSI PSY</span></a>
   </li>  
     </ul>
   </li>
@@ -127,17 +205,22 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./formations/pmsi_mco_requete.html" class="sidebar-item-text sidebar-link">Requêtes SSR</a>
+  <a href="./formations/pmsi_mco_requete.html" class="sidebar-item-text sidebar-link">Requêtes MCO</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./formations/pmsi_mco_requete.html" class="sidebar-item-text sidebar-link">Requêtes SSR</a>
+  <a href="./formations/pmsi_mco_requete_avance.html" class="sidebar-item-text sidebar-link">Requêtes MCO [Avancé]</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./formations/pmsi_mco_requete.html" class="sidebar-item-text sidebar-link">Requêtes SSR</a>
+  <a href="./formations/pmsi_mco_tableau.html" class="sidebar-item-text sidebar-link">Tableaux MCO</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formations/pmsi_mco_plot.html" class="sidebar-item-text sidebar-link">Graphiques MCO</a>
   </div>
 </li>
       </ul>
@@ -152,7 +235,42 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./formations/pmsi_mco_requete.html" class="sidebar-item-text sidebar-link">Requêtes SSR</a>
+  <a href="./formations/pmsi_ssr_requete.html" class="sidebar-item-text sidebar-link">Requêtes SSR</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formations/pmsi_ssr_tableau.html" class="sidebar-item-text sidebar-link">Tableaux SSR</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formations/pmsi_ssr_plot.html" class="sidebar-item-text sidebar-link">Graphiques SSR</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Formations PSY</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formations/pmsi_psy_requete.html" class="sidebar-item-text sidebar-link">Requêtes PSY</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formations/pmsi_psy_tableau.html" class="sidebar-item-text sidebar-link">Tableaux PSY</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formations/pmsi_psy_plot.html" class="sidebar-item-text sidebar-link">Graphiques PSY</a>
   </div>
 </li>
       </ul>
@@ -166,7 +284,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Sur cette page</h2>
    
   <ul>
-  <li><a href="#jeux" id="toc-jeux" class="nav-link active" data-scroll-target="#jeux">Jeux</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#mini_fake_dataset_mco" id="toc-mini_fake_dataset_mco" class="nav-link" data-scroll-target="#mini_fake_dataset_mco"><code>mini_fake_dataset_mco</code></a>
+  <ul class="collapse">
+  <li><a href="#caractéristiques" id="toc-caractéristiques" class="nav-link" data-scroll-target="#caractéristiques">Caractéristiques</a></li>
+  <li><a href="#télécharger" id="toc-télécharger" class="nav-link" data-scroll-target="#télécharger">Télécharger</a></li>
+  </ul></li>
+  <li><a href="#fake_dataset_mco" id="toc-fake_dataset_mco" class="nav-link" data-scroll-target="#fake_dataset_mco"><code>fake_dataset_mco</code></a>
+  <ul class="collapse">
+  <li><a href="#caractéristiques-1" id="toc-caractéristiques-1" class="nav-link" data-scroll-target="#caractéristiques-1">Caractéristiques</a></li>
+  </ul></li>
+  <li><a href="#données-établissement" id="toc-données-établissement" class="nav-link" data-scroll-target="#données-établissement">Données établissement</a></li>
   </ul>
 </nav>
     </div>
@@ -189,14 +317,130 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="jeux" class="level1">
-<h1>Jeux</h1>
-<p>sdfsf</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Nous décrivons ici 3 jeux de données MCO :</p>
+<ul>
+<li>un jeu appelé <code>mini_fake_dataset_mco</code>, librement téléchargeable, pour tester son environnement R et vérifier que tout fonctionne en amont d’une formation Data PMSI avec R<br>
+</li>
+<li>un jeu assez complet appelé <code>fake_dataset_mco</code> utilisé pour les exercices et modules en code living des formations MCO<br>
+</li>
+<li>des jeux issus de l’activité d’un établissement MCO, récupérables gratuitement et sans limite de temps via l’<a href="https://www.pmsisoft.com/acces_pmsisoft_mco.html" target="_blank">accès Standard de PMSISoft</a></li>
+</ul>
+<p>Ces 3 jeux de données sont cohérents entre eux en terme de type et d’intitulés de variables. Les exercices corrigés fournis en livrable des formations peuvent donc être réalisés sur ces 3 jeux.</p>
+</section>
+<section id="mini_fake_dataset_mco" class="level1">
+<h1><code>mini_fake_dataset_mco</code></h1>
+<section id="caractéristiques" class="level2">
+<h2 class="anchored" data-anchor-id="caractéristiques">Caractéristiques</h2>
+<p><code>mini_fake_dataset_mco</code> est un mini jeu simili RUM très simple, conçu par nos soins, d’une trentaine de lignes et de 27 variables.</p>
+<p>Les données fake du jeu sont réalistes en terme de cohérence des valeurs (par exemple lien entre DP et GHM).</p>
+<p>Les variables correspondent à un sous-ensemble des variables de la partie fixe du fichier des RSS groupés (<a href="https://www.atih.sante.fr/sites/default/files/public/content/4230/formats_mco2022.xlsx">année PMSI 2022, version 121</a>).</p>
+<p>Ce mini jeu est proposé à des fins de test de l’environnement R pour les formations <strong>Data PMSI avec R</strong> et de réalisation des <a href="./base_R.html">pré-requis R</a> de ces formations</p>
+<p><code>mini_fake_dataset_mco</code> est une extraction aléatoire du jeu <code>fake_dataset_mco</code></p>
+<p><code>mini_fake_dataset_mco</code> est un fichier JSON, librement téléchargeable.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 30
+Columns: 27
+$ ghm                                        &lt;chr&gt; "06M041", "04M05T", "04M203~
+$ code_retour                                &lt;chr&gt; "000", "000", "000", "000",~
+$ nas                                        &lt;chr&gt; "1740", "435", "1684", "125~
+$ no_rum                                     &lt;chr&gt; "1", "1", "1", "1", "1", "1~
+$ age                                        &lt;int&gt; 72, 58, 59, 55, 71, 87, 65,~
+$ sexe                                       &lt;chr&gt; "F", "F", "H", "F", "F", "H~
+$ no_um                                      &lt;chr&gt; "um01", "um01", "um01", "um~
+$ type_aut_lit_dedie                         &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ mode_entree_um                             &lt;chr&gt; "8", "8", "8", "8", "8", "8~
+$ provenance_um                              &lt;chr&gt; "5", "5", "5", "5", "5", "5~
+$ mode_sortie_um                             &lt;chr&gt; "6", "8", "6", "8", "8", "6~
+$ destination_um                             &lt;chr&gt; "1", "NA", "1", "NA", "NA",~
+$ nb_seances                                 &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, ~
+$ nb_das                                     &lt;int&gt; 1, 3, 1, 0, 0, 0, 0, 1, 1, ~
+$ nb_ccam                                    &lt;int&gt; 0, 3, 3, 3, 3, 5, 2, 3, 1, ~
+$ dp                                         &lt;chr&gt; "K625", "J181", "J9600", "N~
+$ dr                                         &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ igs_2                                      &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, ~
+$ confirmation_codage_rss                    &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ conversion_hc                              &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ raac                                       &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ contexte_patient_surveillance_particuliere &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ admin_produit_rh                           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ rescrit_tarifaire                          &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ cat_nb_inter_tot                           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ date_entree_um                             &lt;chr&gt; "2022-07-01", "2022-03-01",~
+$ date_sortie_um                             &lt;chr&gt; "2022-07-02", "2022-03-02",~</code></pre>
+</div>
+</div>
+</section>
+<section id="télécharger" class="level2">
+<h2 class="anchored" data-anchor-id="télécharger">Télécharger</h2>
+<p>Dernière version : <em>30 décembre 2022</em></p>
+<ul>
+<li><p>Créer (si pas déjà présent) un sous-répertoire <code>data</code> dans le répertoire de votre projet R dédié à la formation (voir <a href="./base_R.html#créer-un-projet-et-un-premier-fichier-.r">“Créer un projet”</a>)</p></li>
+<li><p><a href="data/mini_fake_dataset_mco.json">Télécharger le fichier JSON <code>mini_fake_dataset_mco</code></a> (clic droit sur le lien et choisir “Enregistrer le lien sous”) dans le répertoire <code>data</code></p></li>
+<li><p>Charger le <code>mini_fake_dataset_mco</code> via le code ci-dessous à exécuter</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># chargement du package jsonlite </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>jeu <span class="ot">&lt;-</span> jsonlite<span class="sc">::</span><span class="fu">fromJSON</span>(<span class="st">"data/mini_fake_dataset_mco.json"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>jeu</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Vous pouvez alors réaliser les exercices des <a href="./base_R.html">pré-requis R</a> des formations <strong>Data PMSI MCO avec R</strong>.</p>
+<p>Vous êtes alors certains de pouvoir importer et charger dans votre environnement R le jeu <code>fake_dataset_mco</code> communiqué aux participants des formations Data PMSI avec R pour le champ MCO.</p>
+</section>
+</section>
+<section id="fake_dataset_mco" class="level1">
+<h1><code>fake_dataset_mco</code></h1>
+<section id="caractéristiques-1" class="level2">
+<h2 class="anchored" data-anchor-id="caractéristiques-1">Caractéristiques</h2>
+<p>Dernière version : <em>02 février 2023</em></p>
+<p>Le jeu <code>fake_dataset_mco</code> est conçu par nos soins, de manière semi-automatique sur des mini-séries de séjours semblables (exemple : une série de 10 séjours simili chirurgie traumatique du genou avec des codages les plus fréquents pour cette prise en charge) et manuellement (exemple : séjours multi-rum, introduction d’atypies, un séjour anormalement long, un séjour multi_rum avec 1 rum entièrement en année N-1, etc…).</p>
+<p>Nous essayons de rester réalistes, mais nous ne garantissons aucunement la cohérence métier entre les variables.</p>
+<p>L’objectif du jeu <code>fake_dataset_mco</code> est pédagogique du point de vue de l’utilisation de R pour requêter et exploiter les données PMSI MCO. Son but n’est pas d’apprendre le codage PMSI.</p>
+<p>Le jeu se compose de 6 tables<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> réunies sous forme d’une liste de tibble<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, accessibles via un seul fichier JSON :<br>
+<code>rss</code> (sur le modèle du jeu <code>mini_fake_dataset_mco</code> mais avec plus de lignes et de variables)<br>
+<code>rsa</code><br>
+<code>das</code><br>
+<code>ccam</code><br>
+<code>dmi</code><br>
+<code>ficium</code></p>
+<p>Pour des raisons pratiques d’élaboration et de maintenance :<br>
+- Les dates d’entrée commencent quasi systématiquement le 1er jour d’un mois avec des durées de séjour de moins de 30 jours et une attribution aléatoire des mois.<br>
+- Pas de séjours multi-RUM de plus de 3 RUM<br>
+- Relative cohérence métier entre tables rum, das, ccam<br>
+- Activité concentrée sur des prises en charge les plus communes en MCO avec les codages les plus communs<br>
+- Pas de variable date de naissance, mais une variable générée d’âge toujours &gt;= 18 ans<br>
+- Pas de simili CMD 14 ou 15</p>
+<p>Les types et intitulés des variables des différentes tables sont cohérents avec les formats PMSI.</p>
+<p>Le jeu <code>fake_dataset_mco</code> est régulièrement mis à jour pour l’enrichir, illustrer une situation particulière ou produire une atypie.</p>
+<p>Le fichier JSON du jeu est envoyé aux participants au début des formations concernées.</p>
+</section>
+</section>
+<section id="données-établissement" class="level1">
+<h1>Données établissement</h1>
+<p><a href="https://www.pmsisoft.com" target="_blank">PMSISoft</a> est le logiciel d’analyse PMSI accessible en ligne en hébergement de santé certifié (HDS) que nous développons essentiellement en R.</p>
+<p>PMSISoft propose 2 accès :<br>
+- un <a href="https://www.pmsisoft.com/acces_pmsisoft_mco.html" target="_blank">accès Standard</a>, gratuit et permanent, ouvert aux établissements de santé<br>
+- un accès Professionnel</p>
+<p>Tout établissement de santé peut demander, via son médecin DIM attitré, pour chacun de ses établissement un accès PMSISoft Standard.</p>
+<p>Via l’accès PMSISoft Standard, le médecin DIM peut alors récupérer ses données PMSI, depuis 2019, au format JSON <strong>avec une structure identique à <code>fake_dataset_mco</code></strong> (même tables, mêmes variables).</p>
+<p>Il peut ainsi participer aux formations <strong>Data PMSI avec R</strong> avec son propre jeu de données ou, après la formation, exécuter les scripts de la formation (livrables de la formation) avec les données de ses établissements, en toute indépendance, sans limite de temps.</p>
+<p><a href="https://www.lespmsi.com/contact-pmsisoft/" target="_blank">Demander un accès PMSISoft Standard</a> (avec l’objet “Demande accès PMSISoft Standard”)</p>
 
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notes de bas de page</h2>
+
+<ol>
+<li id="fn1"><p>les exercices des formations s’appuient aussi sur de mini jeux publiés directement dans le code R (exemples : un tibble de quelques lignes simili anohosp, le tibble de correspondance entre numéro et intitulé des mois, …)<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>les intitulés des tibbles (<code>rss</code>, <code>ficium</code>, …) sont des abus de langage pratiques. Ils seraient à lire plus précisément comme <code>simili rss</code>, <code>simili ficium</code><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -299,7 +543,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">Blog codé avec <a href="https://quarto.org/">Quarto</a></div>   
-    <div class="nav-footer-right">© Copyright 2022, DATAMIS</div>
+    <div class="nav-footer-right"><a href="about.html">Mentions légales</a> | © Copyright 2023 - DATAMIS</div>
   </div>
 </footer>
 

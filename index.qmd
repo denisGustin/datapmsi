@@ -1,37 +1,84 @@
 ---
-title: "<span style='font-family: Boska; font-size: 2.75rem; font-weight: 800;'>Exploiter les data PMSI avec R</span>"
+title: "<span style='font-family: Boska; font-size: 2.75rem; font-weight: 800;'>Formations Data PMSI avec R</span>"
 lang: fr
 ---
 
+<span style='font-size: 1.75rem; font-weight: 400;'>Comment devenir autonome dans l'analyse PMSI de ses établissements</span>
+
+::: {.callout-note}
+## Prochaines formations  
+✍️ [Requêtes MCO sur 2 journées](formations/pmsi_mco_requete.qmd)\
+🗓️ **vendredi 24 mars et vendredi 31 mars 2023**\
+⏰ 09:00 - 17:00\
+🏨 En ligne  
+:::
+
+
 # Introduction  
 
-If you a
+## Objectifs d'apprentissage  
 
+Les formations **Data PMSI avec R** s'adressent aux professionnels du PMSI ou aux professionnels amenés à manipuler des données issues du PMSI.  
+
+Ces formations, organisées par champ PMSI, visent à permettre aux professionnels du PMSI ou liées au PMSI de produire eux-mêmes, directement à partir des données PMSI brutes de leurs établissements, de manière efficace, des traitements et analyses PMSI de haute qualité, performantes, reproductibles et documentées.  
+
+Après chaque formation **Data PMSI avec R**, les participants acquièrent une savoir-faire R minimal pour une première autonomie en contexte PMSI MCO, une vision de ce qu'il faut savoir et maîtriser en R pour le PMSI et une bibliothèque de requêtes et de scripts d'analyses PMSI en R à décliner sur l'activité de leurs établissements.  
+
+Pendant la journée ou les 2 journées de la formation, les participants découvrent et apprennent, à travers des exemples concrets et gradués, les familles d'analyse PMSI possibles et réalistes aujourd'hui avec R.  
+
+Ils s'exercent, en live coding avec le formateur, à produire ces analyses PMSI avec R sur des jeux de données simili PMSI réalistes et/ou sur les données PMSI de leurs établissements. 
+
+## Ces formations sont-elles pour moi ?
+
+Ces formations vous conviendront si vous répondez oui à ces questions :  
+
+- Souhaitez-vous créer vous-mêmes des requêtes et des analyses PMSI, sans avoir à passer par un service informatique ou des outils et logiciels chers et propriétaires ?
+- Appréciez-vous de pouvoir tester rapidement vos intuitions et réflexions sur la production PMSI de vos établissements ?
+- Souhaitez-vous construire et faire vivre votre propre catalogue d'analyses PMSI, entièrement reproductibles ?
+- Souhaitez-vous pouvoir travailler avec les data scientists santé ?
+
+## Pourquoi R ?
+
+R est un langage open source, mature, optimisé pour les statistiques et la manipulation de données structurées, très utilisé depuis des années en santé publique.[^1]  
+
+L'arrivée à maturité de la famille de package tidyverse depuis 2 ou 3 ans, en terme de fonctionnalités, documentation et performance, facilite grandement, pour les professionnels du PMSI, l'utilisation de R pour les traitements PMSI.  
+
+R a une masse critique d'utilisateurs qui assure sa pérennité.  
+
+R est gratuit et open source. Cela veut donc dire que vous pouvez travailler tout de suite sans demander l'autorisation ou de budget à personne.  
+
+La documentation R est infinie, adaptée à tous les niveaux.  
+
+Les professionnels du PMSI qui utilisent R ont maintenant un écosystème dédié (prestations, packages PMSI, blogs, échanges entre professionnels, service en ligne).  
 
 # Pré-requis  
 
-sdqsd
+## Pré-requis PMSI  
 
-- Install latest version of RStudio, [`v2022.07.0-548` or later](https://www.rstudio.com/products/rstudio/download/#download)
+Toutes les formations **Data PMSI avec R** supposent une maîtrise professionnelle du PMSI, en particulier du champ PMSI de la formation (MCO, SSR, PSY) :  
 
-- Install [latest version of Quarto](https://quarto.org/docs/get-started/) (`v1.0.36` or greater)
+- règles (définitions, vocabulaire)
+- structures de données (rss, rsa, fichcomp, ficium, vidhosp, fichsup, rhs, rha, rps, raa, ...)
+- référentiels (CIM-10, CCAM à usage PMSI, DMI, UCD en sus, CSARR, ...)
+- documentations (guides méthodologiques, manuels de groupages, cahiers des charges, ...)
+- contrôles qualité (requêtes, OVALIDE, ...)
+- analyses (case mix, reporting, fouilles de données, ...)
 
-## Packages 
+Remarque : la pratique du codage n'est pas nécessaire, même si codé ou avoir déjà codé des dossiers est un plus pour appréhender les problématiques.  
 
--   **tidyverse packages and friends**
-    -   ggplot2, readr, tibble, dplyr, tidyr, forcats, stringr, lubridate, here, systemfonts, scales
--   **extension packages**
-    -   ggrepel, ggforce, ggtext, ggdist, ggbeeswarm, gghalves, ggblur, patchwork
-
-```{r pkg-list}
-#| eval: false
-pkg_list <- c(
-  "tidyverse", "gt", "gtExtras", "reactable", "ggiraph", "here", "quarto",
-  "rmarkdown", "gtsummary", "palmerpenguins", "fs", "skimr"
-  )
-install.packages(pkg_list)
-```
+## Pré-requis R  
+ 
+[Explications détaillées](base_R.qmd)
 
 # Pédagogie  
 
-qsdqd
+[Explications détaillées](pedagogie.qmd)
+
+# Formateur  
+
+Denis Gustin est ingénieur et le concepteur et développeur de [PMSISoft](https://www.pmsisoft.com){target="_blank"}, logiciel d'analyse PMSI développé principalement en R.  
+Il est spécialiste en données PMSI avec plus de 15 ans d'expérience dans les différents PMSI et intervient régulièrement, en tant que formateur et consultant, dans des établissements de santé sur des problématiques d'analyses PMSI et de données de santé.  
+Il développe et maintient le package R de données PMSI [refpmsi::](https://denisgustin.github.io/refpmsi/index.html){target="_blank"}.  
+Il anime le blog [lespmsi.com](https://www.lespmsi.com){target="_blank"}
+
+[^1]: Python est évidemment une alternative avec des avantages réels sur certains aspects par rapport à R pour certaines analyses PMSI. Nous développons d'ailleurs régulièrement en Python. Mais nous estimons que Python est plus difficile d'accès pour des non-informaticients (ce que sont les professionnels du PMSI) et moins riche en fonctions "toutes prêtes" pour de nombreux traitements PMSI (tableaux, graphiques). 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data PMSI - Formation Requêtes MCO [Avancé]</title>
+<title>Data PMSI - Scripts PMSI MCO (1ere partie)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -119,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Formation Requêtes MCO [Avancé]</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Scripts PMSI MCO (1ere partie)</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -147,7 +147,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../formations/pmsi_mco_requete_avance.html" class="sidebar-item-text sidebar-link active">Requêtes MCO [Avancé]</a>
+  <a href="../formations/pmsi_mco_requete_avance.html" class="sidebar-item-text sidebar-link">Requêtes MCO [Avancé]</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -221,7 +221,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Sur cette page</h2>
    
   <ul>
-  <li><a href="#a-venir" id="toc-a-venir" class="nav-link active" data-scroll-target="#a-venir">A venir</a></li>
+  <li><a href="#contenu-du-module" id="toc-contenu-du-module" class="nav-link active" data-scroll-target="#contenu-du-module">Contenu du module</a></li>
+  <li><a href="#exemples" id="toc-exemples" class="nav-link" data-scroll-target="#exemples">Exemples</a></li>
+  <li><a href="#packages-et-fonctions" id="toc-packages-et-fonctions" class="nav-link" data-scroll-target="#packages-et-fonctions">Packages et fonctions</a></li>
   </ul>
 </nav>
     </div>
@@ -230,7 +232,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Formation Requêtes MCO [Avancé]</span></h1>
+<h1 class="title d-none d-lg-block"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Scripts PMSI MCO (1ere partie)</span></h1>
+<p class="subtitle lead">Journée 1 de la formation Requêtes MCO<br>15:30-17:00</p>
 </div>
 
 
@@ -244,8 +247,38 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="a-venir" class="level2">
-<h2 class="anchored" data-anchor-id="a-venir">A venir</h2>
+<section id="contenu-du-module" class="level1">
+<h1>Contenu du module</h1>
+<ul>
+<li>Exposé de ce qu’est un script PMSI MCO :
+<ul>
+<li>Quelles différences avec une suite d’instructions ou une requête ?</li>
+<li>Exécuter en routine</li>
+<li>Documentation</li>
+<li>Evolutions, maintenance, cycles de vie</li>
+<li>Retours d’expérience en contexte PMSI MCO</li>
+</ul></li>
+<li>Etapes de construction d’un script PMSI MCO</li>
+<li>Exposé et fonctionnement des variables intermédiaires dans un script</li>
+</ul>
+</section>
+<section id="exemples" class="level1">
+<h1>Exemples</h1>
+<p>Liste non exhaustive de scripts PMSI codés dans ce module en code living :</p>
+<ul>
+<li>Un script classique : construction de la table des codages CIM avec indication de la position de chaque codage</li>
+<li>Séjours avec au moins 1 codage CIM ou une famille de codages CIM, indépendamment de la position de codage</li>
+<li>Activité avec codage CCAM d’anesthésie seule</li>
+<li>Séjours longs selon plusieurs règles (seuil d’un nombre de journées, &gt; 2,5x DMS national, &gt; 2x DMS du GHM dans l’établissement)</li>
+<li>Pour une racine de GHM, liste des codages DAS de la base nationale non représentés dans l’établissement</li>
+<li>Liste des séjours T0, T1 et T2</li>
+<li>Dédoublonnage des codages par séjour</li>
+<li>File active à partir de l’anohosp ou du vidhosp</li>
+</ul>
+</section>
+<section id="packages-et-fonctions" class="level1">
+<h1>Packages et fonctions</h1>
+<p><a href="../package_function_mco.html">Liste de packages et fonctions utilisés dans la formation Requêtes MCO</a></p>
 
 
 </section>

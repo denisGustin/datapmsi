@@ -1,12 +1,37 @@
 ---
-title: "PMSI MCO Requête - Module 'Les essentiels'"
+title: "<span style='font-family: Boska; font-size: 2.75rem; font-weight: 800;'>Requêtes PMSI MCO de base (1ere partie)</span>"
+subtitle: "Journée 1 de la formation Requêtes MCO<br>9:00-10:30"
 lang: fr
 ---
 
-# Contenu  
+# Contenu du module  
 
+-   Vérification de l'environnement R et du [jeu PMSI MCO](../dataset_mco.qmd)
+-   Premières requêtes en contexte PMSI MCO
+    -   Filtrer des lignes sur plusieurs critères
+    -   Sélectionner des variables
+    -   Modifier ou créer de nouvelles variables
+    -   Caractériser une entité (rum, séjour, codage, um, service, thésaurus)  
+    -   Constituer et manipuler des regroupements de lignes
+    -   Calculer dans des regroupements  
+    -   Trier
+    -   Travailler avec plusieurs sources de données (rum,das,ccam,dmi)  
+-   Enchaîner des instructions  
 
-# Liste des requêtes [extrait]
+# Exemples
 
-- sdfs
-- sfdf
+Liste non exhaustive de requêtes PMSI codées dans ce module en code living :  
+
+-   Récupération de l'activité d'un regroupement d'UM
+-   Calcul de nombre de RUM et de séjours par regroupement C, M, K, Z
+-   Codage du controle Qualité OVALIDE "1.Q.1.CC – Nombre de séjours avec confirmation de codage parmi les GHM concernés"
+-   Séjours d'une UM type SI ou REA sans IG2 codé ou avec IGS2 en dessous d'un seuil
+-   Filtrer une activité par rapport à des dates
+-   Séjours avec tous les codages représentés d'un protocole
+-   Repérage de passages dans un ou plusieurs UM
+-   Calcul de l'âge en années et journées
+-   Ne retenir que les >+75 ans entrés par un service donné 
+
+# Packages et fonctions
+
+[Liste de packages et fonctions utilisés dans la formation Requêtes MCO](../package_function_mco.qmd)

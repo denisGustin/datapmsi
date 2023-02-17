@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data PMSI - Pré-requis R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Data PMSI</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./planning.html">Planning des formations</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./pedagogie.html">Pédagogie</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./prestation.html">Prestations</a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-jeux-de-données" role="button" data-bs-toggle="dropdown" aria-expanded="false">Jeux de données</a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-jeux-de-données">    
+        <li>
+    <a class="dropdown-item" href="./dataset_mco.html">
+ <span class="dropdown-text">Jeux PMSI MCO</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./dataset_ssr.html">
+ <span class="dropdown-text">Jeux PMSI SSR</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./dataset_psy.html">
+ <span class="dropdown-text">Jeux PMSI PSY</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/denisGustin/datapmsi"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Pré-requis R</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Formations MCO</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formations/pmsi_mco_requete.html" class="sidebar-item-text sidebar-link">Requêtes MCO</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formations/pmsi_mco_requete_avance.html" class="sidebar-item-text sidebar-link">Requêtes MCO [Avancé]</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formations/pmsi_mco_tableau.html" class="sidebar-item-text sidebar-link">Tableaux MCO</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formations/pmsi_mco_plot.html" class="sidebar-item-text sidebar-link">Graphiques MCO</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Formations SSR</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formations/pmsi_ssr_requete.html" class="sidebar-item-text sidebar-link">Requêtes SSR</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formations/pmsi_ssr_tableau.html" class="sidebar-item-text sidebar-link">Tableaux SSR</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formations/pmsi_ssr_plot.html" class="sidebar-item-text sidebar-link">Graphiques SSR</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Formations PSY</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formations/pmsi_psy_requete.html" class="sidebar-item-text sidebar-link">Requêtes PSY</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formations/pmsi_psy_tableau.html" class="sidebar-item-text sidebar-link">Tableaux PSY</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formations/pmsi_psy_plot.html" class="sidebar-item-text sidebar-link">Graphiques PSY</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sur cette page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#ere-étape-installer-r" id="toc-ere-étape-installer-r" class="nav-link" data-scroll-target="#ere-étape-installer-r">1ere étape : Installer R</a></li>
+  <li><a href="#eme-étape-installer-r-studio" id="toc-eme-étape-installer-r-studio" class="nav-link" data-scroll-target="#eme-étape-installer-r-studio">2eme étape : Installer R Studio</a></li>
+  <li><a href="#eme-étape-créer-un-projet-et-un-premier-fichier-.r" id="toc-eme-étape-créer-un-projet-et-un-premier-fichier-.r" class="nav-link" data-scroll-target="#eme-étape-créer-un-projet-et-un-premier-fichier-.r">3eme étape : Créer un projet et un premier fichier .R</a>
+  <ul class="collapse">
+  <li><a href="#créer-un-projet" id="toc-créer-un-projet" class="nav-link" data-scroll-target="#créer-un-projet">Créer un projet</a></li>
+  <li><a href="#mon-premier-fichier-.r" id="toc-mon-premier-fichier-.r" class="nav-link" data-scroll-target="#mon-premier-fichier-.r">Mon premier fichier .R</a></li>
+  </ul></li>
+  <li><a href="#eme-étape-minimum-à-connaître" id="toc-eme-étape-minimum-à-connaître" class="nav-link" data-scroll-target="#eme-étape-minimum-à-connaître">4eme étape : Minimum à connaître</a></li>
+  <li><a href="#eme-étapes-installer-et-charger-les-packages" id="toc-eme-étapes-installer-et-charger-les-packages" class="nav-link" data-scroll-target="#eme-étapes-installer-et-charger-les-packages">5eme étapes : Installer et charger les packages</a>
+  <ul class="collapse">
+  <li><a href="#le-tidyverse" id="toc-le-tidyverse" class="nav-link" data-scroll-target="#le-tidyverse">Le tidyverse</a></li>
+  <li><a href="#le-package-refpmsi" id="toc-le-package-refpmsi" class="nav-link" data-scroll-target="#le-package-refpmsi">Le package refpmsi</a></li>
+  <li><a href="#autres-packages-cran" id="toc-autres-packages-cran" class="nav-link" data-scroll-target="#autres-packages-cran">Autres packages CRAN</a></li>
+  <li><a href="#chargement-des-packages" id="toc-chargement-des-packages" class="nav-link" data-scroll-target="#chargement-des-packages">Chargement des packages</a></li>
+  </ul></li>
+  <li><a href="#eme-étape-charger-un-jeu-de-données" id="toc-eme-étape-charger-un-jeu-de-données" class="nav-link" data-scroll-target="#eme-étape-charger-un-jeu-de-données">6eme étape : Charger un jeu de données</a></li>
+  <li><a href="#eme-étape-le-pipe-et-son-fonctionnement" id="toc-eme-étape-le-pipe-et-son-fonctionnement" class="nav-link" data-scroll-target="#eme-étape-le-pipe-et-son-fonctionnement">7eme étape : Le pipe <code>%&gt;%</code> et son fonctionnement</a></li>
+  <li><a href="#eme-étape-quelques-manipulations-simples" id="toc-eme-étape-quelques-manipulations-simples" class="nav-link" data-scroll-target="#eme-étape-quelques-manipulations-simples">8eme étape : Quelques manipulations simples</a>
+  <ul class="collapse">
+  <li><a href="#fonction-dplyrfilter" id="toc-fonction-dplyrfilter" class="nav-link" data-scroll-target="#fonction-dplyrfilter">fonction dplyr::filter()</a></li>
+  <li><a href="#fonction-dplyrselect" id="toc-fonction-dplyrselect" class="nav-link" data-scroll-target="#fonction-dplyrselect">fonction dplyr::select()</a></li>
+  <li><a href="#fonction-dplyrmutate" id="toc-fonction-dplyrmutate" class="nav-link" data-scroll-target="#fonction-dplyrmutate">fonction dplyr::mutate()</a></li>
+  <li><a href="#fonction-dplyrarrange" id="toc-fonction-dplyrarrange" class="nav-link" data-scroll-target="#fonction-dplyrarrange">fonction dplyr::arrange()</a></li>
+  <li><a href="#exercices" id="toc-exercices" class="nav-link" data-scroll-target="#exercices">exercices</a></li>
+  </ul></li>
+  <li><a href="#résumé" id="toc-résumé" class="nav-link" data-scroll-target="#résumé">Résumé</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Pré-requis R</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p><em>Temps de lecture et mise en pratique : 1 heure à 2 heures</em></p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Les formations <strong>Data PMSI avec R</strong> supposent que les participants disposent d’un environnement R de travail opérationnel avec au moins un jeu de données PMSI chargé et les packages R nécessaires à la formation.</p>
+<p>Cette note est à consulter et pratiquer avant de participer à une de nos formations <strong>Data PMSI avec R</strong>. Nous vous invitons à copier/coller et exécuter les blocs de code proposés ci-dessous en s’assurant que vous les comprenez bien.</p>
+<p>Cette note est volontairement simplifiée au maximum, avec donc quelques abus de langage assumés<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Si vous pratiquez déjà R, vous pouvez vous contenter d’un survol de la note, créer un projet dédié à la formation et charger les packages et le jeu de données <a href="./dataset_mco.html"><code>mini_fake_dataset_mco</code></a>.</p>
+<p>Les supports et ressources en ligne pour apprendre et pratiquer R sont innombrables. On y trouve toute l’aide possible.<br>
+2 ressources en français récentes, didactiques et accessibles pour apprendre R :<br>
+<a href="https://juba.github.io/tidyverse/index.html" target="_blank">Introduction à R et au tidyverse par Julien Barnier</a><br>
+<a href="https://larmarange.github.io/analyse-R/" target="_blank">analyse-R par Joseph Larmarange</a><br>
+Ressources R et PMSI :<br>
+<a href="http://pmsidansr.senis.org/" target="_blank">Y a du PMSI dans R</a><br>
+<a href="https://denisgustin.github.io/refpmsi/index.html" target="_blank">Package refpmsi</a></p>
+<p><a href="https://www.lespmsi.com/contact-pmsisoft" target="_blank">Contactez-nous pour toute question</a> (avec l’objet “Question formation Data PMSI avec R”)</p>
+</section>
+<section id="ere-étape-installer-r" class="level2">
+<h2 class="anchored" data-anchor-id="ere-étape-installer-r">1ere étape : Installer R</h2>
+<p>R s’installe sous Windows comme un simple exécutable (comme GENRSA ou GENRHA par exemple).<br>
+<a href="https://cloud.r-project.org/bin/windows/base/" target="_blank">Télécharger R dans sa dernière version</a><br>
+Accepter les options par défaut jusqu’à la fin de l’installation.</p>
+<p>Nous recommandons une version de R &gt;= à la version 4.1.0 de mai 2021.<br>
+<a href="https://cran.r-project.org/bin/windows/base/old/" target="_blank">Historique des versions de R</a></p>
+</section>
+<section id="eme-étape-installer-r-studio" class="level2">
+<h2 class="anchored" data-anchor-id="eme-étape-installer-r-studio">2eme étape : Installer R Studio</h2>
+<p><strong>Après</strong> avoir installé R, nous installons R Studio qui est l’environnement de développement de référence pour R.<br>
+Plus exactement, nous allons télécharger la version open source de R Studio, appelée “R Studio Desktop”.</p>
+<p>R Studio Desktop s’installe comme un exécutable.<br>
+<a href="https://posit.co/download/rstudio-desktop/" target="_blank">Télécharger R Studio Desktop</a></p>
+<p>Nous recommandons une version de R Studio Desktop &gt;= à la version 12.07.02<br>
+<a href="https://www.rstudio.com/products/rstudio/older-versions/" target="_blank">Historique des versions de R Studio Desktop</a></p>
+<p>A ce stade, vous disposez d’une icône R Studio sur votre bureau pour ouvrir R Studio.<br>
+<a href="http://pmsidansr.senis.org/2022/06/15/installation-r-rstudio/" target="_blank">Tuto avec copies écrans pour installer R et R Studio</a><br>
+<a href="https://openclassrooms.com/fr/courses/4525256-initiez-vous-au-langage-r-pour-analyser-vos-donnees/6250851-prenez-en-main-r-et-r-studio" target="_blank">Tuto pour découvrir R Studio</a><br>
+<a href="https://larmarange.github.io/analyse-R/premier-contact.html" target="_blank">Autre tuto</a></p>
+</section>
+<section id="eme-étape-créer-un-projet-et-un-premier-fichier-.r" class="level2">
+<h2 class="anchored" data-anchor-id="eme-étape-créer-un-projet-et-un-premier-fichier-.r">3eme étape : Créer un projet et un premier fichier .R</h2>
+<section id="créer-un-projet" class="level3">
+<h3 class="anchored" data-anchor-id="créer-un-projet">Créer un projet</h3>
+<p>Nous allons maintenant créer un projet sous R Studio que l’on propose d’appeler <code>formation_data_pmsi</code>.<br>
+Ce projet va regrouper tous les fichiers .R et autres informations en lien avec les exerices, données et scripts de la formation.</p>
+<p><strong>Première étape</strong> : on crée (à priori à la racine C:), un répertoire avec l’intitulé <code>formation_data_pmsi</code>.</p>
+<p><strong>Seconde étape</strong> : dans R Studio, on crée le projet <code>formation_data_pmsi</code> en le rattachant au répertoire que l’on vient de créer à la première étape via File &gt; New Project &gt; Existing Directory<br>
+<a href="https://juba.github.io/tidyverse/05-organiser.html#projets" target="_blank">Un tuto</a><br>
+<a href="https://www.book.utilitr.org/rproject.html" target="_blank">Autre tuto</a></p>
+<p>Désormais, une fois ouvert R Studio, on ouvrira ce projet <code>formation_data_pmsi</code> via File &gt; Open Project</p>
+</section>
+<section id="mon-premier-fichier-.r" class="level3">
+<h3 class="anchored" data-anchor-id="mon-premier-fichier-.r">Mon premier fichier .R</h3>
+<p>Nous créons un premier fichier .R dans lequel nous allons sauvegarder les codes R des requêtes et analyses PMSI de la formation.</p>
+<p>Pour créer un fichier .R : File &gt; New File &gt; R Script<br>
+Un fichier “untitled1” apparaît dans le quadrant haut gauche (le quadrant éditeur de code).</p>
+<p>En cliquant sur l’icône “Sauvegarder” de ce quadrant, vous saisissez le nom du fichier, par exemple “intro.R”</p>
+<p>Premières lignes de code (à copier/coller)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># les lignes de commentaires commencent par #</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cliquer sur alt + entrée à la fin chaque ligne de code pour exécuter la ligne</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># première saisie. Il s'agit du très classique jeu de données iris, natif dans R</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># le jeu de données s'affiche dans la console</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>iris</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># appel d'une fonction </span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># nrow() = fonction native de R calculant le nombre de lignes d'un tableau de données</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(iris)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;- permet d'attribuer une valeur à une variable (raccourci R Studio pour &lt;- : alt + 6)</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># il y a des bonnes pratiques de nommage des variables : elles sont appliquées dans cette note</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Penser à sauvegarder votre script R régulièrement et, à minima, avant de quitter R Studio.</p>
+<p>En quittant R Studio, ne jamais sauvegarder le .RData si R Studio vous le demande</p>
+<p><a href="http://pmsidansr.senis.org/2022/06/15/un-premier-programme-en-r/">Un tuto</a></p>
+<p><a href="https://www.lespmsi.com/contact-pmsisoft" target="_blank">Contactez-nous pour toute question</a> (avec l’objet “Question formation Data PMSI avec R”)</p>
+</section>
+</section>
+<section id="eme-étape-minimum-à-connaître" class="level2">
+<h2 class="anchored" data-anchor-id="eme-étape-minimum-à-connaître">4eme étape : Minimum à connaître</h2>
+<p>Il y a 4 concepts à connaître : les types de données, les vecteurs, les data frames ou tibbles et les lists</p>
+<p>Nous les exposons ci-dessous, à minima, avec des exemples issus de données simili PMSI, à exécuter dans le fichier intro.R</p>
+<p><strong>Type de données</strong></p>
+<p>Chaque information (un code CIM, un code d’UM, un initulé, une valorisation T2A, un nombre d’actes, la catégorisation d’âge “adulte” versus “moins 18 ans”, un seuil, …) relève d’un type de données.</p>
+<p>Il y a 4 types principaux de données (logical, character, integer, numeric) que nous illustrons ci-dessous<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># type logical </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 valeurs possibles : TRUE ou FALSE</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># exemple. Pour indiquer qu'on excluera les moins de 18 ans d'une analyse</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>age_moins_18 <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>age_moins_18</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># type character</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># valeurs avec du texte. Bien indiquer les ""</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>code_cim <span class="ot">&lt;-</span> <span class="st">"S42700"</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>code_cim</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># type integer</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># valeurs entières</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>seuil_acte <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>seuil_acte</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># type numeric</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># valeurs réelles. Avec . au lieu de , pour les décimals</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>valo_t2a <span class="ot">&lt;-</span> <span class="fl">13467.89</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>valo_t2a</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Vecteur</strong></p>
+<p>Un vecteur est un ensemble de valeurs <u>du même type</u>.<br>
+On parlera ainsi d’un vecteur logique, d’un vecteur character, etc…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># un vecteur est créé par la fonction c()</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## ici un vecteur de codes UM</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>mes_um <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"UM01"</span>,<span class="st">"UM02"</span>,<span class="st">"UM03"</span>,<span class="st">"UM04"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>mes_um</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># nombre d'élements d'un vecteur avec la fonction length()</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(mes_um)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># extraction d'un élément par sa position</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## ici extraction du 2eme élément du vecteur</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>mes_um[<span class="dv">2</span>]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># extraction de plusieurs éléments via un vecteur des positions à extraire</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="do">## ici extraction des positions 2 et 4</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>positions_recherchees <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>mes_um[positions_recherchees]</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ou plus directement</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>mes_um[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)]</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># une donnée manquante est indiquée par NA (comme Non Available)</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>destination_um <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="dv">2</span>,<span class="dv">7</span>,<span class="cn">NA</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>destination_UM[<span class="dv">1</span>]</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>destination_UM[<span class="dv">3</span>]</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># on peut attribuer un nom à chaque éléments du vecteur avec la fonction names()</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>noms_um <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Ortho"</span>,<span class="st">"Pédiatrie"</span>,<span class="st">"Gynéco"</span>,<span class="st">"Urgences"</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mes_um) <span class="ot">&lt;-</span> noms_um</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>mes_um</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Data frame/tibble</strong></p>
+<p>Un data frame ou tableau de données est une liste de vecteurs indépendants.<br>
+Un data frame est donc constitué de colonnes de même longueur (même nombre de lignes) qui peuvent être de types différents.</p>
+<p>Le jeu de données <a href="./dataset_mco.html"><code>mini_fake_dataset_mco</code></a>, librement téléchargeable (voir ci-dessous), est ainsi un data frame composé de 27 colonnes.</p>
+<p>Les référentiels du package de données <a href="https://denisgustin.github.io/refpmsi/index.html" target="_blank">refpmsi</a> (par exemple le référentiel <code>cim</code> de la CIM-10 à usage PMSI de 2019 à 2022) sont des data frames.<br>
+Abréviation courante : df</p>
+<p>Un tibble est un data frame “enrichi” dans l’environnement du tidyverse<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.<br>
+En pratique, parce qu’on travaille essentiellement avec les packages du tidyverse, on parlera de tibble (abréviation : tbl)</p>
+<p>On parlera indifféremment de colonnes ou de variables : une variable d’un tibble correspond à une colonne</p>
+<p><strong>List</strong></p>
+<p>Une list, au sens R, est une collection de structures de données (valeurs uniques, vecteurs, tibbles, list).</p>
+<p>Une image pour visualiser : une list est une commode dont chaque tiroir contient des objects différents, des pulls dans le premier tiroir, des assiettes dans le second tiroir, rien dans le troisième, un seul livre dans le quatrième.</p>
+<p>Une list est donc la structure de données la plus souple, la plus puissante, mais aussi la plus complexe à manipuler.</p>
+<p>Le jeu de données <a href="./dataset_mco.html"><code>fake_dataset_mco</code></a> des formations MCO est ainsi une list de tibbles (un tbl simili partie fixe des RSS, un tbl simili RSA, un tbl simili actes CCAM, un tble simili DAS, un tbl de DMI, un tbl simili ficium) : nous manipulons donc un seul objet au lieu de 6 objets.</p>
+</section>
+<section id="eme-étapes-installer-et-charger-les-packages" class="level2">
+<h2 class="anchored" data-anchor-id="eme-étapes-installer-et-charger-les-packages">5eme étapes : Installer et charger les packages</h2>
+<p>Un package est une réunion cohérente de fonctions et de données que l’on va pouvoir utiliser en appelant ses fonctions et ses données sans avoir à se préoccuper de la façon dont elles sont codées.</p>
+<p>Une fois installé, un package sera à charger à chaque nouvelle session R Studio.</p>
+<p>Les packages d’intérêt général et validés après une série poussée de tests sont disponibles sur le <a href="https://cran.r-project.org/index.html">CRAN</a>. C’est essentiellement parmi ces packages que nous allons faire notre marché.</p>
+<p>L’installation d’un package est réalisée une fois pour toute (sauf mise à jour du package).</p>
+<p>En revanche, à chaque nouvelle session R Studio, nous allons devoir charger les packages nécessaires (voir ci-dessous “Chargement des packages”).</p>
+<section id="le-tidyverse" class="level3">
+<h3 class="anchored" data-anchor-id="le-tidyverse">Le tidyverse</h3>
+<p>Les packages les plus utiles dans les formations <strong>Data PMSI avec R</strong> sont les packages d’une collection cohérente de packages appelée <a href="https://www.tidyverse.org/" target="_blank">tidyverse</a>.</p>
+<p>Le tidyverse est une sorte méta-package. En chargeant le tidyverse, on charge tous les packages du tidyverse en une fois.</p>
+<p>Principaux packages du tidyverse utilisés en analyse PMSI :<br>
+- dplyr (package qui fournit les fonctions de base pour résoudre les problèmes de manipulation de données les plus courants comme filtre, trier, sélectionner des colonnes, ajouter une colonne, compter des lignes, …) - tidyr (package pour créer des structures “bien rangées” - tidy en anglais -) - stringr (package pour manipuler des chaînes de caractères) - tibble (package pour manipuler spécifiquement les tibbles) - ggplot2 (package pour produire des graphiques)</p>
+<p>Dans le tidyverse, on trouve aussi les packages lubridate (pour manipuler des dates), purrr (pour programmation fonctionnelle), forcats (pour manipuler des facteurs), …</p>
+<p>Installation des packages du tidyverse</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># suffisant pour les formations [Requêtes MCO], [Requêtes SSR] et [Requêtes PSY]</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>vect_pkg <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># la fonction install.packages() installe la dernière version des packages du tidyverse</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(vect_pkg)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="le-package-refpmsi" class="level3">
+<h3 class="anchored" data-anchor-id="le-package-refpmsi">Le package refpmsi</h3>
+<p>refpmsi est un package de référentiels PMSI qui permet de récupérer et travailler avec les référentiels PMSI annualisés et normalisés pour R.</p>
+<p>Le chargement de ce package qui n’est pas sur le CRAN est spécifique.</p>
+<p>Voir la <a href="https://denisgustin.github.io/refpmsi/index.html" target="_blank">documentation de refpmsi</a> pour installer refpmsi.</p>
+</section>
+<section id="autres-packages-cran" class="level3">
+<h3 class="anchored" data-anchor-id="autres-packages-cran">Autres packages CRAN</h3>
+<p>En fonction des formations <strong>Data PMSI avec R</strong>, on peut installer d’autres packages du CRAN :<br>
+- gt, gtExtras pour les formations [Tableaux]<br>
+- ggrepel, ggtext pour les formations [Graphiques]<br>
+- data.table pour la formation Requêtes MCO [Avancé]</p>
+<p>La liste des packages et fonctions utilisés dans une formation est indiquée dans la présenttion de la formation concernée.</p>
+</section>
+<section id="chargement-des-packages" class="level3">
+<h3 class="anchored" data-anchor-id="chargement-des-packages">Chargement des packages</h3>
+<p>Maintenant que nous avons installé les packages nécessaires, nous allons les charger.</p>
+<p>Le code ci-dessous est donc à exécuter à chaque nouvelle session de travail, raison pour laquelle on dispose généralement en tête du fichier .R sur lequel on travaille un code, comme celui proposé ci-dessous, pour charger ces packages.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Charger un package. Ici le package dplyr </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Code proposé pour charger rapidement plusieurs packages</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># A copier/coller tel quel</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># lapply est une fonction qui va "appliquer" la fonction library à chaque élément du vecteur list_packages</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># la fonction invisible() est un confort pour ne pas afficher des informations</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>list_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dplyr"</span>,<span class="st">"tibble"</span>,<span class="st">"tidyr"</span>,<span class="st">"stringr"</span>,<span class="st">"jsonlite"</span>,<span class="st">"refpmsi"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">lapply</span>(list_packages, library, <span class="at">character.only =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative avec le package pacman</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(<span class="at">char =</span> list_packages)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="eme-étape-charger-un-jeu-de-données" class="level2">
+<h2 class="anchored" data-anchor-id="eme-étape-charger-un-jeu-de-données">6eme étape : Charger un jeu de données</h2>
+<p>La traduction anglaise de jeu de données est dataset. On parlera donc indifféremment de jeux de données ou de dataset</p>
+<p>Pour tester le bon fonctionnement et être opérationnel en début de formation, nous avons construit et mettons à disposition <a href="./dataset_mco.html" target="_blank"><code>mini_fake_dataset_mco</code></a>, un mini jeu de données simili PMSI MCO, cohérent avec les jeux de données mis à disposition pour une formation <strong>Data PMSI avec R</strong>.</p>
+<p>Le jeu <a href="./dataset_mco.html" target="_blank"><code>mini_fake_dataset_mco</code></a> (qui est simplement un fichier texte) est à télécharger librement et à déposer dans un sous-répertoire <code>data</code> (on pourrait l’appeler autrement) à créer dans le répertoire <code>formation_data_pmsi</code>.</p>
+<p>Puis nous exécutons le code ci-dessous</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On a chargé la suite de packages list_packages : voir étape 5</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Le jeu est chargé dans la variable jeu qui est un dataframe</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>jeu <span class="ot">&lt;-</span> jsonlite<span class="sc">::</span><span class="fu">fromJSON</span>(<span class="st">"data/mini_fake_dataset_mco.json"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># on vérifie que jeu est bien un data frame avec la fonction is.data.frame()</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">is.data.frame</span>(jeu)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># pour faciliter son exploitation, on passe ce jeu en tibble avec la fonction as_tibble du package tibble:: </span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ici on écrase le df jeu par le nouveau tbl jeu qui a le même nom de variable</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>jeu <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">as_tibble</span>(jeu)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># on vérifie que le jeu est bien chargé</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># la fonction glimpse() du package dplyr fournit un résumé pratique d'un dataset  </span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(jeu)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Le résultat est le suivant :</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 30
+Columns: 27
+$ ghm                                        &lt;chr&gt; "06M041", "04M05T", "04M203~
+$ code_retour                                &lt;chr&gt; "000", "000", "000", "000",~
+$ nas                                        &lt;chr&gt; "1740", "435", "1684", "125~
+$ no_rum                                     &lt;chr&gt; "1", "1", "1", "1", "1", "1~
+$ age                                        &lt;int&gt; 72, 58, 59, 55, 71, 87, 65,~
+$ sexe                                       &lt;chr&gt; "F", "F", "H", "F", "F", "H~
+$ no_um                                      &lt;chr&gt; "um01", "um01", "um01", "um~
+$ type_aut_lit_dedie                         &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ mode_entree_um                             &lt;chr&gt; "8", "8", "8", "8", "8", "8~
+$ provenance_um                              &lt;chr&gt; "5", "5", "5", "5", "5", "5~
+$ mode_sortie_um                             &lt;chr&gt; "6", "8", "6", "8", "8", "6~
+$ destination_um                             &lt;chr&gt; "1", "NA", "1", "NA", "NA",~
+$ nb_seances                                 &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, ~
+$ nb_das                                     &lt;int&gt; 1, 3, 1, 0, 0, 0, 0, 1, 1, ~
+$ nb_ccam                                    &lt;int&gt; 0, 3, 3, 3, 3, 5, 2, 3, 1, ~
+$ dp                                         &lt;chr&gt; "K625", "J181", "J9600", "N~
+$ dr                                         &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ igs_2                                      &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, ~
+$ confirmation_codage_rss                    &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ conversion_hc                              &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ raac                                       &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ contexte_patient_surveillance_particuliere &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ admin_produit_rh                           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ rescrit_tarifaire                          &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ cat_nb_inter_tot                           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
+$ date_entree_um                             &lt;chr&gt; "2022-07-01", "2022-03-01",~
+$ date_sortie_um                             &lt;chr&gt; "2022-07-02", "2022-03-02",~</code></pre>
+</div>
+</div>
+<p>Pour les formations, nous mettons à disposition des participants le jeu de données <a href="./dataset_mco.html"><code>fake_dataset_mco</code></a> plus fourni avec plus de lignes et différents tibbles.</p>
+<p>Nous recommandons aux participants médecins DIM de récupérer les données PMSI de leurs établissements au format JSON via l’<a href="https://www.pmsisoft.com/acces_pmsisoft_mco.html" target="_blank">accès Standard de PMSISoft</a></p>
+<p>Les noms des variables de nos fake dataset PMSI sont ceux des exports de l’accès Standard de PMSISoft en JSON : les médecins DIM peuvent donc ainsi coder en R, pendant la formation, sur les données PMSI de leurs établissements.</p>
+</section>
+<section id="eme-étape-le-pipe-et-son-fonctionnement" class="level2">
+<h2 class="anchored" data-anchor-id="eme-étape-le-pipe-et-son-fonctionnement">7eme étape : Le pipe <code>%&gt;%</code> et son fonctionnement</h2>
+<p>Comprendre ce qu’est et comment fonctionne le pipe <code>%&gt;%</code> est fondamental.<br>
+C’est ce qui permet de construire des scripts lisibles, complexes, testables et maintenables.</p>
+<p>L’idée de base est la suivante : puisque, pour la quasi-totalité des fonctions R et spécialement pour les fonctions du <code>tidyverse</code>, le premier argument de ces fonctions est un data frame (sur lequel va s’appliquer la fonction)<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> et qu’un script consiste, dans son principe, à <strong>enchaîner</strong> des traitements successifs, on va passer directement le résultat de chaque traitement (qui est donc un tibble modifié) au traitement suivant via le pipe <code>%&gt;%</code></p>
+<p>Illustrons avec le <code>mini_fake_dataset_mco</code> que nous avons chargé à l’étape 6 en lui appliquant quelques traitements simples (voir étape 8 “Quelques manipulations simples” ci-dessous).</p>
+<p>Première approche sans le <code>%&gt;%</code> : on enregistre le résultat de chaque traitement dans une variable</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on reprend la variable jeu créée lors de l'étape 6</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># premier traitement : on filtre les RUM groupé en 04M023 avec la fonction filter() du package dplyr </span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># on préfixe les fonctions avec leur package en codant dplyr::filter()</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># on pourrait coder aussi filter() sans référence au package  </span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># on constate que le premier argument de la fonction filter() est bien un data frame, </span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ici jeu qui est notre jeu de données</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>jeu1 <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(jeu, ghm <span class="sc">==</span> <span class="st">"04M203"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>jeu1</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># second traitement : on sélectionne quelques variables</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>jeu2 <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">select</span>(jeu1, ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>jeu2</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># troisième traitement : on transforme les 2 variables date_entree_um et date_sortie_um au format date</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>jeu3 <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(jeu2, <span class="at">date_entree_um =</span> <span class="fu">as.Date</span>(date_entree_um),</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>                      <span class="at">date_sortie_um =</span> <span class="fu">as.Date</span>(date_sortie_um))</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>jeu3</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 4eme traitement : on créé la variable cmd en récupérant les 2 premières positions du ghm</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>jeu4 <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(jeu3, <span class="at">cmd =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(ghm,<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>jeu4</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Constat :<br>
+On a un tibble d’entrée (<code>jeu</code>) et on veut un tibble résultat.<br>
+Avec cette approche, on génère 4 tibble pour arriver au résultat voulu.<br>
+Sachant qu’un script classique PMSI (exemple : produire un case mix simple) va se composer d’une dizaine de traitements et qu’on enchaîne souvent plusieurs suites de traitements, on voit bien que cela devient très rapidement ingérable et illisible avec des dizaines de résultats intermédiaires et des risques constants d’erreur de saisie.</p>
+<p>Deuxième approche : composition de fonctions</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on reprend les 4 traitements de la 1ère approche </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># en partant du dernier traitement dont le tibble est le résultat</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># puis du 3eme traitement, etc...</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">mutate</span>(dplyr<span class="sc">::</span><span class="fu">mutate</span>(dplyr<span class="sc">::</span><span class="fu">select</span>(dplyr<span class="sc">::</span><span class="fu">filter</span>(jeu, ghm <span class="sc">==</span> <span class="st">"04M203"</span>), ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">date_entree_um =</span> <span class="fu">as.Date</span>(date_entree_um),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">date_sortie_um =</span> <span class="fu">as.Date</span>(date_sortie_um)),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">cmd =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(ghm,<span class="dv">1</span>,<span class="dv">2</span>))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Constat : Cela se passe de commentaires !</p>
+<p>L’approche avec le pipe `%&gt;%</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># le tibble final est directement enregistré dans une variable que l'on nomme ici jeu_resultat</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># le raccourci R Studio pour le pipe %&gt;% est ctrl + shift (la flêche vers le haut) + M</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>jeu_resultat <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(jeu, ghm <span class="sc">==</span> <span class="st">"04M203"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dans la fonction dplyr::select(), il n'y a plus de premier argument affiché</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># car le pipe a transféré dans le premier argument de la fonction dplyr::select() le tibble</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># issu du traitement de la ligne précédente</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># même fonctionnement avec la fonction dplyr::mutate() dont le premier argument "invisible"</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># est le tibble produit par ce qui précède le %&gt;% </span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># la fonction dplyr::mutate() permet de créer ou modifier des variables</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">date_entree_um =</span> <span class="fu">as.Date</span>(date_entree_um), <span class="at">date_sortie_um =</span> <span class="fu">as.Date</span>(date_sortie_um)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># la fonction strinr::str_sub() permet d'extraire une partie d'une suite de caractères</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">cmd =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(ghm,<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>jeu_resultat</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co"># si je veux uniquement les 2 premiers traitements</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># je mets en commentaire les lignes inutilisées : très souple pour "jouer" avec un script</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>jeu_resultat <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(jeu, ghm <span class="sc">==</span> <span class="st">"04M203"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dplyr::mutate(jeu2, date_entree_um = as.Date(date_entree_um), date_sortie_um = as.Date(date_sortie_um)) %&gt;% </span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dplyr::mutate(jeu3, cmd = stringr::str_sub(ghm,1,2))</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>jeu_resultat</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co"># autre intérêt : je réitère très facilement pour un autre ghm </span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="co"># en changeant juste à un seul endroit (dans le filter) le code ghm</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>jeu_resultat <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(jeu, ghm <span class="sc">==</span> <span class="st">"19M024"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(ghm,nas,no_rum,age,dp,dr,nb_das,nb_ccam,date_entree_um,date_sortie_um) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">date_entree_um =</span> <span class="fu">as.Date</span>(date_entree_um), <span class="at">date_sortie_um =</span> <span class="fu">as.Date</span>(date_sortie_um)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">cmd =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(ghm,<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>jeu_resultat</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Constat :<br>
+Le code est lisible : on voit bien ce qui se passe dans chaque ligne.<br>
+Je peux documenter chaque ligne.<br>
+Je n’ai que 2 tibble : le tibble d’origine qui ne bouge pas et le tibble résultat.<br>
+Je peux tester une suite de lignes de code en supprimant le pipe à l’endroit voulu.<br>
+<strong>Je peux modifier un traitement sans modifier les autres ni tout reprendre</strong> (manipulation très fréquente en PMSI où on va tester des hypothèses et des codages à la volée).</p>
+</section>
+<section id="eme-étape-quelques-manipulations-simples" class="level2">
+<h2 class="anchored" data-anchor-id="eme-étape-quelques-manipulations-simples">8eme étape : Quelques manipulations simples</h2>
+<p>A partir du jeu <code>mini_fake_dataset_mco</code> que nous avons chargé à l’étape 6, quelques manipulations basiques avec des fonctions du tidyverse permettant de voir aussi le fonctionnement du pipe <code>%&gt;%</code></p>
+<section id="fonction-dplyrfilter" class="level3">
+<h3 class="anchored" data-anchor-id="fonction-dplyrfilter">fonction dplyr::filter()</h3>
+<p>Pour filtrer des lignes<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter() fonctionne avec les valeurs logiques. </span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ici no_um == "um01" teste cette condition sur chaque ligne, donc avec une réponse attendue TRUE ou FALSE</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># si le code UM est bien "um01", no_um == "um01 produit la valeur TRUE et donc filter retient la ligne</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>jeu <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(no_um <span class="sc">==</span> <span class="st">"um01"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 filtrages successives</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>jeu <span class="sc">%&gt;%</span> </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(no_um <span class="sc">==</span> <span class="st">"um01"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">75</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># ou plus directement les 2 filtrages dans un seul traitement où &amp; est le ET logique</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>jeu <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(no_um <span class="sc">==</span> <span class="st">"um01"</span> <span class="sc">&amp;</span> age <span class="sc">&gt;=</span> <span class="dv">75</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fonction-dplyrselect" class="level3">
+<h3 class="anchored" data-anchor-id="fonction-dplyrselect">fonction dplyr::select()</h3>
+<p>Pour sélectionner des variables</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sélection de quelques variables par leur nom</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>jeu <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(ghm,nas,no_rum,dp)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># en PMSI, on a souvent beaucoup de colonnes.</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># on verra dans la formation comment sélectionner intelligemment parmi beaucoup de variables</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fonction-dplyrmutate" class="level3">
+<h3 class="anchored" data-anchor-id="fonction-dplyrmutate">fonction dplyr::mutate()</h3>
+<p>Pour ajouter ou modifier des variables</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># création d'un variable cmd</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>jeu <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">cmd =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(ghm,<span class="dv">1</span>,<span class="dv">2</span>))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fonction-dplyrarrange" class="level3">
+<h3 class="anchored" data-anchor-id="fonction-dplyrarrange">fonction dplyr::arrange()</h3>
+<p>Pour trier selon une ou plusieurs colonnes</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tri ascendant sur l'âge après sélection de variables</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>jeu <span class="sc">%&gt;%</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(ghm,nas,no_rum,no_um,dp,age) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(age)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># tri descendant avec l'option desc() dans arrange()</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>jeu <span class="sc">%&gt;%</span> </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(ghm,nas,no_rum,no_um,dp,age) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(age))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercices" class="level3">
+<h3 class="anchored" data-anchor-id="exercices">exercices</h3>
+<p><strong>Codes CIM-10 autorisés en DP</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Récupération du référentiel  CIM-10</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>cim_10 <span class="ot">&lt;-</span> refpmsi<span class="sc">::</span><span class="fu">refpmsi</span>(<span class="st">"cim"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(cim_10)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>cim_dp_2022 <span class="ot">&lt;-</span> cim_10 <span class="sc">%&gt;%</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sélection des variables qui nous intéressent</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(cim_code,cim_tmco,annee_pmsi,cim_lib) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(annee_pmsi <span class="sc">==</span> <span class="st">"2022"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># rappel : les codes autorisés en DP ont la valeur 0 </span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (voir le kit de la nomenclature CIM PMSI sur le site de l'ATIH)</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(cim_tmco <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># résultat : 13 357 codes </span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>cim_dp_2022 <span class="sc">%&gt;%</span> View</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Et les codes CIM-10 non autorisés en DP </span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>cim__non_dp_2022 <span class="ot">&lt;-</span> cim_10 <span class="sc">%&gt;%</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(cim_code,cim_tmco,annee_pmsi,cim_lib) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(annee_pmsi <span class="sc">==</span> <span class="st">"2022"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(cim_tmco <span class="sc">!=</span> <span class="dv">0</span>)</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>cim_non_dp_2022 <span class="sc">%&gt;%</span> View</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>RUM le plus long d’une sous CMD</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>jeu1 <span class="ot">&lt;-</span> jeu <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(nas,no_rum,ghm,date_sortie_um,date_entree_um) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">sous_cmd =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(ghm,<span class="dv">1</span>,<span class="dv">3</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">date_sortie_um =</span> <span class="fu">as.Date</span>(date_sortie_um), <span class="at">date_entree_um =</span> <span class="fu">as.Date</span>(date_entree_um)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">duree_rum =</span> date_sortie_um <span class="sc">-</span> date_entree_um) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(sous_cmd <span class="sc">==</span> <span class="st">"04M"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">duree_rum =</span> date_sortie_um <span class="sc">-</span> date_entree_um) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(duree_rum <span class="sc">==</span> <span class="fu">max</span>(duree_rum))</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># résultat : le rum 2 du nas 411 avec 34 journées PMSI</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>jeu1</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="résumé" class="level2">
+<h2 class="anchored" data-anchor-id="résumé">Résumé</h2>
+<p>En résumé :</p>
+<ul>
+<li>on a installé R et R Studio</li>
+<li>on a créé un projet et un premier fichier .R, on sait créer des fichiers .R</li>
+<li>on a retenu les noms et compris, dans une première approche, ce que sont :
+<ul>
+<li>les types de données logical, character, integer, numeric</li>
+<li>les vecteurs</li>
+<li>les data frames (ou tableaux de données) et les tibbles (= des data frames améliorés)</li>
+<li>les lists</li>
+</ul></li>
+<li>on a compris ce qu’est un package, on a installé les packages nécessaires</li>
+<li>on sait charger les packages nécessaires à chaque nouvelle session R Studio</li>
+<li>on sait ce qu’est le tidyverse (= une collection de packages pratiques) et on a commencé à se familiariser avec les noms des principaux packages (<code>dplyr</code>, <code>tidyr</code>, <code>stringr</code>, <code>refpmsi</code>)</li>
+<li>on a chargé le jeu <a href="./dataset_mco.html"><code>mini_fake_dataset_mco</code></a> et vérifié qu’on le voyait bien</li>
+<li>on a compris le fonctionnement et l’intérêt du <code>%&gt;%</code></li>
+<li>on a exécuté et compris le code des quelques manipulations simples, on a commencé à se familiariser avec les fonctions très courantes comme <code>dplyr::filter</code>, <code>dplyr::select</code>, <code>dplyr::mutate</code>, <code>dplyr::arrange</code>, <code>refpmsi::refpmsi</code></li>
+</ul>
+<p><a href="https://www.lespmsi.com/contact-pmsisoft" target="_blank">Contactez-nous pour toute question</a> (avec l’objet “Question formation Data PMSI avec R”)</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notes de bas de page</h2>
+
+<ol>
+<li id="fn1"><p>par exemple, on ne distingue pas les notions de types, modes et classes de données, mais on se réfère au sens courant du mot type de données.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>il y a aussi les données <code>Date</code> par exemple dont nous parlerons dans la formation.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>on ne discutera pas ici des différences entre df et tbl<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>voir par exemple la documenter de la fonction très courante <a href="https://dplyr.tidyverse.org/reference/filter.html" target="_blank">dplyr::filter</a> où le premier argument (.data) est bien le data frame sur lequel le filter va s’appliquer.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><a href="https://dplyr.tidyverse.org/reference/filter.html" target="_blank">documentation fonction filter()</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copié");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Blog codé avec <a href="https://quarto.org/">Quarto</a></div>   
+    <div class="nav-footer-right"><a href="about.html">Mentions légales</a> | © Copyright 2023 - DATAMIS</div>
+  </div>
+</footer>
+
+
+
+</body></html>

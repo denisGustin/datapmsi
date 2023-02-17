@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data PMSI - PMSI MCO Requête - Module ‘Les essentiels’</title>
+<title>Data PMSI - Requêtes PMSI MCO de base (1ere partie)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -78,6 +78,17 @@ ul.task-list li input[type="checkbox"] {
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../planning.html">Planning des formations</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../pedagogie.html">Pédagogie</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../prestation.html">Prestations</a>
+  </li>  
+</ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-jeux-de-données" role="button" data-bs-toggle="dropdown" aria-expanded="false">Jeux de données</a>
@@ -89,6 +100,10 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="../dataset_ssr.html">
  <span class="dropdown-text">Jeux PMSI SSR</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../dataset_psy.html">
+ <span class="dropdown-text">Jeux PMSI PSY</span></a>
   </li>  
     </ul>
   </li>
@@ -104,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">PMSI MCO Requête - Module ‘Les essentiels’</h1>
+      <h1 class="quarto-secondary-nav-title"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Requêtes PMSI MCO de base (1ere partie)</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -137,7 +152,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../formations/pmsi_mco_tableau.html" class="sidebar-item-text sidebar-link">Tableau MCO</a>
+  <a href="../formations/pmsi_mco_tableau.html" class="sidebar-item-text sidebar-link">Tableaux MCO</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../formations/pmsi_mco_plot.html" class="sidebar-item-text sidebar-link">Graphiques MCO</a>
   </div>
 </li>
       </ul>
@@ -155,6 +175,41 @@ ul.task-list li input[type="checkbox"] {
   <a href="../formations/pmsi_ssr_requete.html" class="sidebar-item-text sidebar-link">Requêtes SSR</a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../formations/pmsi_ssr_tableau.html" class="sidebar-item-text sidebar-link">Tableaux SSR</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../formations/pmsi_ssr_plot.html" class="sidebar-item-text sidebar-link">Graphiques SSR</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Formations PSY</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../formations/pmsi_psy_requete.html" class="sidebar-item-text sidebar-link">Requêtes PSY</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../formations/pmsi_psy_tableau.html" class="sidebar-item-text sidebar-link">Tableaux PSY</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../formations/pmsi_psy_plot.html" class="sidebar-item-text sidebar-link">Graphiques PSY</a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -166,8 +221,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Sur cette page</h2>
    
   <ul>
-  <li><a href="#contenu" id="toc-contenu" class="nav-link active" data-scroll-target="#contenu">Contenu</a></li>
-  <li><a href="#liste-des-requêtes" id="toc-liste-des-requêtes" class="nav-link" data-scroll-target="#liste-des-requêtes">Liste des requêtes</a></li>
+  <li><a href="#contenu-du-module" id="toc-contenu-du-module" class="nav-link active" data-scroll-target="#contenu-du-module">Contenu du module</a></li>
+  <li><a href="#exemples" id="toc-exemples" class="nav-link" data-scroll-target="#exemples">Exemples</a></li>
+  <li><a href="#packages-et-fonctions" id="toc-packages-et-fonctions" class="nav-link" data-scroll-target="#packages-et-fonctions">Packages et fonctions</a></li>
   </ul>
 </nav>
     </div>
@@ -176,7 +232,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">PMSI MCO Requête - Module ‘Les essentiels’</h1>
+<h1 class="title d-none d-lg-block"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Requêtes PMSI MCO de base (1ere partie)</span></h1>
+<p class="subtitle lead">Journée 1 de la formation Requêtes MCO<br>9:00-10:30</p>
 </div>
 
 
@@ -190,15 +247,45 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="contenu" class="level1">
-<h1>Contenu</h1>
-</section>
-<section id="liste-des-requêtes" class="level1">
-<h1>Liste des requêtes</h1>
+<section id="contenu-du-module" class="level1">
+<h1>Contenu du module</h1>
 <ul>
-<li>sdfs</li>
-<li>sfdf</li>
+<li>Vérification de l’environnement R et du <a href="../dataset_mco.html">jeu PMSI MCO</a></li>
+<li>Premières requêtes en contexte PMSI MCO
+<ul>
+<li>Filtrer des lignes sur plusieurs critères</li>
+<li>Sélectionner des variables</li>
+<li>Modifier ou créer de nouvelles variables</li>
+<li>Caractériser une entité (rum, séjour, codage, um, service, thésaurus)<br>
+</li>
+<li>Constituer et manipuler des regroupements de lignes</li>
+<li>Calculer dans des regroupements<br>
+</li>
+<li>Trier</li>
+<li>Travailler avec plusieurs sources de données (rum,das,ccam,dmi)<br>
+</li>
+</ul></li>
+<li>Enchaîner des instructions</li>
 </ul>
+</section>
+<section id="exemples" class="level1">
+<h1>Exemples</h1>
+<p>Liste non exhaustive de requêtes PMSI codées dans ce module en code living :</p>
+<ul>
+<li>Récupération de l’activité d’un regroupement d’UM</li>
+<li>Calcul de nombre de RUM et de séjours par regroupement C, M, K, Z</li>
+<li>Codage du controle Qualité OVALIDE “1.Q.1.CC – Nombre de séjours avec confirmation de codage parmi les GHM concernés”</li>
+<li>Séjours d’une UM type SI ou REA sans IG2 codé ou avec IGS2 en dessous d’un seuil</li>
+<li>Filtrer une activité par rapport à des dates</li>
+<li>Séjours avec tous les codages représentés d’un protocole</li>
+<li>Repérage de passages dans un ou plusieurs UM</li>
+<li>Calcul de l’âge en années et journées</li>
+<li>Ne retenir que les &gt;+75 ans entrés par un service donné</li>
+</ul>
+</section>
+<section id="packages-et-fonctions" class="level1">
+<h1>Packages et fonctions</h1>
+<p><a href="../package_function_mco.html">Liste de packages et fonctions utilisés dans la formation Requêtes MCO</a></p>
 
 
 </section>
@@ -306,7 +393,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">Blog codé avec <a href="https://quarto.org/">Quarto</a></div>   
-    <div class="nav-footer-right">© Copyright 2022, DATAMIS</div>
+    <div class="nav-footer-right"><a href="about.html">Mentions légales</a> | © Copyright 2023 - DATAMIS</div>
   </div>
 </footer>
 
