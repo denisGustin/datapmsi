@@ -11,6 +11,7 @@ lang: fr
 🗓️ **vendredi 24 mars et vendredi 31 mars 2023**\
 ⏰ 09:00 - 17:00\
 🏨 En ligne  
+[Liste des requêtes MCO codées dans la formation](formations/pmsi_mco_requete_exemples.html)
 :::
 
 

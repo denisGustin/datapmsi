@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data PMSI - Formation Requêtes MCO</title>
+<title>Data PMSI - Formation Requêtes MCO - Exemples</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -119,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Formation Requêtes MCO</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Formation Requêtes MCO - Exemples</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -142,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../formations/pmsi_mco_requete.html" class="sidebar-item-text sidebar-link active">Requêtes MCO</a>
+  <a href="../formations/pmsi_mco_requete.html" class="sidebar-item-text sidebar-link">Requêtes MCO</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -221,18 +221,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Sur cette page</h2>
    
   <ul>
-  <li><a href="#programme-journée-1" id="toc-programme-journée-1" class="nav-link active" data-scroll-target="#programme-journée-1">Programme Journée 1</a></li>
-  <li><a href="#programme-journée-2" id="toc-programme-journée-2" class="nav-link" data-scroll-target="#programme-journée-2">Programme Journée 2</a></li>
-  <li><a href="#pré-requis" id="toc-pré-requis" class="nav-link" data-scroll-target="#pré-requis">Pré-requis</a>
+  <li><a href="#liste-des-requêtes-mco-codées-dans-la-formation" id="toc-liste-des-requêtes-mco-codées-dans-la-formation" class="nav-link active" data-scroll-target="#liste-des-requêtes-mco-codées-dans-la-formation">Liste des requêtes MCO codées dans la formation</a>
   <ul class="collapse">
-  <li><a href="#pré-requis-pmsi" id="toc-pré-requis-pmsi" class="nav-link" data-scroll-target="#pré-requis-pmsi">Pré-requis PMSI</a></li>
-  <li><a href="#pré-requis-r" id="toc-pré-requis-r" class="nav-link" data-scroll-target="#pré-requis-r">Pré-requis R</a></li>
+  <li><a href="#module-requêtes-pmsi-mco-de-base-1ere-partie" id="toc-module-requêtes-pmsi-mco-de-base-1ere-partie" class="nav-link" data-scroll-target="#module-requêtes-pmsi-mco-de-base-1ere-partie">Module Requêtes PMSI MCO de base (1ere partie)</a></li>
+  <li><a href="#module-spécificités-des-données-pmsi-mco" id="toc-module-spécificités-des-données-pmsi-mco" class="nav-link" data-scroll-target="#module-spécificités-des-données-pmsi-mco">Module Spécificités des données PMSI MCO</a></li>
+  <li><a href="#module-enrichissement-des-données-pmsi-mco" id="toc-module-enrichissement-des-données-pmsi-mco" class="nav-link" data-scroll-target="#module-enrichissement-des-données-pmsi-mco">Module Enrichissement des données PMSI MCO</a></li>
+  <li><a href="#module-scripts-pmsi-mco-1ere-partie" id="toc-module-scripts-pmsi-mco-1ere-partie" class="nav-link" data-scroll-target="#module-scripts-pmsi-mco-1ere-partie">Module Scripts PMSI MCO (1ere partie)</a></li>
+  <li><a href="#module-données-pmsi-mco-bien-rangés-tidy" id="toc-module-données-pmsi-mco-bien-rangés-tidy" class="nav-link" data-scroll-target="#module-données-pmsi-mco-bien-rangés-tidy">Module Données PMSI MCO “bien rangés” (tidy)</a></li>
+  <li><a href="#module-requêtes-pmsi-mco-de-base-2eme-partie" id="toc-module-requêtes-pmsi-mco-de-base-2eme-partie" class="nav-link" data-scroll-target="#module-requêtes-pmsi-mco-de-base-2eme-partie">Module Requêtes PMSI MCO de base (2eme partie)</a></li>
+  <li><a href="#module-produire-des-case-mix-pmsi-mco" id="toc-module-produire-des-case-mix-pmsi-mco" class="nav-link" data-scroll-target="#module-produire-des-case-mix-pmsi-mco">Module Produire des case-mix PMSI MCO</a></li>
+  <li><a href="#module-scripts-pmsi-mco-2eme-partie" id="toc-module-scripts-pmsi-mco-2eme-partie" class="nav-link" data-scroll-target="#module-scripts-pmsi-mco-2eme-partie">Module Scripts PMSI MCO (2eme partie)</a></li>
   </ul></li>
-  <li><a href="#sinscrire" id="toc-sinscrire" class="nav-link" data-scroll-target="#sinscrire">S’inscrire</a>
-  <ul class="collapse">
-  <li><a href="#tarif" id="toc-tarif" class="nav-link" data-scroll-target="#tarif">Tarif</a></li>
-  <li><a href="#inscription" id="toc-inscription" class="nav-link" data-scroll-target="#inscription">Inscription</a></li>
-  </ul></li>
+  <li><a href="#packages-et-fonctions" id="toc-packages-et-fonctions" class="nav-link" data-scroll-target="#packages-et-fonctions">Packages et fonctions</a></li>
   </ul>
 </nav>
     </div>
@@ -241,7 +241,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Formation Requêtes MCO</span></h1>
+<h1 class="title d-none d-lg-block"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Formation Requêtes MCO - Exemples</span></h1>
 </div>
 
 
@@ -266,141 +266,139 @@ Prochaines dates
 </div>
 <div class="callout-body-container callout-body">
 <p>Journée 1 : vendredi 24 mars 2023<br>
-Journée 2 : vendredi 31 mars 2023<br>
-<a href="pmsi_mco_requete_exemples.html">Liste des requêtes MCO codées dans la formation</a></p>
+Journée 2 : vendredi 31 mars 2023</p>
 </div>
 </div>
-<section id="programme-journée-1" class="level1">
-<h1>Programme Journée 1</h1>
-<table class="table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Horaires</th>
-<th style="text-align: left;">Modules</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">09:00 - 10:30</td>
-<td style="text-align: left;"><a href="pmsi_mco_requete_day1_module1.html">Requêtes PMSI MCO de base (1ere partie)</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">10:30 - 11:00</td>
-<td style="text-align: left;"><a href="../pause.html"><em>Pause - Echanges</em></a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">11:00 - 12:30</td>
-<td style="text-align: left;"><a href="pmsi_mco_requete_day1_module2.html">Spécificités des données PMSI MCO</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">12:30 - 13:30</td>
-<td style="text-align: left;"><em>Pause méridienne</em></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">13:30 - 15:00</td>
-<td style="text-align: left;"><a href="pmsi_mco_requete_day1_module3.html">Enrichissement des données PMSI MCO</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">15:00 - 15:30</td>
-<td style="text-align: left;"><a href="../pause.html"><em>Pause - Echanges</em></a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">15:30 - 17:00</td>
-<td style="text-align: left;"><a href="pmsi_mco_requete_day1_module4.html">Scripts PMSI MCO (1ere partie)</a></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="programme-journée-2" class="level1">
-<h1>Programme Journée 2</h1>
-<table class="table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Horaires</th>
-<th style="text-align: left;">Modules</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">09:00 - 10:30</td>
-<td style="text-align: left;"><a href="pmsi_mco_requete_day2_module1.html">Données PMSI MCO “bien rangés” (tidy)</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">10:30 - 11:00</td>
-<td style="text-align: left;"><a href="../pause.html"><em>Pause - Echanges</em></a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">11:00 - 12:30</td>
-<td style="text-align: left;"><a href="pmsi_mco_requete_day2_module2.html">Requêtes PMSI MCO de base (2eme partie)</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">12:30 - 13:30</td>
-<td style="text-align: left;"><em>Pause méridienne</em></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">13:30 - 15:00</td>
-<td style="text-align: left;"><a href="pmsi_mco_requete_day2_module3.html">Produire des case-mix PMSI MCO</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">15:00 - 15:30</td>
-<td style="text-align: left;"><a href="../pause.html"><em>Pause - Echanges</em></a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">15:30 - 17:00</td>
-<td style="text-align: left;"><a href="pmsi_mco_requete_day2_module4.html">Scripts PMSI MCO (2eme partie)</a></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="pré-requis" class="level1">
-<h1>Pré-requis</h1>
-<section id="pré-requis-pmsi" class="level2">
-<h2 class="anchored" data-anchor-id="pré-requis-pmsi">Pré-requis PMSI</h2>
-<p>La formation <strong>Requêtes MCO</strong> suppose une maîtrise professionnelle du PMSI MCO :</p>
+<section id="liste-des-requêtes-mco-codées-dans-la-formation" class="level1">
+<h1>Liste des requêtes MCO codées dans la formation</h1>
+<section id="module-requêtes-pmsi-mco-de-base-1ere-partie" class="level2">
+<h2 class="anchored" data-anchor-id="module-requêtes-pmsi-mco-de-base-1ere-partie">Module <a href="pmsi_mco_requete_day1_module1.html">Requêtes PMSI MCO de base (1ere partie)</a></h2>
 <ul>
-<li>règles (définitions, vocabulaire)</li>
-<li>structures de données (rss, rsa, fichcomp, ficium, anohosp/vidhosp, fichsup, …)</li>
-<li>référentiels (CIM-10, CCAM à usage PMSI, DMI, UCD en sus, …)</li>
-<li>documentations (guides méthodologiques, manuels de groupages, cahiers des charges, …)</li>
-<li>contrôles qualité (requêtes, OVALIDE, …)</li>
-<li>analyses (case mix, reporting, fouilles de données, …)</li>
+<li>Récupération de l’activité d’un regroupement d’UM</li>
+<li>Calcul du nombre de RUM et de séjours par regroupement C, M, K, Z</li>
+<li>Codage du controle Qualité OVALIDE “1.Q.1.CC – Nombre de séjours avec confirmation de codage parmi les GHM concernés”</li>
+<li>Séjours d’une UM type SI ou REA sans IG2 codé ou avec IGS2 en dessous d’un seuil</li>
+<li>Filtrer une activité par rapport à des dates</li>
+<li>Séjours avec tous les codages représentés d’un protocole</li>
+<li>Repérage de passages dans un ou plusieurs UM</li>
+<li>Calcul de l’âge en années et journées</li>
+<li>Ne retenir que les &gt;+75 ans entrés par un service donné</li>
 </ul>
-<p>Remarque : la pratique du codage n’est pas nécessaire, même si codé ou avoir déjà codé des dossiers est un plus pour appréhender les problématiques.</p>
 </section>
-<section id="pré-requis-r" class="level2">
-<h2 class="anchored" data-anchor-id="pré-requis-r">Pré-requis R</h2>
-<p><a href="../base_R.html">Explications détaillées</a></p>
+<section id="module-spécificités-des-données-pmsi-mco" class="level2">
+<h2 class="anchored" data-anchor-id="module-spécificités-des-données-pmsi-mco">Module <a href="pmsi_mco_requete_day1_module2.html">Spécificités des données PMSI MCO</a></h2>
+<ul>
+<li>Production des variables CMD, CMKZ, RGHM</li>
+<li>Identification activité avec DP en Z</li>
+<li>Production variables mois et année</li>
+<li>Extrema et moyenne IGS2 sur un périmètre</li>
+<li>Import fichier source txt ou JSON</li>
+<li>Export JSON en sortie de script</li>
+<li>Export csv et excel en sortie de script</li>
+</ul>
+</section>
+<section id="module-enrichissement-des-données-pmsi-mco" class="level2">
+<h2 class="anchored" data-anchor-id="module-enrichissement-des-données-pmsi-mco">Module <a href="pmsi_mco_requete_day1_module3.html">Enrichissement des données PMSI MCO</a></h2>
+<ul>
+<li>Rapatriement des libellés CIM-10 pour les DP, DR et DAS<br>
+</li>
+<li>Rapatriement des CMA<br>
+</li>
+<li>Rapatriement informations CCAM à partir du référentiel de la CCAM à usage PMSI<br>
+</li>
+<li>Enrichissement avec informations du FICIUM</li>
+<li>Rapatriement des GHS et informations liées via les rsa</li>
+<li>Rapatriement référentiel GHS</li>
+<li>Pour une racine de GHM, récupération de liste des codages de la base nationale à partir de tableaux <a href="https://www.scansante.fr/">ScanSante</a></li>
+<li>Enrichissement avec les libellés des mois<br>
+</li>
+<li>Thésaurus à partir des listes en -D et en -A du manuel de groupage MCO</li>
+</ul>
+</section>
+<section id="module-scripts-pmsi-mco-1ere-partie" class="level2">
+<h2 class="anchored" data-anchor-id="module-scripts-pmsi-mco-1ere-partie">Module <a href="pmsi_mco_requete_day1_module4.html">Scripts PMSI MCO (1ere partie)</a></h2>
+<ul>
+<li>Un script classique : construction de la table des codages CIM avec indication de la position de chaque codage</li>
+<li>Séjours avec au moins 1 codage CIM ou une famille de codages CIM, indépendamment de la position de codage</li>
+<li>Activité avec codage CCAM d’anesthésie seule</li>
+<li>Séjours longs selon plusieurs règles (seuil d’un nombre de journées, &gt; 2,5x DMS national, &gt; 2x DMS du GHM dans l’établissement)</li>
+<li>Pour une racine de GHM, liste des codages DAS de la base nationale non représentés dans l’établissement</li>
+<li>Liste des séjours T0, T1 et T2</li>
+<li>Dédoublonnage des codages par séjour</li>
+<li>File active à partir de l’anohosp ou du vidhosp</li>
+</ul>
+</section>
+<section id="module-données-pmsi-mco-bien-rangés-tidy" class="level2">
+<h2 class="anchored" data-anchor-id="module-données-pmsi-mco-bien-rangés-tidy">Module <a href="pmsi_mco_requete_day2_module1.html">Données PMSI MCO “bien rangés” (tidy)</a></h2>
+<ul>
+<li>Eclatement d’une activité par mois avec une colonne par mois</li>
+<li>Homogénéisation du type de données par colonne</li>
+<li>Création de colonnes par sévérité<br>
+</li>
+<li>Exemples de traitement classique en “accordéon” en PMSI MCO</li>
+</ul>
+</section>
+<section id="module-requêtes-pmsi-mco-de-base-2eme-partie" class="level2">
+<h2 class="anchored" data-anchor-id="module-requêtes-pmsi-mco-de-base-2eme-partie">Module <a href="pmsi_mco_requete_day2_module2.html">Requêtes PMSI MCO de base (2eme partie)</a></h2>
+<ul>
+<li>Séjours niveau n avec au moins 1 CMA niveau &gt; n</li>
+<li>Séjours avec une même famille de codage en DP/DR versus DAS</li>
+<li>Séjours multi-UM avec passage dans une certaine UM dans le dernier rum</li>
+<li>Codage post évênement intra-séjour<br>
+</li>
+<li>Extraction des journées sans codage CCAM</li>
+<li>Calcul du total des journées du séjour rattaché à chaque rum</li>
+<li>Proportion par rapport à la 1ere valeur d’un regroupement</li>
+<li>DMS associé à un codage CIM</li>
+<li>Calculer le nombre d’occurrences à venir d’un codage après une 1ere occurence de codage de ce codage</li>
+<li>Identification du ou des rum le(s) plus long(s) dans les séjours multi_rum</li>
+<li>Repérage de séquences journalières consécutives de codage CCAM<br>
+</li>
+<li>Séjours d’au moins 3 jours sans une certaine famille de DAS codé au moins 1 fois</li>
+</ul>
+</section>
+<section id="module-produire-des-case-mix-pmsi-mco" class="level2">
+<h2 class="anchored" data-anchor-id="module-produire-des-case-mix-pmsi-mco">Module <a href="pmsi_mco_requete_day2_module3.html">Produire des case-mix PMSI MCO</a></h2>
+<ul>
+<li>Tri d’un casemix en C,M,Z,K selon un ordre prédifini par le médecin DIM</li>
+<li>Casemix GHM par DMI</li>
+<li>Casemix d’activité par mois</li>
+<li>Forcer, pour un mois donné, la présence à 0 séjour d’un GHM représenté dans l’année mais non représenté ce mois donné</li>
+<li>Regrouper l’activité en dessous d’un seuil dans une catégorie “Autre”</li>
+<li>Casemix par UM et 6eme position (J,T,1,2,3,4)</li>
+<li>Casemix des DMS par codage selon leur position</li>
+<li>Case mix par mode d’entrée, provenance, mode de sortie, destination</li>
+<li>Calculs selon différentes définitions du nombre de journée en PMSI MCO</li>
+<li>Case mix des séjours en T (T0, T1 et T2)</li>
+<li>Fusionner plusieurs colonnes</li>
+<li>Ajouter une ligne de type “Total”</li>
+</ul>
+</section>
+<section id="module-scripts-pmsi-mco-2eme-partie" class="level2">
+<h2 class="anchored" data-anchor-id="module-scripts-pmsi-mco-2eme-partie">Module <a href="pmsi_mco_requete_day2_module4.html">Scripts PMSI MCO (2eme partie)</a></h2>
+<ul>
+<li>Tableau de comparaison pour une pathologie des DMS associées à chaque DAS avec les DMS ScanSanté pour cette pathologie</li>
+<li>Casemix selon thésaurus de codage issus de regroupement de listes de classification en -D</li>
+<li>Analyses via thésaurus maison<br>
+</li>
+<li>Repérage des séjours avec une durée de séjour plus proche de la DMS nationale d’un niveau de sévérité plus élevé<br>
+</li>
+<li>Analyses dérivées de tableaux OVALIDE recodés<br>
+</li>
+<li>Calcul valorisation T2A brute des séjours à partir de données rsa rapatriées<br>
+</li>
+<li>Valorisation T2A modulée par attribution de poids aux UM</li>
+</ul>
 </section>
 </section>
-<section id="sinscrire" class="level1">
-<h1>S’inscrire</h1>
-<section id="tarif" class="level2">
-<h2 class="anchored" data-anchor-id="tarif">Tarif</h2>
-<p>Le tarif est de 720 € (en exonération de TVA, dont 80€ de certification Qualiopi) par participant par journée.</p>
-</section>
-<section id="inscription" class="level2">
-<h2 class="anchored" data-anchor-id="inscription">Inscription</h2>
-<p><a href="https://www.lespmsi.com/formation_requetes_mco_mars_2023" target="_blank">Remplir le formulaire de pré-inscription</a></p>
-<p>A réception de votre pré-inscription <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, nous vous contacterons pour échanger avec vous, valider votre inscription et vous communiquer la convention de formation, les conditions générales de vente (CGV) et le règlement intérieur de la formation.</p>
-<p>La formation comprend de 3 à 10 participants.</p>
-<p>La formation est opérée par l’organisme de formation <a href="https://www.formatim.fr/" target="_blank">FormaTIM</a>, certifié Qualiopi.</p>
-<p><img src="logo_qualiopi.png" class="img-fluid"></p>
-<p>Le label QUALIOPI certifie la qualité des formations proposées et valide la prise en charge par les financeurs.</p>
-<p>La certification qualité a été délivrée à FormaTIM au titre de la catégorie d’action : ACTIONS DE FORMATION</p>
-<p>Nous signaler tout problème de handicap qui nécessiterait une adaptation lors des sessions.</p>
-<p>Règlement à l’issue de la formation.</p>
+<section id="packages-et-fonctions" class="level1">
+<h1>Packages et fonctions</h1>
+<p><a href="../package_function_mco.html">Liste de packages et fonctions utilisés dans la formation Requêtes MCO</a></p>
 
 
 </section>
-</section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notes de bas de page</h2>
-
-<ol>
-<li id="fn1"><p>une pré-inscription est une demande d’information qui n’engage contractuellement ni vous ni votre établissement.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -23,7 +23,7 @@ lang: fr
 Liste non exhaustive de requêtes PMSI codées dans ce module en code living :  
 
 -   Récupération de l'activité d'un regroupement d'UM
--   Calcul de nombre de RUM et de séjours par regroupement C, M, K, Z
+-   Calcul du nombre de RUM et de séjours par regroupement C, M, K, Z
 -   Codage du controle Qualité OVALIDE "1.Q.1.CC – Nombre de séjours avec confirmation de codage parmi les GHM concernés"
 -   Séjours d'une UM type SI ou REA sans IG2 codé ou avec IGS2 en dessous d'un seuil
 -   Filtrer une activité par rapport à des dates
