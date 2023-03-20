@@ -5,10 +5,6 @@ lang: fr
 
 ## Requêtes MCO  
 
-Journée 1 : [vendredi 24 mars 2023](formations/pmsi_mco_requete.qmd)  
-Journée 2 : [vendredi 31 mars 2023](formations/pmsi_mco_requete.qmd)
-
-## Requêtes MCO [avancé]
-
-A venir   
+Journée 1 : [vendredi 09 juin 2023](formations/pmsi_mco_requete.qmd)  
+Journée 2 : [vendredi 16 juin 2023](formations/pmsi_mco_requete.qmd)
 

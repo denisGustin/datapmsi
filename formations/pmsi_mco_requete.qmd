@@ -5,8 +5,8 @@ lang: fr
 
 ::: {.callout-note}
 ## Prochaines dates
-Journée 1 : vendredi 24 mars 2023  
-Journée 2 : vendredi 31 mars 2023  
+Journée 1 : vendredi 09 juin 2023  
+Journée 2 : vendredi 16 juin 2023  
 [Liste des requêtes MCO codées dans la formation](pmsi_mco_requete_exemples.html)
 :::
 
