@@ -26,7 +26,7 @@ Vendredi 13 octobre 2023
 -  Connaître et prendre en main l’environnement R et R Studio utile pour le PMSI  
 -  Connaître et manipuler les structures de données sous R utilisées en analyse PMSI  
 -  Découvrir, comprendre et maîtriser les packages R pour le PMSI (installer, charger, mettre à jour, exploiter)  
--  Réaliser des manipulations élémentaires du PMSI (filtrer, sélectionner, trier)  
+-  Réaliser des manipulations élémentaires du PMSI (filtrer, sélectionner, créer et modifier, trier)  
 
 # Pré-requis  
 

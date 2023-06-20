@@ -7,10 +7,11 @@ lang: fr
 
 ::: {.callout-note}
 ## Prochaines formations
+[Le PMSI avec R](formations/pmsi_initiation.qmd)  
+**vendredi 13 octobre 2023** - 9:00 - 17:00 - En ligne  
 
-[Requêtes MCO sur 2 journées](formations/pmsi_mco_requete.qmd)\
-**vendredi 17 novembre et vendredi 24 novembre 2023**\
-9:00 - 17:00 - En ligne 
+[Requêtes MCO](formations/pmsi_mco_requete.qmd)  
+**vendredi 17 novembre** et **vendredi 24 novembre 2023** - 9:00 - 17:00 - En ligne 
 :::
 
 
