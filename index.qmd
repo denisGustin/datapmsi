@@ -6,12 +6,11 @@ lang: fr
 <span style='font-size: 1.75rem; font-weight: 400;'>Comment devenir autonome dans l'analyse PMSI de ses établissements</span>
 
 ::: {.callout-note}
-## Prochaines formations  
-✍️ [Requêtes MCO sur 2 journées](formations/pmsi_mco_requete.qmd)\
-🗓️ **vendredi 09 juin et vendredi 16 juin 2023**\
-⏰ 09:00 - 17:00\
-🏨 En ligne  
-[Liste des requêtes MCO codées dans la formation](formations/pmsi_mco_requete_exemples.html)
+## Prochaines formations
+
+[Requêtes MCO sur 2 journées](formations/pmsi_mco_requete.qmd)\
+**vendredi 17 novembre et vendredi 24 novembre 2023**\
+9:00 - 17:00 - En ligne 
 :::
 
 

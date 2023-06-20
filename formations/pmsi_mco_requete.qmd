@@ -5,8 +5,8 @@ lang: fr
 
 ::: {.callout-note}
 ## Prochaines dates
-Journée 1 : vendredi 09 juin 2023  
-Journée 2 : vendredi 16 juin 2023  
+Journée 1 : vendredi 17 novembre 2023  
+Journée 2 : vendredi 24 novembre 2023  
 [Liste des requêtes MCO codées dans la formation](pmsi_mco_requete_exemples.html)
 :::
 
@@ -34,6 +34,13 @@ Journée 2 : vendredi 16 juin 2023
 | 13:30 - 15:00 | [Produire des case-mix PMSI MCO](pmsi_mco_requete_day2_module3.html)                                |
 | 15:00 - 15:30 | [*Pause - Echanges*](../pause.qmd)                                     |
 | 15:30 - 17:00 | [Scripts PMSI MCO (2eme partie)](pmsi_mco_requete_day2_module4.html)|
+
+# Objectifs  
+
+-  Concevoir et développer des requêtes PMSI MCO avec R   
+-  Manipuler et enrichir des données PMSI en R  
+-  Construire des casemix PMSI MCO avec R  
+-  Développer des scripts PMSI MCO en R  
 
 # Pré-requis  
 

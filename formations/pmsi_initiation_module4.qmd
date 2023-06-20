@@ -1,0 +1,17 @@
+---
+title: "<span style='font-family: Boska; font-size: 2.75rem; font-weight: 800;'>Manipulations élémentaires du PMSI avec R</span>"
+subtitle: "Module 4 de la formation Le PMSI avec R<br>15:30-17:00"
+lang: fr
+---
+
+# Contenu du module  
+
+-   Méthodologie pour coder une requête PMSI en R  
+-   Comprendre et manipuler les %>% (pipes)  
+-   Requêtes PMSI élémentaires  
+    -   Filtrer  
+    -   Sélectionner des variables
+    -   Modifier ou créer une nouvelle variable
+    -   Trier
+-   Exporter le résultat d'une requête  
+-   Bonnes pratiques pour commenter et maintenir des codes R  

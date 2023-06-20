@@ -1,0 +1,14 @@
+---
+title: "<span style='font-family: Boska; font-size: 2.75rem; font-weight: 800;'>Structures de données R et PMSI</span>"
+subtitle: "Module 2 de la formation Le PMSI avec R<br>11:00-12:30"
+lang: fr
+---
+
+# Contenu du module  
+
+-   Les types de variables en R  
+-   Les structures de données utiles en PMSI  
+    -   Vecteur  
+    -   Data frame et tibble  
+    -   Liste
+-   Manipuler les structures de données R avec des mini-fake jeux de données PMSI  

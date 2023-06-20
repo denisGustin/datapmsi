@@ -27,32 +27,16 @@ website:
   sidebar: 
     style: docked
     contents: 
+      - href: formations/pmsi_initiation.qmd
+        text: "Le PMSI avec R"
       - section: "Formations MCO"
         contents: 
           - href: formations/pmsi_mco_requete.qmd
             text: "Requêtes MCO"
-          - href: formations/pmsi_mco_requete_avance.qmd
-            text: "Requêtes MCO [Avancé]"
-          - href: formations/pmsi_mco_tableau.qmd
-            text: "Tableaux MCO"
-          - href: formations/pmsi_mco_plot.qmd
-            text: "Graphiques MCO"
       - section: "Formations SSR"
         contents:
           - href: formations/pmsi_ssr_requete.qmd
             text: "Requêtes SSR"
-          - href: formations/pmsi_ssr_tableau.qmd
-            text: "Tableaux SSR"
-          - href: formations/pmsi_ssr_plot.qmd
-            text: "Graphiques SSR"
-      - section: "Formations PSY"
-        contents:
-          - href: formations/pmsi_psy_requete.qmd
-            text: "Requêtes PSY"
-          - href: formations/pmsi_psy_tableau.qmd
-            text: "Tableaux PSY"
-          - href: formations/pmsi_psy_plot.qmd
-            text: "Graphiques PSY"
   page-footer:
     left: "Blog codé avec [Quarto](https://quarto.org/)"
     right: "[Mentions légales](../about.html) | &copy; Copyright 2023 - DATAMIS"

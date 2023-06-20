@@ -1,0 +1,99 @@
+---
+title: "<span style='font-family: Boska; font-size: 2.75rem; font-weight: 800;'>Formation Le PMSI avec R</span>"
+lang: fr
+---
+
+::: {.callout-note}
+## Prochaine date
+Vendredi 13 octobre 2023  
+:::
+
+
+# Programme
+
+| Horaires      | Modules                                               |
+|:--------------|:------------------------------------------------------|
+| 09:00 - 10:30 | [L'environnement R et R Studio pour le PMSI](pmsi_initiation_module1.html) |
+| 10:30 - 11:00 | [*Pause - Echanges*](../pause.qmd)                                        |
+| 11:00 - 12:30 | [Structures de données R et PMSI](pmsi_initiation_module2.html)  |
+| 12:30 - 13:30 | *Pause méridienne*                                         |
+| 13:30 - 15:00 | [Les packages R pour le PMSI](pmsi_initiation_module3.html)                                |
+| 15:00 - 15:30 | [*Pause - Echanges*](../pause.qmd)                                |
+| 15:30 - 17:00 | [Manipulations élémentaires du PMSI avec R](pmsi_initiation_module4.html)|
+
+# Objectifs  
+
+-  Connaître et prendre en main l’environnement R et R Studio utile pour le PMSI  
+-  Connaître et manipuler les structures de données sous R utilisées en analyse PMSI  
+-  Découvrir, comprendre et maîtriser les packages R pour le PMSI (installer, charger, mettre à jour, exploiter)  
+-  Réaliser des manipulations élémentaires du PMSI (filtrer, sélectionner, trier)  
+
+# Pré-requis  
+
+## Pré-requis PMSI
+
+La formation **Le PMSI avec R** suppose une maîtrise professionnelle des PMSI :
+
+-  règles (définitions, vocabulaire)
+-  structures de données (rss, rsa, rhs, rps, fichcomp, ficium, anohosp/vidhosp, fichsup, …)
+-  référentiels (CIM-10, CCAM à usage PMSI, DMI, UCD en sus, CSARR, …)
+-  documentations (guides méthodologiques, manuels de groupages, cahiers des charges, …)
+-  contrôles qualité (requêtes, OVALIDE, …)
+-  analyses (case mix, reporting, fouilles de données, …)  
+
+Remarque : la pratique du codage n’est pas nécessaire, même si codé ou avoir déjà codé des dossiers est un plus pour appréhender les problématiques.
+
+## Pré-requis R
+
+## 1ere étape : Installer R  
+
+R s'installe sous Windows comme un simple exécutable (comme GENRSA ou GENRHA par exemple).  
+[Télécharger R dans sa dernière version](https://cloud.r-project.org/bin/windows/base/){target="_blank"}  
+Accepter les options par défaut jusqu’à la fin de l’installation.  
+
+Nous recommandons une version de R >= à la version 4.1.0 de mai 2021.  
+[Historique des versions de R](https://cran.r-project.org/bin/windows/base/old/){target="_blank"}  
+
+## 2eme étape : Installer R Studio  
+
+**Après** avoir installé R, nous installons R Studio qui est l'environnement de développement de référence pour R.  
+Plus exactement, nous allons télécharger la version open source de R Studio, appelée "R Studio Desktop".
+
+R Studio Desktop s'installe comme un exécutable.  
+[Télécharger R Studio Desktop](https://posit.co/download/rstudio-desktop/){target="_blank"}  
+
+Nous recommandons une version de R Studio Desktop >= à la version 12.07.02  
+[Historique des versions de R Studio Desktop](https://www.rstudio.com/products/rstudio/older-versions/){target="_blank"}  
+
+A ce stade, vous disposez d'une icône R Studio sur votre bureau pour ouvrir R Studio.  
+[Tuto avec copies écrans pour installer R et R Studio](http://pmsidansr.senis.org/2022/06/15/installation-r-rstudio/){target="_blank"}  
+[Tuto pour découvrir R Studio](https://openclassrooms.com/fr/courses/4525256-initiez-vous-au-langage-r-pour-analyser-vos-donnees/6250851-prenez-en-main-r-et-r-studio){target="_blank"}  
+[Autre tuto](https://larmarange.github.io/analyse-R/premier-contact.html){target="_blank"}
+
+# S'inscrire
+
+## Tarif  
+
+Le tarif est de 720 € (en exonération de TVA, dont 80€ de certification Qualiopi) par participant pour la journée.  
+
+## Inscription
+
+[Remplir le formulaire de pré-inscription](https://www.lespmsi.com/formation_pmsi_initiation_r){target="_blank"}  
+
+A réception de votre pré-inscription [^1], nous vous contacterons pour échanger avec vous, valider votre inscription et vous communiquer la convention de formation, les conditions générales de vente (CGV) et le règlement intérieur de la formation.  
+
+La formation comprend de 3 à 10 participants.  
+
+La formation est opérée par l'organisme de formation [FormaTIM](https://www.formatim.fr/){target="_blank"}, certifié Qualiopi.  
+
+![](logo_qualiopi.png)
+
+Le label QUALIOPI certifie la qualité des formations proposées et valide la prise en charge par les financeurs.  
+
+La certification qualité a été délivrée à FormaTIM au titre de la catégorie d’action : ACTIONS DE FORMATION  
+
+Nous signaler tout problème de handicap qui nécessiterait une adaptation lors des sessions.  
+
+Règlement à l'issue de la formation.  
+
+[^1]: une pré-inscription est une demande d'information qui n'engage contractuellement ni vous ni votre établissement.  
