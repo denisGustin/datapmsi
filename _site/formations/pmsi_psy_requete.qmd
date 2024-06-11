@@ -1,7 +1,0 @@
----
-title: "FORMATION DATA PMSI : Requêtes SSR"
-lang: fr
----
-
-## A venir
-

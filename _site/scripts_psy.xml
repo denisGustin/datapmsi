@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Data PMSI</title>
+<link>https://www.datapmsi.com/scripts_psy.html</link>
+<atom:link href="https://www.datapmsi.com/scripts_psy.xml" rel="self" type="application/rss+xml"/>
+<description>Codes et formations R pour les PMSI MCO, SMR, PSY et HAD</description>
+<generator>quarto-1.4.551</generator>
+<lastBuildDate>Mon, 10 Jun 2024 22:00:00 GMT</lastBuildDate>
+<item>
+  <title></title>
+  <dc:creator>denis Gustin</dc:creator>
+  <link>https://www.datapmsi.com/posts/psy/script_psy_episode_soin_continu/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Pour la définition des épisodes de soin continu en hospitalisation complète, voir <a href="https://www.scansante.fr/sites/default/files/content/376/notice_rme_psy_hospitalisations_longues_en_psychiatrie.pdf" target="_blank">ici</a></p>
+<p>Dans une première étape, sur la base des RPS de temps complet, on repère et comptabilise par IPP, les épisodes de soin continu.</p>
+<p>Dans une 2eme étape, on passe en IPP et on calcule le nombre de séjours de l’IPP.</p>
+<p>Au final, on a un tibble par IPP avec, pour chaque IPP, le nombre de séjours temps complet et le nombre d’épisodes soin continu.</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"></span>
+<span id="cb1-3">rps_episode_soin_continu <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> psy<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>rps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>rps <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-4">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(forme_activite,ipp,no_sejour,date_debut_sequence,date_fin_sequence,nb_jours_presence) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-5">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(forme_activite <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"01"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"01D"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"01S"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"01P"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"02"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"03"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"04"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"05"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"06"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"07"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-6">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(ipp) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-7">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(date_debut_sequence, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.by_group =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">same_episode_soin_continu_ipp =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.integer</span>(date_debut_sequence<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lag</span>(date_fin_sequence, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">default =</span> date_debut_sequence[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>])) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L,</span>
+<span id="cb1-9">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cumsum_episode_soin_continu_ipp =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cumsum</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span>same_episode_soin_continu_ipp)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L,</span>
+<span id="cb1-10">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nb_episode_soin_continu_ipp =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">max</span>(cumsum_episode_soin_continu_ipp)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-11">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ungroup</span>()</span>
+<span id="cb1-12">rps_episode_soin_continu</span>
+<span id="cb1-13"></span>
+<span id="cb1-14">ipp_episode_soin_continu <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> rps_episode_soin_continu <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-15">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">distinct</span>(ipp,no_sejour,nb_episode_soin_continu_ipp) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-16">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.by =</span> ipp, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nb_sejour_ipp =</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>()) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-17">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">distinct</span>(ipp,nb_sejour_ipp,nb_episode_soin_continu_ipp)</span>
+<span id="cb1-18">ipp_episode_soin_continu</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level2">
+<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Ligne 7 : l’argument <code>.by_group = TRUE</code> dans le <code>dplyr::arrange()</code> permet de trier au sens d’un regroupement.</p>
+<p>Ligne 9 : le +1L dans le cumsum() est là pour faire démarrer le comptage des épisodes de soin continu à 1 et non à 0</p>
+<p>Pour aller + loin :<br>
+Repérage concomitant des épisodes de soin concentré (séquences séparées de 0 à 7 jours dans un même épisode)<br>
+Attribution d’un code aux épisodes de soin continu</p>
+<p>PMSISoft PSY Standard : écran <code>Séjours &gt; Base des séjours</code>, affichage du nombre d’épisodes de soin continu et du nombre d’épisodes de soin concentré au dessus du tableau de résultats.</p>
+<p>PMSISoft PSY Professionnel : écran <code>Séjours &gt; Base des séjours</code>, calcul, pour chaque séjour, des variables <code>ordre_episode_soin_continu_ipp</code>, <code>nb_episode_soin_continu_ipp</code>, <code>ordre_episode_soin_concentre_ipp</code>et <code>nb_episode_soin_concentre_ipp</code></p>
+
+
+</section>
+
+ ]]></description>
+  <category>PSY</category>
+  <category>IPP</category>
+  <guid>https://www.datapmsi.com/posts/psy/script_psy_episode_soin_continu/</guid>
+  <pubDate>Mon, 10 Jun 2024 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>IPP avec plusieurs actes de Réunion le même jour</title>
+  <dc:creator>denis Gustin</dc:creator>
+  <link>https://www.datapmsi.com/posts/psy/script_psy_nb_jp_multiple_reunion_same_ipp/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Pour chaque configuration (ipp,date_acte), on calcule le nombre d’acte de Réunion, puis on ne retient que les configurations avec au moins 2 actes de Réunion.</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"></span>
+<span id="cb1-3">same_ipp_date_acte <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> psy<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>raa<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>raa <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-4">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(ipp,nature_acte,date_acte) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-5">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.by =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(ipp,date_acte,nature_acte),</span>
+<span id="cb1-6">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sum_same_ipp_date_acte_nature_acte_R =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(nature_acte <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"R"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-7">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(sum_same_ipp_date_acte_nature_acte_R <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>L) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">distinct</span>()</span>
+<span id="cb1-9">same_ipp_date_acte</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level2">
+<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Voir le contrôle Qualité OVALIDE [1.Q.11.RIPP] : Nombre de journées avec plusieurs actes de réunions pour un même IPP”.<br>
+On améliore ici en produisant la variable <code>sum_same_ipp_date_acte_nature_acte_R</code> qui est le nombre d’actes de Réunion</p>
+<p>PMSISoft PSY Standard : écran <code>Requêtes PSY &gt; Requêtes RAA</code>, requête <code>Plusieurs actes de réunions pour un même IPP et une même date [1.Q.11.RIPP]</code></p>
+
+
+</section>
+
+ ]]></description>
+  <category>PSY</category>
+  <category>RAA</category>
+  <guid>https://www.datapmsi.com/posts/psy/script_psy_nb_jp_multiple_reunion_same_ipp/</guid>
+  <pubDate>Sun, 09 Jun 2024 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Séjours temps complet avec entrée et sortie le même jour</title>
+  <dc:creator>denis Gustin</dc:creator>
+  <link>https://www.datapmsi.com/posts/psy/script_psy_sejour_temps_complet_entree_sortie_same_sejour/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>On sélectionne l’activité RPS en temps complet, puis les RPS avec date_entree_sejour == date_sortie_sejour, puis on ne retient qu’une ligne par séjour.</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"></span>
+<span id="cb1-3">sejour_selected <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> psy<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>rps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>rps <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-4">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(no_sejour,ipp,forme_activite,nb_jours_presence,date_entree_sejour,date_sortie_sejour) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-5">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(forme_activite <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'01'</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'01D'</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'01S'</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'01P'</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'02'</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'03'</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'04'</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'05'</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'06'</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'07'</span>),</span>
+<span id="cb1-6">                  date_entree_sejour <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> date_sortie_sejour) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-7">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">distinct</span>(no_sejour,ipp,date_entree_sejour,date_sortie_sejour)</span>
+<span id="cb1-8">sejour_selected</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level2">
+<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Ligne 5 : le vecteur <code>c('01','01D','01S','01P','02','03','04','05','06','07')</code> correspond aux formes d’activité temps complet</p>
+<p>Ligne 7 : on ne sélectionne que des variables liées à un séjour</p>
+<p>PMSISoft PSY Professionnel : écran <code>Séjours &gt; Base des séjours</code>, filtrage de périmètre <code>Forme d'activité == codes temps_complet</code> et filtrage de variable <code>nb_jp_sejour Egal à 0</code></p>
+
+
+</section>
+
+ ]]></description>
+  <category>PSY</category>
+  <category>RPS</category>
+  <guid>https://www.datapmsi.com/posts/psy/script_psy_sejour_temps_complet_entree_sortie_same_sejour/</guid>
+  <pubDate>Sat, 08 Jun 2024 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Casemix basique EDGARX</title>
+  <dc:creator>denis Gustin</dc:creator>
+  <link>https://www.datapmsi.com/posts/psy/script_psy_casemix_EDGARX/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Pour chaque nature d’acte EDGARX du jeu de données, calcul du nombre d’actes, du nombre d’IPP uniques, du nombre de categories professionnelles d’intervenant différentes et du % en nombre d’actes.</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"></span>
+<span id="cb1-3">raa <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> psy<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>raa<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>raa</span>
+<span id="cb1-4"></span>
+<span id="cb1-5">casemix_edgarx <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> raa <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-6">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(ipp,nature_acte,categorie_professionnelle_intervenant) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-7">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(nature_acte) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nb_acte =</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>(),</span>
+<span id="cb1-9">                     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nb_ipp =</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n_distinct</span>(ipp),</span>
+<span id="cb1-10">                     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nb_categorie_professionnelle_intervenant =</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n_distinct</span>(categorie_professionnelle_intervenant)</span>
+<span id="cb1-11">                     ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-12">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(nb_acte)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-13">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">percent_acte =</span> nb_acte<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(nb_acte), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.after =</span> nb_acte)</span>
+<span id="cb1-14">casemix_edgarx</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level2">
+<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Ligne 12 : on trie sur le nombre descendant de <code>nb_acte</code></p>
+<p>Ligne 13 : avec l’argument <code>.after</code>, on positionne directement la variable <code>percent_acte</code> calculée après <code>nb_acte</code></p>
+<p>PMSISoft PSY Standard : casemix disponible dans l’écran <code>Actes ambulatoires &gt; Casemix EDGARX &gt; Casemix EDGARX</code></p>
+
+
+</section>
+
+ ]]></description>
+  <category>PSY</category>
+  <category>RAA</category>
+  <category>EDGARX</category>
+  <guid>https://www.datapmsi.com/posts/psy/script_psy_casemix_EDGARX/</guid>
+  <pubDate>Fri, 07 Jun 2024 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Rapatriement libellé CIM-10 du DP des RPS</title>
+  <dc:creator>denis Gustin</dc:creator>
+  <link>https://www.datapmsi.com/posts/psy/script_psy_rapatriement_libelle_dp_rps/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Script très simple et très classique pour enrichir les données PMSI via le rapatriement des libellés, ici le libellé CIM-10 du DP de chaque RPS du jeu de données.</p>
+<p>Documentation du référentiel <a href="https://denisgustin.github.io/refpmsi/articles/cim.html#cim-libell%C3%A9" target="_blank">cim_libelle</a></p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(refpmsi)</span>
+<span id="cb1-3"></span>
+<span id="cb1-4">cim_libelle <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> refpmsi<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">refpmsi</span>(cim_libelle)</span>
+<span id="cb1-5"></span>
+<span id="cb1-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># everything() dans le select() est une façon de sélectionner toutes les variables natives du rps, dont la variable dp </span></span>
+<span id="cb1-7">rps_extended <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> psy<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>rps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>rps <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">everything</span>()) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-9">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(cim_libelle <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(cim_code, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dp_libelle =</span> cim_libelle), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">join_by</span>(dp <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> cim_code))</span>
+<span id="cb1-10">rps_extended</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level2">
+<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Ligne 8 : <code>everything()</code> est pour <code>tidyselect::everything()</code> sachant que le package <code>tidyselect::</code> est chargé indirectement via le <code>dplyr</code></p>
+<p>Ligne 9 : on profite du <code>dplyr::select()</code> pour renommer <code>cim_libelle</code> en <code>dp_libelle</code> plus cohérent</p>
+<p>Ligne 9 : le <code>dplyr::left_join()</code> ajoute <code>dp_libelle</code> en dernière position</p>
+<p>PMSISoft PSY Professionnel : <code>dp_libelle</code> est dans liste des variables de <code>psy$rps$rps</code></p>
+
+
+</section>
+
+ ]]></description>
+  <category>PSY</category>
+  <category>RPS</category>
+  <category>CIM</category>
+  <guid>https://www.datapmsi.com/posts/psy/script_psy_rapatriement_libelle_dp_rps/</guid>
+  <pubDate>Thu, 06 Jun 2024 22:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
