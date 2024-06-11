@@ -260,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Après avoir calculé, par séjour, les variables <code>date_entree_sejour</code>et <code>date_sortie_sejour</code>, on calcule <code>nb_jp_sejour</code></p>
+<p>Après avoir calculé, par séjour, les variables <code>date_entree_sejour</code> et <code>date_sortie_sejour</code>, on calcule <code>nb_jp_sejour</code></p>
 <p>On en profite pour calculer aussi le nombre de RUM par séjour <code>nb_rum_sejour</code></p>
 </section>
 <section id="code" class="level2">
@@ -281,7 +281,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>PMSISoft MCO Standard : écran <code>Séjours &gt; Base des séjours</code></p>
+<p>Ligne 7 : on force en integer le calcul de la différence de dates qui sinon serait une différence en journées, peu pratique à manipuler</p>
+<p>PMSISoft MCO Standard : voir écran <code>Séjours &gt; Base des séjours</code></p>
+<p>PMSISoft MCO professionnel : variable <code>nb_jp_sejour</code> et <code>nb_rum_sejour</code> présents dans <code>mco</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
 </section>

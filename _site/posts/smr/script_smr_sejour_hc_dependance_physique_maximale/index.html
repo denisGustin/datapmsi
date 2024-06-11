@@ -163,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><b>Dépendance physique maximales des séjours HC</b></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><b>Dépendance physique maximale des séjours HC</b></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -226,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><b>Dépendance physique maximales des séjours HC</b></h1>
+<h1 class="title"><b>Dépendance physique maximale des séjours HC</b></h1>
   <div class="quarto-categories">
     <div class="quarto-category">SMR</div>
     <div class="quarto-category">Dépendance</div>
@@ -261,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>On va calculer la dépendance physique de chaque RHS, puis, par séjour HC, on calcule la dépendance physique maximale parmi le ou les RHS du séjour</p>
+<p>On calcule la dépendance physique de chaque RHS, puis, par séjour HC, on calcule la dépendance physique maximale parmi le ou les RHS du séjour</p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
@@ -285,8 +285,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
 <p>Ligne 7-8 : <code>rowSums()</code> pour permettre un calcul ligne à ligne</p>
 <p>Démarche identique pour calculer la dépendance cognitive maximale d’un séjour</p>
-<p>PMSISoft SMR Standard : information calculée et affichée dans <code>RHS &gt; Base des RHS &gt; Détail RHS &gt; Dépendance</code></p>
-<p>PMSISoft SMR Professionnel : écran <code>Séjours &gt; Séjours et dépendance</code></p>
+<p>PMSISoft SMR Standard : information calculée et affichée dans l’écran <code>RHS &gt; Base des RHS &gt; Détail RHS &gt; Dépendance</code></p>
+<p>PMSISoft SMR Professionnel : voir aussi écran <code>Séjours &gt; Séjours et dépendance</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
 </section>

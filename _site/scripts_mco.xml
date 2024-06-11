@@ -214,6 +214,7 @@ Calcul de l’écart à la moyenne en nb_jp avec nb_jp_theorique_ghm<br>
 Rapatriemeent libellé des GHM<br>
 Etc …</p>
 <p>PMSISoft MCO Professionnel : IPDMS calculée pour tous les casemix en CMD, sous-CMD, RGHM, GHM, Sévérité, DA, GA, GP. <code>ipdms_ghm</code>dans <code>mco</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
 </section>
@@ -362,7 +363,7 @@ font-style: inherit;">sum</span>(nb_sejour_severite))</span>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
 <p>Ligne 8 : on ne retient que des variables liées au séjour pour le <code>dplyr::distinct()</code></p>
-<p>PMSISoft MCO Standard : écran <code>Séjours &gt; Séjours et classification</code></p>
+<p>PMSISoft MCO Standard : voir écran <code>Séjours &gt; Séjours et classification</code></p>
 <p>PMSISoft MCO Professionnel : les 2 variables <code>nb_jp_rum</code> et <code>nb_jp_sejour</code> sont dans <code>mco</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
@@ -469,8 +470,9 @@ font-style: inherit;">$</span>supplements_rea_t2a)</span>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>PMSISoft MCO Standard : écran <code>Recettes T2A MCO &gt; Suppléments</code> calcule et présente casemix des valorisations des suppléments</p>
+<p>PMSISoft MCO Standard : voir écran <code>Recettes T2A MCO &gt; Suppléments</code> qui calcule et présente le casemix des valorisations des suppléments</p>
 <p>PMSISoft MCO Professionnel : <code>supplements_rea_t2a</code> déjà calculé dans <code>mco$rsa$rsa_t2a</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
 </section>
@@ -537,6 +539,7 @@ font-style: inherit;">is.na</span>(extension_documentaire_ccam))</span>
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
 <p>PMSISoft MCO Standard : la clé (nas, no_rum) est incluse par défaut dans <code>mco$rum$ccam</code></p>
 <p>PMSISoft MCO Professionnel : écran <code>Codage CCAM &gt; Base des actes CCAM</code> et filtrage de variables <code>activite_ccam Egal à 4 ET extension_documentaire_ccam Est vide</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
 </section>
@@ -558,7 +561,7 @@ font-style: inherit;">is.na</span>(extension_documentaire_ccam))</span>
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Après avoir calculé, par séjour, les variables <code>date_entree_sejour</code>et <code>date_sortie_sejour</code>, on calcule <code>nb_jp_sejour</code></p>
+<p>Après avoir calculé, par séjour, les variables <code>date_entree_sejour</code> et <code>date_sortie_sejour</code>, on calcule <code>nb_jp_sejour</code></p>
 <p>On en profite pour calculer aussi le nombre de RUM par séjour <code>nb_rum_sejour</code></p>
 </section>
 <section id="code" class="level2">
@@ -631,7 +634,10 @@ font-style: inherit;">distinct</span>(nas,date_entree_sejour,date_sortie_sejour,
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>PMSISoft MCO Standard : écran <code>Séjours &gt; Base des séjours</code></p>
+<p>Ligne 7 : on force en integer le calcul de la différence de dates qui sinon serait une différence en journées, peu pratique à manipuler</p>
+<p>PMSISoft MCO Standard : voir écran <code>Séjours &gt; Base des séjours</code></p>
+<p>PMSISoft MCO professionnel : variable <code>nb_jp_sejour</code> et <code>nb_rum_sejour</code> présents dans <code>mco</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
 </section>

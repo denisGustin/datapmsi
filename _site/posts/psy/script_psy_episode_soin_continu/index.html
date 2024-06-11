@@ -163,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><b></b></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><b>Episodes de soin continu par IPP</b></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -226,10 +226,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><b></b></h1>
+<h1 class="title"><b>Episodes de soin continu par IPP</b></h1>
   <div class="quarto-categories">
     <div class="quarto-category">PSY</div>
-    <div class="quarto-category">RPS</div>
+    <div class="quarto-category">IPP</div>
   </div>
   </div>
 
@@ -291,13 +291,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 7 : l’argument <code>.by_group = TRUE</code> dans le <code>dplyr::arrange()</code> permet de trier au sens d’un regroupement.</p>
-<p>Ligne 9 : le +1L dans le cumsum() est là pour faire démarrer le comptage des épisodes de soin continu à 1 et non à 0</p>
+<p>Ligne 7 : l’argument <code>.by_group = TRUE</code> dans le <code>dplyr::arrange()</code> permet de trier au sein d’un regroupement.</p>
+<p>Ligne 9 : le +1L est là pour faire démarrer le comptage des épisodes de soin continu à 1 et non à 0</p>
 <p>Pour aller + loin :<br>
 Repérage concomitant des épisodes de soin concentré (séquences séparées de 0 à 7 jours dans un même épisode)<br>
 Attribution d’un code aux épisodes de soin continu</p>
-<p>PMSISoft PSY Standard : écran <code>Séjours &gt; Base des séjours</code>, affichage du nombre d’épisodes de soin continu et du nombre d’épisodes de soin concentré au dessus du tableau de résultats.</p>
-<p>PMSISoft PSY Professionnel : écran <code>Séjours &gt; Base des séjours</code>, calcul, pour chaque séjour, des variables <code>ordre_episode_soin_continu_ipp</code>, <code>nb_episode_soin_continu_ipp</code>, <code>ordre_episode_soin_concentre_ipp</code>et <code>nb_episode_soin_concentre_ipp</code></p>
+<p>PMSISoft PSY Standard :voir écran <code>Séjours &gt; Base des séjours</code>, affichage du nombre d’épisodes de soin continu et du nombre d’épisodes de soin concentré au dessus du tableau de résultats.</p>
+<p>PMSISoft PSY Professionnel : voir écran <code>Séjours &gt; Base des séjours</code>, calcul, pour chaque séjour, des variables <code>ordre_episode_soin_continu_ipp</code>, <code>nb_episode_soin_continu_ipp</code>, <code>ordre_episode_soin_concentre_ipp</code>et <code>nb_episode_soin_concentre_ipp</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
 </section>

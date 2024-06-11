@@ -12,7 +12,7 @@
 <generator>quarto-1.4.551</generator>
 <lastBuildDate>Mon, 10 Jun 2024 22:00:00 GMT</lastBuildDate>
 <item>
-  <title>Casemix basique </title>
+  <title>Casemix basique Intervenant CSARR</title>
   <dc:creator>denis Gustin</dc:creator>
   <link>https://www.datapmsi.com/posts/smr/script_smr_casemix_intervenant/</link>
   <description><![CDATA[ 
@@ -88,7 +88,7 @@ font-style: inherit;">n_distinct</span>(code_csarr),</span>
 background-color: null;
 font-style: inherit;">nb_realisation_csarr =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">sum</span>(nb_realisation_csarr),</span>
+font-style: inherit;">sum</span>(nb_realisation_csarr)</span>
 <span id="cb1-12">    ) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
@@ -137,7 +137,8 @@ font-style: inherit;">select</span>(code_intervenant_csarr,csarr_intervenant_lib
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
 <p>Ligne 16 : le <code>dplyr::select()</code> permet de réordonner les variables</p>
-<p>PMSISoft SMR Standard : écran <code>Codage CSARR &gt; Casemix CSARR &gt; Casemix Intervenant</code></p>
+<p>PMSISoft SMR Standard : voir écran <code>Codage CSARR &gt; Casemix CSARR &gt; Casemix Intervenant</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
 </section>
@@ -156,7 +157,7 @@ font-style: inherit;">select</span>(code_intervenant_csarr,csarr_intervenant_lib
   <pubDate>Mon, 10 Jun 2024 22:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Dépendance physique maximales des séjours HC</title>
+  <title>Dépendance physique maximale des séjours HC</title>
   <dc:creator>denis Gustin</dc:creator>
   <link>https://www.datapmsi.com/posts/smr/script_smr_sejour_hc_dependance_physique_maximale/</link>
   <description><![CDATA[ 
@@ -166,7 +167,7 @@ font-style: inherit;">select</span>(code_intervenant_csarr,csarr_intervenant_lib
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>On va calculer la dépendance physique de chaque RHS, puis, par séjour HC, on calcule la dépendance physique maximale parmi le ou les RHS du séjour</p>
+<p>On calcule la dépendance physique de chaque RHS, puis, par séjour HC, on calcule la dépendance physique maximale parmi le ou les RHS du séjour</p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
@@ -246,8 +247,9 @@ font-style: inherit;">distinct</span>(nas,dependance_physique_maximale_sejour)</
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
 <p>Ligne 7-8 : <code>rowSums()</code> pour permettre un calcul ligne à ligne</p>
 <p>Démarche identique pour calculer la dépendance cognitive maximale d’un séjour</p>
-<p>PMSISoft SMR Standard : information calculée et affichée dans <code>RHS &gt; Base des RHS &gt; Détail RHS &gt; Dépendance</code></p>
-<p>PMSISoft SMR Professionnel : écran <code>Séjours &gt; Séjours et dépendance</code></p>
+<p>PMSISoft SMR Standard : information calculée et affichée dans l’écran <code>RHS &gt; Base des RHS &gt; Détail RHS &gt; Dépendance</code></p>
+<p>PMSISoft SMR Professionnel : voir aussi écran <code>Séjours &gt; Séjours et dépendance</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
 </section>
@@ -343,7 +345,8 @@ font-style: inherit;">0</span>)</span>
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
 <p>Ligne 5-6 : voir script “Nombre de JP par RHS”</p>
 <p>Avec le script, possibilité de varier en toute liberté les critères de filtrages (age, autres CM/GN/…, autre seuil nb_jp_rhs, ..)</p>
-<p>PMSISoft SMR Standard : écran <code>RHS &gt; Base des RHS</code>, filtrage de périmètre <code>cm == "08"</code> et filtrage de variable <code>nb_jp_rhs Supérieur ou égal à 5 ET nb_acte_csarr Egal à 0</code></p>
+<p>PMSISoft SMR Professionnel : écran <code>RHS &gt; Base des RHS</code>, filtrage de périmètre <code>cm == "08"</code> et filtrage de variable <code>nb_jp_rhs Supérieur ou égal à 5 ET nb_acte_csarr Egal à 0</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
 </section>
@@ -471,7 +474,7 @@ font-style: inherit;">==</span> csarr_code))</span>
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Pour chaque RHS, on va compter le nombre de “1” dans les variables natives <code>jp_hors_we</code> et <code>jp_we</code>, en écrasant leur valeur initiale (suite de “0” et de “1”) par la valeur calculée, puis on additionne ces 2 variables.</p>
+<p>Pour chaque RHS, on compte le nombre de “1” dans les variables natives <code>jp_hors_we</code> et <code>jp_we</code>, en écrasant leur valeur initiale (suite de “0” et de “1”) par la valeur calculée, puis on additionne ces 2 variables.</p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
@@ -523,9 +526,9 @@ font-style: inherit;">+</span>jp_hors_we)</span>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 5 : utilisation ultra-classique de la fonction àcross()` pour appliquer un même traitement à plusieurs variables en une seule ligne</p>
+<p>Ligne 5 : utilisation ultra-classique de la fonction <code>àcross()</code> pour appliquer un même traitement à plusieurs variables en une seule ligne</p>
 <p>PMSISoft SMR Standard : voir écran <code>RHS &gt; Base des RHS</code></p>
-<p>PMSISoft SMR Professionnel : variable <code>nb_jp_rhs</code> présent dans <code>smr$rhs$rhs</code></p>
+<p>PMSISoft SMR Professionnel : variable <code>nb_jp_rhs</code> présent dans <code>smr</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 

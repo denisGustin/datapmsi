@@ -163,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><b>Casemix basique </b></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><b>Casemix basique Intervenant CSARR</b></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -226,11 +226,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><b>Casemix basique </b></h1>
+<h1 class="title"><b>Casemix basique Intervenant CSARR</b></h1>
   <div class="quarto-categories">
     <div class="quarto-category">SMR</div>
     <div class="quarto-category">CSARR</div>
-    <div class="quarto-category">casemix</div>
+    <div class="quarto-category">Casemix</div>
   </div>
   </div>
 
@@ -278,7 +278,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(code_intervenant_csarr) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-9"><a href="#cb1-9"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">nb_acte_csarr =</span> dplyr<span class="sc">::</span><span class="fu">n</span>(),</span>
 <span id="cb1-10"><a href="#cb1-10"></a>                     <span class="at">nb_acte_different_csarr =</span> dplyr<span class="sc">::</span><span class="fu">n_distinct</span>(code_csarr),</span>
-<span id="cb1-11"><a href="#cb1-11"></a>                     <span class="at">nb_realisation_csarr =</span> <span class="fu">sum</span>(nb_realisation_csarr),</span>
+<span id="cb1-11"><a href="#cb1-11"></a>                     <span class="at">nb_realisation_csarr =</span> <span class="fu">sum</span>(nb_realisation_csarr)</span>
 <span id="cb1-12"><a href="#cb1-12"></a>    ) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-13"><a href="#cb1-13"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(nb_realisation_csarr)) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-14"><a href="#cb1-14"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">percent_realisation_csarr =</span> nb_realisation_csarr<span class="sc">/</span><span class="fu">sum</span>(nb_realisation_csarr)) <span class="sc">%&gt;%</span> </span>
@@ -291,7 +291,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
 <p>Ligne 16 : le <code>dplyr::select()</code> permet de réordonner les variables</p>
-<p>PMSISoft SMR Standard : écran <code>Codage CSARR &gt; Casemix CSARR &gt; Casemix Intervenant</code></p>
+<p>PMSISoft SMR Standard : voir écran <code>Codage CSARR &gt; Casemix CSARR &gt; Casemix Intervenant</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
 </section>
