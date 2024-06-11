@@ -1,9 +1,0 @@
----
-title: "Pause et échanges"
-lang: fr
----
-
-Les temps de pause et d'échanges d'1/2 heure entre 2 modules permettent aux participants et au formateur d'échanger, de manière informelle, sur le contenu et les exercices du module qui vient de s'achever.  
-
-C'est l'occasion de revenir sur des points précis et d'apporter des compléments d'informations ou des retours d'expérience.  
-
