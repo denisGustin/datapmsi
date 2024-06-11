@@ -1,0 +1,15 @@
+{
+  "hash": "565c799c98990299594f0cb1c8723d51",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b>Rapatriement libellé CSARR</b>\"\ndate: \"2024-06-08\"\ncategories: [SMR,CSARR]\npage-layout: full\n---\n\n\n## Introduction  \n\nScript ultra-classique permettant de rapatrier un libellé, ici libellé des actes CSARR  \n\nA partir du référentiel annualisé des actes CSARR[^1], on créé un référentiel dédoublonné des seuls libellés par acte CSARR. Puis on rattache ce référentiel à la table des actes CSARR produite à partir des \"blocs CSARR\" des RHS.  \n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\nlibrary(refpmsi)\n\ncsarr_code <- refpmsi::refpmsi(csarr_code)\n\ncsarr_libelle <-  csarr_code %>% \n    dplyr::slice_head(n = 1, by = csarr_code) %>% \n    dplyr::select(csarr_code,csarr_libelle)\ncsarr_libelle\n\ncsarr_extend <- smr$rhs$csarr %>% \n    dplyr::select(annee_import, code_csarr) %>% \n    dplyr::left_join(csarr_libelle, join_by(code_csarr == csarr_code))\ncsarr_extend\n```\n:::\n\n\n## Commentaires  \n\nLigne 7 : permet de ne retenir que le dernière libellé actif de l'acte CSARR  \n\nPMSISoft SMR Professionnel : variables de libellé, dont comme ici `csarr_libelle` incluses dans `smr`  \n\n[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target=\"_blank\"}  \n\n\n[^1]: Documentation du référentiel [csarr_code](https://denisgustin.github.io/refpmsi/articles/csarr.html#csarr-code){target=\"_blank\"}  ",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

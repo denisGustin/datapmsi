@@ -3,43 +3,40 @@ project:
 
 website:
   title: "Data PMSI"
-  description: "Formations PMSI MCO, PMSI SSR avec R et tidyverse"
+  description: "Codes et formations R pour les PMSI MCO, SMR, PSY et HAD"
+  site-url: https://www.datapmsi.com
   navbar:
     background: "#447099"
     left: 
-      - href: planning.qmd
-        text: "Planning des formations"
-      - href: pedagogie.qmd
-        text: "Pédagogie"
       - href: prestation.qmd
-        text: "Prestations"
+        text: "Live coding PMSI R"
+      - href: guide_post.qmd
+        text: "Guide des scripts"
+      - href: base_R.qmd
+        text: "Pre-requis R"
     right: 
       - text: "Jeux de données"
         menu:
           - href: "dataset_mco.qmd"
             text: "Jeux PMSI MCO"
-          - href: "dataset_ssr.qmd"
-            text: "Jeux PMSI SSR"
-          - href: "dataset_psy.qmd"
-            text: "Jeux PMSI PSY"
       - icon: github
         href: https://github.com/denisGustin/datapmsi
   sidebar: 
     style: docked
     contents: 
-      - href: formations/pmsi_initiation.qmd
-        text: "Le PMSI avec R"
-      - section: "Formations MCO"
-        contents: 
-          - href: formations/pmsi_mco_requete.qmd
-            text: "Requêtes MCO"
-      - section: "Formations SSR"
-        contents:
-          - href: formations/pmsi_ssr_requete.qmd
-            text: "Requêtes SSR"
+      - href: prestation.qmd
+        text: "Live coding PMSI R"
+      - href: guide_post.qmd
+        text: "Guide des scripts"
+      - href: scripts_mco.qmd
+        text: "Scripts MCO"
+      - href: scripts_smr.qmd
+        text: "Scripts SMR"
+      - href: scripts_psy.qmd
+        text: "Scripts PSY"
   page-footer:
     left: "Blog codé avec [Quarto](https://quarto.org/)"
-    right: "[Mentions légales](../about.html) | &copy; Copyright 2023 - DATAMIS"
+    right: "[Mentions légales](../about.html) | &copy; Copyright 2023-2024 - DATAMIS"
     
 format:
   html:
@@ -47,3 +44,4 @@ format:
       - cosmo
       - style.css
     toc: true
+    toc-location: "left"

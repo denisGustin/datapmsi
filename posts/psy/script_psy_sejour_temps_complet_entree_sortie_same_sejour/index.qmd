@@ -1,0 +1,34 @@
+---
+title: "<b>Séjours temps complet avec entrée et sortie le même jour</b>"
+date: "2024-06-09"
+categories: [PSY,RPS]
+page-layout: full
+---
+
+## Introduction  
+
+On sélectionne l'activité RPS en temps complet, puis les RPS avec date_entree_sejour == date_sortie_sejour, puis on ne retient qu'une ligne par séjour.  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+
+sejour_selected <- psy$rps$rps %>% 
+    dplyr::select(no_sejour,ipp,forme_activite,nb_jours_presence,date_entree_sejour,date_sortie_sejour) %>% 
+    dplyr::filter(forme_activite %in% c('01','01D','01S','01P','02','03','04','05','06','07'),
+                  date_entree_sejour == date_sortie_sejour) %>% 
+    dplyr::distinct(no_sejour,ipp,date_entree_sejour,date_sortie_sejour)
+sejour_selected
+```
+
+## Commentaires  
+
+Ligne 5 : le vecteur `c('01','01D','01S','01P','02','03','04','05','06','07')` correspond aux formes d'activité temps complet  
+
+Ligne 7 : on ne sélectionne que des variables liées à un séjour  
+
+PMSISoft PSY Professionnel : écran `Séjours > Base des séjours`, filtrage de périmètre `Forme d'activité == codes temps_complet` et filtrage de variable `nb_jp_sejour Egal à 0`  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

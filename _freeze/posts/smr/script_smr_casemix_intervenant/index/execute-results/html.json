@@ -1,0 +1,15 @@
+{
+  "hash": "8840530d941ab6f82b5fe9f8997d9e04",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b>Casemix basique </b>\"\ndate: \"2024-06-11\"\ncategories: [SMR,CSARR,casemix]\npage-layout: full\n---\n\n\n## Introduction  \n\nPar type d'intervenant, calcul du nombre d'actes, du nombre de réalisations CSARR et % du nombre d'actes et rapatriement libellé intervenant. \n\nOn enrichie en rapatriant le libellé des types d'intervenant via le référentiel `csarr_intervenant` [^1]  \n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\nlibrary(refpmsi)\n\ncsarr_intervenant <- refpmsi::refpmsi(csarr_intervenant)\n\ncasemix_csarr_intervenant <- smr$rhs$csarr %>% \n    dplyr::select(annee_import,code_csarr,nb_realisation_csarr,code_intervenant_csarr) %>% \n    dplyr::group_by(code_intervenant_csarr) %>% \n    dplyr::summarise(nb_acte_csarr = dplyr::n(),\n                     nb_acte_different_csarr = dplyr::n_distinct(code_csarr),\n                     nb_realisation_csarr = sum(nb_realisation_csarr),\n    ) %>% \n    dplyr::arrange(desc(nb_realisation_csarr)) %>% \n    dplyr::mutate(percent_realisation_csarr = nb_realisation_csarr/sum(nb_realisation_csarr)) %>% \n    dplyr::left_join(csarr_intervenant, join_by(code_intervenant_csarr == csarr_intervenant_code)) %>% \n    dplyr::select(code_intervenant_csarr,csarr_intervenant_libelle,nb_acte_csarr,nb_acte_different_csarr,\n                  nb_realisation_csarr,percent_realisation_csarr)\ncasemix_csarr_intervenant\n```\n:::\n\n\n## Commentaires  \n\nLigne 16 : le `dplyr::select()` permet de réordonner les variables  \n\nPMSISoft SMR Standard : écran `Codage CSARR > Casemix CSARR > Casemix Intervenant`\n\n[^1]: Documentation du référentiel [csarr_intervenant](https://denisgustin.github.io/refpmsi/articles/csarr.html#csarr-intervenant){target=\"_blank\"}  \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

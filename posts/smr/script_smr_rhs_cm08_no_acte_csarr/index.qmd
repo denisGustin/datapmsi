@@ -1,0 +1,37 @@
+---
+title: "<b>RHS CM 08 d'au moins 5 JP avec 0 acte CSARR</b>"
+date: "2024-06-09"
+categories: [SMR,RHS]
+page-layout: full
+---
+
+## Introduction  
+
+Un contrôle qualité classique.  
+
+On filtre les RHS sur les 3 variables `cm`, `nb_jp_rhs` (à produire) et `nb_csarr`
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+
+rhs_selected <- smr$rhs$rhs %>% 
+    dplyr::select(annee_import,nas,no_semaine,no_um,cm,jp_we,jp_hors_we,nb_csarr) %>% 
+    dplyr::mutate(across(c(jp_we,jp_hors_we), ~ stringr::str_count(.x,"1")),
+                  nb_jp_rhs = jp_we+jp_hors_we) %>% 
+    dplyr::filter(cm == "08", nb_jp_rhs == 5, nb_csarr == 0)
+rhs_selected
+```
+
+## Commentaires  
+
+Ligne 5-6 : voir script "Nombre de JP par RHS"  
+
+Avec le script, possibilité de varier en toute liberté les critères de filtrages (age, autres CM/GN/..., autre seuil nb_jp_rhs, ..)  
+
+PMSISoft SMR Professionnel : écran `RHS > Base des RHS`, filtrage de périmètre `cm == "08"` et filtrage de variable `nb_jp_rhs Supérieur ou égal à 5 ET nb_acte_csarr Egal à 0`  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  
+

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.189">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,11 +17,12 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -108,7 +79,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "Pas de résultats",
     "search-matching-documents-text": "documents trouvés",
@@ -117,8 +94,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-match-text": "correspondance de plus dans ce document",
     "search-more-matches-text": "correspondances de plus dans ce document",
     "search-clear-button-title": "Effacer",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Annuler",
-    "search-submit-button-title": "Envoyer"
+    "search-submit-button-title": "Envoyer",
+    "search-label": "Recherche"
   }
 }</script>
 
@@ -127,182 +106,129 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <body class="nav-sidebar docked nav-fixed">
 
-
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Data PMSI</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Recherche"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Basculer la navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./planning.html">Planning des formations</a>
+    <a class="nav-link active" href="./prestation.html" aria-current="page"> 
+<span class="menu-text">Live coding PMSI R</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./pedagogie.html">Pédagogie</a>
+    <a class="nav-link" href="./guide_post.html"> 
+<span class="menu-text">Guide des scripts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./prestation.html">Prestations</a>
+    <a class="nav-link" href="./base_R.html"> 
+<span class="menu-text">Pre-requis R</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-jeux-de-données" role="button" data-bs-toggle="dropdown" aria-expanded="false">Jeux de données</a>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-jeux-de-données" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Jeux de données</span>
+    </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-jeux-de-données">    
         <li>
     <a class="dropdown-item" href="./dataset_mco.html">
  <span class="dropdown-text">Jeux PMSI MCO</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="./dataset_ssr.html">
- <span class="dropdown-text">Jeux PMSI SSR</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./dataset_psy.html">
- <span class="dropdown-text">Jeux PMSI PSY</span></a>
-  </li>  
     </ul>
   </li>
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/denisGustin/datapmsi"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/denisGustin/datapmsi"> <i class="bi bi-github" role="img">
 </i> 
- </a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Pré-requis R</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Pré-requis R</span></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Formations MCO</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./formations/pmsi_mco_requete.html" class="sidebar-item-text sidebar-link">Requêtes MCO</a>
+  <a href="./prestation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Live coding PMSI R</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./formations/pmsi_mco_requete_avance.html" class="sidebar-item-text sidebar-link">Requêtes MCO [Avancé]</a>
+  <a href="./guide_post.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guide des scripts</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./formations/pmsi_mco_tableau.html" class="sidebar-item-text sidebar-link">Tableaux MCO</a>
+  <a href="./scripts_mco.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scripts MCO</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./formations/pmsi_mco_plot.html" class="sidebar-item-text sidebar-link">Graphiques MCO</a>
+  <a href="./scripts_smr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scripts SMR</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Formations SSR</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./formations/pmsi_ssr_requete.html" class="sidebar-item-text sidebar-link">Requêtes SSR</a>
+  <a href="./scripts_psy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scripts PSY</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./formations/pmsi_ssr_tableau.html" class="sidebar-item-text sidebar-link">Tableaux SSR</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./formations/pmsi_ssr_plot.html" class="sidebar-item-text sidebar-link">Graphiques SSR</a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Formations PSY</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./formations/pmsi_psy_requete.html" class="sidebar-item-text sidebar-link">Requêtes PSY</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./formations/pmsi_psy_tableau.html" class="sidebar-item-text sidebar-link">Tableaux PSY</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./formations/pmsi_psy_plot.html" class="sidebar-item-text sidebar-link">Graphiques PSY</a>
-  </div>
-</li>
-      </ul>
-  </li>
     </ul>
     </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+    <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Sur cette page</h2>
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#ere-étape-installer-r" id="toc-ere-étape-installer-r" class="nav-link" data-scroll-target="#ere-étape-installer-r">1ere étape : Installer R</a></li>
-  <li><a href="#eme-étape-installer-r-studio" id="toc-eme-étape-installer-r-studio" class="nav-link" data-scroll-target="#eme-étape-installer-r-studio">2eme étape : Installer R Studio</a></li>
-  <li><a href="#eme-étape-créer-un-projet-et-un-premier-fichier-.r" id="toc-eme-étape-créer-un-projet-et-un-premier-fichier-.r" class="nav-link" data-scroll-target="#eme-étape-créer-un-projet-et-un-premier-fichier-.r">3eme étape : Créer un projet et un premier fichier .R</a>
+  <li><a href="#installer-r" id="toc-installer-r" class="nav-link" data-scroll-target="#installer-r">Installer R</a></li>
+  <li><a href="#installer-r-studio" id="toc-installer-r-studio" class="nav-link" data-scroll-target="#installer-r-studio">Installer R Studio</a></li>
+  <li><a href="#créer-un-projet-et-un-premier-fichier-.r" id="toc-créer-un-projet-et-un-premier-fichier-.r" class="nav-link" data-scroll-target="#créer-un-projet-et-un-premier-fichier-.r">Créer un projet et un premier fichier .R</a>
   <ul class="collapse">
-  <li><a href="#créer-un-projet" id="toc-créer-un-projet" class="nav-link" data-scroll-target="#créer-un-projet">Créer un projet</a></li>
+  <li><a href="#créer-un-premier-projet" id="toc-créer-un-premier-projet" class="nav-link" data-scroll-target="#créer-un-premier-projet">Créer un premier projet</a></li>
   <li><a href="#mon-premier-fichier-.r" id="toc-mon-premier-fichier-.r" class="nav-link" data-scroll-target="#mon-premier-fichier-.r">Mon premier fichier .R</a></li>
   </ul></li>
-  <li><a href="#eme-étape-minimum-à-connaître" id="toc-eme-étape-minimum-à-connaître" class="nav-link" data-scroll-target="#eme-étape-minimum-à-connaître">4eme étape : Minimum à connaître</a></li>
-  <li><a href="#eme-étapes-installer-et-charger-les-packages" id="toc-eme-étapes-installer-et-charger-les-packages" class="nav-link" data-scroll-target="#eme-étapes-installer-et-charger-les-packages">5eme étapes : Installer et charger les packages</a>
+  <li><a href="#minimum-de-r-à-connaître" id="toc-minimum-de-r-à-connaître" class="nav-link" data-scroll-target="#minimum-de-r-à-connaître">Minimum de R à connaître</a></li>
+  <li><a href="#installer-et-charger-des-packages" id="toc-installer-et-charger-des-packages" class="nav-link" data-scroll-target="#installer-et-charger-des-packages">Installer et charger des packages</a>
   <ul class="collapse">
   <li><a href="#le-tidyverse" id="toc-le-tidyverse" class="nav-link" data-scroll-target="#le-tidyverse">Le tidyverse</a></li>
   <li><a href="#le-package-refpmsi" id="toc-le-package-refpmsi" class="nav-link" data-scroll-target="#le-package-refpmsi">Le package refpmsi</a></li>
   <li><a href="#autres-packages-cran" id="toc-autres-packages-cran" class="nav-link" data-scroll-target="#autres-packages-cran">Autres packages CRAN</a></li>
   <li><a href="#chargement-des-packages" id="toc-chargement-des-packages" class="nav-link" data-scroll-target="#chargement-des-packages">Chargement des packages</a></li>
   </ul></li>
-  <li><a href="#eme-étape-charger-un-jeu-de-données" id="toc-eme-étape-charger-un-jeu-de-données" class="nav-link" data-scroll-target="#eme-étape-charger-un-jeu-de-données">6eme étape : Charger un jeu de données</a></li>
-  <li><a href="#eme-étape-le-pipe-et-son-fonctionnement" id="toc-eme-étape-le-pipe-et-son-fonctionnement" class="nav-link" data-scroll-target="#eme-étape-le-pipe-et-son-fonctionnement">7eme étape : Le pipe <code>%&gt;%</code> et son fonctionnement</a></li>
-  <li><a href="#eme-étape-quelques-manipulations-simples" id="toc-eme-étape-quelques-manipulations-simples" class="nav-link" data-scroll-target="#eme-étape-quelques-manipulations-simples">8eme étape : Quelques manipulations simples</a>
+  <li><a href="#charger-un-jeu-de-données" id="toc-charger-un-jeu-de-données" class="nav-link" data-scroll-target="#charger-un-jeu-de-données">Charger un jeu de données</a></li>
+  <li><a href="#le-pipe-et-son-fonctionnement" id="toc-le-pipe-et-son-fonctionnement" class="nav-link" data-scroll-target="#le-pipe-et-son-fonctionnement">Le pipe <code>%&gt;%</code> et son fonctionnement</a></li>
+  <li><a href="#quelques-manipulations-simples" id="toc-quelques-manipulations-simples" class="nav-link" data-scroll-target="#quelques-manipulations-simples">Quelques manipulations simples</a>
   <ul class="collapse">
   <li><a href="#fonction-dplyrfilter" id="toc-fonction-dplyrfilter" class="nav-link" data-scroll-target="#fonction-dplyrfilter">fonction dplyr::filter()</a></li>
   <li><a href="#fonction-dplyrselect" id="toc-fonction-dplyrselect" class="nav-link" data-scroll-target="#fonction-dplyrselect">fonction dplyr::select()</a></li>
@@ -310,16 +236,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#fonction-dplyrarrange" id="toc-fonction-dplyrarrange" class="nav-link" data-scroll-target="#fonction-dplyrarrange">fonction dplyr::arrange()</a></li>
   <li><a href="#exercices" id="toc-exercices" class="nav-link" data-scroll-target="#exercices">exercices</a></li>
   </ul></li>
-  <li><a href="#résumé" id="toc-résumé" class="nav-link" data-scroll-target="#résumé">Résumé</a></li>
   </ul>
 </nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Pré-requis R</span></h1>
+<h1 class="title"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Pré-requis R</span></h1>
 </div>
 
 
@@ -327,53 +256,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
 
+
 </header>
 
-<p><em>Temps de lecture et mise en pratique : 1 heure à 2 heures</em></p>
+
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Les formations <strong>Data PMSI avec R</strong> supposent que les participants disposent d’un environnement R de travail opérationnel avec au moins un jeu de données PMSI chargé et les packages R nécessaires à la formation.</p>
-<p>Cette note est à consulter et pratiquer avant de participer à une de nos formations <strong>Data PMSI avec R</strong>. Nous vous invitons à copier/coller et exécuter les blocs de code proposés ci-dessous en s’assurant que vous les comprenez bien.</p>
-<p>Cette note est volontairement simplifiée au maximum, avec donc quelques abus de langage assumés<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>Si vous pratiquez déjà R, vous pouvez vous contenter d’un survol de la note, créer un projet dédié à la formation et charger les packages et le jeu de données <a href="./dataset_mco.html"><code>mini_fake_dataset_mco</code></a>.</p>
-<p>Les supports et ressources en ligne pour apprendre et pratiquer R sont innombrables. On y trouve toute l’aide possible.<br>
-2 ressources en français récentes, didactiques et accessibles pour apprendre R :<br>
+<p>La compréhension et la reproduction des scripts PMSI R supposent :</p>
+<p># un environnement R de travail opérationnel avec les packages R appelés dans les scripts (généralement des packages du <a href="https://www.tidyverse.org/" target="_blank">tidyverse</a> et le package de données <a href="https://denisgustin.github.io/refpmsi/index.html" target="_blank">refpmsi</a></p>
+<p># une pratique minimale de R</p>
+<p># de disposer de données PMSI sous forme de tibbles exploitables.</p>
+<p>Nous vous invitons à consulter le <strong><a href="./guide_post.html">Guide des scripts</a></strong></p>
+<p>Les explications proposées ci-dessous sont volontairement simplifiées, avec donc quelques abus de langage assumés<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Les supports et ressources en ligne pour apprendre et pratiquer R sont innombrables.</p>
+<p>Quelques ressources en français récentes, didactiques et accessibles pour apprendre R :<br>
 <a href="https://juba.github.io/tidyverse/index.html" target="_blank">Introduction à R et au tidyverse par Julien Barnier</a><br>
-<a href="https://larmarange.github.io/analyse-R/" target="_blank">analyse-R par Joseph Larmarange</a><br>
-Ressources R et PMSI :<br>
+<a href="https://larmarange.github.io/analyse-R/" target="_blank">analyse-R par Joseph Larmarange</a></p>
+<p>Ressources R et PMSI :<br>
 <a href="http://pmsidansr.senis.org/" target="_blank">Y a du PMSI dans R</a><br>
 <a href="https://denisgustin.github.io/refpmsi/index.html" target="_blank">Package refpmsi</a></p>
-<p><a href="https://www.lespmsi.com/contact-pmsisoft" target="_blank">Contactez-nous pour toute question</a> (avec l’objet “Question formation Data PMSI avec R”)</p>
+<p><a href="https://www.lespmsi.com/contact-pmsisoft" target="_blank">Contact pour toute question</a> (avec l’objet “Question formation Data PMSI avec R”)</p>
 </section>
-<section id="ere-étape-installer-r" class="level2">
-<h2 class="anchored" data-anchor-id="ere-étape-installer-r">1ere étape : Installer R</h2>
-<p>R s’installe sous Windows comme un simple exécutable (comme GENRSA ou GENRHA par exemple).<br>
+<section id="installer-r" class="level2">
+<h2 class="anchored" data-anchor-id="installer-r">Installer R</h2>
+<p>R s’installe sous Windows comme un simple exécutable (comme DRUIDES ou GENRHA par exemple).<br>
 <a href="https://cloud.r-project.org/bin/windows/base/" target="_blank">Télécharger R dans sa dernière version</a><br>
 Accepter les options par défaut jusqu’à la fin de l’installation.</p>
-<p>Nous recommandons une version de R &gt;= à la version 4.1.0 de mai 2021.<br>
+<p>Nous recommandons une version de R &gt;= à la version 4.1.3 de mars 2022.<br>
 <a href="https://cran.r-project.org/bin/windows/base/old/" target="_blank">Historique des versions de R</a></p>
 </section>
-<section id="eme-étape-installer-r-studio" class="level2">
-<h2 class="anchored" data-anchor-id="eme-étape-installer-r-studio">2eme étape : Installer R Studio</h2>
-<p><strong>Après</strong> avoir installé R, nous installons R Studio qui est l’environnement de développement de référence pour R.<br>
+<section id="installer-r-studio" class="level2">
+<h2 class="anchored" data-anchor-id="installer-r-studio">Installer R Studio</h2>
+<p><strong>Après</strong> avoir installé R, nous installons R Studio qui est un environnement de développement (IDE) de référence pour R.<br>
 Plus exactement, nous allons télécharger la version open source de R Studio, appelée “R Studio Desktop”.</p>
 <p>R Studio Desktop s’installe comme un exécutable.<br>
 <a href="https://posit.co/download/rstudio-desktop/" target="_blank">Télécharger R Studio Desktop</a></p>
-<p>Nous recommandons une version de R Studio Desktop &gt;= à la version 12.07.02<br>
-<a href="https://www.rstudio.com/products/rstudio/older-versions/" target="_blank">Historique des versions de R Studio Desktop</a></p>
+<p>Nous recommandons une version de R Studio Desktop &gt;= version 2022.07.02<br>
+<a href="https://docs.posit.co/previous-versions/rstudio/" target="_blank">Historique des versions de R Studio Desktop</a></p>
 <p>A ce stade, vous disposez d’une icône R Studio sur votre bureau pour ouvrir R Studio.<br>
 <a href="http://pmsidansr.senis.org/2022/06/15/installation-r-rstudio/" target="_blank">Tuto avec copies écrans pour installer R et R Studio</a><br>
 <a href="https://openclassrooms.com/fr/courses/4525256-initiez-vous-au-langage-r-pour-analyser-vos-donnees/6250851-prenez-en-main-r-et-r-studio" target="_blank">Tuto pour découvrir R Studio</a><br>
 <a href="https://larmarange.github.io/analyse-R/premier-contact.html" target="_blank">Autre tuto</a></p>
+<p>Autre IDE pour développer en R : <a href="https://code.visualstudio.com/" target="&quot;_blank">Visual Studio Code</a></p>
 </section>
-<section id="eme-étape-créer-un-projet-et-un-premier-fichier-.r" class="level2">
-<h2 class="anchored" data-anchor-id="eme-étape-créer-un-projet-et-un-premier-fichier-.r">3eme étape : Créer un projet et un premier fichier .R</h2>
-<section id="créer-un-projet" class="level3">
-<h3 class="anchored" data-anchor-id="créer-un-projet">Créer un projet</h3>
+<section id="créer-un-projet-et-un-premier-fichier-.r" class="level2">
+<h2 class="anchored" data-anchor-id="créer-un-projet-et-un-premier-fichier-.r">Créer un projet et un premier fichier .R</h2>
+<section id="créer-un-premier-projet" class="level3">
+<h3 class="anchored" data-anchor-id="créer-un-premier-projet">Créer un premier projet</h3>
 <p>Nous allons maintenant créer un projet sous R Studio que l’on propose d’appeler <code>formation_data_pmsi</code>.<br>
 Ce projet va regrouper tous les fichiers .R et autres informations en lien avec les exerices, données et scripts de la formation.</p>
 <p><strong>Première étape</strong> : on crée (à priori à la racine C:), un répertoire avec l’intitulé <code>formation_data_pmsi</code>.</p>
@@ -390,22 +324,23 @@ Un fichier “untitled1” apparaît dans le quadrant haut gauche (le quadrant �
 <p>En cliquant sur l’icône “Sauvegarder” de ce quadrant, vous saisissez le nom du fichier, par exemple “intro.R”</p>
 <p>Premières lignes de code (à copier/coller)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># les lignes de commentaires commencent par #</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cliquer sur alt + entrée à la fin chaque ligne de code pour exécuter la ligne</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># première saisie. Il s'agit du très classique jeu de données iris, natif dans R</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># le jeu de données s'affiche dans la console</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>iris</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># appel d'une fonction </span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># nrow() = fonction native de R calculant le nombre de lignes d'un tableau de données</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(iris)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;- permet d'attribuer une valeur à une variable (raccourci R Studio pour &lt;- : alt + 6)</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># il y a des bonnes pratiques de nommage des variables : elles sont appliquées dans cette note</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>type_data_learning</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># les lignes de commentaires commencent par #</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># cliquer sur alt + entrée à la fin chaque ligne de code pour exécuter la ligne</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># première saisie. Il s'agit du très classique jeu de données iris, natif dans R</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># le jeu de données s'affiche dans la console</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>iris</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># appel d'une fonction </span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># nrow() = fonction native de R calculant le nombre de lignes d'un tableau de données</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(iris)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;- permet d'attribuer une valeur à une variable (raccourci R Studio pour &lt;- : alt + 6)</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># il y a des bonnes pratiques de nommage des variables : elles sont appliquées dans cette note</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Penser à sauvegarder votre script R régulièrement et, à minima, avant de quitter R Studio.</p>
 <p>En quittant R Studio, ne jamais sauvegarder le .RData si R Studio vous le demande</p>
@@ -413,8 +348,8 @@ Un fichier “untitled1” apparaît dans le quadrant haut gauche (le quadrant �
 <p><a href="https://www.lespmsi.com/contact-pmsisoft" target="_blank">Contactez-nous pour toute question</a> (avec l’objet “Question formation Data PMSI avec R”)</p>
 </section>
 </section>
-<section id="eme-étape-minimum-à-connaître" class="level2">
-<h2 class="anchored" data-anchor-id="eme-étape-minimum-à-connaître">4eme étape : Minimum à connaître</h2>
+<section id="minimum-de-r-à-connaître" class="level2">
+<h2 class="anchored" data-anchor-id="minimum-de-r-à-connaître">Minimum de R à connaître</h2>
 <p>Il y a 4 concepts à connaître : les types de données, les vecteurs, les data frames ou tibbles et les lists</p>
 <p>Nous les exposons ci-dessous, à minima, avec des exemples issus de données simili PMSI, à exécuter dans le fichier intro.R</p>
 <p><strong>Type de données</strong></p>
@@ -490,9 +425,9 @@ En pratique, parce qu’on travaille essentiellement avec les packages du tidyve
 <p>Une list est donc la structure de données la plus souple, la plus puissante, mais aussi la plus complexe à manipuler.</p>
 <p>Le jeu de données <a href="./dataset_mco.html"><code>fake_dataset_mco</code></a> des formations MCO est ainsi une list de tibbles (un tbl simili partie fixe des RSS, un tbl simili RSA, un tbl simili actes CCAM, un tble simili DAS, un tbl de DMI, un tbl simili ficium) : nous manipulons donc un seul objet au lieu de 6 objets.</p>
 </section>
-<section id="eme-étapes-installer-et-charger-les-packages" class="level2">
-<h2 class="anchored" data-anchor-id="eme-étapes-installer-et-charger-les-packages">5eme étapes : Installer et charger les packages</h2>
-<p>Un package est une réunion cohérente de fonctions et de données que l’on va pouvoir utiliser en appelant ses fonctions et ses données sans avoir à se préoccuper de la façon dont elles sont codées.</p>
+<section id="installer-et-charger-des-packages" class="level2">
+<h2 class="anchored" data-anchor-id="installer-et-charger-des-packages">Installer et charger des packages</h2>
+<p>De manière simplifiée, on peut dire qu’un package est une réunion cohérente de fonctions et de données que l’on va pouvoir utiliser en appelant ses fonctions et ses données sans avoir à se préoccuper de la façon dont elles sont codées.</p>
 <p>Une fois installé, un package sera à charger à chaque nouvelle session R Studio.</p>
 <p>Les packages d’intérêt général et validés après une série poussée de tests sont disponibles sur le <a href="https://cran.r-project.org/index.html">CRAN</a>. C’est essentiellement parmi ces packages que nous allons faire notre marché.</p>
 <p>L’installation d’un package est réalisée une fois pour toute (sauf mise à jour du package).</p>
@@ -547,9 +482,9 @@ En pratique, parce qu’on travaille essentiellement avec les packages du tidyve
 </div>
 </section>
 </section>
-<section id="eme-étape-charger-un-jeu-de-données" class="level2">
-<h2 class="anchored" data-anchor-id="eme-étape-charger-un-jeu-de-données">6eme étape : Charger un jeu de données</h2>
-<p>La traduction anglaise de jeu de données est dataset. On parlera donc indifféremment de jeux de données ou de dataset</p>
+<section id="charger-un-jeu-de-données" class="level2">
+<h2 class="anchored" data-anchor-id="charger-un-jeu-de-données">Charger un jeu de données</h2>
+<p>La traduction anglaise de jeu de données est dataset. On parlera donc indifféremment désormais de jeux de données ou de dataset.</p>
 <p>Pour tester le bon fonctionnement et être opérationnel en début de formation, nous avons construit et mettons à disposition <a href="./dataset_mco.html" target="_blank"><code>mini_fake_dataset_mco</code></a>, un mini jeu de données simili PMSI MCO, cohérent avec les jeux de données mis à disposition pour une formation <strong>Data PMSI avec R</strong>.</p>
 <p>Le jeu <a href="./dataset_mco.html" target="_blank"><code>mini_fake_dataset_mco</code></a> (qui est simplement un fichier texte) est à télécharger librement et à déposer dans un sous-répertoire <code>data</code> (on pourrait l’appeler autrement) à créer dans le répertoire <code>formation_data_pmsi</code>.</p>
 <p>Puis nous exécutons le code ci-dessous</p>
@@ -607,8 +542,8 @@ $ date_sortie_um                             &lt;chr&gt; "2022-07-02", "2022-03-
 <p>Nous recommandons aux participants médecins DIM de récupérer les données PMSI de leurs établissements au format JSON via l’<a href="https://www.pmsisoft.com/acces_pmsisoft_mco.html" target="_blank">accès Standard de PMSISoft</a></p>
 <p>Les noms des variables de nos fake dataset PMSI sont ceux des exports de l’accès Standard de PMSISoft en JSON : les médecins DIM peuvent donc ainsi coder en R, pendant la formation, sur les données PMSI de leurs établissements.</p>
 </section>
-<section id="eme-étape-le-pipe-et-son-fonctionnement" class="level2">
-<h2 class="anchored" data-anchor-id="eme-étape-le-pipe-et-son-fonctionnement">7eme étape : Le pipe <code>%&gt;%</code> et son fonctionnement</h2>
+<section id="le-pipe-et-son-fonctionnement" class="level2">
+<h2 class="anchored" data-anchor-id="le-pipe-et-son-fonctionnement">Le pipe <code>%&gt;%</code> et son fonctionnement</h2>
 <p>Comprendre ce qu’est et comment fonctionne le pipe <code>%&gt;%</code> est fondamental.<br>
 C’est ce qui permet de construire des scripts lisibles, complexes, testables et maintenables.</p>
 <p>L’idée de base est la suivante : puisque, pour la quasi-totalité des fonctions R et spécialement pour les fonctions du <code>tidyverse</code>, le premier argument de ces fonctions est un data frame (sur lequel va s’appliquer la fonction)<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> et qu’un script consiste, dans son principe, à <strong>enchaîner</strong> des traitements successifs, on va passer directement le résultat de chaque traitement (qui est donc un tibble modifié) au traitement suivant via le pipe <code>%&gt;%</code></p>
@@ -694,8 +629,8 @@ Je n’ai que 2 tibble : le tibble d’origine qui ne bouge pas et le tibble ré
 Je peux tester une suite de lignes de code en supprimant le pipe à l’endroit voulu.<br>
 <strong>Je peux modifier un traitement sans modifier les autres ni tout reprendre</strong> (manipulation très fréquente en PMSI où on va tester des hypothèses et des codages à la volée).</p>
 </section>
-<section id="eme-étape-quelques-manipulations-simples" class="level2">
-<h2 class="anchored" data-anchor-id="eme-étape-quelques-manipulations-simples">8eme étape : Quelques manipulations simples</h2>
+<section id="quelques-manipulations-simples" class="level2">
+<h2 class="anchored" data-anchor-id="quelques-manipulations-simples">Quelques manipulations simples</h2>
 <p>A partir du jeu <code>mini_fake_dataset_mco</code> que nous avons chargé à l’étape 6, quelques manipulations basiques avec des fonctions du tidyverse permettant de voir aussi le fonctionnement du pipe <code>%&gt;%</code></p>
 <section id="fonction-dplyrfilter" class="level3">
 <h3 class="anchored" data-anchor-id="fonction-dplyrfilter">fonction dplyr::filter()</h3>
@@ -784,31 +719,10 @@ Je peux tester une suite de lignes de code en supprimant le pipe à l’endroit 
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># résultat : le rum 2 du nas 411 avec 34 journées PMSI</span></span>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>jeu1</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-</section>
-<section id="résumé" class="level2">
-<h2 class="anchored" data-anchor-id="résumé">Résumé</h2>
-<p>En résumé :</p>
-<ul>
-<li>on a installé R et R Studio</li>
-<li>on a créé un projet et un premier fichier .R, on sait créer des fichiers .R</li>
-<li>on a retenu les noms et compris, dans une première approche, ce que sont :
-<ul>
-<li>les types de données logical, character, integer, numeric</li>
-<li>les vecteurs</li>
-<li>les data frames (ou tableaux de données) et les tibbles (= des data frames améliorés)</li>
-<li>les lists</li>
-</ul></li>
-<li>on a compris ce qu’est un package, on a installé les packages nécessaires</li>
-<li>on sait charger les packages nécessaires à chaque nouvelle session R Studio</li>
-<li>on sait ce qu’est le tidyverse (= une collection de packages pratiques) et on a commencé à se familiariser avec les noms des principaux packages (<code>dplyr</code>, <code>tidyr</code>, <code>stringr</code>, <code>refpmsi</code>)</li>
-<li>on a chargé le jeu <a href="./dataset_mco.html"><code>mini_fake_dataset_mco</code></a> et vérifié qu’on le voyait bien</li>
-<li>on a compris le fonctionnement et l’intérêt du <code>%&gt;%</code></li>
-<li>on a exécuté et compris le code des quelques manipulations simples, on a commencé à se familiariser avec les fonctions très courantes comme <code>dplyr::filter</code>, <code>dplyr::select</code>, <code>dplyr::mutate</code>, <code>dplyr::arrange</code>, <code>refpmsi::refpmsi</code></li>
-</ul>
-<p><a href="https://www.lespmsi.com/contact-pmsisoft" target="_blank">Contactez-nous pour toute question</a> (avec l’objet “Question formation Data PMSI avec R”)</p>
+<p><a href="https://www.lespmsi.com/contact-pmsisoft" target="_blank">Contact pour toute question</a> (avec l’objet “Question formation Data PMSI avec R”)</p>
 
 
+</section>
 </section>
 
 
@@ -816,7 +730,7 @@ Je peux tester une suite de lignes de code en supprimant le pipe à l’endroit 
 
 <ol>
 <li id="fn1"><p>par exemple, on ne distingue pas les notions de types, modes et classes de données, mais on se réfère au sens courant du mot type de données.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>il y a aussi les données <code>Date</code> par exemple dont nous parlerons dans la formation.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>il y a aussi les données <code>Date</code> par exemple<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>on ne discutera pas ici des différences entre df et tbl<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>voir par exemple la documenter de la fonction très courante <a href="https://dplyr.tidyverse.org/reference/filter.html" target="_blank">dplyr::filter</a> où le premier argument (.data) est bien le data frame sur lequel le filter va s’appliquer.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p><a href="https://dplyr.tidyverse.org/reference/filter.html" target="_blank">documentation fonction filter()</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -849,9 +763,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -863,17 +791,51 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copié");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copié");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/www\.datapmsi\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -883,8 +845,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -896,37 +867,299 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">Blog codé avec <a href="https://quarto.org/">Quarto</a></div>   
-    <div class="nav-footer-right"><a href="../about.qmd">Mentions légales</a> | © Copyright 2023 - DATAMIS</div>
+    <div class="nav-footer-left">
+<p>Blog codé avec <a href="https://quarto.org/">Quarto</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p><a href="../about.html">Mentions légales</a> | © Copyright 2023-2024 - DATAMIS</p>
+</div>
   </div>
 </footer>
+
 
 
 

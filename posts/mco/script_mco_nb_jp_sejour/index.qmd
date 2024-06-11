@@ -1,0 +1,39 @@
+---
+title: "<b>Nombre de JP d'un séjour MCO</b>"
+date: "2024-06-07"
+categories: [MCO]
+page-layout: full
+---
+
+## Introduction  
+
+Après avoir calculé, par séjour, les variables `date_entree_sejour` et `date_sortie_sejour`, on calcule `nb_jp_sejour`   
+
+On en profite pour calculer aussi le nombre de RUM par séjour `nb_rum_sejour`  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+
+sejour_extended <- mco$rum$rum %>% 
+    dplyr::select(nas,no_rum,date_entree_um,date_sortie_um) %>% 
+    dplyr::group_by(nas) %>% 
+    dplyr::mutate(date_entree_sejour = min(date_entree_um), date_sortie_sejour = max(date_sortie_um),
+                  nb_jp_sejour = as.integer(date_sortie_sejour-date_entree_sejour),
+                  nb_rum_sejour = dplyr::n()
+                  ) %>% 
+    dplyr::distinct(nas,date_entree_sejour,date_sortie_sejour,nb_jp_sejour,nb_rum_sejour)
+sejour_extended
+```
+
+## Commentaires  
+
+Ligne 7 : on force en integer le calcul de la différence de dates qui sinon serait une différence en journées, peu pratique à manipuler  
+
+PMSISoft MCO Standard : voir écran `Séjours > Base des séjours`  
+
+PMSISoft MCO professionnel : variable `nb_jp_sejour` et `nb_rum_sejour` présents dans `mco`  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

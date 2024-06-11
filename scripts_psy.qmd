@@ -1,0 +1,20 @@
+---
+title: "<span style='font-family: Boska; font-size: 2.75rem; font-weight: 800;'>Scripts PSY R</span>"
+lang: fr
+listing:
+  type: default
+  contents: posts/psy/**/*.qmd
+  sort: "date desc"
+  date-format: full
+  categories: true
+  sort-ui: false
+  filter-ui: false
+  fields: [date, title, categories]
+  feed: true
+toc: false
+---
+
+Il est conseillé de lire le [Guide des scripts](guide_post.qmd) et les [Pré-requis R](base_R.qmd) en préambule à la lecture et à l'exploitation des scripts.  
+
+## Liste des scripts PSY R  
+

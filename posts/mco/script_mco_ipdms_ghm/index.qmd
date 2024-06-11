@@ -1,0 +1,60 @@
+---
+title: "<b>IPDMS par GHM</b>"
+date: "2024-06-11"
+categories: [MCO,GHM,Casemix]
+page-layout: full
+---
+
+## Introduction  
+
+On se restreint aux séjours de sévérité 1,2,3 ou 4 d'au moins 1 nuitée et on suppose qu'on est en ex-DGF  
+
+Pour chaque séjour, on rapatrie la DMS OVALIDE correspondant à son GHM et à son année PMSI, à partir du référentiel annualisé OVALIDE GHMinfo [^1]  
+
+Pour ces séjours, pour chaque GHM, on calcule le nombre de séjours, le cumul des JP de ces séjours et l'IPDMS au sens "division du nombre de journées de l'établissement par le nombre de journées théoriques pour le périmètre considéré."  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+library(refpmsi)
+
+ovalide_ghminfo_dgf <- refpmsi::refpmsi(ovalide_ghminfo_dgf)
+
+casemix_ghm_ipdms <- mco$rum$rum %>% 
+    dplyr::select(annee_import,nas,ghm,severite,date_entree_um,date_sortie_um) %>% 
+    dplyr::mutate(.by = nas, date_entree_sejour = min(date_entree_um), date_sortie_sejour = max(date_sortie_um),
+                  nb_jp_sejour = as.integer(date_sortie_sejour-date_entree_sejour)) %>% 
+    dplyr::distinct(nas,ghm,severite,date_sortie_sejour,nb_jp_sejour) %>% 
+    dplyr::mutate(annee_sortie_sejour = as.character(lubridate::year(date_sortie_sejour))) %>% 
+    dplyr::filter(severite %in% c("1","2","3","4"), nb_jp_sejour >= 1L) %>% 
+    dplyr::left_join(ovalide_ghminfo_dgf %>% dplyr::select(annee_pmsi,ghm,dms_ovalide_ghm = dms),
+                     join_by(ghm == ghm, annee_sortie_sejour == annee_pmsi)) %>% 
+    dplyr::mutate(nb_jp_theorique_sejour = dms_ovalide_ghm*nb_jp_sejour) %>% 
+    dplyr::group_by(ghm) %>% 
+    dplyr::summarise(nb_sejour_ghm = dplyr::n(),
+                     nb_jp_sejour_ghm = sum(nb_jp_sejour),
+                     nb_jp_theorique_ghm = sum(nb_jp_theorique_sejour)
+                     ) %>% 
+    dplyr::mutate(ipdms_ghm = nb_jp_sejour_ghm/nb_jp_theorique_ghm)
+casemix_ghm_ipdms
+```
+
+## Commentaires  
+
+Ligne 8-9 : voir script "Nombre de JP d'un séjour MCO" pour le calcul de `nb_jp_sejour`  
+
+Ligne 11 : forçage `annee_sortie_sejour` en character pour préparer la jointure avec `ovalide_ghminfo_dgf`
+
+Pour aller + loin :  
+Calcul de l'écart à la moyenne en nb_jp avec nb_jp_theorique_ghm  
+Rapatriemeent libellé des GHM  
+Etc ...  
+
+PMSISoft MCO Professionnel : IPDMS calculée pour tous les casemix en CMD, sous-CMD, RGHM, GHM, Sévérité, DA, GA, GP. `ipdms_ghm`dans `mco` 
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  
+
+
+[^1]: Documentation du référentiel [ovalide_ghminfo_dgf](https://denisgustin.github.io/refpmsi/articles/ghm.html#ovalide---table-ghminfo_exdgf){target="_blank"}  

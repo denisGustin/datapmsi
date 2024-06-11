@@ -6,57 +6,62 @@ execute:
 lang: fr
 ---
 
-*Temps de lecture et mise en pratique : 1 heure à 2 heures*
-
 ## Introduction  
 
-Les formations **Data PMSI avec R** supposent que les participants disposent d'un environnement R de travail opérationnel avec au moins un jeu de données PMSI chargé et les packages R nécessaires à la formation.  
+La compréhension et la reproduction des scripts PMSI R supposent :  
+  
+\# un environnement R de travail opérationnel avec les packages R appelés dans les scripts (généralement des packages du [tidyverse](https://www.tidyverse.org/){target="_blank"} et le package de données [refpmsi](https://denisgustin.github.io/refpmsi/index.html){target="_blank"}  
+  
+\# une pratique minimale de R 
+  
+\# de disposer de données PMSI sous forme de tibbles exploitables.  
 
-Cette note est à consulter et pratiquer avant de participer à une de nos formations **Data PMSI avec R**. 
-Nous vous invitons à copier/coller et exécuter les blocs de code proposés ci-dessous en s'assurant que vous les comprenez bien.  
+Nous vous invitons à consulter le **[Guide des scripts](guide_post.qmd)**  
 
-Cette note est volontairement simplifiée au maximum, avec donc quelques abus de langage assumés[^1]
+Les explications proposées ci-dessous sont volontairement simplifiées, avec donc quelques abus de langage assumés[^1]  
 
-Si vous pratiquez déjà R, vous pouvez vous contenter d'un survol de la note, créer un projet dédié à la formation et charger les packages et le jeu de données [`mini_fake_dataset_mco`](dataset_mco.qmd).  
+Les supports et ressources en ligne pour apprendre et pratiquer R sont innombrables.  
 
-Les supports et ressources en ligne pour apprendre et pratiquer R sont innombrables. On y trouve toute l'aide possible.  
-2 ressources en français récentes, didactiques et accessibles pour apprendre R :  
+Quelques ressources en français récentes, didactiques et accessibles pour apprendre R :  
 [Introduction à R et au tidyverse par Julien Barnier](https://juba.github.io/tidyverse/index.html){target="_blank"}  
 [analyse-R par Joseph Larmarange](https://larmarange.github.io/analyse-R/){target="_blank"}  
+
 Ressources R et PMSI :  
 [Y a du PMSI dans R](http://pmsidansr.senis.org/){target="_blank"}  
 [Package refpmsi](https://denisgustin.github.io/refpmsi/index.html){target="_blank"}  
 
-[Contactez-nous pour toute question](https://www.lespmsi.com/contact-pmsisoft){target="_blank"} (avec l'objet "Question formation Data PMSI avec R")
+[Contact pour toute question](https://www.lespmsi.com/contact-pmsisoft){target="_blank"} (avec l'objet "Question formation Data PMSI avec R")
 
-## 1ere étape : Installer R  
+## Installer R  
 
-R s'installe sous Windows comme un simple exécutable (comme GENRSA ou GENRHA par exemple).  
+R s'installe sous Windows comme un simple exécutable (comme DRUIDES ou GENRHA par exemple).  
 [Télécharger R dans sa dernière version](https://cloud.r-project.org/bin/windows/base/){target="_blank"}  
 Accepter les options par défaut jusqu’à la fin de l’installation.  
 
-Nous recommandons une version de R >= à la version 4.1.0 de mai 2021.  
+Nous recommandons une version de R >= à la version 4.1.3 de mars 2022.  
 [Historique des versions de R](https://cran.r-project.org/bin/windows/base/old/){target="_blank"}  
 
-## 2eme étape : Installer R Studio  
+## Installer R Studio  
 
-**Après** avoir installé R, nous installons R Studio qui est l'environnement de développement de référence pour R.  
+**Après** avoir installé R, nous installons R Studio qui est un environnement de développement (IDE) de référence pour R.  
 Plus exactement, nous allons télécharger la version open source de R Studio, appelée "R Studio Desktop".
 
 R Studio Desktop s'installe comme un exécutable.  
 [Télécharger R Studio Desktop](https://posit.co/download/rstudio-desktop/){target="_blank"}  
 
-Nous recommandons une version de R Studio Desktop >= à la version 12.07.02  
-[Historique des versions de R Studio Desktop](https://www.rstudio.com/products/rstudio/older-versions/){target="_blank"}  
+Nous recommandons une version de R Studio Desktop >= version 2022.07.02  
+[Historique des versions de R Studio Desktop](https://docs.posit.co/previous-versions/rstudio/){target="_blank"}  
 
 A ce stade, vous disposez d'une icône R Studio sur votre bureau pour ouvrir R Studio.  
 [Tuto avec copies écrans pour installer R et R Studio](http://pmsidansr.senis.org/2022/06/15/installation-r-rstudio/){target="_blank"}  
 [Tuto pour découvrir R Studio](https://openclassrooms.com/fr/courses/4525256-initiez-vous-au-langage-r-pour-analyser-vos-donnees/6250851-prenez-en-main-r-et-r-studio){target="_blank"}  
 [Autre tuto](https://larmarange.github.io/analyse-R/premier-contact.html){target="_blank"}
 
-## 3eme étape : Créer un projet et un premier fichier .R 
+Autre IDE pour développer en R : [Visual Studio Code](https://code.visualstudio.com/){target="_blank}
 
-### Créer un projet 
+## Créer un projet et un premier fichier .R  
+
+### Créer un premier projet 
 
 Nous allons maintenant créer un projet sous R Studio que l'on propose d'appeler `formation_data_pmsi`.  
 Ce projet va regrouper tous les fichiers .R et autres informations en lien avec les exerices, données et scripts de la formation.  
@@ -79,7 +84,9 @@ Un fichier "untitled1" apparaît dans le quadrant haut gauche (le quadrant édit
 En cliquant sur l'icône "Sauvegarder" de ce quadrant, vous saisissez le nom du fichier, par exemple "intro.R"
 
 Premières lignes de code (à copier/coller)  
-```{r first_script}
+```{r}
+#| label: first_script
+type_data_learning
 # les lignes de commentaires commencent par #
 
 # cliquer sur alt + entrée à la fin chaque ligne de code pour exécuter la ligne
@@ -106,7 +113,7 @@ En quittant R Studio, ne jamais sauvegarder le .RData si R Studio vous le demand
 
 [Contactez-nous pour toute question](https://www.lespmsi.com/contact-pmsisoft){target="_blank"} (avec l'objet "Question formation Data PMSI avec R")
 
-## 4eme étape : Minimum à connaître  
+## Minimum de R à connaître  
 
 Il y a 4 concepts à connaître : les types de données, les vecteurs, les data frames ou tibbles et les lists
 
@@ -119,7 +126,8 @@ Chaque information (un code CIM, un code d'UM, un initulé, une valorisation T2A
 
 Il y a 4 types principaux de données (logical, character, integer, numeric) que nous illustrons ci-dessous[^5] 
 
-```{r type_data_learning}
+```{r}
+#| label: type_data_learning
 # type logical 
 # 2 valeurs possibles : TRUE ou FALSE
 # exemple. Pour indiquer qu'on excluera les moins de 18 ans d'une analyse
@@ -147,7 +155,8 @@ valo_t2a
 Un vecteur est un ensemble de valeurs [du même type]{.underline}.  
 On parlera ainsi d'un vecteur logique, d'un vecteur character, etc...
 
-```{r vector_learning}
+```{r}
+#| label: vector_learning
 
 # un vecteur est créé par la fonction c()
 ## ici un vecteur de codes UM
@@ -205,9 +214,9 @@ Une list est donc la structure de données la plus souple, la plus puissante, ma
 Le jeu de données [`fake_dataset_mco`](dataset_mco.qmd) des formations MCO est ainsi une list de tibbles (un tbl simili partie fixe des RSS, un tbl simili RSA, un tbl simili actes CCAM, un tble simili DAS, un tbl de DMI, un tbl simili ficium) : nous manipulons donc un seul objet au lieu de 6 objets.   
 
 
-## 5eme étapes : Installer et charger les packages  
+## Installer et charger des packages  
 
-Un package est une réunion cohérente de fonctions et de données que l'on va pouvoir utiliser en appelant ses fonctions et ses données sans avoir à se préoccuper de la façon dont elles sont codées.  
+De manière simplifiée, on peut dire qu'un package est une réunion cohérente de fonctions et de données que l'on va pouvoir utiliser en appelant ses fonctions et ses données sans avoir à se préoccuper de la façon dont elles sont codées.  
 
 Une fois installé, un package sera à charger à chaque nouvelle session R Studio.  
 
@@ -232,7 +241,8 @@ Principaux packages du tidyverse utilisés en analyse PMSI :
 Dans le tidyverse, on trouve aussi les packages lubridate (pour manipuler des dates), purrr (pour programmation fonctionnelle), forcats (pour manipuler des facteurs), ...
 
 Installation des packages du tidyverse  
-```{r tidyverse_install}
+```{r}
+#| label: tidyverse_install
 # suffisant pour les formations [Requêtes MCO], [Requêtes SSR] et [Requêtes PSY]
 vect_pkg <- c("tidyverse")
 
@@ -263,7 +273,9 @@ Maintenant que nous avons installé les packages nécessaires, nous allons les c
 
 Le code ci-dessous est donc à exécuter à chaque nouvelle session de travail, raison pour laquelle on dispose généralement en tête du fichier .R sur lequel on travaille un code, comme celui proposé ci-dessous, pour charger ces packages.  
 
-```{r dataset_install_package}
+```{r}
+#| label: dataset_install_package
+
 # Charger un package. Ici le package dplyr 
 library(dplyr)
 
@@ -278,9 +290,9 @@ invisible(lapply(list_packages, library, character.only = TRUE))
 pacman::p_load(char = list_packages)
 ```
 
-## 6eme étape : Charger un jeu de données
+## Charger un jeu de données  
 
-La traduction anglaise de jeu de données est dataset. On parlera donc indifféremment de jeux de données ou de dataset  
+La traduction anglaise de jeu de données est dataset. On parlera donc indifféremment désormais de jeux de données ou de dataset.  
 
 Pour tester le bon fonctionnement et être opérationnel en début de formation, nous avons construit et mettons à disposition [`mini_fake_dataset_mco`](dataset_mco.qmd){target="_blank"}, un mini jeu de données simili PMSI MCO, cohérent avec les jeux de données mis à disposition pour une formation **Data PMSI avec R**.  
 
@@ -319,7 +331,7 @@ Nous recommandons aux participants médecins DIM de récupérer les données PMS
 
 Les noms des variables de nos fake dataset PMSI sont ceux des exports de l'accès Standard de PMSISoft en JSON : les médecins DIM peuvent donc ainsi coder en R, pendant la formation, sur les données PMSI de leurs établissements.  
 
-## 7eme étape : Le pipe `%>%` et son fonctionnement  
+## Le pipe `%>%` et son fonctionnement  
 
 Comprendre ce qu'est et comment fonctionne le pipe `%>%` est fondamental.  
 C'est ce qui permet de construire des scripts lisibles, complexes, testables et maintenables.  
@@ -412,7 +424,7 @@ Je n'ai que 2 tibble : le tibble d'origine qui ne bouge pas et le tibble résult
 Je peux tester une suite de lignes de code en supprimant le pipe à l'endroit voulu.  
 **Je peux modifier un traitement sans modifier les autres ni tout reprendre** (manipulation très fréquente en PMSI où on va tester des hypothèses et des codages à la volée).  
 
-## 8eme étape : Quelques manipulations simples  
+## Quelques manipulations simples  
 
 A partir du jeu `mini_fake_dataset_mco` que nous avons chargé à l'étape 6, quelques manipulations basiques avec des fonctions du tidyverse permettant de voir aussi le fonctionnement du pipe `%>%`  
 
@@ -512,30 +524,11 @@ jeu1 <- jeu %>%
 jeu1
 ```
 
-
-## Résumé 
-
-En résumé :  
-
--   on a installé R et R Studio
--   on a créé un projet et un premier fichier .R, on sait créer des fichiers .R
--   on a retenu les noms et compris, dans une première approche, ce que sont :
-    -   les types de données logical, character, integer, numeric
-    -   les vecteurs
-    -   les data frames (ou tableaux de données) et les tibbles (= des data frames améliorés)
-    -   les lists
--   on a compris ce qu'est un package, on a installé les packages nécessaires
--   on sait charger les packages nécessaires à chaque nouvelle session R Studio
--   on sait ce qu'est le tidyverse (= une collection de packages pratiques) et on a commencé à se familiariser avec les noms des principaux packages (`dplyr`, `tidyr`, `stringr`, `refpmsi`)
--   on a chargé le jeu [`mini_fake_dataset_mco`](dataset_mco.qmd) et vérifié qu'on le voyait bien
--   on a compris le fonctionnement et l'intérêt du `%>%`
--   on a exécuté et compris le code des quelques manipulations simples, on a commencé à se familiariser avec les fonctions très courantes comme `dplyr::filter`, `dplyr::select`, `dplyr::mutate`, `dplyr::arrange`, `refpmsi::refpmsi`
-
-[Contactez-nous pour toute question](https://www.lespmsi.com/contact-pmsisoft){target="_blank"} (avec l'objet "Question formation Data PMSI avec R")  
+[Contact pour toute question](https://www.lespmsi.com/contact-pmsisoft){target="_blank"} (avec l'objet "Question formation Data PMSI avec R")  
 
 [^1]: par exemple, on ne distingue pas les notions de types, modes et classes de données, mais on se réfère au sens courant du mot type de données.  
 [^2]: depuis mai 2021 et la version 4.1.0 de R, il existe |> nouveau pipe natif dans R, alternative à %>% du tidyverse  
 [^3]: on ne discutera pas ici des différences entre df et tbl
 [^4]: voir par exemple la documenter de la fonction très courante [dplyr::filter](https://dplyr.tidyverse.org/reference/filter.html){target="_blank"} où le premier argument (.data) est bien le data frame sur lequel le filter va s'appliquer.  
-[^5]: il y a aussi les données `Date` par exemple dont nous parlerons dans la formation.  
+[^5]: il y a aussi les données `Date` par exemple  
 [^6]: [documentation fonction filter()](https://dplyr.tidyverse.org/reference/filter.html){target="_blank"}

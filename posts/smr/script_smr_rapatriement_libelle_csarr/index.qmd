@@ -1,0 +1,43 @@
+---
+title: "<b>Rapatriement libellé CSARR</b>"
+date: "2024-06-08"
+categories: [SMR,CSARR]
+page-layout: full
+---
+
+## Introduction  
+
+Script ultra-classique permettant de rapatrier un libellé, ici libellé des actes CSARR  
+
+A partir du référentiel annualisé des actes CSARR[^1], on créé un référentiel dédoublonné des seuls libellés par acte CSARR. Puis on rattache ce référentiel à la table des actes CSARR produite à partir des "blocs CSARR" des RHS.  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+library(refpmsi)
+
+csarr_code <- refpmsi::refpmsi(csarr_code)
+
+csarr_libelle <-  csarr_code %>% 
+    dplyr::slice_head(n = 1, by = csarr_code) %>% 
+    dplyr::select(csarr_code,csarr_libelle)
+csarr_libelle
+
+csarr_extend <- smr$rhs$csarr %>% 
+    dplyr::select(annee_import, code_csarr) %>% 
+    dplyr::left_join(csarr_libelle, join_by(code_csarr == csarr_code))
+csarr_extend
+```
+
+## Commentaires  
+
+Ligne 7 : permet de ne retenir que le dernière libellé actif de l'acte CSARR  
+
+PMSISoft SMR Professionnel : variables de libellé, dont comme ici `csarr_libelle` incluses dans `smr`  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  
+
+
+[^1]: Documentation du référentiel [csarr_code](https://denisgustin.github.io/refpmsi/articles/csarr.html#csarr-code){target="_blank"}  

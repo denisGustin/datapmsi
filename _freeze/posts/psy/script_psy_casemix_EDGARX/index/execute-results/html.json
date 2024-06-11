@@ -1,0 +1,15 @@
+{
+  "hash": "186b29e7a3cb186adb50def2f9e3e026",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b>Casemix basique EDGARX</b>\"\ndate: \"2024-06-08\"\ncategories: [PSY,RAA,EDGARX]\npage-layout: full\n---\n\n\n## Introduction  \n\nPour chaque nature d'acte EDGARX du jeu de données, calcul du nombre d'actes, du nombre d'IPP uniques, du nombre de categories professionnelles d'intervenant différentes et du % en nombre d'actes.  \n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\n\nraa <- psy$raa$raa\n\ncasemix_edgarx <- raa %>% \n    dplyr::select(ipp,nature_acte,categorie_professionnelle_intervenant) %>% \n    dplyr::group_by(nature_acte) %>% \n    dplyr::summarise(nb_acte = dplyr::n(),\n                     nb_ipp = dplyr::n_distinct(ipp),\n                     nb_categorie_professionnelle_intervenant = dplyr::n_distinct(categorie_professionnelle_intervenant)\n                     ) %>% \n    dplyr::arrange(desc(nb_acte)) %>% \n    dplyr::mutate(percent_acte = nb_acte/sum(nb_acte), .after = nb_acte)\ncasemix_edgarx\n```\n:::\n\n\n## Commentaires  \n\nLigne 12 : on trie sur le nombre descendant de `nb_acte`  \n\nLigne 13 : avec l'argument `.after`, on positionne directement la variable `percent_acte` calculée après `nb_acte`  \n\nPMSISoft PSY Standard : casemix disponible dans l'écran `Actes ambulatoires > Casemix EDGARX > Casemix EDGARX`  \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

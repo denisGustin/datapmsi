@@ -1,0 +1,34 @@
+---
+title: "<b>Actes CCAM avec extension documentaire obligatoire mais absente</b>"
+date: "2024-06-09"
+categories: [MCO,CCAM]
+page-layout: full
+---
+
+## Introduction  
+
+Rappel : l'extension documentaire est obligatoire pour les actes d'anesthésie  
+
+On suppose ici que la table des actes CCAM intègre la clé d'identification des RUM (nas,no_rum) permettant de rapprocher les RUM et les actes CCAM  
+
+On repère les actes d'anesthésie via activite_ccam == 4  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+
+actes_ccam_no_extension_documentaire <-mco$rum$ccam %>% 
+    dplyr::select(nas,no_rum,code_ccam,activite_ccam,extension_documentaire_ccam) %>% 
+    dplyr::filter(activite_ccam == "4", is.na(extension_documentaire_ccam))
+actes_ccam_no_extension_documentaire
+```
+
+## Commentaires  
+
+PMSISoft MCO Standard : la clé (nas, no_rum) est incluse par défaut dans `mco$rum$ccam`  
+
+PMSISoft MCO Professionnel : écran `Codage CCAM > Base des actes CCAM` et filtrage de variables `activite_ccam Egal à 4 ET extension_documentaire_ccam Est vide`  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

@@ -1,0 +1,15 @@
+{
+  "hash": "6a18b9a82afa068b671a2899fa5c2165",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b>Rapatriement libellé CIM-10 du DP des RPS</b>\"\ndate: \"2024-06-07\"\ncategories: [PSY,RPS,CIM]\npage-layout: full\n---\n\n\n## Introduction  \n\nScript très simple et très classique pour enrichir les données PMSI via le rapatriement des libellés, ici le libellé CIM-10 du DP de chaque RPS du jeu de données.  \n\nDocumentation du référentiel [cim_libelle](https://denisgustin.github.io/refpmsi/articles/cim.html#cim-libell%C3%A9){target=\"_blank\"}  \n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\nlibrary(refpmsi)\n\ncim_libelle <- refpmsi::refpmsi(cim_libelle)\n\n# everything() dans le select() est une façon de sélectionner toutes les variables natives du rps, dont la variable dp \nrps_extended <- psy$rps$rps %>% \n    dplyr::select(everything()) %>% \n    dplyr::left_join(cim_libelle %>% dplyr::select(cim_code, dp_libelle = cim_libelle), join_by(dp == cim_code))\nrps_extended\n```\n:::\n\n\n## Commentaires  \n\nLigne 8 : `everything()` est pour `tidyselect::everything()` sachant que le package `tidyselect::` est chargé indirectement via le `dplyr`  \n\nLigne 9 : on profite du `dplyr::select()` pour renommer `cim_libelle` en `dp_libelle` plus cohérent  \n\nPMSISoft PSY Professionnel : `dp_libelle` est dans liste des variables de `psy$rps$rps`  \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

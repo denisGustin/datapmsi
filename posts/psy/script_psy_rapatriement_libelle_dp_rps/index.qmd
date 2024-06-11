@@ -1,0 +1,42 @@
+---
+title: "<b>Rapatriement libellé CIM-10 du DP des RPS</b>"
+date: "2024-06-07"
+categories: [PSY,RPS,CIM]
+page-layout: full
+---
+
+## Introduction  
+
+Script très simple et très classique pour enrichir les données PMSI via le rapatriement des libellés, ici le libellé CIM-10 du DP de chaque RPS du jeu de données, à partir du référentiel `cim_libelle` [^1]  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+library(refpmsi)
+
+cim_libelle <- refpmsi::refpmsi(cim_libelle)
+
+# everything() dans le select() est une façon de sélectionner toutes les variables natives du rps, dont la variable dp 
+rps_extended <- psy$rps$rps %>% 
+    dplyr::select(everything()) %>% 
+    dplyr::left_join(cim_libelle %>% dplyr::select(cim_code, dp_libelle = cim_libelle), join_by(dp == cim_code))
+rps_extended
+```
+
+## Commentaires  
+
+Ligne 8 : `everything()` est pour `tidyselect::everything()` sachant que le package `tidyselect::` est chargé indirectement via le `dplyr`  
+
+Ligne 9 : on profite du `dplyr::select()` pour renommer `cim_libelle` en `dp_libelle` plus cohérent  
+
+Ligne 9 : le `dplyr::left_join()` ajoute `dp_libelle` en dernière position  
+
+PMSISoft PSY Standard : voir écran `RPS > Base des RPS`  
+
+PMSISoft PSY Professionnel : `dp_libelle` est dans liste des variables de `psy$rps$rps`  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  
+
+[^1]: documentation du référentiel [cim_libelle](https://denisgustin.github.io/refpmsi/articles/cim.html#cim-libell%C3%A9){target="_blank"}  

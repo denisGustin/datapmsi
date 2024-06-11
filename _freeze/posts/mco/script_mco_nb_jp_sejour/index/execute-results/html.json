@@ -1,0 +1,15 @@
+{
+  "hash": "c5037b6af3aa540cf3e7b459701be471",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b>Nombre de JP d'un séjour MCO</b>\"\ndate: \"2024-06-07\"\ncategories: [MCO]\npage-layout: full\n---\n\n\n## Introduction  \n\nAprès avoir calculé, par séjour, les variables `date_entree_sejour`et `date_sortie_sejour`, on calcule `nb_jp_sejour`   \n\nOn en profite pour calculer aussi le nombre de RUM par séjour `nb_rum_sejour`  \n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\n\nsejour_extended <- mco$rum$rum %>% \n    dplyr::select(nas,no_rum,date_entree_um,date_sortie_um) %>% \n    dplyr::group_by(nas) %>% \n    dplyr::mutate(date_entree_sejour = min(date_entree_um), date_sortie_sejour = max(date_sortie_um),\n                  nb_jp_sejour = as.integer(date_sortie_sejour-date_entree_sejour),\n                  nb_rum_sejour = dplyr::n()\n                  ) %>% \n    dplyr::distinct(nas,date_entree_sejour,date_sortie_sejour,nb_jp_sejour,nb_rum_sejour)\nsejour_extended\n```\n:::\n\n\n## Commentaires  \n\nPMSISoft MCO Standard : écran `Séjours > Base des séjours`  \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

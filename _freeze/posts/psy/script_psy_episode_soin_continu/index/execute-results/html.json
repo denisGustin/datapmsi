@@ -1,0 +1,15 @@
+{
+  "hash": "70a47f2c7d0aa212b72dd06944eefa99",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b></b>\"\ndate: \"2024-06-11\"\ncategories: [PSY,RPS]\npage-layout: full\n---\n\n\n## Introduction  \n\nPour la définition des épisodes de soin continu en hospitalisation complète, voir [ici](https://www.scansante.fr/sites/default/files/content/376/notice_rme_psy_hospitalisations_longues_en_psychiatrie.pdf){target=\"_blank\"}  \n\nDans une première étape, sur la base des RPS de temps complet, on repère et comptabilise par IPP, les épisodes de soin continu.  \n\nDans une 2eme étape, on passe en IPP et on calcule le nombre de séjours de l'IPP.  \n\nAu final, on a un tibble par IPP avec, pour chaque IPP, le nombre de séjours temps complet et le nombre d'épisodes soin continu.  \n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\n\nrps_episode_soin_continu <- psy$rps$rps %>% \n    dplyr::select(forme_activite,ipp,no_sejour,date_debut_sequence,date_fin_sequence,nb_jours_presence) %>% \n    dplyr::filter(forme_activite %in% c(\"01\",\"01D\",\"01S\",\"01P\",\"02\",\"03\",\"04\",\"05\",\"06\",\"07\")) %>% \n    dplyr::group_by(ipp) %>% \n    dplyr::arrange(date_debut_sequence, .by_group = TRUE) %>% \n    dplyr::mutate(same_episode_soin_continu_ipp = as.integer(date_debut_sequence-dplyr::lag(date_fin_sequence, default = date_debut_sequence[1])) <= 1L,\n                  cumsum_episode_soin_continu_ipp = cumsum(!same_episode_soin_continu_ipp)+1L,\n                  nb_episode_soin_continu_ipp = max(cumsum_episode_soin_continu_ipp)) %>% \n    dplyr::ungroup()\nrps_episode_soin_continu\n\nipp_episode_soin_continu <- rps_episode_soin_continu %>% \n    dplyr::distinct(ipp,no_sejour,nb_episode_soin_continu_ipp) %>% \n    dplyr::mutate(.by = ipp, nb_sejour_ipp = dplyr::n()) %>% \n    dplyr::distinct(ipp,nb_sejour_ipp,nb_episode_soin_continu_ipp)\nipp_episode_soin_continu\n```\n:::\n\n\n## Commentaires  \n\nLigne 7 : l'argument `.by_group = TRUE` dans le `dplyr::arrange()` permet de trier au sens d'un regroupement.  \n\nLigne 9 : le +1L dans le cumsum() est là pour faire démarrer le comptage des épisodes de soin continu à 1 et non à 0  \n\nPour aller + loin :  \nRepérage concomitant des épisodes de soin concentré (séquences séparées de 0 à 7 jours dans un même épisode)  \nAttribution d'un code aux épisodes de soin continu  \n\nPMSISoft PSY Standard : écran `Séjours > Base des séjours`, affichage du nombre d'épisodes de soin continu  et du nombre d'épisodes de soin concentré au dessus du tableau de résultats.  \n\nPMSISoft PSY Professionnel : écran `Séjours > Base des séjours`, calcul, pour chaque séjour, des variables `ordre_episode_soin_continu_ipp`, `nb_episode_soin_continu_ipp`, `ordre_episode_soin_concentre_ipp`et `nb_episode_soin_concentre_ipp`  \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

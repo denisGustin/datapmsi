@@ -1,0 +1,15 @@
+{
+  "hash": "f374596c82a2db653fab37858da7f0ae",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b>Nombre de JP par RHS</b>\"\ndate: \"2024-06-07\"\ncategories: [SMR,RHS]\npage-layout: full\n---\n\n\n## Introduction  \n\nPour chaque RHS, on va compter le nombre de \"1\" dans les variables natives `jp_hors_we` et `jp_we`, en écrasant leur valeur initiale (suite de \"0\" et de \"1\") par la valeur calculée, puis on additionne ces 2 variables.  \n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\n\nrhs_extend <- smr$rhs$rhs %>% \n    dplyr::select(nas,no_semaine,no_um,jp_we,jp_hors_we) %>% \n    dplyr::mutate(across(c(jp_we,jp_hors_we), ~ stringr::str_count(.x,\"1\")),\n                  nb_jp_rhs = jp_we+jp_hors_we)\nrhs_extend\n```\n:::\n\n\n## Commentaires  \n\nLigne 5 : utilisation ultra-classique de la fonction àcross()` pour appliquer un même traitement à plusieurs variables en une seule ligne   \n\nPMSISoft SMR Standard : voir écran `RHS > Base des RHS`  \n\nPMSISoft SMR Professionnel : variable `nb_jp_rhs` présent dans `smr$rhs$rhs`  \n\n[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target=\"_blank\"}  \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

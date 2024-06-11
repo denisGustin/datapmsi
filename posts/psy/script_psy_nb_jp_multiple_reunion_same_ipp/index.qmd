@@ -1,0 +1,34 @@
+---
+title: "<b>IPP avec plusieurs actes de Réunion le même jour</b>"
+date: "2024-06-10"
+categories: [PSY,RAA]
+page-layout: full
+---
+
+## Introduction  
+
+Pour chaque configuration (ipp,date_acte), on calcule le nombre d'acte de Réunion, puis on ne retient que les configurations avec au moins 2 actes de Réunion.  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+
+same_ipp_date_acte <- psy$raa$raa %>% 
+    dplyr::select(ipp,nature_acte,date_acte) %>% 
+    dplyr::mutate(.by = c(ipp,date_acte,nature_acte),
+                  sum_same_ipp_date_acte_nature_acte_R = sum(nature_acte == "R")) %>% 
+    dplyr::filter(sum_same_ipp_date_acte_nature_acte_R >= 2L) %>% 
+    dplyr::distinct()
+same_ipp_date_acte
+```
+
+## Commentaires  
+
+Voir le contrôle Qualité OVALIDE "[1.Q.11.RIPP] : Nombre de journées avec plusieurs actes de réunions pour un même IPP".  
+On améliore ici en produisant la variable `sum_same_ipp_date_acte_nature_acte_R` qui est le nombre d'actes de Réunion  
+
+PMSISoft PSY Standard : voir écran `Requêtes PSY > Requêtes RAA` et la requête `Plusieurs actes de réunions pour un même IPP et une même date [1.Q.11.RIPP]`  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

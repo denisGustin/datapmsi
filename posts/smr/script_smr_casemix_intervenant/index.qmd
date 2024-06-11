@@ -1,0 +1,47 @@
+---
+title: "<b>Casemix basique Intervenant CSARR</b>"
+date: "2024-06-11"
+categories: [SMR,CSARR,Casemix]
+page-layout: full
+---
+
+## Introduction  
+
+Par type d'intervenant, calcul du nombre d'actes, du nombre de réalisations CSARR et % du nombre d'actes et rapatriement libellé intervenant. 
+
+On enrichie en rapatriant le libellé des types d'intervenant via le référentiel `csarr_intervenant` [^1]  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+library(refpmsi)
+
+csarr_intervenant <- refpmsi::refpmsi(csarr_intervenant)
+
+casemix_csarr_intervenant <- smr$rhs$csarr %>% 
+    dplyr::select(annee_import,code_csarr,nb_realisation_csarr,code_intervenant_csarr) %>% 
+    dplyr::group_by(code_intervenant_csarr) %>% 
+    dplyr::summarise(nb_acte_csarr = dplyr::n(),
+                     nb_acte_different_csarr = dplyr::n_distinct(code_csarr),
+                     nb_realisation_csarr = sum(nb_realisation_csarr)
+    ) %>% 
+    dplyr::arrange(desc(nb_realisation_csarr)) %>% 
+    dplyr::mutate(percent_realisation_csarr = nb_realisation_csarr/sum(nb_realisation_csarr)) %>% 
+    dplyr::left_join(csarr_intervenant, join_by(code_intervenant_csarr == csarr_intervenant_code)) %>% 
+    dplyr::select(code_intervenant_csarr,csarr_intervenant_libelle,nb_acte_csarr,nb_acte_different_csarr,
+                  nb_realisation_csarr,percent_realisation_csarr)
+casemix_csarr_intervenant
+```
+
+## Commentaires  
+
+Ligne 16 : le `dplyr::select()` permet de réordonner les variables  
+
+PMSISoft SMR Standard : voir écran `Codage CSARR > Casemix CSARR > Casemix Intervenant`
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  
+
+
+[^1]: Documentation du référentiel [csarr_intervenant](https://denisgustin.github.io/refpmsi/articles/csarr.html#csarr-intervenant){target="_blank"}  

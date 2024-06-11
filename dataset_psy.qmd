@@ -1,7 +1,0 @@
----
-title: "Jeux PMSI PSY"
-lang: fr
----
-
-## A venir
-

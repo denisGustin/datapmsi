@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.189">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data PMSI - Formations Data PMSI avec R</title>
+<title>Data PMSI -</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -30,6 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -45,7 +47,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "Pas de résultats",
     "search-matching-documents-text": "documents trouvés",
@@ -54,250 +62,601 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "correspondance de plus dans ce document",
     "search-more-matches-text": "correspondances de plus dans ce document",
     "search-clear-button-title": "Effacer",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Annuler",
-    "search-submit-button-title": "Envoyer"
+    "search-submit-button-title": "Envoyer",
+    "search-label": "Recherche"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
 
-</head>
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="alternate" type="application/rss+xml" title="Data PMSI" href="index.xml" data-external="1"></head>
 
 <body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Data PMSI</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Recherche"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Basculer la navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./planning.html">Planning des formations</a>
+    <a class="nav-link active" href="./prestation.html" aria-current="page"> 
+<span class="menu-text">Live coding PMSI R</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./pedagogie.html">Pédagogie</a>
+    <a class="nav-link" href="./guide_post.html"> 
+<span class="menu-text">Guide des scripts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./prestation.html">Prestations</a>
+    <a class="nav-link" href="./base_R.html"> 
+<span class="menu-text">Pre-requis R</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-jeux-de-données" role="button" data-bs-toggle="dropdown" aria-expanded="false">Jeux de données</a>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-jeux-de-données" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Jeux de données</span>
+    </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-jeux-de-données">    
         <li>
     <a class="dropdown-item" href="./dataset_mco.html">
  <span class="dropdown-text">Jeux PMSI MCO</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="./dataset_ssr.html">
- <span class="dropdown-text">Jeux PMSI SSR</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./dataset_psy.html">
- <span class="dropdown-text">Jeux PMSI PSY</span></a>
-  </li>  
     </ul>
   </li>
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/denisGustin/datapmsi"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/denisGustin/datapmsi"> <i class="bi bi-github" role="img">
 </i> 
- </a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Formations Data PMSI avec R</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./formations/pmsi_initiation.html" class="sidebar-item-text sidebar-link">Le PMSI avec R</a>
+  <a href="./prestation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Live coding PMSI R</span></a>
   </div>
 </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Formations MCO</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./formations/pmsi_mco_requete.html" class="sidebar-item-text sidebar-link">Requêtes MCO</a>
+  <a href="./guide_post.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guide des scripts</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Formations SSR</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./formations/pmsi_ssr_requete.html" class="sidebar-item-text sidebar-link">Requêtes SSR</a>
+  <a href="./scripts_mco.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scripts MCO</span></a>
   </div>
 </li>
-      </ul>
-  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scripts_smr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scripts SMR</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scripts_psy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scripts PSY</span></a>
+  </div>
+</li>
     </ul>
     </div>
+    
 </nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Sur cette page</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
-  <ul class="collapse">
-  <li><a href="#objectifs-dapprentissage" id="toc-objectifs-dapprentissage" class="nav-link" data-scroll-target="#objectifs-dapprentissage">Objectifs d’apprentissage</a></li>
-  <li><a href="#ces-formations-sont-elles-pour-moi" id="toc-ces-formations-sont-elles-pour-moi" class="nav-link" data-scroll-target="#ces-formations-sont-elles-pour-moi">Ces formations sont-elles pour moi ?</a></li>
-  <li><a href="#pourquoi-r" id="toc-pourquoi-r" class="nav-link" data-scroll-target="#pourquoi-r">Pourquoi R ?</a></li>
-  </ul></li>
-  <li><a href="#pré-requis" id="toc-pré-requis" class="nav-link" data-scroll-target="#pré-requis">Pré-requis</a>
-  <ul class="collapse">
-  <li><a href="#pré-requis-pmsi" id="toc-pré-requis-pmsi" class="nav-link" data-scroll-target="#pré-requis-pmsi">Pré-requis PMSI</a></li>
-  <li><a href="#pré-requis-r" id="toc-pré-requis-r" class="nav-link" data-scroll-target="#pré-requis-r">Pré-requis R</a></li>
-  </ul></li>
-  <li><a href="#pédagogie" id="toc-pédagogie" class="nav-link" data-scroll-target="#pédagogie">Pédagogie</a></li>
-  <li><a href="#formateur" id="toc-formateur" class="nav-link" data-scroll-target="#formateur">Formateur</a></li>
-  </ul>
-</nav>
-    </div>
+    <h5 class="quarto-listing-category-title">Catégories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Tous <span class="quarto-category-count">(15)</span></div><div class="category" data-category="CCAM">CCAM <span class="quarto-category-count">(1)</span></div><div class="category" data-category="CIM">CIM <span class="quarto-category-count">(1)</span></div><div class="category" data-category="CSARR">CSARR <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Casemix">Casemix <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Dépendance">Dépendance <span class="quarto-category-count">(1)</span></div><div class="category" data-category="EDGARX">EDGARX <span class="quarto-category-count">(1)</span></div><div class="category" data-category="GHM">GHM <span class="quarto-category-count">(1)</span></div><div class="category" data-category="IPP">IPP <span class="quarto-category-count">(1)</span></div><div class="category" data-category="MCO">MCO <span class="quarto-category-count">(5)</span></div><div class="category" data-category="PSY">PSY <span class="quarto-category-count">(5)</span></div><div class="category" data-category="RAA">RAA <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RHS">RHS <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RPS">RPS <span class="quarto-category-count">(2)</span></div><div class="category" data-category="SMR">SMR <span class="quarto-category-count">(5)</span></div><div class="category" data-category="T2A">T2A <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Formations Data PMSI avec R</span></h1>
-</div>
+<main class="content column-body" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta">
 
-    
-    
-  </div>
-  
-
-</header>
-
-<p><span style="font-size: 1.75rem; font-weight: 400;">Comment devenir autonome dans l’analyse PMSI de ses établissements</span></p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-Prochaines formations
+<div class="callout-title-container flex-fill">
+Live coding PMSI R
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><a href="./formations/pmsi_initiation.html">Le PMSI avec R</a><br>
-<strong>vendredi 13 octobre 2023</strong> - 9:00 - 17:00 - En ligne</p>
-<p><a href="./formations/pmsi_mco_requete.html">Requêtes MCO</a><br>
-<strong>vendredi 17 novembre</strong> et <strong>vendredi 24 novembre 2023</strong> - 9:00 - 17:00 - En ligne</p>
+<p>Session à l’heure pour vous accompagner dans le codage de vos scripts PMSI R.<br>
+<a href="./prestation.html">Principes, exemples de sujets, mise en oeuvre, l’expert, tarif et réservation</a></p>
 </div>
 </div>
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<section id="objectifs-dapprentissage" class="level2">
-<h2 class="anchored" data-anchor-id="objectifs-dapprentissage">Objectifs d’apprentissage</h2>
-<p>Les formations <strong>Data PMSI avec R</strong> s’adressent aux professionnels du PMSI ou aux professionnels amenés à manipuler des données issues du PMSI.</p>
-<p>Ces formations, organisées par champ PMSI, visent à permettre aux professionnels du PMSI ou liées au PMSI de produire eux-mêmes, directement à partir des données PMSI brutes de leurs établissements, de manière efficace, des traitements et analyses PMSI de haute qualité, performantes, reproductibles et documentées.</p>
-<p>Après chaque formation <strong>Data PMSI avec R</strong>, les participants acquièrent une savoir-faire R minimal pour une première autonomie en contexte PMSI MCO, une vision de ce qu’il faut savoir et maîtriser en R pour le PMSI et une bibliothèque de requêtes et de scripts d’analyses PMSI en R à décliner sur l’activité de leurs établissements.</p>
-<p>Pendant la journée ou les 2 journées de la formation, les participants découvrent et apprennent, à travers des exemples concrets et gradués, les familles d’analyse PMSI possibles et réalistes aujourd’hui avec R.</p>
-<p>Ils s’exercent, en live coding avec le formateur, à produire ces analyses PMSI avec R sur des jeux de données simili PMSI réalistes et/ou sur les données PMSI de leurs établissements.</p>
-</section>
-<section id="ces-formations-sont-elles-pour-moi" class="level2">
-<h2 class="anchored" data-anchor-id="ces-formations-sont-elles-pour-moi">Ces formations sont-elles pour moi ?</h2>
-<p>Ces formations vous conviendront si vous répondez oui à ces questions :</p>
-<ul>
-<li>Souhaitez-vous créer vous-mêmes des requêtes et des analyses PMSI, sans avoir à passer par un service informatique ou des outils et logiciels chers et propriétaires ?</li>
-<li>Appréciez-vous de pouvoir tester rapidement vos intuitions et réflexions sur la production PMSI de vos établissements ?</li>
-<li>Souhaitez-vous construire et faire vivre votre propre catalogue d’analyses PMSI, entièrement reproductibles ?</li>
-<li>Souhaitez-vous pouvoir travailler avec les data scientists santé ?</li>
-</ul>
-</section>
-<section id="pourquoi-r" class="level2">
-<h2 class="anchored" data-anchor-id="pourquoi-r">Pourquoi R ?</h2>
-<p>R est un langage open source, mature, optimisé pour les statistiques et la manipulation de données structurées, très utilisé depuis des années en santé publique.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>L’arrivée à maturité de la famille de package tidyverse depuis 2 ou 3 ans, en terme de fonctionnalités, documentation et performance, facilite grandement, pour les professionnels du PMSI, l’utilisation de R pour les traitements PMSI.</p>
-<p>R a une masse critique d’utilisateurs qui assure sa pérennité.</p>
-<p>R est gratuit et open source. Cela veut donc dire que vous pouvez travailler tout de suite sans demander l’autorisation ou de budget à personne.</p>
-<p>La documentation R est infinie, adaptée à tous les niveaux.</p>
-<p>Les professionnels du PMSI qui utilisent R ont maintenant un écosystème dédié (prestations, packages PMSI, blogs, échanges entre professionnels, service en ligne).</p>
-</section>
-</section>
-<section id="pré-requis" class="level1">
-<h1>Pré-requis</h1>
-<section id="pré-requis-pmsi" class="level2">
-<h2 class="anchored" data-anchor-id="pré-requis-pmsi">Pré-requis PMSI</h2>
-<p>Toutes les formations <strong>Data PMSI avec R</strong> supposent une maîtrise professionnelle du PMSI, en particulier du champ PMSI de la formation (MCO, SSR, PSY) :</p>
-<ul>
-<li>règles (définitions, vocabulaire)</li>
-<li>structures de données (rss, rsa, fichcomp, ficium, vidhosp, fichsup, rhs, rha, rps, raa, …)</li>
-<li>référentiels (CIM-10, CCAM à usage PMSI, DMI, UCD en sus, CSARR, …)</li>
-<li>documentations (guides méthodologiques, manuels de groupages, cahiers des charges, …)</li>
-<li>contrôles qualité (requêtes, OVALIDE, …)</li>
-<li>analyses (case mix, reporting, fouilles de données, …)</li>
-</ul>
-<p>Remarque : la pratique du codage n’est pas nécessaire, même si codé ou avoir déjà codé des dossiers est un plus pour appréhender les problématiques.</p>
-</section>
-<section id="pré-requis-r" class="level2">
-<h2 class="anchored" data-anchor-id="pré-requis-r">Pré-requis R</h2>
-<p><a href="./base_R.html">Explications détaillées</a></p>
-</section>
-</section>
-<section id="pédagogie" class="level1">
-<h1>Pédagogie</h1>
-<p><a href="./pedagogie.html">Explications détaillées</a></p>
-</section>
-<section id="formateur" class="level1">
-<h1>Formateur</h1>
-<p>Denis Gustin est ingénieur et le concepteur et développeur de <a href="https://www.pmsisoft.com" target="_blank">PMSISoft</a>, logiciel d’analyse PMSI développé principalement en R.<br>
-Il est spécialiste en données PMSI avec plus de 15 ans d’expérience dans les différents PMSI et intervient régulièrement, en tant que formateur et consultant, dans des établissements de santé sur des problématiques d’analyses PMSI et de données de santé.<br>
-Il développe et maintient le package R de données PMSI <a href="https://denisgustin.github.io/refpmsi/index.html" target="_blank">refpmsi::</a>.<br>
-Il anime le blog <a href="https://www.lespmsi.com" target="_blank">lespmsi.com</a></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
+<section id="liste-des-scripts-pmsi-r" class="level2">
+<h2 class="anchored" data-anchor-id="liste-des-scripts-pmsi-r">Liste des scripts PMSI R</h2>
+
 
 
 </section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notes de bas de page</h2>
-
-<ol>
-<li id="fn1"><p>Python est évidemment une alternative avec des avantages réels sur certains aspects par rapport à R pour certaines analyses PMSI. Nous développons d’ailleurs régulièrement en Python. Mais nous estimons que Python est plus difficile d’accès pour des non-informaticients (ce que sont les professionnels du PMSI) et moins riche en fonctions “toutes prêtes” pour de nombreux traitements PMSI (tableaux, graphiques).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="MCO,GHM,Casemix" data-listing-date-sort="1718056800000" data-listing-file-modified-sort="1718080859855" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="394">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/mco/script_mco_ipdms_ghm/index.html" class="no-external"><b>IPDMS par GHM</b></a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/mco/script_mco_ipdms_ghm/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('MCO'); return false;">
+MCO
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('GHM'); return false;">
+GHM
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Casemix'); return false;">
+Casemix
+</div>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/mco/script_mco_ipdms_ghm/index.html" class="no-external">
+<div class="listing-date">
+mardi 11 juin 2024
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="PSY,IPP" data-listing-date-sort="1718056800000" data-listing-file-modified-sort="1718082908414" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="348">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/psy/script_psy_episode_soin_continu/index.html" class="no-external"><b>Episodes de soin continu par IPP</b></a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/psy/script_psy_episode_soin_continu/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('PSY'); return false;">
+PSY
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('IPP'); return false;">
+IPP
+</div>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/psy/script_psy_episode_soin_continu/index.html" class="no-external">
+<div class="listing-date">
+mardi 11 juin 2024
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="SMR,CSARR,Casemix" data-listing-date-sort="1718056800000" data-listing-file-modified-sort="1718082478136" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="209">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/smr/script_smr_casemix_intervenant/index.html" class="no-external"><b>Casemix basique Intervenant CSARR</b></a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/smr/script_smr_casemix_intervenant/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('SMR'); return false;">
+SMR
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('CSARR'); return false;">
+CSARR
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Casemix'); return false;">
+Casemix
+</div>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/smr/script_smr_casemix_intervenant/index.html" class="no-external">
+<div class="listing-date">
+mardi 11 juin 2024
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="MCO,Casemix" data-listing-date-sort="1717970400000" data-listing-file-modified-sort="1718081682568" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="192">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/mco/script_mco_casemix_sejour_severite/index.html" class="no-external"><b>Casemix basique séjours par sévérité</b></a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/mco/script_mco_casemix_sejour_severite/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('MCO'); return false;">
+MCO
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Casemix'); return false;">
+Casemix
+</div>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/mco/script_mco_casemix_sejour_severite/index.html" class="no-external">
+<div class="listing-date">
+lundi 10 juin 2024
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="MCO,T2A" data-listing-date-sort="1717970400000" data-listing-file-modified-sort="1718081547567" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="160">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/mco/script_mco_valorisation_t2a_supplement_REA/index.html" class="no-external"><b>Valorisation T2A des suppléments REA</b></a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/mco/script_mco_valorisation_t2a_supplement_REA/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('MCO'); return false;">
+MCO
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('T2A'); return false;">
+T2A
+</div>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/mco/script_mco_valorisation_t2a_supplement_REA/index.html" class="no-external">
+<div class="listing-date">
+lundi 10 juin 2024
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-categories="PSY,RAA" data-listing-date-sort="1717970400000" data-listing-file-modified-sort="1718082786936" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="164">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/psy/script_psy_nb_jp_multiple_reunion_same_ipp/index.html" class="no-external"><b>IPP avec plusieurs actes de Réunion le même jour</b></a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/psy/script_psy_nb_jp_multiple_reunion_same_ipp/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('PSY'); return false;">
+PSY
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('RAA'); return false;">
+RAA
+</div>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/psy/script_psy_nb_jp_multiple_reunion_same_ipp/index.html" class="no-external">
+<div class="listing-date">
+lundi 10 juin 2024
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-categories="SMR,Dépendance" data-listing-date-sort="1717970400000" data-listing-file-modified-sort="1718082397590" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="260">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/smr/script_smr_sejour_hc_dependance_physique_maximale/index.html" class="no-external"><b>Dépendance physique maximale des séjours HC</b></a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/smr/script_smr_sejour_hc_dependance_physique_maximale/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('SMR'); return false;">
+SMR
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Dépendance'); return false;">
+Dépendance
+</div>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/smr/script_smr_sejour_hc_dependance_physique_maximale/index.html" class="no-external">
+<div class="listing-date">
+lundi 10 juin 2024
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="7" data-categories="MCO,CCAM" data-listing-date-sort="1717884000000" data-listing-file-modified-sort="1718080844979" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="125">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/mco/script_mco_acte_ccam_extension_documentaire_absente/index.html" class="no-external"><b>Actes CCAM avec extension documentaire obligatoire mais absente</b></a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/mco/script_mco_acte_ccam_extension_documentaire_absente/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('MCO'); return false;">
+MCO
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('CCAM'); return false;">
+CCAM
+</div>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/mco/script_mco_acte_ccam_extension_documentaire_absente/index.html" class="no-external">
+<div class="listing-date">
+dimanche 9 juin 2024
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="8" data-categories="PSY,RPS" data-listing-date-sort="1717884000000" data-listing-file-modified-sort="1718081012835" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="141">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/psy/script_psy_sejour_temps_complet_entree_sortie_same_sejour/index.html" class="no-external"><b>Séjours temps complet avec entrée et sortie le même jour</b></a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/psy/script_psy_sejour_temps_complet_entree_sortie_same_sejour/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('PSY'); return false;">
+PSY
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('RPS'); return false;">
+RPS
+</div>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/psy/script_psy_sejour_temps_complet_entree_sortie_same_sejour/index.html" class="no-external">
+<div class="listing-date">
+dimanche 9 juin 2024
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="9" data-categories="SMR,RHS" data-listing-date-sort="1717884000000" data-listing-file-modified-sort="1718082153328" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="154">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/smr/script_smr_rhs_cm08_no_acte_csarr/index.html" class="no-external"><b>RHS CM 08 d’au moins 5 JP avec 0 acte CSARR</b></a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/smr/script_smr_rhs_cm08_no_acte_csarr/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('SMR'); return false;">
+SMR
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('RHS'); return false;">
+RHS
+</div>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/smr/script_smr_rhs_cm08_no_acte_csarr/index.html" class="no-external">
+<div class="listing-date">
+dimanche 9 juin 2024
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="10" data-categories="PSY,RAA,EDGARX" data-listing-date-sort="1717797600000" data-listing-file-modified-sort="1718080912270" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="206">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/psy/script_psy_casemix_EDGARX/index.html" class="no-external"><b>Casemix basique EDGARX</b></a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/psy/script_psy_casemix_EDGARX/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('PSY'); return false;">
+PSY
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('RAA'); return false;">
+RAA
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('EDGARX'); return false;">
+EDGARX
+</div>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/psy/script_psy_casemix_EDGARX/index.html" class="no-external">
+<div class="listing-date">
+samedi 8 juin 2024
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="11" data-categories="SMR,CSARR" data-listing-date-sort="1717797600000" data-listing-file-modified-sort="1718081981647" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="151">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/smr/script_smr_rapatriement_libelle_csarr/index.html" class="no-external"><b>Rapatriement libellé CSARR</b></a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/smr/script_smr_rapatriement_libelle_csarr/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('SMR'); return false;">
+SMR
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('CSARR'); return false;">
+CSARR
+</div>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/smr/script_smr_rapatriement_libelle_csarr/index.html" class="no-external">
+<div class="listing-date">
+samedi 8 juin 2024
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="12" data-categories="MCO" data-listing-date-sort="1717711200000" data-listing-file-modified-sort="1718081430777" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="190">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/mco/script_mco_nb_jp_sejour/index.html" class="no-external"><b>Nombre de JP d’un séjour MCO</b></a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/mco/script_mco_nb_jp_sejour/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('MCO'); return false;">
+MCO
+</div>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/mco/script_mco_nb_jp_sejour/index.html" class="no-external">
+<div class="listing-date">
+vendredi 7 juin 2024
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="13" data-categories="PSY,RPS,CIM" data-listing-date-sort="1717711200000" data-listing-file-modified-sort="1718082651300" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="178">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/psy/script_psy_rapatriement_libelle_dp_rps/index.html" class="no-external"><b>Rapatriement libellé CIM-10 du DP des RPS</b></a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/psy/script_psy_rapatriement_libelle_dp_rps/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('PSY'); return false;">
+PSY
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('RPS'); return false;">
+RPS
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('CIM'); return false;">
+CIM
+</div>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/psy/script_psy_rapatriement_libelle_dp_rps/index.html" class="no-external">
+<div class="listing-date">
+vendredi 7 juin 2024
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="14" data-categories="SMR,RHS" data-listing-date-sort="1717711200000" data-listing-file-modified-sort="1718081937350" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="141">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/smr/script_smr_nombre_jp_rhs/index.html" class="no-external"><b>Nombre de JP par RHS</b></a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/smr/script_smr_nombre_jp_rhs/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('SMR'); return false;">
+SMR
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('RHS'); return false;">
+RHS
+</div>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/smr/script_smr_nombre_jp_rhs/index.html" class="no-external">
+<div class="listing-date">
+vendredi 7 juin 2024
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+Aucun article correspondant
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -325,9 +684,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -339,17 +712,51 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copié");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copié");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/www\.datapmsi\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -359,8 +766,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -372,37 +788,299 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">Blog codé avec <a href="https://quarto.org/">Quarto</a></div>   
-    <div class="nav-footer-right"><a href="../about.html">Mentions légales</a> | © Copyright 2023 - DATAMIS</div>
+    <div class="nav-footer-left">
+<p>Blog codé avec <a href="https://quarto.org/">Quarto</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p><a href="../about.html">Mentions légales</a> | © Copyright 2023-2024 - DATAMIS</p>
+</div>
   </div>
 </footer>
+
 
 
 

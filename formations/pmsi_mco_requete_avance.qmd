@@ -1,8 +1,0 @@
----
-title: "<span style='font-family: Boska; font-size: 2.75rem; font-weight: 800;'>Formation Requêtes MCO [Avancé]</span>"
-lang: fr
----
-
-## A venir
-
-

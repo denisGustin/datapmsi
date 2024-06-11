@@ -1,0 +1,134 @@
+---
+title: "<span style='font-family: Boska; font-size: 2.75rem; font-weight: 800;'>Guide des scripts</span>"
+execute:
+  eval: false
+  echo: true
+lang: fr
+---
+
+## Principes généraux des scripts PMSI R  
+
+Les scripts PMSI R publiés ici correspondent à des morceaux de codes R autonomes, répondant à des problématiques spécifiques en analyse PMSI.  
+
+Ils constituent **une** solution possible pour traiter la question, dans un compromis entre performance du code, lisibilité du code et pédagogie.  
+
+Chaque script est composé :  
+
+* d'un intitulé explicite  
+
+* d'une introduction minimale exposant l'approche algorithmique   
+
+* du code du script commençant toujours avec l'appel d'un dataframe de données PMSI natives, telles qu'issues de fichiers du .in et/ou du .out  
+
+* si nécessaire, d'un commentaire succinct pour expliciter un point délicat en codage R ou une manipulation spécifique de données PMSI.  
+
+Ces scripts ont vocation à être appliqués tels quels sur vos jeux de données, à être complétés, dérivés, copiés/collés dans vos scripts existant, à être lus pour apprendre le codage PMSI R.  
+
+On fait par défaut le choix d'un codage "1 traitement par ligne" pour rendre visible la logique PMSI.  
+
+On fait le choix de laisser les variables intermédiaires de calcul, là encore pour rendre visible la logique PMSI du script.  
+
+De même, on fait le choix de casser une analyse en plusieurs scripts quand son codage R en un seul script devient trop long/complexe. Dans une version de production en routine, le script pourra donc avantageusement être  simplifé au niveau R.  
+
+Le niveau R des scripts est varié, du plus basique à un niveau avancé.  
+
+## Pré-requis  
+
+**Pré-requis métier PMSI :** connaissance des règles et logiques du PMSI, maîtrise des nomenclatures, pratique de l'analyse de données PMSI.  
+
+**Pré-requis R :** un environnement de développement R (R Studio, VS Code), pratique minimale de la manipulation de structures de données (vecteur, dataframe), manipulations de packages R, codage d'une suite d'instructions dans un pipe.  
+Voir notre [article "Pré-requis R"](base_R.qmd) pour plus de détails.  
+
+## Jeux de données  
+
+Chaque script commence avec l'appel à un jeu de données PMSI cohérent avec l'objet du script.  
+
+Ce jeu de données est constitué _des seules variables natives_ du [format ATIH](https://www.atih.sante.fr/formats-pmsi-2024-0){target="_blank"} correspondant à l'objet du script.  
+
+Ce jeu de données est un tibble[^1].  
+
+Chaque variable de ces jeux de données est supposée nettoyée[^2] et normalisée.  
+
+2 manières pour disposer de ce jeu de données.  
+
+**1ere manière**  
+
+Télécharger, en tant qu'administrateur d'un accès Standard PMSISoft[^3], la liste des tibbles du champ PMSI qui vous intéresse.    
+Cette liste est un objet list, enregistré dans un fichier .rds    
+
+**L'accès Standard PMSISoft est gratuit, sans limite de temps, ouvert à la demande de tout établissement qui nous en fait la demande.**  
+Plus d'informations :  
+[PMSISoft MCO](https://www.pmsisoft.com/acces_pmsisoft_mco){target="_blank"}  
+[PMSISoft SMR](https://www.pmsisoft.com/acces_pmsisoft_ssr){target="_blank"}  
+[PMSISoft PSY](https://www.pmsisoft.com/acces_pmsisoft_psy){target="_blank"}  
+
+[Demander votre accès PMSISoft](https://www.lespmsi.com/contact-pmsisoft/){target="_blank"}  
+
+```{r}
+#| label: download_dataset_pmsi
+
+# on suppose que le .rds est déposé dans un répertoire "data" de votre projet R, sans modification de son nom
+
+# En MCO, on récupère la liste des tibbles via
+mco <- readRDS("data/mco_AAAA-MM-JJ.rds")
+
+# En SMR, on récupère la liste des tibbles via
+smr <- readRDS("data/smr_AAAA-MM-JJ.rds")
+
+# En PSY, on récupère la liste des tibbles via
+psy <- readRDS("data/psy_AAAA-MM-JJ.rds")
+
+```
+
+**2eme manière**  
+
+Produire le tibble à partir du fichier concerné du .in ou du .out ou via un export à partir du SI de votre établissement.  
+**Important : **  dans _chaque script_, en 2ème ligne d'instruction du script, nous codons un `dplyr::select()` qui sélectionne les variables du jeu dont on va se servir.  
+
+Cette sélection permet de vous "raccrocher" au script, indépendamment du nommage de votre jeu de données, car le libellé des variables utilisées est normalisé et la correspondance avec les intitulés des variables des formats de fichiers officiels est évidente.  
+
+Vous pouvez donc appliquer le script tel quel à partir de sa 3eme ligne de code, soit en renommant vos variables (via `dplyr::select()` ou `dplyr::rename()`) pour qu'elles correspondent à celles du script, soit en personnalisant le script avec vos intitulés de variables.  
+
+Exemple avec le script ["Casemix basique séjours par sévérité"](posts/mco/script_mco_casemix_sejour_severite/index.qmd)
+
+```{r}
+#| label: example
+
+# récupération préalable du tibble correspondant à la partie fixe du fichier des rss groupés
+rum <- mco$rum$rum
+
+# les 2 premières lignes du script sont 
+casemix_severite <- rum %>% 
+    dplyr::select(nas,no_rum,ghm,severite,date_entree_um,date_sortie_um)
+
+# on a sélectionné ici 6 variables (nas, no_rum, ghm, severite, date_entree_um, date_sortie_um) dont la correspondance avec les intitulés du format est évidente :
+## nas pour N° Administratif local de séjour (positions 48 à 67)
+## no_rum pour N° de RUM (positions 68 à 77)
+## etc...
+```
+
+On se base par défaut sur la dernière version des formats PMSI.   
+
+## Packages R  
+
+Les scripts font appel, principalement, aux fonctions de bases R et aux fonctions des packages du [Tidyverse](https://www.tidyverse.org/){target="_blank"}, en particulier, et ce systématiquement, au package [`dplyr`](https://dplyr.tidyverse.org/){target="_blank"}  
+
+Version minimale recommandée du `dplyr` : 1.1.2  
+
+Pour l'accès aux référentiels PMSI, nous faisons appel au package [`refpmsi`](https://denisgustin.github.io/refpmsi/index.html){target="_blank"}  
+
+## Licence  
+
+[MIT (Massachusetts Institute of Technology)](https://fr.wikipedia.org/wiki/Licence_MIT){target="_blank"}
+
+## Avertissement  
+
+Les informations diffusées dans cette bibliothèque de scripts sont proposées à titre purement informatif et ne sauraient constituer un conseil ou une recommandation de quelque nature que ce soit.  
+En conséquence, nous déclinons toute responsabilité quant à leurs utilisations. Elles ne sauraient en aucun cas engager notre responsabilité, à quelque titre que ce soit.  
+
+[^1]: un script peut faire appel, dans son déroulé à un 2eme, voire un 3eme jeu de données, pour enrichir l'analyse (exemple en MCO : rapprochement d'informations issues du RSA et du RUM).  
+
+[^2]: par "nettoyée", on entend suppression des 0 ou des espaces vides inutiles, typage cohérent de la variable, données absentes en NA, etc...  
+Par "normalisée", on entend normalisation du nommage des variables : suffixation univoque (exemple "_libelle" pour les libellés), pas d'accent ou d'espace, tout en minuscule, tous les intitulés "numéro" traduits en "no", etc...
+
+[^3]: en accès Professionnel PMSISoft, l'administrateur dispose de 100% des variables de l'accès Standard et de variables calculées ou enrichies supplémentaires.  Il peut donc, à partir de son export en accès Professionnel, appliquer tel quel les scripts.  

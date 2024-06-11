@@ -1,0 +1,42 @@
+---
+title: "<b>Valorisation T2A des suppléments REA</b>"
+date: "2024-06-10"
+categories: [MCO,T2A]
+page-layout: full
+---
+
+## Introduction  
+
+On suppose qu'on est en ex-DGF  
+
+On récupére `nb_supplements_rea`, variable native des `rsa` auquel on associe le tarif unitaire du suppléments REA correspondant qui est récupéré dans le référentiel annualisé `supplements_mco_public` de `refpmsi`  
+
+Remarque : `annee_sortie_sejour`, variable native `rsa`, = l'année PMSI du séjour, permettant le rapatriement des tarifs correspondant des suppléments  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+library(refpmsi)
+
+supplements_mco_public <- refpmsi::refpmsi(supplements_mco_public)
+
+supplements_rea_t2a <- mco$rsa$rsa %>% 
+    dplyr::select(no_sequentiel_sejour,annee_sortie_sejour,nb_supplements_rea) %>% 
+    dplyr::left_join(supplements_mco_public %>% dplyr::filter(supplement_mco_code == "REA"),
+                     join_by(annee_sortie_sejour == annee_pmsi)) %>% 
+    dplyr::mutate(supplements_rea_t2a = nb_supplements_rea*supplement_mco_tarif)
+supplements_rea_t2a
+
+total_supplements_rea_t2a <- sum(supplements_rea_t2a$supplements_rea_t2a)
+total_supplements_rea_t2a
+```
+
+## Commentaires  
+
+PMSISoft MCO Standard : voir écran `Recettes T2A MCO > Suppléments` qui calcule et présente le casemix des valorisations des suppléments  
+
+PMSISoft MCO Professionnel : `supplements_rea_t2a` déjà calculé dans `mco$rsa$rsa_t2a`
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

@@ -1,0 +1,40 @@
+---
+title: "<b>Casemix basique EDGARX</b>"
+date: "2024-06-08"
+categories: [PSY,RAA,EDGARX]
+page-layout: full
+---
+
+## Introduction  
+
+Pour chaque nature d'acte EDGARX du jeu de données, calcul du nombre d'actes, du nombre d'IPP uniques, du nombre de categories professionnelles d'intervenant différentes et du % en nombre d'actes.  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+
+raa <- psy$raa$raa
+
+casemix_edgarx <- raa %>% 
+    dplyr::select(ipp,nature_acte,categorie_professionnelle_intervenant) %>% 
+    dplyr::group_by(nature_acte) %>% 
+    dplyr::summarise(nb_acte = dplyr::n(),
+                     nb_ipp = dplyr::n_distinct(ipp),
+                     nb_categorie_professionnelle_intervenant = dplyr::n_distinct(categorie_professionnelle_intervenant)
+                     ) %>% 
+    dplyr::arrange(desc(nb_acte)) %>% 
+    dplyr::mutate(percent_acte = nb_acte/sum(nb_acte), .after = nb_acte)
+casemix_edgarx
+```
+
+## Commentaires  
+
+Ligne 12 : on trie sur le nombre descendant de `nb_acte`  
+
+Ligne 13 : avec l'argument `.after`, on positionne directement la variable `percent_acte` calculée après `nb_acte`  
+
+PMSISoft PSY Standard : casemix disponible dans l'écran `Actes ambulatoires > Casemix EDGARX > Casemix EDGARX`  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

@@ -1,0 +1,15 @@
+{
+  "hash": "d4fa98c80c67311659a36ad1678b14d2",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b>Dépendance physique maximales des séjours HC</b>\"\ndate: \"2024-06-10\"\ncategories: [SMR,Dépendance]\npage-layout: full\n---\n\n\n## Introduction  \n\nOn va calculer la dépendance physique de chaque RHS, puis, par séjour HC, on calcule la dépendance physique maximale parmi le ou les RHS du séjour  \n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\n\nsejour_dependance_physique_maximale <- smr$rhs$rhs %>% \n    dplyr::select(nas,no_semaine,type_hospitalisation,\n                  dependance_alimentation,dependance_deplacement,dependance_habillage,dependance_continence) %>% \n    dplyr::filter(type_hospitalisation == \"1\") %>% \n    dplyr::mutate(dependance_physique_rhs = rowSums(across(c(dependance_alimentation,dependance_deplacement,\n                                                             dependance_habillage,dependance_continence)))) %>% \n    dplyr::mutate(.by = nas,\n                  dependance_physique_maximale_sejour = max(dependance_physique_rhs)\n                  ) %>% \n    dplyr::distinct(nas,dependance_physique_maximale_sejour)\nsejour_dependance_physique_maximale\n```\n:::\n\n\n## Commentaires  \n\nLigne 7-8 : `rowSums()` pour permettre un calcul ligne à ligne  \n\nDémarche identique pour calculer la dépendance cognitive maximale d'un séjour  \n\nPMSISoft SMR Standard : information calculée et affichée dans `RHS > Base des RHS > Détail RHS > Dépendance`  \n\nPMSISoft SMR Professionnel : écran `Séjours > Séjours et dépendance`  \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

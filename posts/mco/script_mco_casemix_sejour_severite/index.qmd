@@ -1,0 +1,40 @@
+---
+title: "<b>Casemix basique séjours par sévérité</b>"
+date: "2024-06-10"
+categories: [MCO,Casemix]
+page-layout: full
+---
+
+## Introduction  
+
+Après avoir calculé les variables `nb_jp_rum`et `nb_jp_sejour`, on filtre sur les séjours d'au moins 1 nuitée et on calcule, pour chaque sévérité, le nombre de séjours concernés, le nombre de journées et le % de séjours représenté.  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+
+casemix_severite <- mco$rum$rum %>% 
+    dplyr::select(nas,no_rum,ghm,severite,date_entree_um,date_sortie_um) %>% 
+    dplyr::mutate(nb_jp_rum = as.integer(date_sortie_um-date_entree_um)) %>% 
+    dplyr::mutate(.by = nas, nb_jp_sejour = sum(nb_jp_rum)) %>% 
+    dplyr::filter(nb_jp_sejour >= 1) %>% 
+    dplyr::distinct(nas,severite,nb_jp_sejour) %>% 
+    dplyr::group_by(severite) %>% 
+    dplyr::summarise(nb_sejour_severite = dplyr::n(),
+                     nb_jp_severite = sum(nb_jp_sejour)) %>% 
+    dplyr::arrange(desc(nb_sejour_severite)) %>% 
+    dplyr::mutate(percent_sejour_severite = nb_sejour_severite/sum(nb_sejour_severite))
+casemix_severite
+```
+
+## Commentaires  
+
+Ligne 8 : on ne retient que des variables liées au séjour pour le `dplyr::distinct()`  
+
+PMSISoft MCO Standard : voir écran `Séjours > Séjours et classification`
+
+PMSISoft MCO Professionnel : les 2 variables `nb_jp_rum` et `nb_jp_sejour` sont dans `mco`  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

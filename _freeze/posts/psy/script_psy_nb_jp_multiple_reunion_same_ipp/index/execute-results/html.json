@@ -1,0 +1,15 @@
+{
+  "hash": "051f0c049e31fe5468e31356dfd5c975",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b>IPP avec plusieurs actes de Réunion le même jour</b>\"\ndate: \"2024-06-10\"\ncategories: [PSY,RAA]\npage-layout: full\n---\n\n\n## Introduction  \n\nPour chaque configuration (ipp,date_acte), on calcule le nombre d'acte de Réunion, puis on ne retient que les configurations avec au moins 2 actes de Réunion.  \n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\n\nsame_ipp_date_acte <- psy$raa$raa %>% \n    dplyr::select(ipp,nature_acte,date_acte) %>% \n    dplyr::mutate(.by = c(ipp,date_acte,nature_acte),\n                  sum_same_ipp_date_acte_nature_acte_R = sum(nature_acte == \"R\")) %>% \n    dplyr::filter(sum_same_ipp_date_acte_nature_acte_R >= 2L) %>% \n    dplyr::distinct()\nsame_ipp_date_acte\n```\n:::\n\n\n## Commentaires  \n\nVoir le contrôle Qualité OVALIDE [1.Q.11.RIPP] : Nombre de journées avec plusieurs actes de réunions pour un même IPP\".  \nOn améliore ici en produisant la variable `sum_same_ipp_date_acte_nature_acte_R` qui est le nombre d'actes de Réunion  \n\nPMSISoft PSY Standard : écran `Requêtes PSY > Requêtes RAA`, requête `Plusieurs actes de réunions pour un même IPP et une même date [1.Q.11.RIPP]`  \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

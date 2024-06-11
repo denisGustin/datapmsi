@@ -1,0 +1,15 @@
+{
+  "hash": "7d16d615bbc51c82edbc9eedfdca5b06",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b>RHS CM 08 d'au moins 5 JP avec 0 acte CSARR</b>\"\ndate: \"2024-06-09\"\ncategories: [SMR,RHS]\npage-layout: full\n---\n\n\n## Introduction  \n\nUn contrôle qualité classique.  \n\nOn filtre les RHS sur les 3 variables `cm`, `nb_jp_rhs` (à produire) et `nb_csarr`\n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\n\nrhs_selected <- smr$rhs$rhs %>% \n    dplyr::select(annee_import,nas,no_semaine,no_um,cm,jp_we,jp_hors_we,nb_csarr) %>% \n    dplyr::mutate(across(c(jp_we,jp_hors_we), ~ stringr::str_count(.x,\"1\")),\n                  nb_jp_rhs = jp_we+jp_hors_we) %>% \n    dplyr::filter(cm == \"08\", nb_jp_rhs == 5, nb_csarr == 0)\nrhs_selected\n```\n:::\n\n\n## Commentaires  \n\nLigne 5-6 : voir script \"Nombre de JP par RHS\"  \n\nAvec le script, possibilité de varier en toute liberté les critères de filtrages (age, autres CM/GN/..., autre seuil nb_jp_rhs, ..)  \n\nPMSISoft SMR Standard : écran `RHS > Base des RHS`, filtrage de périmètre `cm == \"08\"` et filtrage de variable `nb_jp_rhs Supérieur ou égal à 5 ET nb_acte_csarr Egal à 0`  \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

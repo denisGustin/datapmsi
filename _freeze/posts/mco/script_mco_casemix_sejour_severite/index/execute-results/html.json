@@ -1,0 +1,15 @@
+{
+  "hash": "2d191d31ab21e25f48e24f8660c1b872",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b>Casemix basique séjours par sévérité</b>\"\ndate: \"2024-06-10\"\ncategories: [MCO,Casemix]\npage-layout: full\n---\n\n\n## Introduction  \n\nAprès avoir calculé les variables `nb_jp_rum`et `nb_jp_sejour`, on filtre sur les séjours d'au moins 1 nuitée et on calcule, pour chaque sévérité, le nombre de séjours concernés, le nombre de journées et le % de séjours représenté.  \n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\n\ncasemix_severite <- mco$rum$rum %>% \n    dplyr::select(nas,no_rum,ghm,severite,date_entree_um,date_sortie_um) %>% \n    dplyr::mutate(nb_jp_rum = as.integer(date_sortie_um-date_entree_um)) %>% \n    dplyr::mutate(.by = nas, nb_jp_sejour = sum(nb_jp_rum)) %>% \n    dplyr::filter(nb_jp_sejour >= 1) %>% \n    dplyr::distinct(nas,severite,nb_jp_sejour) %>% \n    dplyr::group_by(severite) %>% \n    dplyr::summarise(nb_sejour_severite = dplyr::n(),\n                     nb_jp_severite = sum(nb_jp_sejour)) %>% \n    dplyr::arrange(desc(nb_sejour_severite)) %>% \n    dplyr::mutate(percent_sejour_severite = nb_sejour_severite/sum(nb_sejour_severite))\ncasemix_severite\n```\n:::\n\n\n## Commentaires  \n\nLigne 8 : on ne retient que des variables liées au séjour pour le `dplyr::distinct()`  \n\nPMSISoft MCO Standard : écran `Séjours > Séjours et classification`\n\nPMSISoft MCO Professionnel : les 2 variables `nb_jp_rum` et `nb_jp_sejour` sont dans `mco`  \n\n[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target=\"_blank\"}  ",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

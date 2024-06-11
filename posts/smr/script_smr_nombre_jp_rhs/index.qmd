@@ -1,0 +1,33 @@
+---
+title: "<b>Nombre de JP par RHS</b>"
+date: "2024-06-07"
+categories: [SMR,RHS]
+page-layout: full
+---
+
+## Introduction  
+
+Pour chaque RHS, on compte le nombre de "1" dans les variables natives `jp_hors_we` et `jp_we`, en écrasant leur valeur initiale (suite de "0" et de "1") par la valeur calculée, puis on additionne ces 2 variables.  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+
+rhs_extend <- smr$rhs$rhs %>% 
+    dplyr::select(nas,no_semaine,no_um,jp_we,jp_hors_we) %>% 
+    dplyr::mutate(across(c(jp_we,jp_hors_we), ~ stringr::str_count(.x,"1")),
+                  nb_jp_rhs = jp_we+jp_hors_we)
+rhs_extend
+```
+
+## Commentaires  
+
+Ligne 5 : utilisation ultra-classique de la fonction `àcross()` pour appliquer un même traitement à plusieurs variables en une seule ligne   
+
+PMSISoft SMR Standard : voir écran `RHS > Base des RHS`  
+
+PMSISoft SMR Professionnel : variable `nb_jp_rhs` présent dans `smr`  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

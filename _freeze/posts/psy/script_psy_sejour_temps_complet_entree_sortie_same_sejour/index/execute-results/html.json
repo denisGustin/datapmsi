@@ -1,0 +1,15 @@
+{
+  "hash": "676f241084d8d6e77eee1c42e73b1a57",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b>Séjours temps complet avec entrée et sortie le même jour</b>\"\ndate: \"2024-06-09\"\ncategories: [PSY,RPS]\npage-layout: full\n---\n\n\n## Introduction  \n\nOn sélectionne l'activité RPS en temps complet, puis les RPS avec date_entree_sejour == date_sortie_sejour, puis on ne retient qu'une ligne par séjour.  \n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\n\nsejour_selected <- psy$rps$rps %>% \n    dplyr::select(no_sejour,ipp,forme_activite,nb_jours_presence,date_entree_sejour,date_sortie_sejour) %>% \n    dplyr::filter(forme_activite %in% c('01','01D','01S','01P','02','03','04','05','06','07'),\n                  date_entree_sejour == date_sortie_sejour) %>% \n    dplyr::distinct(no_sejour,ipp,date_entree_sejour,date_sortie_sejour)\nsejour_selected\n```\n:::\n\n\n## Commentaires  \n\nLigne 5 : le vecteur `c('01','01D','01S','01P','02','03','04','05','06','07')` correspond aux formes d'activité temps complet  \n\nLigne 7 : on ne sélectionne que des variables liées à un séjour  \n\nPMSISoft PSY Professionnel : écran `Séjours > Base des séjours`, filtrage de périmètre `Forme d'activité == codes temps_complet` et filtrage de variable `nb_jp_sejour Egal à 0` \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
