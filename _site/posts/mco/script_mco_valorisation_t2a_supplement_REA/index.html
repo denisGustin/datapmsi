@@ -262,8 +262,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>On suppose qu’on est en ex-DGF</p>
-<p>On récupére <code>nb_supplements_rea</code>, variable native des <code>rsa</code> auquel on associe le tarif unitaire du suppléments REA correspondant qui est récupéré dans le référentiel annualisé <code>supplements_mco_public</code> de <code>refpmsi</code></p>
-<p>Remarque : <code>annee_sortie_sejour</code>, variable native <code>rsa</code>, = l’année PMSI du séjour, permettant le rapatriement des tarifs correspondant des suppléments</p>
+<p>On associe au <code>nb_supplements_rea</code> (variable native des <code>rsa</code>) le tarif unitaire du supplément REA correspondant à l’année PMSI du séjour.</p>
+<p>Ce tarif du supplément REA est récupéré via le référentiel annualisé <code>supplements_mco_public</code> du package <code>refpmsi</code></p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
@@ -273,21 +273,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3"></a></span>
 <span id="cb1-4"><a href="#cb1-4"></a>supplements_mco_public <span class="ot">&lt;-</span> refpmsi<span class="sc">::</span><span class="fu">refpmsi</span>(supplements_mco_public)</span>
 <span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>supplements_rea_t2a <span class="ot">&lt;-</span> mco<span class="sc">$</span>rsa<span class="sc">$</span>rsa <span class="sc">%&gt;%</span> </span>
-<span id="cb1-7"><a href="#cb1-7"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(no_sequentiel_sejour,annee_sortie_sejour,nb_supplements_rea) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-8"><a href="#cb1-8"></a>    dplyr<span class="sc">::</span><span class="fu">left_join</span>(supplements_mco_public <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(supplement_mco_code <span class="sc">==</span> <span class="st">"REA"</span>),</span>
-<span id="cb1-9"><a href="#cb1-9"></a>                     <span class="fu">join_by</span>(annee_sortie_sejour <span class="sc">==</span> annee_pmsi)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-10"><a href="#cb1-10"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">supplements_rea_t2a =</span> nb_supplements_rea<span class="sc">*</span>supplement_mco_tarif)</span>
-<span id="cb1-11"><a href="#cb1-11"></a>supplements_rea_t2a</span>
-<span id="cb1-12"><a href="#cb1-12"></a></span>
-<span id="cb1-13"><a href="#cb1-13"></a>total_supplements_rea_t2a <span class="ot">&lt;-</span> <span class="fu">sum</span>(supplements_rea_t2a<span class="sc">$</span>supplements_rea_t2a)</span>
-<span id="cb1-14"><a href="#cb1-14"></a>total_supplements_rea_t2a</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6"></a>supplements_rea_t2a <span class="ot">&lt;-</span> mco_rsa<span class="sc">$</span>rsa <span class="sc">%&gt;%</span> </span>
+<span id="cb1-7"><a href="#cb1-7"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(no_sequentiel_sejour,mois_sortie_sejour,annee_sortie_sejour,nb_supplements_rea) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-8"><a href="#cb1-8"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">annee_pmsi_sejour =</span> <span class="fu">ifelse</span>(mois_sortie_sejour <span class="sc">&lt;=</span> <span class="st">"02"</span>,<span class="fu">as.character</span>(<span class="fu">as.integer</span>(annee_sortie_sejour)<span class="sc">-</span><span class="dv">1</span>L),annee_sortie_sejour)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-9"><a href="#cb1-9"></a>    dplyr<span class="sc">::</span><span class="fu">left_join</span>(supplements_mco_public <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(supplement_mco_code <span class="sc">==</span> <span class="st">"REA"</span>),</span>
+<span id="cb1-10"><a href="#cb1-10"></a>                     <span class="at">by =</span> <span class="fu">join_by</span>(annee_pmsi_sejour <span class="sc">==</span> annee_pmsi)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-11"><a href="#cb1-11"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">supplements_rea_t2a =</span> nb_supplements_rea<span class="sc">*</span>supplement_mco_tarif)</span>
+<span id="cb1-12"><a href="#cb1-12"></a>supplements_rea_t2a</span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="co"># Calcul du cumul de la valorisation T2A brute des suppléments REA</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>total_supplements_rea_t2a <span class="ot">&lt;-</span> <span class="fu">sum</span>(supplements_rea_t2a<span class="sc">$</span>supplements_rea_t2a)</span>
+<span id="cb1-16"><a href="#cb1-16"></a>total_supplements_rea_t2a</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>PMSISoft MCO Standard : voir écran <code>Recettes T2A MCO &gt; Suppléments</code> qui calcule et présente le casemix des valorisations des suppléments</p>
-<p>PMSISoft MCO Professionnel : <code>supplements_rea_t2a</code> déjà calculé dans <code>mco$rsa$rsa_t2a</code></p>
+<p>Ligne 6 : <code>mco_rsa$rsa</code> est un tibble des variables de la partie fixe des RSA</p>
+<p>Ligne 8 : calcul de la variable <code>annee_pmsi_sejour</code> à partir des 2 variables <code>mois_sortie_sejour</code> et <code>annee_sortie_sejour</code> (variables natives <code>rsa</code>)</p>
+<p>Les valorisations T2A brutes des suppléments sont calculées dans l’écran <code>Activité MCO &gt; Synthèse T2A</code> de <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 

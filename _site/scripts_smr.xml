@@ -22,8 +22,8 @@
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Par type d’intervenant, calcul du nombre d’actes, du nombre de réalisations CSARR et % du nombre d’actes et rapatriement libellé intervenant.</p>
-<p>On enrichie en rapatriant le libellé des types d’intervenant via le référentiel <code>csarr_intervenant</code> <sup>1</sup></p>
+<p>Par type d’intervenant représenté dans le jeu de données, on calcule le nombre de codages CSARR, le nombre d’actes différents CSARR codés, le nombre de réalisations CSARR cumulées et le % représenté par ce nombre de réalisations CSARR par rapport au nombre total de réalisations du jeu de données.</p>
+<p>On rapatrie le libellé du type intervenant via le référentiel <code>csarr_intervenant</code> <sup>1</sup> du package <code>refpmsi</code></p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
@@ -45,9 +45,7 @@ font-style: inherit;">refpmsi</span>(csarr_intervenant)</span>
 <span id="cb1-5"></span>
 <span id="cb1-6">casemix_csarr_intervenant <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> smr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rhs<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> smr_rhs<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>csarr <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -56,7 +54,7 @@ font-style: inherit;">%&gt;%</span> </span>
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">select</span>(annee_import,code_csarr,nb_realisation_csarr,code_intervenant_csarr) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">select</span>(code_csarr,nb_realisation_csarr,code_intervenant_csarr) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
 <span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
@@ -118,7 +116,9 @@ font-style: inherit;">%&gt;%</span> </span>
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">left_join</span>(csarr_intervenant, <span class="fu" style="color: #4758AB;
+font-style: inherit;">left_join</span>(csarr_intervenant, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">join_by</span>(code_intervenant_csarr <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -136,8 +136,9 @@ font-style: inherit;">select</span>(code_intervenant_csarr,csarr_intervenant_lib
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Ligne 6 : <code>smr_rhs$csarr</code> est un tibble des variables <code>csarr</code> liées aux RHS</p>
 <p>Ligne 16 : le <code>dplyr::select()</code> permet de réordonner les variables</p>
-<p>PMSISoft SMR Standard : voir écran <code>Codage CSARR &gt; Casemix CSARR &gt; Casemix Intervenant</code></p>
+<p>Ce casemix est disponible dans <a href="https://www.pmsisoft.com/acces_pmsisoft_ssr" target="_blank">PMSISoft SMR</a> dans l’écran <code>Codage CSARR &gt; Casemix CSARR &gt; Casemix Intervenant</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -178,9 +179,7 @@ font-style: inherit;">library</span>(dplyr)</span>
 <span id="cb1-2"></span>
 <span id="cb1-3">sejour_dependance_physique_maximale <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> smr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rhs<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> smr_rhs<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>rhs <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -189,11 +188,10 @@ font-style: inherit;">%&gt;%</span> </span>
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">select</span>(nas,no_semaine,type_hospitalisation,</span>
-<span id="cb1-5">                  dependance_alimentation,dependance_deplacement,dependance_habillage,dependance_continence) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">select</span>(nas,no_semaine,type_hospitalisation,dependance_alimentation,dependance_deplacement,dependance_habillage,dependance_continence) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-6">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-5">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -204,7 +202,7 @@ background-color: null;
 font-style: inherit;">"1"</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-7">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-6">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -217,38 +215,39 @@ background-color: null;
 font-style: inherit;">across</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">c</span>(dependance_alimentation,dependance_deplacement,</span>
-<span id="cb1-8">                                                             dependance_habillage,dependance_continence)))) <span class="sc" style="color: #5E5E5E;
+<span id="cb1-7">                                                             dependance_habillage,dependance_continence)))) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-9">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">.by =</span> nas,</span>
-<span id="cb1-10">                  <span class="at" style="color: #657422;
+<span id="cb1-9">                  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">dependance_physique_maximale_sejour =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">max</span>(dependance_physique_rhs)</span>
-<span id="cb1-11">                  ) <span class="sc" style="color: #5E5E5E;
+<span id="cb1-10">                  ) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-12">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-11">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">distinct</span>(nas,dependance_physique_maximale_sejour)</span>
-<span id="cb1-13">sejour_dependance_physique_maximale</span></code></pre></div>
+<span id="cb1-12">sejour_dependance_physique_maximale</span></code></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 7-8 : <code>rowSums()</code> pour permettre un calcul ligne à ligne</p>
-<p>Démarche identique pour calculer la dépendance cognitive maximale d’un séjour</p>
-<p>PMSISoft SMR Standard : information calculée et affichée dans l’écran <code>RHS &gt; Base des RHS &gt; Détail RHS &gt; Dépendance</code></p>
-<p>PMSISoft SMR Professionnel : voir aussi écran <code>Séjours &gt; Séjours et dépendance</code></p>
+<p>Ligne 3 : <code>smr_rhs$rhs</code> est un tibble des variables de la partie fixe des RHS</p>
+<p>Ligne 6-7 : <code>rowSums()</code> pour permettre un calcul de somme ligne à ligne</p>
+<p>Pour aller + loin :<br>
+Démarche identique pour calculer la dépendance cognitive maximale d’un séjour</p>
+<p>La variable <code>dependance_physique_maximale_sejour</code> est calculée par défaut dans les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_ssr" target="_blank">PMSISoft SMR</a></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -283,9 +282,7 @@ font-style: inherit;">library</span>(dplyr)</span>
 <span id="cb1-2"></span>
 <span id="cb1-3">rhs_selected <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> smr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rhs<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> smr_rhs<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>rhs <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -294,7 +291,7 @@ font-style: inherit;">%&gt;%</span> </span>
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">select</span>(annee_import,nas,no_semaine,no_um,cm,jp_we,jp_hors_we,nb_csarr) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">select</span>(nas,no_semaine,no_um,cm,jp_we,jp_hors_we,nb_csarr) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
 <span id="cb1-5">    dplyr<span class="sc" style="color: #5E5E5E;
@@ -343,9 +340,9 @@ font-style: inherit;">0</span>)</span>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 5-6 : voir script “Nombre de JP par RHS”</p>
-<p>Avec le script, possibilité de varier en toute liberté les critères de filtrages (age, autres CM/GN/…, autre seuil nb_jp_rhs, ..)</p>
-<p>PMSISoft SMR Professionnel : écran <code>RHS &gt; Base des RHS</code>, filtrage de périmètre <code>cm == "08"</code> et filtrage de variable <code>nb_jp_rhs Supérieur ou égal à 5 ET nb_acte_csarr Egal à 0</code></p>
+<p>Ligne 3 : <code>smr_rhs$rhs</code> est un tibble des variables de la partie fixe des RHS</p>
+<p>Ligne 5-6 : voir script SMR “Nombre de JP par RHS”</p>
+<p>Cette requêtes est réalisable dans <a href="https://www.pmsisoft.com/acces_pmsisoft_ssr" target="_blank">PMSISoft SMR</a> dans l’écran <code>RHS &gt; Base des RHS</code> via le filtrage de périmètre <code>cm == "08"</code> et le filtrage de variable <code>nb_jp_rhs Supérieur ou égal à 5 ET nb_acte_csarr Egal à 0</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -393,8 +390,7 @@ font-style: inherit;">refpmsi</span>(csarr_code)</span>
 background-color: null;
 font-style: inherit;">&lt;-</span>  csarr_code <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-7">    dplyr<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -406,31 +402,27 @@ font-style: inherit;">1</span>, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">by =</span> csarr_code) <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">select</span>(csarr_code,csarr_libelle)</span>
-<span id="cb1-9">csarr_libelle</span>
-<span id="cb1-10"></span>
-<span id="cb1-11">csarr_extend <span class="ot" style="color: #003B4F;
+<span id="cb1-7"></span>
+<span id="cb1-8">csarr_extend <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> smr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rhs<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> smr_rhs<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>csarr <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-12">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-9">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">select</span>(annee_import, code_csarr) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">select</span>(code_csarr) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-13">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-10">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -439,13 +431,13 @@ background-color: null;
 font-style: inherit;">join_by</span>(code_csarr <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> csarr_code))</span>
-<span id="cb1-14">csarr_extend</span></code></pre></div>
+<span id="cb1-11">csarr_extend</span></code></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 7 : permet de ne retenir que le dernière libellé actif de l’acte CSARR</p>
-<p>PMSISoft SMR Professionnel : variables de libellé, dont comme ici <code>csarr_libelle</code> incluses dans <code>smr</code></p>
+<p>Ligne 8 : <code>smr_rhs$csarr</code> est un tibble des variables <code>csarr</code> liées à chaque RHS</p>
+<p>La variable <code>csarr_libelle</code> est rapatriée par défaut dans tous les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_ssr" target="_blank">PMSISoft SMR</a></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -485,9 +477,7 @@ font-style: inherit;">library</span>(dplyr)</span>
 <span id="cb1-2"></span>
 <span id="cb1-3">rhs_extend <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> smr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rhs<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> smr_rhs<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>rhs <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -518,7 +508,7 @@ background-color: null;
 font-style: inherit;">"1"</span>)),</span>
 <span id="cb1-6">                  <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">nb_jp_rhs =</span> jp_we<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">nb_jour_rhs =</span> jp_we<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span>jp_hors_we)</span>
 <span id="cb1-7">rhs_extend</span></code></pre></div>
@@ -526,9 +516,9 @@ font-style: inherit;">+</span>jp_hors_we)</span>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 5 : utilisation ultra-classique de la fonction <code>àcross()</code> pour appliquer un même traitement à plusieurs variables en une seule ligne</p>
-<p>PMSISoft SMR Standard : voir écran <code>RHS &gt; Base des RHS</code></p>
-<p>PMSISoft SMR Professionnel : variable <code>nb_jp_rhs</code> présent dans <code>smr</code></p>
+<p>Ligne 3 : <code>smr_rhs$rhs</code> est un tibble des variables de la partie fixe des RHS</p>
+<p>Ligne 5 : utilisation classique de la fonction <code>dplyr::àcross()</code> pour appliquer un même traitement à plusieurs variables en une seule ligne</p>
+<p>La variable <code>nb_jour_rhs</code> est calculée par défaut dans tous les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_ssr" target="_blank">PMSISoft SMR</a></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 

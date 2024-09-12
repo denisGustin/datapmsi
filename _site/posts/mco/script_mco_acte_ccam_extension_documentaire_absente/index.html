@@ -261,8 +261,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Rappel : l’extension documentaire est obligatoire pour les actes d’anesthésie</p>
-<p>On suppose ici que la table des actes CCAM intègre la clé d’identification des RUM (nas,no_rum) permettant de rapprocher les RUM et les actes CCAM</p>
+<p>Rappel : les actes d’anesthésie appelent le codage d’une extension documentaire</p>
+<p>On suppose ici que la table des actes CCAM intègre la clé d’identification des RUM (no_rss,no_rum) permettant de rapprocher les RUM et les actes CCAM</p>
 <p>On repère les actes d’anesthésie via activite_ccam == 4</p>
 </section>
 <section id="code" class="level2">
@@ -270,16 +270,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>actes_ccam_no_extension_documentaire <span class="ot">&lt;-</span>mco<span class="sc">$</span>rum<span class="sc">$</span>ccam <span class="sc">%&gt;%</span> </span>
-<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(nas,no_rum,code_ccam,activite_ccam,extension_documentaire_ccam) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="#cb1-3"></a>actes_ccam_no_extension_documentaire <span class="ot">&lt;-</span>mco_rum<span class="sc">$</span>ccam <span class="sc">%&gt;%</span> </span>
+<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(nas,no_rss,no_rum,code_ccam,activite_ccam,extension_documentaire_ccam) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-5"><a href="#cb1-5"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(activite_ccam <span class="sc">==</span> <span class="st">"4"</span>, <span class="fu">is.na</span>(extension_documentaire_ccam))</span>
 <span id="cb1-6"><a href="#cb1-6"></a>actes_ccam_no_extension_documentaire</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>PMSISoft MCO Standard : la clé (nas, no_rum) est incluse par défaut dans <code>mco$rum$ccam</code></p>
-<p>PMSISoft MCO Professionnel : écran <code>Codage CCAM &gt; Base des actes CCAM</code> et filtrage de variables <code>activite_ccam Egal à 4 ET extension_documentaire_ccam Est vide</code></p>
+<p>Ligne 3 : <code>mco_rss$ccam</code> est un tibble des actes CCAM</p>
+<p>Cette requête est réalisable dans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a> dans l’écran <code>Codage CCAM &gt; Base des actes CCAM</code> via le filtrage de variables <code>activite_ccam Egal à 4 ET extension_documentaire_ccam Est vide</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 

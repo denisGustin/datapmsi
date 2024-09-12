@@ -269,8 +269,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>rhs_selected <span class="ot">&lt;-</span> smr<span class="sc">$</span>rhs<span class="sc">$</span>rhs <span class="sc">%&gt;%</span> </span>
-<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(annee_import,nas,no_semaine,no_um,cm,jp_we,jp_hors_we,nb_csarr) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="#cb1-3"></a>rhs_selected <span class="ot">&lt;-</span> smr_rhs<span class="sc">$</span>rhs <span class="sc">%&gt;%</span> </span>
+<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(nas,no_semaine,no_um,cm,jp_we,jp_hors_we,nb_csarr) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-5"><a href="#cb1-5"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(jp_we,jp_hors_we), <span class="sc">~</span> stringr<span class="sc">::</span><span class="fu">str_count</span>(.x,<span class="st">"1"</span>)),</span>
 <span id="cb1-6"><a href="#cb1-6"></a>                  <span class="at">nb_jp_rhs =</span> jp_we<span class="sc">+</span>jp_hors_we) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-7"><a href="#cb1-7"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(cm <span class="sc">==</span> <span class="st">"08"</span>, nb_jp_rhs <span class="sc">==</span> <span class="dv">5</span>, nb_csarr <span class="sc">==</span> <span class="dv">0</span>)</span>
@@ -279,9 +279,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 5-6 : voir script “Nombre de JP par RHS”</p>
-<p>Avec le script, possibilité de varier en toute liberté les critères de filtrages (age, autres CM/GN/…, autre seuil nb_jp_rhs, ..)</p>
-<p>PMSISoft SMR Professionnel : écran <code>RHS &gt; Base des RHS</code>, filtrage de périmètre <code>cm == "08"</code> et filtrage de variable <code>nb_jp_rhs Supérieur ou égal à 5 ET nb_acte_csarr Egal à 0</code></p>
+<p>Ligne 3 : <code>smr_rhs$rhs</code> est un tibble des variables de la partie fixe des RHS</p>
+<p>Ligne 5-6 : voir script SMR “Nombre de JP par RHS”</p>
+<p>Cette requêtes est réalisable dans <a href="https://www.pmsisoft.com/acces_pmsisoft_ssr" target="_blank">PMSISoft SMR</a> dans l’écran <code>RHS &gt; Base des RHS</code> via le filtrage de périmètre <code>cm == "08"</code> et le filtrage de variable <code>nb_jp_rhs Supérieur ou égal à 5 ET nb_acte_csarr Egal à 0</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 

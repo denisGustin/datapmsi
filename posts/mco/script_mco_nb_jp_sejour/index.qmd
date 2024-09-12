@@ -17,23 +17,26 @@ On en profite pour calculer aussi le nombre de RUM par séjour `nb_rum_sejour`
 #| label: code
 library(dplyr)
 
-sejour_extended <- mco$rum$rum %>% 
-    dplyr::select(nas,no_rum,date_entree_um,date_sortie_um) %>% 
-    dplyr::group_by(nas) %>% 
+sejour_extended <- mco_rss$rum %>% 
+    dplyr::select(nas,no_rss,no_rum,date_entree_um,date_sortie_um) %>% 
+    dplyr::group_by(no_rss) %>% 
     dplyr::mutate(date_entree_sejour = min(date_entree_um), date_sortie_sejour = max(date_sortie_um),
                   nb_jp_sejour = as.integer(date_sortie_sejour-date_entree_sejour),
                   nb_rum_sejour = dplyr::n()
                   ) %>% 
-    dplyr::distinct(nas,date_entree_sejour,date_sortie_sejour,nb_jp_sejour,nb_rum_sejour)
+    dplyr::ungroup() %>% 
+    dplyr::distinct(nas,no_rss,date_entree_sejour,date_sortie_sejour,nb_jp_sejour,nb_rum_sejour)
 sejour_extended
 ```
 
 ## Commentaires  
 
-Ligne 7 : on force en integer le calcul de la différence de dates qui sinon serait une différence en journées, peu pratique à manipuler  
+Ligne 3 : `mco_rss$rum` est un tibble des variables de la partie fixe des RUM  
 
-PMSISoft MCO Standard : voir écran `Séjours > Base des séjours`  
+Ligne 7 : on force en integer le calcul de la différence de dates qui, sinon, serait une différence en journées, peu pratique à manipuler  
 
-PMSISoft MCO professionnel : variable `nb_jp_sejour` et `nb_rum_sejour` présents dans `mco`  
+Ligne 11 : le `dplyr::distinct()` permet de ne sélectionner que des séjours via une suite de variables liées aux seuls séjours  
+
+Le calcul du nombre de JP ou de venues des RUM et des séjours ainsi que le calcul du nombre de RUM par séjour est disponible dans tous les écrans [PMSISoft MCO](https://www.pmsisoft.com/acces_pmsisoft_mco){target="_blank"}  
 
 [Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

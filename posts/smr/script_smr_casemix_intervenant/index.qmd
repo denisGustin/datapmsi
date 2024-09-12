@@ -7,9 +7,9 @@ page-layout: full
 
 ## Introduction  
 
-Par type d'intervenant, calcul du nombre d'actes, du nombre de réalisations CSARR et % du nombre d'actes et rapatriement libellé intervenant. 
+Par type d'intervenant représenté dans le jeu de données, on calcule le nombre de codages CSARR, le nombre d'actes différents CSARR codés, le nombre de réalisations CSARR cumulées et le % représenté par ce nombre de réalisations CSARR par rapport au nombre total de réalisations du jeu de données.  
 
-On enrichie en rapatriant le libellé des types d'intervenant via le référentiel `csarr_intervenant` [^1]  
+On rapatrie le libellé du type intervenant via le référentiel `csarr_intervenant` [^1]  du package `refpmsi`  
 
 ## Code  
 
@@ -20,8 +20,8 @@ library(refpmsi)
 
 csarr_intervenant <- refpmsi::refpmsi(csarr_intervenant)
 
-casemix_csarr_intervenant <- smr$rhs$csarr %>% 
-    dplyr::select(annee_import,code_csarr,nb_realisation_csarr,code_intervenant_csarr) %>% 
+casemix_csarr_intervenant <- smr_rhs$csarr %>% 
+    dplyr::select(code_csarr,nb_realisation_csarr,code_intervenant_csarr) %>% 
     dplyr::group_by(code_intervenant_csarr) %>% 
     dplyr::summarise(nb_acte_csarr = dplyr::n(),
                      nb_acte_different_csarr = dplyr::n_distinct(code_csarr),
@@ -29,7 +29,7 @@ casemix_csarr_intervenant <- smr$rhs$csarr %>%
     ) %>% 
     dplyr::arrange(desc(nb_realisation_csarr)) %>% 
     dplyr::mutate(percent_realisation_csarr = nb_realisation_csarr/sum(nb_realisation_csarr)) %>% 
-    dplyr::left_join(csarr_intervenant, join_by(code_intervenant_csarr == csarr_intervenant_code)) %>% 
+    dplyr::left_join(csarr_intervenant, by = join_by(code_intervenant_csarr == csarr_intervenant_code)) %>% 
     dplyr::select(code_intervenant_csarr,csarr_intervenant_libelle,nb_acte_csarr,nb_acte_different_csarr,
                   nb_realisation_csarr,percent_realisation_csarr)
 casemix_csarr_intervenant
@@ -37,11 +37,12 @@ casemix_csarr_intervenant
 
 ## Commentaires  
 
+Ligne 6 : `smr_rhs$csarr` est un tibble des variables `csarr` liées aux RHS  
+
 Ligne 16 : le `dplyr::select()` permet de réordonner les variables  
 
-PMSISoft SMR Standard : voir écran `Codage CSARR > Casemix CSARR > Casemix Intervenant`
+Ce casemix est disponible dans [PMSISoft SMR](https://www.pmsisoft.com/acces_pmsisoft_ssr){target="_blank"} dans l'écran `Codage CSARR > Casemix CSARR > Casemix Intervenant`  
 
 [Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  
-
 
 [^1]: Documentation du référentiel [csarr_intervenant](https://denisgustin.github.io/refpmsi/articles/csarr.html#csarr-intervenant){target="_blank"}  

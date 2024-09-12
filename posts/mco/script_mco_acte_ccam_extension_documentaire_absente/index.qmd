@@ -7,9 +7,9 @@ page-layout: full
 
 ## Introduction  
 
-Rappel : l'extension documentaire est obligatoire pour les actes d'anesthésie  
+Rappel : les actes d'anesthésie appelent le codage d'une extension documentaire  
 
-On suppose ici que la table des actes CCAM intègre la clé d'identification des RUM (nas,no_rum) permettant de rapprocher les RUM et les actes CCAM  
+On suppose ici que la table des actes CCAM intègre la clé d'identification des RUM (no_rss,no_rum) permettant de rapprocher les RUM et les actes CCAM  
 
 On repère les actes d'anesthésie via activite_ccam == 4  
 
@@ -19,16 +19,16 @@ On repère les actes d'anesthésie via activite_ccam == 4
 #| label: code
 library(dplyr)
 
-actes_ccam_no_extension_documentaire <-mco$rum$ccam %>% 
-    dplyr::select(nas,no_rum,code_ccam,activite_ccam,extension_documentaire_ccam) %>% 
+actes_ccam_no_extension_documentaire <-mco_rum$ccam %>% 
+    dplyr::select(nas,no_rss,no_rum,code_ccam,activite_ccam,extension_documentaire_ccam) %>% 
     dplyr::filter(activite_ccam == "4", is.na(extension_documentaire_ccam))
 actes_ccam_no_extension_documentaire
 ```
 
 ## Commentaires  
 
-PMSISoft MCO Standard : la clé (nas, no_rum) est incluse par défaut dans `mco$rum$ccam`  
+Ligne 3 : `mco_rss$ccam` est un tibble des actes CCAM 
 
-PMSISoft MCO Professionnel : écran `Codage CCAM > Base des actes CCAM` et filtrage de variables `activite_ccam Egal à 4 ET extension_documentaire_ccam Est vide`  
+Cette requête est réalisable dans [PMSISoft MCO](https://www.pmsisoft.com/acces_pmsisoft_mco){target="_blank"} dans l'écran `Codage CCAM > Base des actes CCAM` via le filtrage de variables `activite_ccam Egal à 4 ET extension_documentaire_ccam Est vide`  
 
 [Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

@@ -17,8 +17,8 @@ On filtre les RHS sur les 3 variables `cm`, `nb_jp_rhs` (à produire) et `nb_csa
 #| label: code
 library(dplyr)
 
-rhs_selected <- smr$rhs$rhs %>% 
-    dplyr::select(annee_import,nas,no_semaine,no_um,cm,jp_we,jp_hors_we,nb_csarr) %>% 
+rhs_selected <- smr_rhs$rhs %>% 
+    dplyr::select(nas,no_semaine,no_um,cm,jp_we,jp_hors_we,nb_csarr) %>% 
     dplyr::mutate(across(c(jp_we,jp_hors_we), ~ stringr::str_count(.x,"1")),
                   nb_jp_rhs = jp_we+jp_hors_we) %>% 
     dplyr::filter(cm == "08", nb_jp_rhs == 5, nb_csarr == 0)
@@ -27,11 +27,10 @@ rhs_selected
 
 ## Commentaires  
 
-Ligne 5-6 : voir script "Nombre de JP par RHS"  
+Ligne 3 : `smr_rhs$rhs` est un tibble des variables de la partie fixe des RHS  
 
-Avec le script, possibilité de varier en toute liberté les critères de filtrages (age, autres CM/GN/..., autre seuil nb_jp_rhs, ..)  
+Ligne 5-6 : voir script SMR "Nombre de JP par RHS"  
 
-PMSISoft SMR Professionnel : écran `RHS > Base des RHS`, filtrage de périmètre `cm == "08"` et filtrage de variable `nb_jp_rhs Supérieur ou égal à 5 ET nb_acte_csarr Egal à 0`  
+Cette requêtes est réalisable dans [PMSISoft SMR](https://www.pmsisoft.com/acces_pmsisoft_ssr){target="_blank"} dans l'écran `RHS > Base des RHS` via le filtrage de périmètre `cm == "08"` et le filtrage de variable `nb_jp_rhs Supérieur ou égal à 5 ET nb_acte_csarr Egal à 0`  
 
 [Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  
-

@@ -15,9 +15,7 @@ Pour chaque nature d'acte EDGARX du jeu de données, calcul du nombre d'actes, d
 #| label: code
 library(dplyr)
 
-raa <- psy$raa$raa
-
-casemix_edgarx <- raa %>% 
+casemix_edgarx <- psy_raa$raa %>% 
     dplyr::select(ipp,nature_acte,categorie_professionnelle_intervenant) %>% 
     dplyr::group_by(nature_acte) %>% 
     dplyr::summarise(nb_acte = dplyr::n(),
@@ -31,10 +29,12 @@ casemix_edgarx
 
 ## Commentaires  
 
-Ligne 12 : on trie sur le nombre descendant de `nb_acte`  
+Ligne 3 : `psy_raa$raa` est un tibble des variables RAA  
 
-Ligne 13 : avec l'argument `.after`, on positionne directement la variable `percent_acte` calculée après `nb_acte`  
+Ligne 10 : on trie sur le nombre descendant de `nb_acte`  
 
-PMSISoft PSY Standard : casemix disponible dans l'écran `Actes ambulatoires > Casemix EDGARX > Casemix EDGARX`  
+Ligne 11 : l'argument `.after` positionne la variable `percent_acte` qui vient d'être calculée après `nb_acte`  
+
+Ce casemix est disponible dans l'écran `Actes ambulatoires > Casemix EDGARX > Casemix EDGARX` de [PMSISoft PSY](https://www.pmsisoft.com/acces_pmsisoft_psy){target="_blank"}  
 
 [Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

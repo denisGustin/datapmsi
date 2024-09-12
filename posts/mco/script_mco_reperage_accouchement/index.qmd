@@ -1,0 +1,44 @@
+---
+title: "<b>Repérage des accouchements</b>"
+date: "2024-09-11"
+categories: [MCO,CCAM]
+page-layout: full
+---
+
+## Introduction  
+
+On produit le vecteur des actes CCAM d'accouchement à partir du référentiel `ovalide_ccaminfo` du package `refpmsi`  
+
+On identifie ensuite les actes CCAM qui sont des actes d'acccouchement puis on produit la liste des séjours concernés par un accouchement.  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+library(refpmsi)
+
+ovalide_ccaminfo <- refpmsi::refpmsi("ovalide_ccaminfo",2024)
+
+vect_acte_accouchement <- ovalide_ccaminfo %>% dplyr::filter(ACCOUCHEMENT == 1) %>% dplyr::pull(ccam_code)
+
+rum_accouchement <- mco_rss$ccam %>% 
+    dplyr::select(no_rss,nas,no_rum,code_ccam) %>% 
+    dplyr::mutate(is_accouchement = code_ccam %in% vect_acte_accouchement) %>% 
+    dplyr::filter(is_accouchement) %>% 
+    dplyr::distinct(no_rss,nas,no_rum)
+rum_accouchement
+```
+
+## Commentaires  
+
+Ligne 4 : on se restreint ici à la seule année 2024, car la liste des actes CCAM d'accouchement ne change pas depuis au moins 2020  
+
+Ligne 8 : `mco_rss$ccam` est un tibble des variables CCAM liées aux RUM  
+
+Ligne 11 : raccourci pour `dplyr::filter(is_accouchement == TRUE)`  
+
+Cette requête est réalisable dans [PMSISoft MCO](https://www.pmsisoft.com/acces_pmsisoft_mco){target="_blank"} dans l'écran `CCAM > Base des actes CCAM` via le filtrage de variables `code_ccam Contient codes des actes d'accoucheemnt`  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  
+

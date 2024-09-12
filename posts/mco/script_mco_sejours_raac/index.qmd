@@ -1,0 +1,38 @@
+---
+title: "<b>Séjours RAAC</b>"
+date: "2024-09-11"
+categories: [MCO]
+page-layout: full
+---
+
+## Introduction  
+
+Rappel : la variable `raac` (variable de la partie fixe des RUM) a 3 valeurs possibles (NA, 1 "Prise en charge RAAC", 2 "Pas de prise en charge RAAC")  
+
+On calcule une variable logique `sejour_raac`par séjour qui vaut TRUE si le séjour a au moins 1 RUM avec la variable `raac` == 1 et FALSE sinon.  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+
+sejour_raac <- mco_rss$rum %>% 
+    dplyr::select(nas,no_rss,no_rum,raac) %>% 
+    dplyr::mutate(.by = no_rss,
+                  raac_sejour = any(raac == "1", na.rm = TRUE)) %>% 
+    dplyr::distinct(nas,no_rss,raac_sejour)
+sejour_raac
+```
+
+## Commentaires  
+
+Ligne 3 : `mco_rss$rum` est un tibble des variables de la partie fixe des RUM  
+
+Ligne 6 : l'argument `na.rm = TRUE` de la fonction `àny()` gère le cas où la variable `raac` des RUM est NA  
+
+Ligne 7 : on passe d'un tibble de RUM à un tibble de séjours via le `dplyr::distinct()` de variables liées au séjour  
+
+Les séjours RAAC sont filtrables dans tous les écrans de [PMSISoft MCO](https://www.pmsisoft.com/acces_pmsisoft_mco){target="_blank"} via le filtrage de variables `sejour_raac TRUE`  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

@@ -1,5 +1,5 @@
 ---
-title: "<b>Casemix basique séjours par sévérité</b>"
+title: "<b>Casemix basique séjours par complexité</b>"
 date: "2024-06-10"
 categories: [MCO,Casemix]
 page-layout: full
@@ -7,7 +7,9 @@ page-layout: full
 
 ## Introduction  
 
-Après avoir calculé les variables `nb_jp_rum`et `nb_jp_sejour`, on filtre sur les séjours d'au moins 1 nuitée et on calcule, pour chaque sévérité, le nombre de séjours concernés, le nombre de journées et le % de séjours représenté.  
+Le complexité correspond à la 6eme position des GHM, appelée aussi de manière plus imprécise "sévérité"  
+
+On calcule, par complexité rencontrée au moins 1 fois dans le jeu de données, le nombre de séjours groupés avec cette complexité, ainsi le nombre de JP de ces séjours et le % de ces séjours par rapport au nombre total de séjours.  
 
 ## Code  
 
@@ -15,26 +17,26 @@ Après avoir calculé les variables `nb_jp_rum`et `nb_jp_sejour`, on filtre sur 
 #| label: code
 library(dplyr)
 
-casemix_severite <- mco$rum$rum %>% 
-    dplyr::select(nas,no_rum,ghm,severite,date_entree_um,date_sortie_um) %>% 
+casemix_complexite <- mco_rss$rum %>% 
+    dplyr::select(nas,no_rss,no_rum,ghm,complexite,date_entree_um,date_sortie_um) %>% 
     dplyr::mutate(nb_jp_rum = as.integer(date_sortie_um-date_entree_um)) %>% 
-    dplyr::mutate(.by = nas, nb_jp_sejour = sum(nb_jp_rum)) %>% 
+    dplyr::mutate(.by = no_rss, nb_jp_sejour = sum(nb_jp_rum)) %>% 
     dplyr::filter(nb_jp_sejour >= 1) %>% 
-    dplyr::distinct(nas,severite,nb_jp_sejour) %>% 
-    dplyr::group_by(severite) %>% 
-    dplyr::summarise(nb_sejour_severite = dplyr::n(),
-                     nb_jp_severite = sum(nb_jp_sejour)) %>% 
-    dplyr::arrange(desc(nb_sejour_severite)) %>% 
-    dplyr::mutate(percent_sejour_severite = nb_sejour_severite/sum(nb_sejour_severite))
-casemix_severite
+    dplyr::distinct(no_rss,complexite,nb_jp_sejour) %>% 
+    dplyr::group_by(complexite) %>% 
+    dplyr::summarise(nb_sejour_complexite = dplyr::n(),
+                     nb_jp_complexite = sum(nb_jp_sejour)) %>% 
+    dplyr::arrange(desc(nb_sejour_complexite)) %>% 
+    dplyr::mutate(percent_sejour_complexite = nb_sejour_complexite/sum(nb_sejour_complexite))
+casemix_complexite
 ```
 
 ## Commentaires  
 
-Ligne 8 : on ne retient que des variables liées au séjour pour le `dplyr::distinct()`  
+Ligne 3 : `mco_rss$rum` est un tibble des variables de la partie fixe des RUM  
 
-PMSISoft MCO Standard : voir écran `Séjours > Séjours et classification`
+Ligne 8 : ce `dplyr::distinct()` sur des variables liées au séjour fait passer le tibble d'un tibble de RUM à un tibble de séjours  
 
-PMSISoft MCO Professionnel : les 2 variables `nb_jp_rum` et `nb_jp_sejour` sont dans `mco`  
+Ce casemix est disponible dans [PMSISoft MCO](https://www.pmsisoft.com/acces_pmsisoft_mco){target="_blank"} dans l'écran `Séjours > Séjours et classification`  
 
 [Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

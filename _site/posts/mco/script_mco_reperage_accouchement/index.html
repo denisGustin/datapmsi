@@ -8,7 +8,7 @@
 
 <meta name="author" content="denis Gustin">
 
-<title>Data PMSI - Rapatriement libellé CIM-10 du DP des RPS</title>
+<title>Data PMSI - Repérage des accouchements</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -163,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><b>Rapatriement libellé CIM-10 du DP des RPS</b></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><b>Repérage des accouchements</b></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -226,11 +226,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><b>Rapatriement libellé CIM-10 du DP des RPS</b></h1>
+<h1 class="title"><b>Repérage des accouchements</b></h1>
   <div class="quarto-categories">
-    <div class="quarto-category">PSY</div>
-    <div class="quarto-category">RPS</div>
-    <div class="quarto-category">CIM</div>
+    <div class="quarto-category">MCO</div>
+    <div class="quarto-category">CCAM</div>
   </div>
   </div>
 
@@ -248,7 +247,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Date de publication</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">7 juin 2024</p>
+      <p class="date">11 septembre 2024</p>
     </div>
   </div>
   
@@ -262,8 +261,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Script très simple et très classique pour enrichir les données PMSI via le rapatriement des libellés, ici le libellé CIM-10 du DP de chaque RPS du jeu de données.</p>
-<p>Documentation du référentiel <a href="https://denisgustin.github.io/refpmsi/articles/cim.html#cim-libell%C3%A9" target="_blank">cim_libelle</a></p>
+<p>On produit le vecteur des actes CCAM d’accouchement à partir du référentiel <code>ovalide_ccaminfo</code> du package <code>refpmsi</code></p>
+<p>On identifie ensuite les actes CCAM qui sont des actes d’acccouchement puis on produit la liste des séjours concernés par un accouchement.</p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
@@ -271,20 +270,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(refpmsi)</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a>cim_libelle <span class="ot">&lt;-</span> refpmsi<span class="sc">::</span><span class="fu">refpmsi</span>(cim_libelle)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>ovalide_ccaminfo <span class="ot">&lt;-</span> refpmsi<span class="sc">::</span><span class="fu">refpmsi</span>(<span class="st">"ovalide_ccaminfo"</span>,<span class="dv">2024</span>)</span>
 <span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co"># everything() dans le select() est une façon de sélectionner toutes les variables natives du rps, dont la variable dp </span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>rps_extended <span class="ot">&lt;-</span> psy<span class="sc">$</span>rps<span class="sc">$</span>rps <span class="sc">%&gt;%</span> </span>
-<span id="cb1-8"><a href="#cb1-8"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">everything</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-9"><a href="#cb1-9"></a>    dplyr<span class="sc">::</span><span class="fu">left_join</span>(cim_libelle <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(cim_code, <span class="at">dp_libelle =</span> cim_libelle), <span class="fu">join_by</span>(dp <span class="sc">==</span> cim_code))</span>
-<span id="cb1-10"><a href="#cb1-10"></a>rps_extended</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6"></a>vect_acte_accouchement <span class="ot">&lt;-</span> ovalide_ccaminfo <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(ACCOUCHEMENT <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">pull</span>(ccam_code)</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a>rum_accouchement <span class="ot">&lt;-</span> mco_rss<span class="sc">$</span>ccam <span class="sc">%&gt;%</span> </span>
+<span id="cb1-9"><a href="#cb1-9"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(no_rss,nas,no_rum,code_ccam) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-10"><a href="#cb1-10"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">is_accouchement =</span> code_ccam <span class="sc">%in%</span> vect_acte_accouchement) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-11"><a href="#cb1-11"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(is_accouchement) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-12"><a href="#cb1-12"></a>    dplyr<span class="sc">::</span><span class="fu">distinct</span>(no_rss,nas,no_rum)</span>
+<span id="cb1-13"><a href="#cb1-13"></a>rum_accouchement</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 8 : <code>everything()</code> est pour <code>tidyselect::everything()</code> sachant que le package <code>tidyselect::</code> est chargé indirectement via le <code>dplyr</code></p>
-<p>Ligne 9 : on profite du <code>dplyr::select()</code> pour renommer <code>cim_libelle</code> en <code>dp_libelle</code> plus cohérent</p>
-<p>PMSISoft PSY Professionnel : <code>dp_libelle</code> est dans liste des variables de <code>psy$rps$rps</code></p>
+<p>Ligne 4 : on se restreint ici à la seule année 2024, car la liste des actes CCAM d’accouchement ne change pas depuis au moins 2020</p>
+<p>Ligne 8 : <code>mco_rss$ccam</code> est un tibble des variables CCAM liées aux RUM</p>
+<p>Ligne 11 : raccourci pour <code>dplyr::filter(is_accouchement == TRUE)</code></p>
+<p>Cette requête est réalisable dans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a> dans l’écran <code>CCAM &gt; Base des actes CCAM</code> via le filtrage de variables <code>code_ccam Contient codes des actes d'accoucheemnt</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
 </section>

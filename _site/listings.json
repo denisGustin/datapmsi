@@ -1,7 +1,34 @@
 [
   {
+    "listing": "/scripts_smr.html",
+    "items": [
+      "/posts/smr/script_smr_casemix_intervenant/index.html",
+      "/posts/smr/script_smr_sejour_hc_dependance_physique_maximale/index.html",
+      "/posts/smr/script_smr_rhs_cm08_no_acte_csarr/index.html",
+      "/posts/smr/script_smr_rapatriement_libelle_csarr/index.html",
+      "/posts/smr/script_smr_nombre_jp_rhs/index.html"
+    ]
+  },
+  {
+    "listing": "/scripts_mco.html",
+    "items": [
+      "/posts/mco/script_mco_reperage_accouchement/index.html",
+      "/posts/mco/script_mco_sejours_raac/index.html",
+      "/posts/mco/script_mco_extraction_string/index.html",
+      "/posts/mco/script_mco_ipdms_ghm/index.html",
+      "/posts/mco/script_mco_casemix_sejour_severite/index.html",
+      "/posts/mco/script_mco_valorisation_t2a_supplement_REA/index.html",
+      "/posts/mco/script_mco_acte_ccam_extension_documentaire_absente/index.html",
+      "/posts/mco/script_mco_nb_jp_sejour/index.html"
+    ]
+  },
+  {
     "listing": "/index.html",
     "items": [
+      "/posts/mco/script_mco_reperage_accouchement/index.html",
+      "/posts/mco/script_mco_sejours_raac/index.html",
+      "/posts/psy/script_psy_nb_raa_idem_same_date/index.html",
+      "/posts/mco/script_mco_extraction_string/index.html",
       "/posts/mco/script_mco_ipdms_ghm/index.html",
       "/posts/psy/script_psy_episode_soin_continu/index.html",
       "/posts/smr/script_smr_casemix_intervenant/index.html",
@@ -20,28 +47,9 @@
     ]
   },
   {
-    "listing": "/scripts_mco.html",
-    "items": [
-      "/posts/mco/script_mco_ipdms_ghm/index.html",
-      "/posts/mco/script_mco_casemix_sejour_severite/index.html",
-      "/posts/mco/script_mco_valorisation_t2a_supplement_REA/index.html",
-      "/posts/mco/script_mco_acte_ccam_extension_documentaire_absente/index.html",
-      "/posts/mco/script_mco_nb_jp_sejour/index.html"
-    ]
-  },
-  {
-    "listing": "/scripts_smr.html",
-    "items": [
-      "/posts/smr/script_smr_casemix_intervenant/index.html",
-      "/posts/smr/script_smr_sejour_hc_dependance_physique_maximale/index.html",
-      "/posts/smr/script_smr_rhs_cm08_no_acte_csarr/index.html",
-      "/posts/smr/script_smr_rapatriement_libelle_csarr/index.html",
-      "/posts/smr/script_smr_nombre_jp_rhs/index.html"
-    ]
-  },
-  {
     "listing": "/scripts_psy.html",
     "items": [
+      "/posts/psy/script_psy_nb_raa_idem_same_date/index.html",
       "/posts/psy/script_psy_episode_soin_continu/index.html",
       "/posts/psy/script_psy_nb_jp_multiple_reunion_same_ipp/index.html",
       "/posts/psy/script_psy_sejour_temps_complet_entree_sortie_same_sejour/index.html",

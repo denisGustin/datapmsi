@@ -8,7 +8,7 @@
 
 <meta name="author" content="denis Gustin">
 
-<title>Data PMSI - Casemix basique séjours par sévérité</title>
+<title>Data PMSI - Casemix basique séjours par complexité</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -163,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><b>Casemix basique séjours par sévérité</b></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><b>Casemix basique séjours par complexité</b></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -226,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><b>Casemix basique séjours par sévérité</b></h1>
+<h1 class="title"><b>Casemix basique séjours par complexité</b></h1>
   <div class="quarto-categories">
     <div class="quarto-category">MCO</div>
     <div class="quarto-category">Casemix</div>
@@ -261,32 +261,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Après avoir calculé les variables <code>nb_jp_rum</code>et <code>nb_jp_sejour</code>, on filtre sur les séjours d’au moins 1 nuitée et on calcule, pour chaque sévérité, le nombre de séjours concernés, le nombre de journées et le % de séjours représenté.</p>
+<p>Le complexité correspond à la 6eme position des GHM, appelée aussi de manière plus imprécise “sévérité”</p>
+<p>On calcule, par complexité rencontrée au moins 1 fois dans le jeu de données, le nombre de séjours groupés avec cette complexité, ainsi le nombre de JP de ces séjours et le % de ces séjours par rapport au nombre total de séjours.</p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>casemix_severite <span class="ot">&lt;-</span> mco<span class="sc">$</span>rum<span class="sc">$</span>rum <span class="sc">%&gt;%</span> </span>
-<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(nas,no_rum,ghm,severite,date_entree_um,date_sortie_um) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="#cb1-3"></a>casemix_complexite <span class="ot">&lt;-</span> mco_rss<span class="sc">$</span>rum <span class="sc">%&gt;%</span> </span>
+<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(nas,no_rss,no_rum,ghm,complexite,date_entree_um,date_sortie_um) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-5"><a href="#cb1-5"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">nb_jp_rum =</span> <span class="fu">as.integer</span>(date_sortie_um<span class="sc">-</span>date_entree_um)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-6"><a href="#cb1-6"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">.by =</span> nas, <span class="at">nb_jp_sejour =</span> <span class="fu">sum</span>(nb_jp_rum)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-6"><a href="#cb1-6"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">.by =</span> no_rss, <span class="at">nb_jp_sejour =</span> <span class="fu">sum</span>(nb_jp_rum)) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-7"><a href="#cb1-7"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(nb_jp_sejour <span class="sc">&gt;=</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-8"><a href="#cb1-8"></a>    dplyr<span class="sc">::</span><span class="fu">distinct</span>(nas,severite,nb_jp_sejour) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-9"><a href="#cb1-9"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(severite) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-10"><a href="#cb1-10"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">nb_sejour_severite =</span> dplyr<span class="sc">::</span><span class="fu">n</span>(),</span>
-<span id="cb1-11"><a href="#cb1-11"></a>                     <span class="at">nb_jp_severite =</span> <span class="fu">sum</span>(nb_jp_sejour)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-12"><a href="#cb1-12"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(nb_sejour_severite)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-13"><a href="#cb1-13"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">percent_sejour_severite =</span> nb_sejour_severite<span class="sc">/</span><span class="fu">sum</span>(nb_sejour_severite))</span>
-<span id="cb1-14"><a href="#cb1-14"></a>casemix_severite</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8"></a>    dplyr<span class="sc">::</span><span class="fu">distinct</span>(no_rss,complexite,nb_jp_sejour) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-9"><a href="#cb1-9"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(complexite) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-10"><a href="#cb1-10"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">nb_sejour_complexite =</span> dplyr<span class="sc">::</span><span class="fu">n</span>(),</span>
+<span id="cb1-11"><a href="#cb1-11"></a>                     <span class="at">nb_jp_complexite =</span> <span class="fu">sum</span>(nb_jp_sejour)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-12"><a href="#cb1-12"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(nb_sejour_complexite)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-13"><a href="#cb1-13"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">percent_sejour_complexite =</span> nb_sejour_complexite<span class="sc">/</span><span class="fu">sum</span>(nb_sejour_complexite))</span>
+<span id="cb1-14"><a href="#cb1-14"></a>casemix_complexite</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 8 : on ne retient que des variables liées au séjour pour le <code>dplyr::distinct()</code></p>
-<p>PMSISoft MCO Standard : voir écran <code>Séjours &gt; Séjours et classification</code></p>
-<p>PMSISoft MCO Professionnel : les 2 variables <code>nb_jp_rum</code> et <code>nb_jp_sejour</code> sont dans <code>mco</code></p>
+<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM</p>
+<p>Ligne 8 : ce <code>dplyr::distinct()</code> sur des variables liées au séjour fait passer le tibble d’un tibble de RUM à un tibble de séjours</p>
+<p>Ce casemix est disponible dans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a> dans l’écran <code>Séjours &gt; Séjours et classification</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 

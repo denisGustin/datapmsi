@@ -18,8 +18,7 @@ library(refpmsi)
 
 cim_libelle <- refpmsi::refpmsi(cim_libelle)
 
-# everything() dans le select() est une façon de sélectionner toutes les variables natives du rps, dont la variable dp 
-rps_extended <- psy$rps$rps %>% 
+rps_extended <- psy_rps$rps %>% 
     dplyr::select(everything()) %>% 
     dplyr::left_join(cim_libelle %>% dplyr::select(cim_code, dp_libelle = cim_libelle), join_by(dp == cim_code))
 rps_extended
@@ -27,15 +26,15 @@ rps_extended
 
 ## Commentaires  
 
-Ligne 8 : `everything()` est pour `tidyselect::everything()` sachant que le package `tidyselect::` est chargé indirectement via le `dplyr`  
+Ligne 6 : `psy_rps$rps` est un tibble des variables de la partie fixe des RPS  
 
-Ligne 9 : on profite du `dplyr::select()` pour renommer `cim_libelle` en `dp_libelle` plus cohérent  
+Ligne 7 : `everything()` est pour `tidyselect::everything()` sachant que le package `tidyselect::` est chargé via le `dplyr`.  
+`everything()` dans le `dplyr::select()` est une façon de sélectionner toutes les variables natives du du tibble `psy_rps$rps`, donc toutes les variables de la partie fixe d'un fichier RPS, dont, en particulier, la variable dp  
 
-Ligne 9 : le `dplyr::left_join()` ajoute `dp_libelle` en dernière position  
+Ligne 8 : on profite du `dplyr::select()` pour renommer `cim_libelle` en `dp_libelle` plus cohérent.  
+Le `dplyr::left_join()` ajoute `dp_libelle` en dernière position  
 
-PMSISoft PSY Standard : voir écran `RPS > Base des RPS`  
-
-PMSISoft PSY Professionnel : `dp_libelle` est dans liste des variables de `psy$rps$rps`  
+Dans tous les écrans [PMSISoft PSY](https://www.pmsisoft.com/acces_pmsisoft_psy){target="_blank"}, le libellé des codages CIM-10 est rapatrié par défaut.
 
 [Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  
 

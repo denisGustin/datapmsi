@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Denis Gustin">
+<meta name="author" content="denis Gustin">
 
-<title>Data PMSI - Formations Data PMSI avec R</title>
+<title>Data PMSI - Extraction partie d’une chaîne de caractères</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,25 +21,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -78,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Data PMSI</span>
     </a>
   </div>
@@ -89,24 +123,16 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./base_R.html"> 
-<span class="menu-text">Pre-requis R</span></a>
+    <a class="nav-link active" href="../../../prestation.html" aria-current="page"> 
+<span class="menu-text">Live coding PMSI R</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./guide_post.html" aria-current="page"> 
+    <a class="nav-link" href="../../../guide_post.html"> 
 <span class="menu-text">Guide des scripts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./prestation.html"> 
-<span class="menu-text">Code living PMSI R</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./pedagogie.html"> 
-<span class="menu-text">Pédagogie</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./formations_R.html"> 
-<span class="menu-text">Formations</span></a>
+    <a class="nav-link" href="../../../base_R.html"> 
+<span class="menu-text">Pre-requis R</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -116,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-jeux-de-données">    
         <li>
-    <a class="dropdown-item" href="./dataset_mco.html">
+    <a class="dropdown-item" href="../../../dataset_mco.html">
  <span class="dropdown-text">Jeux PMSI MCO</span></a>
   </li>  
     </ul>
@@ -137,34 +163,46 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Formations Data PMSI avec R</span></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><b>Extraction partie d’une chaîne de caractères</b></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prestation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Code living PMSI R</span></a>
+  <a href="../../../prestation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Live coding PMSI R</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./guide_post.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../guide_post.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Guide des scripts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./scripts/scripts_mco.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../../scripts_mco.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scripts MCO</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../scripts_smr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scripts SMR</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../scripts_psy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scripts PSY</span></a>
   </div>
 </li>
     </ul>
@@ -173,52 +211,57 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Sur cette page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#string-à-taille-fixe" id="toc-string-à-taille-fixe" class="nav-link" data-scroll-target="#string-à-taille-fixe">String à taille fixe</a>
   <ul class="collapse">
-  <li><a href="#objectifs-dapprentissage" id="toc-objectifs-dapprentissage" class="nav-link" data-scroll-target="#objectifs-dapprentissage">Objectifs d’apprentissage</a></li>
-  <li><a href="#ces-formations-sont-elles-pour-moi" id="toc-ces-formations-sont-elles-pour-moi" class="nav-link" data-scroll-target="#ces-formations-sont-elles-pour-moi">Ces formations sont-elles pour moi ?</a></li>
-  <li><a href="#pourquoi-r" id="toc-pourquoi-r" class="nav-link" data-scroll-target="#pourquoi-r">Pourquoi R ?</a></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
+  <li><a href="#commentaires" id="toc-commentaires" class="nav-link" data-scroll-target="#commentaires">Commentaires</a></li>
   </ul></li>
-  <li><a href="#pré-requis" id="toc-pré-requis" class="nav-link" data-scroll-target="#pré-requis">Pré-requis</a>
+  <li><a href="#string-à-taille-variable" id="toc-string-à-taille-variable" class="nav-link" data-scroll-target="#string-à-taille-variable">String à taille variable</a>
   <ul class="collapse">
-  <li><a href="#pré-requis-pmsi" id="toc-pré-requis-pmsi" class="nav-link" data-scroll-target="#pré-requis-pmsi">Pré-requis PMSI</a></li>
-  <li><a href="#pré-requis-r" id="toc-pré-requis-r" class="nav-link" data-scroll-target="#pré-requis-r">Pré-requis R</a></li>
+  <li><a href="#code-1" id="toc-code-1" class="nav-link" data-scroll-target="#code-1">Code</a></li>
+  <li><a href="#commentaires-1" id="toc-commentaires-1" class="nav-link" data-scroll-target="#commentaires-1">Commentaires</a></li>
   </ul></li>
-  <li><a href="#pédagogie" id="toc-pédagogie" class="nav-link" data-scroll-target="#pédagogie">Pédagogie</a></li>
-  <li><a href="#formateur" id="toc-formateur" class="nav-link" data-scroll-target="#formateur">Formateur</a></li>
+  <li><a href="#string-date" id="toc-string-date" class="nav-link" data-scroll-target="#string-date">String date</a>
+  <ul class="collapse">
+  <li><a href="#code-2" id="toc-code-2" class="nav-link" data-scroll-target="#code-2">Code</a></li>
+  <li><a href="#commentaires-2" id="toc-commentaires-2" class="nav-link" data-scroll-target="#commentaires-2">Commentaires</a></li>
+  </ul></li>
   </ul>
 </nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Formations Data PMSI avec R</span></h1>
-</div>
+<h1 class="title"><b>Extraction partie d’une chaîne de caractères</b></h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">MCO</div>
+  </div>
+  </div>
 
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Auteur·rice</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
-  
+
+<div class="quarto-title-meta column-page-right">
+
+    <div>
+    <div class="quarto-title-meta-heading">Auteur·rice</div>
     <div class="quarto-title-meta-contents">
-    <p class="author">Denis Gustin </p>
+             <p>denis Gustin </p>
+          </div>
   </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Data PMSI
-          </p>
-      </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Date de publication</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">9 septembre 2024</p>
+    </div>
   </div>
-
-<div class="quarto-title-meta">
-
-      
   
     
   </div>
@@ -228,78 +271,86 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><span style="font-size: 1.75rem; font-weight: 400;"><i>Devenir autonome dans l’analyse PMSI de ses établissements</i></span></p>
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<section id="objectifs-dapprentissage" class="level2">
-<h2 class="anchored" data-anchor-id="objectifs-dapprentissage">Objectifs d’apprentissage</h2>
-<p>Les formations <strong>Data PMSI avec R</strong> s’adressent aux professionnels du PMSI amenés à manipuler des données issues du PMSI.</p>
-<p>Ces formations, organisées par champ PMSI, visent à permettre aux professionnels du PMSI ou liées au PMSI de produire eux-mêmes, directement à partir des données PMSI brutes de leurs établissements, de manière efficace, des traitements et analyses PMSI de haute qualité, performantes, reproductibles et documentées.</p>
-<p>Après chaque formation <strong>Data PMSI avec R</strong>, les participants acquièrent une savoir-faire R minimal pour une première autonomie en contexte PMSI MCO, une vision de ce qu’il faut savoir et maîtriser en R pour le PMSI et une bibliothèque de requêtes et de scripts d’analyses PMSI en R à décliner sur l’activité de leurs établissements.</p>
-<p>Pendant la demi-journée, la journée ou les 2 journées de la formation, les participants découvrent et apprennent, à travers des exemples concrets et gradués, les familles d’analyse PMSI possibles et réalistes aujourd’hui avec R.</p>
-<p>Ils s’exercent, en live coding avec le formateur, à produire ces analyses PMSI avec R sur des jeux de données simili PMSI réalistes et/ou sur les données PMSI de leurs établissements.</p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>string = chaîne de caractères</p>
+<p>On distingue 3 situations (string à taille fixe, string à taille variable, string de type date) illustrées chacune par un traitement</p>
 </section>
-<section id="ces-formations-sont-elles-pour-moi" class="level2">
-<h2 class="anchored" data-anchor-id="ces-formations-sont-elles-pour-moi">Ces formations sont-elles pour moi ?</h2>
-<p>Ces formations vous conviendront si vous répondez oui à ces questions :</p>
-<ul>
-<li>Souhaitez-vous créer vous-mêmes des requêtes et des analyses PMSI, sans avoir à passer par un service informatique ou des outils et logiciels chers et propriétaires ?</li>
-<li>Appréciez-vous de pouvoir tester rapidement vos intuitions et réflexions sur la production PMSI de vos établissements ?</li>
-<li>Souhaitez-vous construire et faire vivre votre propre catalogue d’analyses PMSI, entièrement reproductibles ?</li>
-<li>Souhaitez-vous pouvoir travailler avec les data scientists santé ?</li>
-</ul>
+<section id="string-à-taille-fixe" class="level2">
+<h2 class="anchored" data-anchor-id="string-à-taille-fixe">String à taille fixe</h2>
+<p>On repère les séjours de complexité 3 ou 4</p>
+<section id="code" class="level3">
+<h3 class="anchored" data-anchor-id="code">Code</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>sejour_niveau_3_4 <span class="ot">&lt;-</span> mco_rss<span class="sc">$</span>rum <span class="sc">%&gt;%</span> </span>
+<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(nas,no_rss,no_rum,ghm) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-5"><a href="#cb1-5"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">is_niveau_3_4 =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(ghm, <span class="at">start =</span> <span class="dv">6</span>, <span class="at">end =</span> <span class="dv">6</span>) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'3'</span>,<span class="st">'4'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-6"><a href="#cb1-6"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(is_niveau_3_4) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-7"><a href="#cb1-7"></a>    dplyr<span class="sc">::</span><span class="fu">distinct</span>(nas,no_rss,ghm)</span>
+<span id="cb1-8"><a href="#cb1-8"></a>sejour_niveau_3_4</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="pourquoi-r" class="level2">
-<h2 class="anchored" data-anchor-id="pourquoi-r">Pourquoi R ?</h2>
-<p>R est un langage open source, mature, optimisé pour les statistiques et la manipulation de données structurées, très utilisé depuis des années en santé publique.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>L’arrivée à maturité de la famille de package tidyverse depuis 2 ou 3 ans, en terme de fonctionnalités, documentation et performance, facilite grandement, pour les professionnels du PMSI, l’utilisation de R pour les traitements PMSI.</p>
-<p>R a une masse critique d’utilisateurs qui assure sa pérennité.</p>
-<p>R est gratuit et open source. Cela veut donc dire que vous pouvez travailler tout de suite sans demander l’autorisation ou de budget à personne.</p>
-<p>La documentation R est infinie, adaptée à tous les niveaux.</p>
-<p>Les professionnels du PMSI qui utilisent R ont maintenant un écosystème dédié (prestations, packages PMSI, blogs, échanges entre professionnels, service en ligne).</p>
-</section>
-</section>
-<section id="pré-requis" class="level1">
-<h1>Pré-requis</h1>
-<section id="pré-requis-pmsi" class="level2">
-<h2 class="anchored" data-anchor-id="pré-requis-pmsi">Pré-requis PMSI</h2>
-<p>Toutes les formations <strong>Data PMSI avec R</strong> supposent une maîtrise professionnelle du PMSI, en particulier du champ PMSI de la formation (MCO, SSR, PSY) :</p>
-<ul>
-<li>règles (définitions, vocabulaire)</li>
-<li>structures de données (rss, rsa, fichcomp, ficium, vidhosp, fichsup, rhs, rha, rps, raa, …)</li>
-<li>référentiels (CIM-10, CCAM à usage PMSI, DMI, UCD en sus, CSARR, …)</li>
-<li>documentations (guides méthodologiques, manuels de groupages, cahiers des charges, …)</li>
-<li>contrôles qualité (requêtes, OVALIDE, …)</li>
-<li>analyses (case mix, reporting, fouilles de données, …)</li>
-</ul>
-<p>Remarque : la pratique du codage n’est pas nécessaire, même si codé ou avoir déjà codé des dossiers est un plus pour appréhender les problématiques.</p>
-</section>
-<section id="pré-requis-r" class="level2">
-<h2 class="anchored" data-anchor-id="pré-requis-r">Pré-requis R</h2>
-<p><a href="./base_R.html">Explications détaillées</a></p>
+<section id="commentaires" class="level3">
+<h3 class="anchored" data-anchor-id="commentaires">Commentaires</h3>
+<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM</p>
+<p>Ligne 5 : <code>stringr::str_sub(ghm, start = 6, end = 6)</code> isole la complexite du GHM</p>
+<p>Ligne 6 : raccourci pour <code>dplyr::filter(is_niveau_3_4 == TRUE)</code></p>
+<p>Ligne 7 : le <code>dplyr::distinct()</code> sur des variables liées au séjour fait passer le tibble d’un tibble de RUM à un tibble de séjours</p>
+<p>Le script est pédagogique car, en pratique, on dispose généralement de la variable <code>complexite</code> par défaut.</p>
+<p>Le filtrage sur la complexité est disponible dans tous les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a></p>
 </section>
 </section>
-<section id="pédagogie" class="level1">
-<h1>Pédagogie</h1>
-<p><a href="./pedagogie.html">Explications détaillées</a></p>
+<section id="string-à-taille-variable" class="level2">
+<h2 class="anchored" data-anchor-id="string-à-taille-variable">String à taille variable</h2>
+<p>On repère les codages CIM-10 terminés par un 9</p>
+<section id="code-1" class="level3">
+<h3 class="anchored" data-anchor-id="code-1">Code</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>codage_das_9 <span class="ot">&lt;-</span> mco_rss<span class="sc">$</span>das <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(nas,no_rss,no_rum,das) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-5"><a href="#cb2-5"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">is_das_9 =</span> stringr<span class="sc">::</span><span class="fu">str_detect</span>(das, <span class="at">pattern =</span> <span class="st">"9$"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(is_das_9)</span>
+<span id="cb2-7"><a href="#cb2-7"></a>codage_das_9</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="formateur" class="level1">
-<h1>Formateur</h1>
-<p>Denis Gustin est ingénieur et le concepteur et développeur de <a href="https://www.pmsisoft.com" target="_blank">PMSISoft</a>, logiciel d’analyse PMSI développé principalement en R.<br>
-Il est spécialiste en données PMSI avec plus de 15 ans d’expérience dans les différents PMSI et intervient régulièrement, en tant que formateur et consultant, dans des établissements de santé sur des problématiques d’analyses PMSI et de données de santé.<br>
-Il développe et maintient le package R de données PMSI <a href="https://denisgustin.github.io/refpmsi/index.html" target="_blank">refpmsi::</a>.<br>
-Il anime le blog <a href="https://www.lespmsi.com" target="_blank">lespmsi.com</a></p>
+<section id="commentaires-1" class="level3">
+<h3 class="anchored" data-anchor-id="commentaires-1">Commentaires</h3>
+<p>Ligne 3 : <code>mco_rss$das</code> est un tibble des variables <code>das</code> associées aux RUM</p>
+<p>Ligne 5 : le repérage des codes CIM-10 recherchés se fait via le regex très simple <code>9$</code> qui signifie “un 9 en dernière position”</p>
+<p>Le filtrage par regex sur un codage est disponible dans tous les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a></p>
+</section>
+</section>
+<section id="string-date" class="level2">
+<h2 class="anchored" data-anchor-id="string-date">String date</h2>
+<p>On produit la variable <code>mois_sortie_um</code></p>
+<section id="code-2" class="level3">
+<h3 class="anchored" data-anchor-id="code-2">Code</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a>rum_extended <span class="ot">&lt;-</span> mco_rss<span class="sc">$</span>rum <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(nas,no_rss,no_um,date_sortie_um) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-5"><a href="#cb3-5"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">mois_sortie_um =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(date_sortie_um,<span class="dv">6</span>,<span class="dv">7</span>),</span>
+<span id="cb3-6"><a href="#cb3-6"></a>                  <span class="at">mois_sortie_um_label =</span> <span class="fu">as.character</span>(lubridate<span class="sc">::</span><span class="fu">month</span>(date_sortie_um, <span class="at">label =</span> <span class="cn">TRUE</span>, <span class="at">abbr =</span> <span class="cn">FALSE</span>, <span class="at">locale =</span> <span class="fu">Sys.getlocale</span>(<span class="st">"LC_TIME"</span>))))</span>
+<span id="cb3-7"><a href="#cb3-7"></a>rum_extended</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="commentaires-2" class="level3">
+<h3 class="anchored" data-anchor-id="commentaires-2">Commentaires</h3>
+<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM</p>
+<p>Ligne 6 : <code>mois_sortie_um_lable</code>est une alternative au code la ligne 5 permettant d’obtenir directement le mois de sortie de l’UM avec son intitulé en français (ex : “janvier”)</p>
+<p>La variable <code>mois_sortie_um</code> est calculée par défaut dans tous les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
 </section>
+</section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notes de bas de page</h2>
-
-<ol>
-<li id="fn1"><p>Python est évidemment une alternative avec des avantages réels sur certains aspects par rapport à R pour certaines analyses PMSI. Nous développons d’ailleurs régulièrement en Python. Mais nous estimons que Python est plus difficile d’accès pour des non-informaticients (ce que sont les professionnels du PMSI) et moins riche en fonctions “toutes prêtes” pour de nombreux traitements PMSI (tableaux, graphiques).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -381,7 +432,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/www\.datapmsi\.com");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

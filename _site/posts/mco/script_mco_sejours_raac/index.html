@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="denis Gustin">
 
-<title>Data PMSI - Scripts MCO R</title>
+<title>Data PMSI - Séjours RAAC</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +21,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,67 +101,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Recherche"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="alternate" type="application/rss+xml" title="Data PMSI" href="scripts_mco.xml" data-external="1"></head>
+</head>
 
 <body class="nav-sidebar docked nav-fixed">
 
@@ -137,7 +112,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Data PMSI</span>
     </a>
   </div>
@@ -148,15 +123,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./prestation.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../prestation.html" aria-current="page"> 
 <span class="menu-text">Live coding PMSI R</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./guide_post.html"> 
+    <a class="nav-link" href="../../../guide_post.html"> 
 <span class="menu-text">Guide des scripts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./base_R.html"> 
+    <a class="nav-link" href="../../../base_R.html"> 
 <span class="menu-text">Pre-requis R</span></a>
   </li>  
 </ul>
@@ -167,7 +142,7 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-jeux-de-données">    
         <li>
-    <a class="dropdown-item" href="./dataset_mco.html">
+    <a class="dropdown-item" href="../../../dataset_mco.html">
  <span class="dropdown-text">Jeux PMSI MCO</span></a>
   </li>  
     </ul>
@@ -188,69 +163,92 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./scripts_mco.html">Scripts MCO</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><b>Séjours RAAC</b></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prestation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../prestation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Live coding PMSI R</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./guide_post.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../guide_post.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Guide des scripts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./scripts_mco.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../scripts_mco.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scripts MCO</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./scripts_smr.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../scripts_smr.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scripts SMR</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./scripts_psy.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../scripts_psy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scripts PSY</span></a>
   </div>
 </li>
     </ul>
     </div>
-    
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sur cette page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
+  <li><a href="#commentaires" id="toc-commentaires" class="nav-link" data-scroll-target="#commentaires">Commentaires</a></li>
+  </ul>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <h5 class="quarto-listing-category-title">Catégories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Tous <span class="quarto-category-count">(8)</span></div><div class="category" data-category="CCAM">CCAM <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Casemix">Casemix <span class="quarto-category-count">(2)</span></div><div class="category" data-category="GHM">GHM <span class="quarto-category-count">(1)</span></div><div class="category" data-category="MCO">MCO <span class="quarto-category-count">(8)</span></div><div class="category" data-category="T2A">T2A <span class="quarto-category-count">(1)</span></div></div></div>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Scripts MCO R</span></h1>
-</div>
+<h1 class="title"><b>Séjours RAAC</b></h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">MCO</div>
+  </div>
+  </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-right">
 
+    <div>
+    <div class="quarto-title-meta-heading">Auteur·rice</div>
+    <div class="quarto-title-meta-contents">
+             <p>denis Gustin </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Date de publication</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">11 septembre 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -260,215 +258,36 @@ window.Quarto = {
 </header>
 
 
-<p>Il est conseillé de lire le <a href="./guide_post.html">Guide des scripts</a> et les <a href="./base_R.html">Pré-requis R</a> en préambule à la lecture et à l’exploitation des scripts.</p>
-<section id="liste-des-scripts-mco-r" class="level2">
-<h2 class="anchored" data-anchor-id="liste-des-scripts-mco-r">Liste des scripts MCO R</h2>
-
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Rappel : la variable <code>raac</code> (variable de la partie fixe des RUM) a 3 valeurs possibles (NA, 1 “Prise en charge RAAC”, 2 “Pas de prise en charge RAAC”)</p>
+<p>On calcule une variable logique <code>sejour_raac</code>par séjour qui vaut TRUE si le séjour a au moins 1 RUM avec la variable <code>raac</code> == 1 et FALSE sinon.</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>sejour_raac <span class="ot">&lt;-</span> mco_rss<span class="sc">$</span>rum <span class="sc">%&gt;%</span> </span>
+<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(nas,no_rss,no_rum,raac) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-5"><a href="#cb1-5"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">.by =</span> no_rss,</span>
+<span id="cb1-6"><a href="#cb1-6"></a>                  <span class="at">raac_sejour =</span> <span class="fu">any</span>(raac <span class="sc">==</span> <span class="st">"1"</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-7"><a href="#cb1-7"></a>    dplyr<span class="sc">::</span><span class="fu">distinct</span>(nas,no_rss,raac_sejour)</span>
+<span id="cb1-8"><a href="#cb1-8"></a>sejour_raac</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level2">
+<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM</p>
+<p>Ligne 6 : l’argument <code>na.rm = TRUE</code> de la fonction <code>àny()</code> gère le cas où la variable <code>raac</code> des RUM est NA</p>
+<p>Ligne 7 : on passe d’un tibble de RUM à un tibble de séjours via le <code>dplyr::distinct()</code> de variables liées au séjour</p>
+<p>Les séjours RAAC sont filtrables dans tous les écrans de <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a> via le filtrage de variables <code>sejour_raac TRUE</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
 </section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="MCO,CCAM" data-listing-date-sort="1726005600000" data-listing-file-modified-sort="1726110838236" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="179">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/mco/script_mco_reperage_accouchement/index.html" class="no-external"><b>Repérage des accouchements</b></a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/mco/script_mco_reperage_accouchement/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('MCO'); return false;">
-MCO
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('CCAM'); return false;">
-CCAM
-</div>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/mco/script_mco_reperage_accouchement/index.html" class="no-external">
-<div class="listing-date">
-mercredi 11 septembre 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="MCO" data-listing-date-sort="1726005600000" data-listing-file-modified-sort="1726120063559" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="209">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/mco/script_mco_sejours_raac/index.html" class="no-external"><b>Séjours RAAC</b></a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/mco/script_mco_sejours_raac/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('MCO'); return false;">
-MCO
-</div>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/mco/script_mco_sejours_raac/index.html" class="no-external">
-<div class="listing-date">
-mercredi 11 septembre 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="MCO" data-listing-date-sort="1725832800000" data-listing-file-modified-sort="1726120342155" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="422">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/mco/script_mco_extraction_string/index.html" class="no-external"><b>Extraction partie d’une chaîne de caractères</b></a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/mco/script_mco_extraction_string/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('MCO'); return false;">
-MCO
-</div>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/mco/script_mco_extraction_string/index.html" class="no-external">
-<div class="listing-date">
-lundi 9 septembre 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="MCO,GHM,Casemix" data-listing-date-sort="1718056800000" data-listing-file-modified-sort="1726109974212" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="494">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/mco/script_mco_ipdms_ghm/index.html" class="no-external"><b>IPDMS par GHM</b></a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/mco/script_mco_ipdms_ghm/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('MCO'); return false;">
-MCO
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('GHM'); return false;">
-GHM
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Casemix'); return false;">
-Casemix
-</div>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/mco/script_mco_ipdms_ghm/index.html" class="no-external">
-<div class="listing-date">
-mardi 11 juin 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="MCO,Casemix" data-listing-date-sort="1717970400000" data-listing-file-modified-sort="1726107402199" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="231">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/mco/script_mco_casemix_sejour_severite/index.html" class="no-external"><b>Casemix basique séjours par complexité</b></a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/mco/script_mco_casemix_sejour_severite/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('MCO'); return false;">
-MCO
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Casemix'); return false;">
-Casemix
-</div>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/mco/script_mco_casemix_sejour_severite/index.html" class="no-external">
-<div class="listing-date">
-lundi 10 juin 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="MCO,T2A" data-listing-date-sort="1717970400000" data-listing-file-modified-sort="1726123023555" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="197">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/mco/script_mco_valorisation_t2a_supplement_REA/index.html" class="no-external"><b>Valorisation T2A des suppléments REA</b></a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/mco/script_mco_valorisation_t2a_supplement_REA/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('MCO'); return false;">
-MCO
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('T2A'); return false;">
-T2A
-</div>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/mco/script_mco_valorisation_t2a_supplement_REA/index.html" class="no-external">
-<div class="listing-date">
-lundi 10 juin 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="MCO,CCAM" data-listing-date-sort="1717884000000" data-listing-file-modified-sort="1726102931079" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="126">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/mco/script_mco_acte_ccam_extension_documentaire_absente/index.html" class="no-external"><b>Actes CCAM avec extension documentaire obligatoire mais absente</b></a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/mco/script_mco_acte_ccam_extension_documentaire_absente/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('MCO'); return false;">
-MCO
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('CCAM'); return false;">
-CCAM
-</div>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/mco/script_mco_acte_ccam_extension_documentaire_absente/index.html" class="no-external">
-<div class="listing-date">
-dimanche 9 juin 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="MCO" data-listing-date-sort="1717711200000" data-listing-file-modified-sort="1726096015532" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="243">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/mco/script_mco_nb_jp_sejour/index.html" class="no-external"><b>Nombre de JP d’un séjour MCO</b></a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/mco/script_mco_nb_jp_sejour/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('MCO'); return false;">
-MCO
-</div>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/mco/script_mco_nb_jp_sejour/index.html" class="no-external">
-<div class="listing-date">
-vendredi 7 juin 2024
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-Aucun article correspondant
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

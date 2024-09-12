@@ -277,43 +277,56 @@ Voir notre <a href="./base_R.html">article “Pré-requis R”</a> pour plus de 
 <p>2 manières pour disposer de ce jeu de données.</p>
 <p><strong>1ere manière</strong></p>
 <p>Télécharger, en tant qu’administrateur d’un accès Standard PMSISoft<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, la liste des tibbles du champ PMSI qui vous intéresse.<br>
-Cette liste est un objet list, enregistré dans un fichier .rds</p>
-<p><strong>L’accès Standard PMSISoft est gratuit, sans limite de temps, ouvert à la demande de tout établissement qui nous en fait la demande.</strong><br>
-Plus d’informations :<br>
+Ces listes sont des objets <code>list</code> enregistrés dans un fichier .rds</p>
+<p><strong>L’accès Standard PMSISoft est gratuit, sans limite de temps, ouvert à la demande de tout établissement qui nous en fait la demande.</strong></p>
+<p>Plus d’informations :<br>
 <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a><br>
 <a href="https://www.pmsisoft.com/acces_pmsisoft_ssr" target="_blank">PMSISoft SMR</a><br>
 <a href="https://www.pmsisoft.com/acces_pmsisoft_psy" target="_blank">PMSISoft PSY</a></p>
 <p><a href="https://www.lespmsi.com/contact-pmsisoft/" target="_blank">Demander votre accès PMSISoft</a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on suppose que le .rds est déposé dans un répertoire "data" de votre projet R, sans modification de son nom</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on suppose que les .rds sont déposés dans un répertoire "data" de votre projet R, sans modification de nom</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># En MCO, on récupère la liste des tibbles via</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>mco <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/mco_AAAA-MM-JJ.rds"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># En SMR, on récupère la liste des tibbles via</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>smr <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/smr_AAAA-MM-JJ.rds"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># En PSY, on récupère la liste des tibbles via</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>psy <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/psy_AAAA-MM-JJ.rds"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemples MCO</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">## on récupère la liste des tibbles liés aux RSS via</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>mco_rss <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/mco_rss_AAAA-MM-JJ.rds"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="do">## on récupère la liste des tibbles liés aux RSA via</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>mco_rsa <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/mco_rsa_AAAA-MM-JJ.rds"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="do">## on récupère la liste des tibbles liés aux DMI via</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>mco_dmi <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/mco_dmi_AAAA-MM-JJ.rds"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemple SMR</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">## on récupère la liste des tibbles liés aux RHS via</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>smr_rhs <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/smr_rhs_AAAA-MM-JJ.rds"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemples PSY</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="do">## on récupère la liste des tibbles liés aux RPS via</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>psy_rps <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/psy_rps_AAAA-MM-JJ.rds"</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="do">## on récupère la liste des tibbles liés aux RAA via</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>psy_raa <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/psy_raa_AAAA-MM-JJ.rds"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>2eme manière</strong></p>
 <p>Produire le tibble à partir du fichier concerné du .in ou du .out ou via un export à partir du SI de votre établissement.<br>
 <strong>Important : </strong> dans <em>chaque script</em>, en 2ème ligne d’instruction du script, nous codons un <code>dplyr::select()</code> qui sélectionne les variables du jeu dont on va se servir.</p>
 <p>Cette sélection permet de vous “raccrocher” au script, indépendamment du nommage de votre jeu de données, car le libellé des variables utilisées est normalisé et la correspondance avec les intitulés des variables des formats de fichiers officiels est évidente.</p>
-<p>Vous pouvez donc appliquer le script tel quel à partir de sa 3eme ligne de code, soit en renommant vos variables (via <code>dplyr::select()</code> ou <code>dplyr::rename()</code>) pour qu’elles correspondent à celles du script, soit en personnalisant le script avec vos intitulés de variables.</p>
-<p>Exemple avec le script <a href="./posts/mco/script_mco_casemix_sejour_severite/index.html">“Casemix basique séjours par sévérité”</a></p>
+<p>Vous pouvez donc appliquer le script tel quel à partir de sa 2eme ligne de code, soit en renommant vos variables (via <code>dplyr::select()</code> ou <code>dplyr::rename()</code>) pour qu’elles correspondent à celles du script, soit en personnalisant le script avec vos intitulés de variables.</p>
+<p>Exemple avec le script <a href="./posts/mco/script_mco_casemix_sejour_severite/index.html">“Casemix basique séjours par complexité”</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># récupération préalable du tibble correspondant à la partie fixe du fichier des rss groupés</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>rum <span class="ot">&lt;-</span> mco<span class="sc">$</span>rum<span class="sc">$</span>rum</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mco_rss<span class="sc">$</span>rum</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># les 2 premières lignes du script sont </span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>casemix_severite <span class="ot">&lt;-</span> rum <span class="sc">%&gt;%</span> </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(nas,no_rum,ghm,severite,date_entree_um,date_sortie_um)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>casemix_severite <span class="ot">&lt;-</span> mco_rss<span class="sc">$</span>rum <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(nas,no_rss,no_rum,ghm,complexite,date_entree_um,date_sortie_um)</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># on a sélectionné ici 6 variables (nas, no_rum, ghm, severite, date_entree_um, date_sortie_um) dont la correspondance avec les intitulés du format est évidente :</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># on a sélectionné ici 7 variables dont la correspondance avec les intitulés du format est évidente :</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="do">## nas pour N° Administratif local de séjour (positions 48 à 67)</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="do">## no_rum pour N° de RUM (positions 68 à 77)</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">## etc...</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="do">## no_rss pour Numéro de RSS</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">## no_rum pour N° de RUM (positions 68 à 77)</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="do">## etc...</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>On se base par défaut sur la dernière version des formats PMSI.</p>
 </section>

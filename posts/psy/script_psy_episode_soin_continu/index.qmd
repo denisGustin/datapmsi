@@ -9,11 +9,9 @@ page-layout: full
 
 Pour la définition des épisodes de soin continu en hospitalisation complète, voir [ici](https://www.scansante.fr/sites/default/files/content/376/notice_rme_psy_hospitalisations_longues_en_psychiatrie.pdf){target="_blank"}  
 
-Dans une première étape, sur la base des RPS de temps complet, on repère et comptabilise par IPP, les épisodes de soin continu.  
+Dans un premier tibble, sur la base des RPS de temps complet, on repère et comptabilise par IPP, les épisodes de soin continu.  
 
-Dans une 2eme étape, on passe en IPP et on calcule le nombre de séjours de l'IPP.  
-
-Au final, on a un tibble par IPP avec, pour chaque IPP, le nombre de séjours temps complet et le nombre d'épisodes soin continu.  
+Dans un second tibble, on calcule **par IPP** le nombre de séjours temps complet et le nombre d'épisodes de soin continu.  
 
 ## Code  
 
@@ -21,10 +19,12 @@ Au final, on a un tibble par IPP avec, pour chaque IPP, le nombre de séjours te
 #| label: code
 library(dplyr)
 
-rps_episode_soin_continu <- psy$rps$rps %>% 
-    dplyr::select(forme_activite,ipp,no_sejour,date_debut_sequence,date_fin_sequence,nb_jours_presence) %>% 
-    dplyr::filter(forme_activite %in% c("01","01D","01S","01P","02","03","04","05","06","07")) %>% 
-    dplyr::group_by(ipp) %>% 
+vect_fa_temps_complet <- c('01','01D','01S','01P','02','03','04','05','06','07')
+
+rps_episode_soin_continu <- psy_rps$rps %>% 
+    dplyr::select(forme_activite,no_ipp,no_sejour,date_debut_sequence,date_fin_sequence,nb_jours_presence) %>% 
+    dplyr::filter(forme_activite %in% vect_fa_temps_complet) %>% 
+    dplyr::group_by(no_ipp) %>% 
     dplyr::arrange(date_debut_sequence, .by_group = TRUE) %>% 
     dplyr::mutate(same_episode_soin_continu_ipp = as.integer(date_debut_sequence-dplyr::lag(date_fin_sequence, default = date_debut_sequence[1])) <= 1L,
                   cumsum_episode_soin_continu_ipp = cumsum(!same_episode_soin_continu_ipp)+1L,
@@ -33,25 +33,28 @@ rps_episode_soin_continu <- psy$rps$rps %>%
 rps_episode_soin_continu
 
 ipp_episode_soin_continu <- rps_episode_soin_continu %>% 
-    dplyr::distinct(ipp,no_sejour,nb_episode_soin_continu_ipp) %>% 
-    dplyr::mutate(.by = ipp, nb_sejour_ipp = dplyr::n()) %>% 
-    dplyr::distinct(ipp,nb_sejour_ipp,nb_episode_soin_continu_ipp)
+    dplyr::distinct(no_ipp,no_sejour,nb_episode_soin_continu_ipp) %>% 
+    dplyr::mutate(.by = no_ipp, nb_sejour_ipp = dplyr::n()) %>% 
+    dplyr::distinct(no_ipp,nb_sejour_ipp,nb_episode_soin_continu_ipp)
 ipp_episode_soin_continu
 
 ```
 
 ## Commentaires  
 
-Ligne 7 : l'argument `.by_group = TRUE` dans le `dplyr::arrange()` permet de trier au sein d'un regroupement.  
+Ligne 3 : le vecteur `vect_fa_temps_complet` correspond aux codes des formes d'activité temps complet  
 
-Ligne 9 : le +1L est là pour faire démarrer le comptage des épisodes de soin continu à 1 et non à 0  
+Ligne 5 : `psy_rps$rps` est un tibble des variables de la partie fixe d'un fichier RPS  
+
+Ligne 9 : l'argument `.by_group = TRUE` dans le `dplyr::arrange()` permet de trier au sein d'un regroupement.  
+
+Lignes 10 à 12 : codage de l'algorithme de définition d'un épisode de soins continus  
 
 Pour aller + loin :  
 Repérage concomitant des épisodes de soin concentré (séquences séparées de 0 à 7 jours dans un même épisode)  
-Attribution d'un code aux épisodes de soin continu  
+Attribution d'une numérotation aux épisodes de soin continu  
+Etc ...
 
-PMSISoft PSY Standard :voir écran `Séjours > Base des séjours`, affichage du nombre d'épisodes de soin continu  et du nombre d'épisodes de soin concentré au dessus du tableau de résultats.  
-
-PMSISoft PSY Professionnel : voir écran `Séjours > Base des séjours`, calcul, pour chaque séjour, des variables `ordre_episode_soin_continu_ipp`, `nb_episode_soin_continu_ipp`, `ordre_episode_soin_concentre_ipp`et `nb_episode_soin_concentre_ipp`  
+Cette analyse est réalisée dans [PMSISoft PSY](https://www.pmsisoft.com/acces_pmsisoft_psy){target="_blank"} dans l'écran `Séjours > Base des séjours` avec, en particulier, le calcul du nombre d'épisodes de soin continu et du nombre d'épisodes de soin concentré.  
 
 [Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

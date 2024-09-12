@@ -15,19 +15,19 @@ Pour chaque RHS, on compte le nombre de "1" dans les variables natives `jp_hors_
 #| label: code
 library(dplyr)
 
-rhs_extend <- smr$rhs$rhs %>% 
+rhs_extend <- smr_rhs$rhs %>% 
     dplyr::select(nas,no_semaine,no_um,jp_we,jp_hors_we) %>% 
     dplyr::mutate(across(c(jp_we,jp_hors_we), ~ stringr::str_count(.x,"1")),
-                  nb_jp_rhs = jp_we+jp_hors_we)
+                  nb_jour_rhs = jp_we+jp_hors_we)
 rhs_extend
 ```
 
 ## Commentaires  
 
-Ligne 5 : utilisation ultra-classique de la fonction `àcross()` pour appliquer un même traitement à plusieurs variables en une seule ligne   
+Ligne 3 : `smr_rhs$rhs` est un tibble des variables de la partie fixe des RHS  
 
-PMSISoft SMR Standard : voir écran `RHS > Base des RHS`  
+Ligne 5 : utilisation classique de la fonction `dplyr::àcross()` pour appliquer un même traitement à plusieurs variables en une seule ligne  
 
-PMSISoft SMR Professionnel : variable `nb_jp_rhs` présent dans `smr`  
+La variable `nb_jour_rhs` est calculée par défaut dans tous les écrans [PMSISoft SMR](https://www.pmsisoft.com/acces_pmsisoft_ssr){target="_blank"}  
 
 [Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

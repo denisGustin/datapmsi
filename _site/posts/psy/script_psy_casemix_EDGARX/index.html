@@ -269,25 +269,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>raa <span class="ot">&lt;-</span> psy<span class="sc">$</span>raa<span class="sc">$</span>raa</span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a>casemix_edgarx <span class="ot">&lt;-</span> raa <span class="sc">%&gt;%</span> </span>
-<span id="cb1-6"><a href="#cb1-6"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(ipp,nature_acte,categorie_professionnelle_intervenant) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-7"><a href="#cb1-7"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(nature_acte) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-8"><a href="#cb1-8"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">nb_acte =</span> dplyr<span class="sc">::</span><span class="fu">n</span>(),</span>
-<span id="cb1-9"><a href="#cb1-9"></a>                     <span class="at">nb_ipp =</span> dplyr<span class="sc">::</span><span class="fu">n_distinct</span>(ipp),</span>
-<span id="cb1-10"><a href="#cb1-10"></a>                     <span class="at">nb_categorie_professionnelle_intervenant =</span> dplyr<span class="sc">::</span><span class="fu">n_distinct</span>(categorie_professionnelle_intervenant)</span>
-<span id="cb1-11"><a href="#cb1-11"></a>                     ) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-12"><a href="#cb1-12"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(nb_acte)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-13"><a href="#cb1-13"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">percent_acte =</span> nb_acte<span class="sc">/</span><span class="fu">sum</span>(nb_acte), <span class="at">.after =</span> nb_acte)</span>
-<span id="cb1-14"><a href="#cb1-14"></a>casemix_edgarx</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a>casemix_edgarx <span class="ot">&lt;-</span> psy_raa<span class="sc">$</span>raa <span class="sc">%&gt;%</span> </span>
+<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(ipp,nature_acte,categorie_professionnelle_intervenant) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-5"><a href="#cb1-5"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(nature_acte) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-6"><a href="#cb1-6"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">nb_acte =</span> dplyr<span class="sc">::</span><span class="fu">n</span>(),</span>
+<span id="cb1-7"><a href="#cb1-7"></a>                     <span class="at">nb_ipp =</span> dplyr<span class="sc">::</span><span class="fu">n_distinct</span>(ipp),</span>
+<span id="cb1-8"><a href="#cb1-8"></a>                     <span class="at">nb_categorie_professionnelle_intervenant =</span> dplyr<span class="sc">::</span><span class="fu">n_distinct</span>(categorie_professionnelle_intervenant)</span>
+<span id="cb1-9"><a href="#cb1-9"></a>                     ) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-10"><a href="#cb1-10"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(nb_acte)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-11"><a href="#cb1-11"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">percent_acte =</span> nb_acte<span class="sc">/</span><span class="fu">sum</span>(nb_acte), <span class="at">.after =</span> nb_acte)</span>
+<span id="cb1-12"><a href="#cb1-12"></a>casemix_edgarx</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 12 : on trie sur le nombre descendant de <code>nb_acte</code></p>
-<p>Ligne 13 : avec l’argument <code>.after</code>, on positionne directement la variable <code>percent_acte</code> calculée après <code>nb_acte</code></p>
-<p>PMSISoft PSY Standard : casemix disponible dans l’écran <code>Actes ambulatoires &gt; Casemix EDGARX &gt; Casemix EDGARX</code></p>
+<p>Ligne 3 : <code>psy_raa$raa</code> est un tibble des variables RAA</p>
+<p>Ligne 10 : on trie sur le nombre descendant de <code>nb_acte</code></p>
+<p>Ligne 11 : l’argument <code>.after</code> positionne la variable <code>percent_acte</code> qui vient d’être calculée après <code>nb_acte</code></p>
+<p>Ce casemix est disponible dans l’écran <code>Actes ambulatoires &gt; Casemix EDGARX &gt; Casemix EDGARX</code> de <a href="https://www.pmsisoft.com/acces_pmsisoft_psy" target="_blank">PMSISoft PSY</a></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 

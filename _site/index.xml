@@ -10,7 +10,509 @@
 <atom:link href="https://www.datapmsi.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Codes et formations R pour les PMSI MCO, SMR, PSY et HAD</description>
 <generator>quarto-1.4.551</generator>
-<lastBuildDate>Mon, 10 Jun 2024 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 10 Sep 2024 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Repérage des accouchements</title>
+  <dc:creator>denis Gustin</dc:creator>
+  <link>https://www.datapmsi.com/posts/mco/script_mco_reperage_accouchement/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>On produit le vecteur des actes CCAM d’accouchement à partir du référentiel <code>ovalide_ccaminfo</code> du package <code>refpmsi</code></p>
+<p>On identifie ensuite les actes CCAM qui sont des actes d’acccouchement puis on produit la liste des séjours concernés par un accouchement.</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(refpmsi)</span>
+<span id="cb1-3"></span>
+<span id="cb1-4">ovalide_ccaminfo <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> refpmsi<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">refpmsi</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ovalide_ccaminfo"</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2024</span>)</span>
+<span id="cb1-5"></span>
+<span id="cb1-6">vect_acte_accouchement <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> ovalide_ccaminfo <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(ACCOUCHEMENT <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pull</span>(ccam_code)</span>
+<span id="cb1-7"></span>
+<span id="cb1-8">rum_accouchement <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> mco_rss<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>ccam <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-9">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(no_rss,nas,no_rum,code_ccam) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-10">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">is_accouchement =</span> code_ccam <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> vect_acte_accouchement) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-11">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(is_accouchement) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-12">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">distinct</span>(no_rss,nas,no_rum)</span>
+<span id="cb1-13">rum_accouchement</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level2">
+<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Ligne 4 : on se restreint ici à la seule année 2024, car la liste des actes CCAM d’accouchement ne change pas depuis au moins 2020</p>
+<p>Ligne 8 : <code>mco_rss$ccam</code> est un tibble des variables CCAM liées aux RUM</p>
+<p>Ligne 11 : raccourci pour <code>dplyr::filter(is_accouchement == TRUE)</code></p>
+<p>Cette requête est réalisable dans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a> dans l’écran <code>CCAM &gt; Base des actes CCAM</code> via le filtrage de variables <code>code_ccam Contient codes des actes d'accoucheemnt</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>MCO</category>
+  <category>CCAM</category>
+  <guid>https://www.datapmsi.com/posts/mco/script_mco_reperage_accouchement/</guid>
+  <pubDate>Tue, 10 Sep 2024 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Séjours RAAC</title>
+  <dc:creator>denis Gustin</dc:creator>
+  <link>https://www.datapmsi.com/posts/mco/script_mco_sejours_raac/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Rappel : la variable <code>raac</code> (variable de la partie fixe des RUM) a 3 valeurs possibles (NA, 1 “Prise en charge RAAC”, 2 “Pas de prise en charge RAAC”)</p>
+<p>On calcule une variable logique <code>sejour_raac</code>par séjour qui vaut TRUE si le séjour a au moins 1 RUM avec la variable <code>raac</code> == 1 et FALSE sinon.</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"></span>
+<span id="cb1-3">sejour_raac <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> mco_rss<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>rum <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-4">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(nas,no_rss,no_rum,raac) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-5">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.by =</span> no_rss,</span>
+<span id="cb1-6">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">raac_sejour =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">any</span>(raac <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-7">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">distinct</span>(nas,no_rss,raac_sejour)</span>
+<span id="cb1-8">sejour_raac</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level2">
+<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM</p>
+<p>Ligne 6 : l’argument <code>na.rm = TRUE</code> de la fonction <code>àny()</code> gère le cas où la variable <code>raac</code> des RUM est NA</p>
+<p>Ligne 7 : on passe d’un tibble de RUM à un tibble de séjours via le <code>dplyr::distinct()</code> de variables liées au séjour</p>
+<p>Les séjours RAAC sont filtrables dans tous les écrans de <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a> via le filtrage de variables <code>sejour_raac TRUE</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>MCO</category>
+  <guid>https://www.datapmsi.com/posts/mco/script_mco_sejours_raac/</guid>
+  <pubDate>Tue, 10 Sep 2024 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Nombre d’actes ambulatoires identiques pour une même date</title>
+  <dc:creator>denis Gustin</dc:creator>
+  <link>https://www.datapmsi.com/posts/psy/script_psy_nb_raa_idem_same_date/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Pour chaque acte ambulatoire caractérisé par toutes ses variables de la partie fixe, on calcule le nombre de doublon.</p>
+<p>On peut alors filter les situations sans doublon, avec 1 doublon, 2 doublons, etc…</p>
+<p>Voir le contrôle qualité OVALIDE “1.Q.10.NBAI : Nombre d’actes identiques” que l’on a adapté ici de manière à la fois plus restrictive avec recherche de doublon sur la date et non sur le mois et à la fois plus riche en produisant la table de toutes les situations de doublon.</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"></span>
+<span id="cb1-3">raa_idem_date <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> psy_raa<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>raa <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-4">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">add_count</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">across</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(no_ipp,age,sexe_patient,cp_residence,no_secteur_dispositif_intersectoriel,finess_geographique,no_um,</span>
+<span id="cb1-5">                              date_acte,dp,indicateur_activite_liberale,</span>
+<span id="cb1-6">                              forme_activite,mode_legal_soins,nb_das,modalite_realisation_acte,</span>
+<span id="cb1-7">                              nb_intervenants,categorie_professionnelle_intervenant, nature_acte, lieu_acte)), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">name =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"doublon_acte"</span>)</span>
+<span id="cb1-8">raa_idem_date</span>
+<span id="cb1-9"></span>
+<span id="cb1-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># les situations avec doublon_acte &gt; 1</span></span>
+<span id="cb1-11">raa_idem_date <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(doublon_acte <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level2">
+<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Ligne 3 : <code>psy_raa$raa</code> est un tibble des variables RAA</p>
+<p>Ligne 4 : joli cas d’usage de la fonction <code>dplyr::add_count()</code> qui représente un <code>dplyr::group_by()</code> + <code>dplyr::mutate()</code></p>
+<p>Ce requête est disponible dans l’écran <code>Requêtes PSY &gt; Requêtes RAA</code> de <a href="https://www.pmsisoft.com/acces_pmsisoft_psy" target="_blank">PMSISoft PSY</a> sous le libellé <code>Actes identiques [1.Q.10.NBAI]</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>PSY</category>
+  <category>RAA</category>
+  <guid>https://www.datapmsi.com/posts/psy/script_psy_nb_raa_idem_same_date/</guid>
+  <pubDate>Mon, 09 Sep 2024 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Extraction partie d’une chaîne de caractères</title>
+  <dc:creator>denis Gustin</dc:creator>
+  <link>https://www.datapmsi.com/posts/mco/script_mco_extraction_string/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>string = chaîne de caractères</p>
+<p>On distingue 3 situations (string à taille fixe, string à taille variable, string de type date) illustrées chacune par un traitement</p>
+</section>
+<section id="string-à-taille-fixe" class="level2">
+<h2 class="anchored" data-anchor-id="string-à-taille-fixe">String à taille fixe</h2>
+<p>On repère les séjours de complexité 3 ou 4</p>
+<section id="code" class="level3">
+<h3 class="anchored" data-anchor-id="code">Code</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"></span>
+<span id="cb1-3">sejour_niveau_3_4 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> mco_rss<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>rum <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-4">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(nas,no_rss,no_rum,ghm) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-5">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">is_niveau_3_4 =</span> stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_sub</span>(ghm, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">start =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">end =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'3'</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'4'</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-6">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(is_niveau_3_4) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-7">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">distinct</span>(nas,no_rss,ghm)</span>
+<span id="cb1-8">sejour_niveau_3_4</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level3">
+<h3 class="anchored" data-anchor-id="commentaires">Commentaires</h3>
+<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM</p>
+<p>Ligne 5 : <code>stringr::str_sub(ghm, start = 6, end = 6)</code> isole la complexite du GHM</p>
+<p>Ligne 6 : raccourci pour <code>dplyr::filter(is_niveau_3_4 == TRUE)</code></p>
+<p>Ligne 7 : le <code>dplyr::distinct()</code> sur des variables liées au séjour fait passer le tibble d’un tibble de RUM à un tibble de séjours</p>
+<p>Le script est pédagogique car, en pratique, on dispose généralement de la variable <code>complexite</code> par défaut.</p>
+<p>Le filtrage sur la complexité est disponible dans tous les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a></p>
+</section>
+</section>
+<section id="string-à-taille-variable" class="level2">
+<h2 class="anchored" data-anchor-id="string-à-taille-variable">String à taille variable</h2>
+<p>On repère les codages CIM-10 terminés par un 9</p>
+<section id="code-1" class="level3">
+<h3 class="anchored" data-anchor-id="code-1">Code</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb2-2"></span>
+<span id="cb2-3">codage_das_9 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> mco_rss<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>das <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb2-4">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(nas,no_rss,no_rum,das) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb2-5">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">is_das_9 =</span> stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_detect</span>(das, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pattern =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"9$"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb2-6">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(is_das_9)</span>
+<span id="cb2-7">codage_das_9</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires-1" class="level3">
+<h3 class="anchored" data-anchor-id="commentaires-1">Commentaires</h3>
+<p>Ligne 3 : <code>mco_rss$das</code> est un tibble des variables <code>das</code> associées aux RUM</p>
+<p>Ligne 5 : le repérage des codes CIM-10 recherchés se fait via le regex très simple <code>9$</code> qui signifie “un 9 en dernière position”</p>
+<p>Le filtrage par regex sur un codage est disponible dans tous les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a></p>
+</section>
+</section>
+<section id="string-date" class="level2">
+<h2 class="anchored" data-anchor-id="string-date">String date</h2>
+<p>On produit la variable <code>mois_sortie_um</code></p>
+<section id="code-2" class="level3">
+<h3 class="anchored" data-anchor-id="code-2">Code</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb3-2"></span>
+<span id="cb3-3">rum_extended <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> mco_rss<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>rum <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb3-4">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(nas,no_rss,no_um,date_sortie_um) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb3-5">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mois_sortie_um =</span> stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_sub</span>(date_sortie_um,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>),</span>
+<span id="cb3-6">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mois_sortie_um_label =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.character</span>(lubridate<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">month</span>(date_sortie_um, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">abbr =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">locale =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Sys.getlocale</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"LC_TIME"</span>))))</span>
+<span id="cb3-7">rum_extended</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires-2" class="level3">
+<h3 class="anchored" data-anchor-id="commentaires-2">Commentaires</h3>
+<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM</p>
+<p>Ligne 6 : <code>mois_sortie_um_lable</code>est une alternative au code la ligne 5 permettant d’obtenir directement le mois de sortie de l’UM avec son intitulé en français (ex : “janvier”)</p>
+<p>La variable <code>mois_sortie_um</code> est calculée par défaut dans tous les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>MCO</category>
+  <guid>https://www.datapmsi.com/posts/mco/script_mco_extraction_string/</guid>
+  <pubDate>Sun, 08 Sep 2024 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>IPDMS par GHM</title>
   <dc:creator>denis Gustin</dc:creator>
@@ -23,8 +525,8 @@
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>On se restreint aux séjours de sévérité 1,2,3 ou 4 d’au moins 1 nuitée et on suppose qu’on est en ex-DGF</p>
-<p>Pour chaque séjour, on rapatrie la DMS OVALIDE correspondant à son GHM et à son année PMSI, à partir du référentiel annualisé OVALIDE GHMinfo <sup>1</sup></p>
-<p>Pour ces séjours, pour chaque GHM, on calcule le nombre de séjours, le cumul des JP de ces séjours et l’IPDMS au sens “division du nombre de journées de l’établissement par le nombre de journées théoriques pour le périmètre considéré.”</p>
+<p>Pour chaque séjour, on rapatrie la DMS OVALIDE correspondant au GHM du séjour via le référentiel <code>ovalide_ghminfo_dgf</code><sup>1</sup> du package <code>refpmsi</code></p>
+<p>Pour chaque GHM, on calcule le nombre de séjours, le cumul des JP de ces séjours, le nombre de journées théoriques et l’IPDMS au sens “nombre de journées établissement / nombre de journées théoriques pour le périmètre considéré.”</p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
@@ -46,9 +548,7 @@ font-style: inherit;">refpmsi</span>(ovalide_ghminfo_dgf)</span>
 <span id="cb1-5"></span>
 <span id="cb1-6">casemix_ghm_ipdms <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> mco<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rum<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> mco_rss<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>rum <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -57,7 +557,7 @@ font-style: inherit;">%&gt;%</span> </span>
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">select</span>(annee_import,nas,ghm,severite,date_entree_um,date_sortie_um) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">select</span>(nas,no_rss,ghm,complexite,date_entree_um,date_sortie_um) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
 <span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
@@ -66,7 +566,8 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">.by =</span> nas, <span class="at" style="color: #657422;
+font-style: inherit;">.by =</span> no_rss, </span>
+<span id="cb1-9">                  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">date_entree_sejour =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -75,7 +576,7 @@ background-color: null;
 font-style: inherit;">date_sortie_sejour =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">max</span>(date_sortie_um),</span>
-<span id="cb1-9">                  <span class="at" style="color: #657422;
+<span id="cb1-10">                  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">nb_jp_sejour =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -84,14 +585,14 @@ background-color: null;
 font-style: inherit;">-</span>date_entree_sejour)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-10">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-11">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">distinct</span>(nas,ghm,severite,date_sortie_sejour,nb_jp_sejour) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">distinct</span>(no_rss,ghm,complexite,date_sortie_sejour,nb_jp_sejour) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-11">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-12">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -103,14 +604,39 @@ font-style: inherit;">as.character</span>(lubridate<span class="sc" style="color
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">year</span>(date_sortie_sejour))) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">year</span>(date_sortie_sejour)),</span>
+<span id="cb1-13">                  <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-12">    dplyr<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">mois_sortie_sejour =</span> lubridate<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">filter</span>(severite <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">month</span>(date_sortie_sejour),</span>
+<span id="cb1-14">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">annee_pmsi_sejour =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(mois_sortie_sejour <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>,<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.character</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.integer</span>(annee_sortie_sejour)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L),annee_sortie_sejour)</span>
+<span id="cb1-15">                  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-16">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(complexite <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -129,7 +655,7 @@ background-color: null;
 font-style: inherit;">1</span>L) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-13">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-17">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -142,16 +668,16 @@ background-color: null;
 font-style: inherit;">select</span>(annee_pmsi,ghm,<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">dms_ovalide_ghm =</span> dms),</span>
-<span id="cb1-14">                     <span class="fu" style="color: #4758AB;
+<span id="cb1-18">                     <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">join_by</span>(ghm <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">==</span> ghm, annee_sortie_sejour <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">==</span> ghm, annee_pmsi_sejour <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> annee_pmsi)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-15">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-19">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -162,14 +688,14 @@ background-color: null;
 font-style: inherit;">*</span>nb_jp_sejour) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-16">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-20">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">group_by</span>(ghm) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-17">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-21">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -180,20 +706,20 @@ background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">n</span>(),</span>
-<span id="cb1-18">                     <span class="at" style="color: #657422;
+<span id="cb1-22">                     <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">nb_jp_sejour_ghm =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">sum</span>(nb_jp_sejour),</span>
-<span id="cb1-19">                     <span class="at" style="color: #657422;
+<span id="cb1-23">                     <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">nb_jp_theorique_ghm =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">sum</span>(nb_jp_theorique_sejour)</span>
-<span id="cb1-20">                     ) <span class="sc" style="color: #5E5E5E;
+<span id="cb1-24">                     ) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-21">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-25">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -202,18 +728,21 @@ background-color: null;
 font-style: inherit;">ipdms_ghm =</span> nb_jp_sejour_ghm<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span>nb_jp_theorique_ghm)</span>
-<span id="cb1-22">casemix_ghm_ipdms</span></code></pre></div>
+<span id="cb1-26">casemix_ghm_ipdms <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> View</span></code></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 8-9 : voir script “Nombre de JP d’un séjour MCO” pour le calcul de <code>nb_jp_sejour</code></p>
-<p>Ligne 11 : forçage <code>annee_sortie_sejour</code> en character pour préparer la jointure avec <code>ovalide_ghminfo_dgf</code></p>
+<p>Ligne 6 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM</p>
+<p>Ligne 11 : on passe d’un tibble de RUM à un tibble de séjours via le <code>dplyr::distinct()</code> de variables liées au séjour</p>
+<p>Ligne 12 : forçage <code>annee_sortie_sejour</code> en character pour préparer la jointure avec la variable ànnee_pmsi<code>de ovalide_ghminfo_dgf</code> qui est character</p>
 <p>Pour aller + loin :<br>
 Calcul de l’écart à la moyenne en nb_jp avec nb_jp_theorique_ghm<br>
 Rapatriemeent libellé des GHM<br>
 Etc …</p>
-<p>PMSISoft MCO Professionnel : IPDMS calculée pour tous les casemix en CMD, sous-CMD, RGHM, GHM, Sévérité, DA, GA, GP. <code>ipdms_ghm</code>dans <code>mco</code></p>
+<p>L’IP-DMS est calculé dans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a> dans l’écran <code>Séjour &gt; Séjours et classification &gt; Casemix GHM</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -244,9 +773,8 @@ Etc …</p>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Pour la définition des épisodes de soin continu en hospitalisation complète, voir <a href="https://www.scansante.fr/sites/default/files/content/376/notice_rme_psy_hospitalisations_longues_en_psychiatrie.pdf" target="_blank">ici</a></p>
-<p>Dans une première étape, sur la base des RPS de temps complet, on repère et comptabilise par IPP, les épisodes de soin continu.</p>
-<p>Dans une 2eme étape, on passe en IPP et on calcule le nombre de séjours de l’IPP.</p>
-<p>Au final, on a un tibble par IPP avec, pour chaque IPP, le nombre de séjours temps complet et le nombre d’épisodes soin continu.</p>
+<p>Dans un premier tibble, sur la base des RPS de temps complet, on repère et comptabilise par IPP, les épisodes de soin continu.</p>
+<p>Dans un second tibble, on calcule <strong>par IPP</strong> le nombre de séjours temps complet et le nombre d’épisodes de soin continu.</p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
@@ -255,61 +783,63 @@ Etc …</p>
 background-color: null;
 font-style: inherit;">library</span>(dplyr)</span>
 <span id="cb1-2"></span>
-<span id="cb1-3">rps_episode_soin_continu <span class="ot" style="color: #003B4F;
+<span id="cb1-3">vect_fa_temps_complet <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> psy<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rps<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rps <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-4">    dplyr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">select</span>(forme_activite,ipp,no_sejour,date_debut_sequence,date_fin_sequence,nb_jours_presence) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-5">    dplyr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(forme_activite <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"01"</span>,<span class="st" style="color: #20794D;
+font-style: inherit;">'01'</span>,<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"01D"</span>,<span class="st" style="color: #20794D;
+font-style: inherit;">'01D'</span>,<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"01S"</span>,<span class="st" style="color: #20794D;
+font-style: inherit;">'01S'</span>,<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"01P"</span>,<span class="st" style="color: #20794D;
+font-style: inherit;">'01P'</span>,<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"02"</span>,<span class="st" style="color: #20794D;
+font-style: inherit;">'02'</span>,<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"03"</span>,<span class="st" style="color: #20794D;
+font-style: inherit;">'03'</span>,<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"04"</span>,<span class="st" style="color: #20794D;
+font-style: inherit;">'04'</span>,<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"05"</span>,<span class="st" style="color: #20794D;
+font-style: inherit;">'05'</span>,<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"06"</span>,<span class="st" style="color: #20794D;
+font-style: inherit;">'06'</span>,<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"07"</span>)) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">'07'</span>)</span>
+<span id="cb1-4"></span>
+<span id="cb1-5">rps_episode_soin_continu <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> psy_rps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>rps <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
 <span id="cb1-6">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">group_by</span>(ipp) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">select</span>(forme_activite,no_ipp,no_sejour,date_debut_sequence,date_fin_sequence,nb_jours_presence) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
 <span id="cb1-7">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(forme_activite <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> vect_fa_temps_complet) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(no_ipp) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-9">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -320,7 +850,7 @@ background-color: null;
 font-style: inherit;">TRUE</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-10">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -343,7 +873,7 @@ background-color: null;
 font-style: inherit;">&lt;=</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>L,</span>
-<span id="cb1-9">                  <span class="at" style="color: #657422;
+<span id="cb1-11">                  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">cumsum_episode_soin_continu_ipp =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -354,39 +884,39 @@ background-color: null;
 font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>L,</span>
-<span id="cb1-10">                  <span class="at" style="color: #657422;
+<span id="cb1-12">                  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">nb_episode_soin_continu_ipp =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">max</span>(cumsum_episode_soin_continu_ipp)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-11">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-13">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">ungroup</span>()</span>
-<span id="cb1-12">rps_episode_soin_continu</span>
-<span id="cb1-13"></span>
-<span id="cb1-14">ipp_episode_soin_continu <span class="ot" style="color: #003B4F;
+<span id="cb1-14">rps_episode_soin_continu</span>
+<span id="cb1-15"></span>
+<span id="cb1-16">ipp_episode_soin_continu <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> rps_episode_soin_continu <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-15">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-17">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">distinct</span>(ipp,no_sejour,nb_episode_soin_continu_ipp) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">distinct</span>(no_ipp,no_sejour,nb_episode_soin_continu_ipp) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-16">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-18">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">.by =</span> ipp, <span class="at" style="color: #657422;
+font-style: inherit;">.by =</span> no_ipp, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">nb_sejour_ipp =</span> dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -395,23 +925,25 @@ background-color: null;
 font-style: inherit;">n</span>()) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-17">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-19">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">distinct</span>(ipp,nb_sejour_ipp,nb_episode_soin_continu_ipp)</span>
-<span id="cb1-18">ipp_episode_soin_continu</span></code></pre></div>
+font-style: inherit;">distinct</span>(no_ipp,nb_sejour_ipp,nb_episode_soin_continu_ipp)</span>
+<span id="cb1-20">ipp_episode_soin_continu</span></code></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 7 : l’argument <code>.by_group = TRUE</code> dans le <code>dplyr::arrange()</code> permet de trier au sein d’un regroupement.</p>
-<p>Ligne 9 : le +1L est là pour faire démarrer le comptage des épisodes de soin continu à 1 et non à 0</p>
+<p>Ligne 3 : le vecteur <code>vect_fa_temps_complet</code> correspond aux codes des formes d’activité temps complet</p>
+<p>Ligne 5 : <code>psy_rps$rps</code> est un tibble des variables de la partie fixe d’un fichier RPS</p>
+<p>Ligne 9 : l’argument <code>.by_group = TRUE</code> dans le <code>dplyr::arrange()</code> permet de trier au sein d’un regroupement.</p>
+<p>Lignes 10 à 12 : codage de l’algorithme de définition d’un épisode de soins continus</p>
 <p>Pour aller + loin :<br>
 Repérage concomitant des épisodes de soin concentré (séquences séparées de 0 à 7 jours dans un même épisode)<br>
-Attribution d’un code aux épisodes de soin continu</p>
-<p>PMSISoft PSY Standard :voir écran <code>Séjours &gt; Base des séjours</code>, affichage du nombre d’épisodes de soin continu et du nombre d’épisodes de soin concentré au dessus du tableau de résultats.</p>
-<p>PMSISoft PSY Professionnel : voir écran <code>Séjours &gt; Base des séjours</code>, calcul, pour chaque séjour, des variables <code>ordre_episode_soin_continu_ipp</code>, <code>nb_episode_soin_continu_ipp</code>, <code>ordre_episode_soin_concentre_ipp</code>et <code>nb_episode_soin_concentre_ipp</code></p>
+Attribution d’une numérotation aux épisodes de soin continu<br>
+Etc …</p>
+<p>Cette analyse est réalisée dans <a href="https://www.pmsisoft.com/acces_pmsisoft_psy" target="_blank">PMSISoft PSY</a> dans l’écran <code>Séjours &gt; Base des séjours</code> avec, en particulier, le calcul du nombre d’épisodes de soin continu et du nombre d’épisodes de soin concentré.</p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -434,8 +966,8 @@ Attribution d’un code aux épisodes de soin continu</p>
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Par type d’intervenant, calcul du nombre d’actes, du nombre de réalisations CSARR et % du nombre d’actes et rapatriement libellé intervenant.</p>
-<p>On enrichie en rapatriant le libellé des types d’intervenant via le référentiel <code>csarr_intervenant</code> <sup>1</sup></p>
+<p>Par type d’intervenant représenté dans le jeu de données, on calcule le nombre de codages CSARR, le nombre d’actes différents CSARR codés, le nombre de réalisations CSARR cumulées et le % représenté par ce nombre de réalisations CSARR par rapport au nombre total de réalisations du jeu de données.</p>
+<p>On rapatrie le libellé du type intervenant via le référentiel <code>csarr_intervenant</code> <sup>1</sup> du package <code>refpmsi</code></p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
@@ -457,9 +989,7 @@ font-style: inherit;">refpmsi</span>(csarr_intervenant)</span>
 <span id="cb1-5"></span>
 <span id="cb1-6">casemix_csarr_intervenant <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> smr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rhs<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> smr_rhs<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>csarr <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -468,7 +998,7 @@ font-style: inherit;">%&gt;%</span> </span>
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">select</span>(annee_import,code_csarr,nb_realisation_csarr,code_intervenant_csarr) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">select</span>(code_csarr,nb_realisation_csarr,code_intervenant_csarr) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
 <span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
@@ -530,7 +1060,9 @@ font-style: inherit;">%&gt;%</span> </span>
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">left_join</span>(csarr_intervenant, <span class="fu" style="color: #4758AB;
+font-style: inherit;">left_join</span>(csarr_intervenant, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">join_by</span>(code_intervenant_csarr <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -548,8 +1080,9 @@ font-style: inherit;">select</span>(code_intervenant_csarr,csarr_intervenant_lib
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Ligne 6 : <code>smr_rhs$csarr</code> est un tibble des variables <code>csarr</code> liées aux RHS</p>
 <p>Ligne 16 : le <code>dplyr::select()</code> permet de réordonner les variables</p>
-<p>PMSISoft SMR Standard : voir écran <code>Codage CSARR &gt; Casemix CSARR &gt; Casemix Intervenant</code></p>
+<p>Ce casemix est disponible dans <a href="https://www.pmsisoft.com/acces_pmsisoft_ssr" target="_blank">PMSISoft SMR</a> dans l’écran <code>Codage CSARR &gt; Casemix CSARR &gt; Casemix Intervenant</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -569,7 +1102,7 @@ font-style: inherit;">select</span>(code_intervenant_csarr,csarr_intervenant_lib
   <pubDate>Mon, 10 Jun 2024 22:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Casemix basique séjours par sévérité</title>
+  <title>Casemix basique séjours par complexité</title>
   <dc:creator>denis Gustin</dc:creator>
   <link>https://www.datapmsi.com/posts/mco/script_mco_casemix_sejour_severite/</link>
   <description><![CDATA[ 
@@ -579,7 +1112,8 @@ font-style: inherit;">select</span>(code_intervenant_csarr,csarr_intervenant_lib
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Après avoir calculé les variables <code>nb_jp_rum</code>et <code>nb_jp_sejour</code>, on filtre sur les séjours d’au moins 1 nuitée et on calcule, pour chaque sévérité, le nombre de séjours concernés, le nombre de journées et le % de séjours représenté.</p>
+<p>Le complexité correspond à la 6eme position des GHM, appelée aussi de manière plus imprécise “sévérité”</p>
+<p>On calcule, par complexité rencontrée au moins 1 fois dans le jeu de données, le nombre de séjours groupés avec cette complexité, ainsi le nombre de JP de ces séjours et le % de ces séjours par rapport au nombre total de séjours.</p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
@@ -588,11 +1122,9 @@ font-style: inherit;">select</span>(code_intervenant_csarr,csarr_intervenant_lib
 background-color: null;
 font-style: inherit;">library</span>(dplyr)</span>
 <span id="cb1-2"></span>
-<span id="cb1-3">casemix_severite <span class="ot" style="color: #003B4F;
+<span id="cb1-3">casemix_complexite <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> mco<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rum<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> mco_rss<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>rum <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -601,7 +1133,7 @@ font-style: inherit;">%&gt;%</span> </span>
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">select</span>(nas,no_rum,ghm,severite,date_entree_um,date_sortie_um) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">select</span>(nas,no_rss,no_rum,ghm,complexite,date_entree_um,date_sortie_um) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
 <span id="cb1-5">    dplyr<span class="sc" style="color: #5E5E5E;
@@ -623,7 +1155,7 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">.by =</span> nas, <span class="at" style="color: #657422;
+font-style: inherit;">.by =</span> no_rss, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">nb_jp_sejour =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -645,14 +1177,14 @@ font-style: inherit;">%&gt;%</span> </span>
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">distinct</span>(nas,severite,nb_jp_sejour) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">distinct</span>(no_rss,complexite,nb_jp_sejour) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
 <span id="cb1-9">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">group_by</span>(severite) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">group_by</span>(complexite) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
 <span id="cb1-10">    dplyr<span class="sc" style="color: #5E5E5E;
@@ -661,14 +1193,14 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">nb_sejour_severite =</span> dplyr<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">nb_sejour_complexite =</span> dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">n</span>(),</span>
 <span id="cb1-11">                     <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">nb_jp_severite =</span> <span class="fu" style="color: #4758AB;
+font-style: inherit;">nb_jp_complexite =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">sum</span>(nb_jp_sejour)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -679,7 +1211,7 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">desc</span>(nb_sejour_severite)) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">desc</span>(nb_sejour_complexite)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
 <span id="cb1-13">    dplyr<span class="sc" style="color: #5E5E5E;
@@ -688,19 +1220,19 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">percent_sejour_severite =</span> nb_sejour_severite<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">percent_sejour_complexite =</span> nb_sejour_complexite<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">sum</span>(nb_sejour_severite))</span>
-<span id="cb1-14">casemix_severite</span></code></pre></div>
+font-style: inherit;">sum</span>(nb_sejour_complexite))</span>
+<span id="cb1-14">casemix_complexite</span></code></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 8 : on ne retient que des variables liées au séjour pour le <code>dplyr::distinct()</code></p>
-<p>PMSISoft MCO Standard : voir écran <code>Séjours &gt; Séjours et classification</code></p>
-<p>PMSISoft MCO Professionnel : les 2 variables <code>nb_jp_rum</code> et <code>nb_jp_sejour</code> sont dans <code>mco</code></p>
+<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM</p>
+<p>Ligne 8 : ce <code>dplyr::distinct()</code> sur des variables liées au séjour fait passer le tibble d’un tibble de RUM à un tibble de séjours</p>
+<p>Ce casemix est disponible dans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a> dans l’écran <code>Séjours &gt; Séjours et classification</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -724,8 +1256,8 @@ font-style: inherit;">sum</span>(nb_sejour_severite))</span>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>On suppose qu’on est en ex-DGF</p>
-<p>On récupére <code>nb_supplements_rea</code>, variable native des <code>rsa</code> auquel on associe le tarif unitaire du suppléments REA correspondant qui est récupéré dans le référentiel annualisé <code>supplements_mco_public</code> de <code>refpmsi</code></p>
-<p>Remarque : <code>annee_sortie_sejour</code>, variable native <code>rsa</code>, = l’année PMSI du séjour, permettant le rapatriement des tarifs correspondant des suppléments</p>
+<p>On associe au <code>nb_supplements_rea</code> (variable native des <code>rsa</code>) le tarif unitaire du supplément REA correspondant à l’année PMSI du séjour.</p>
+<p>Ce tarif du supplément REA est récupéré via le référentiel annualisé <code>supplements_mco_public</code> du package <code>refpmsi</code></p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
@@ -747,9 +1279,7 @@ font-style: inherit;">refpmsi</span>(supplements_mco_public)</span>
 <span id="cb1-5"></span>
 <span id="cb1-6">supplements_rea_t2a <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> mco<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rsa<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> mco_rsa<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>rsa <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -758,10 +1288,33 @@ font-style: inherit;">%&gt;%</span> </span>
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">select</span>(no_sequentiel_sejour,annee_sortie_sejour,nb_supplements_rea) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">select</span>(no_sequentiel_sejour,mois_sortie_sejour,annee_sortie_sejour,nb_supplements_rea) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
 <span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">annee_pmsi_sejour =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(mois_sortie_sejour <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"02"</span>,<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.character</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.integer</span>(annee_sortie_sejour)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L),annee_sortie_sejour)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-9">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -776,14 +1329,16 @@ background-color: null;
 font-style: inherit;">==</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"REA"</span>),</span>
-<span id="cb1-9">                     <span class="fu" style="color: #4758AB;
+<span id="cb1-10">                     <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">join_by</span>(annee_sortie_sejour <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">by =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">join_by</span>(annee_pmsi_sejour <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> annee_pmsi)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-10">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-11">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -792,22 +1347,26 @@ background-color: null;
 font-style: inherit;">supplements_rea_t2a =</span> nb_supplements_rea<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">*</span>supplement_mco_tarif)</span>
-<span id="cb1-11">supplements_rea_t2a</span>
-<span id="cb1-12"></span>
-<span id="cb1-13">total_supplements_rea_t2a <span class="ot" style="color: #003B4F;
+<span id="cb1-12">supplements_rea_t2a</span>
+<span id="cb1-13"></span>
+<span id="cb1-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Calcul du cumul de la valorisation T2A brute des suppléments REA</span></span>
+<span id="cb1-15">total_supplements_rea_t2a <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">sum</span>(supplements_rea_t2a<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>supplements_rea_t2a)</span>
-<span id="cb1-14">total_supplements_rea_t2a</span></code></pre></div>
+<span id="cb1-16">total_supplements_rea_t2a</span></code></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>PMSISoft MCO Standard : voir écran <code>Recettes T2A MCO &gt; Suppléments</code> qui calcule et présente le casemix des valorisations des suppléments</p>
-<p>PMSISoft MCO Professionnel : <code>supplements_rea_t2a</code> déjà calculé dans <code>mco$rsa$rsa_t2a</code></p>
+<p>Ligne 6 : <code>mco_rsa$rsa</code> est un tibble des variables de la partie fixe des RSA</p>
+<p>Ligne 8 : calcul de la variable <code>annee_pmsi_sejour</code> à partir des 2 variables <code>mois_sortie_sejour</code> et <code>annee_sortie_sejour</code> (variables natives <code>rsa</code>)</p>
+<p>Les valorisations T2A brutes des suppléments sont calculées dans l’écran <code>Activité MCO &gt; Synthèse T2A</code> de <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -830,7 +1389,8 @@ font-style: inherit;">$</span>supplements_rea_t2a)</span>
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Pour chaque configuration (ipp,date_acte), on calcule le nombre d’acte de Réunion, puis on ne retient que les configurations avec au moins 2 actes de Réunion.</p>
+<p>Pour chaque configuration (ipp,date_acte), on calcule le nombre d’acte de Réunion, puis on ne retient que les configurations avec au moins 2 actes de Réunion réalisés le même jour pour le même patient.</p>
+<p>Voir le contrôle Qualité OVALIDE “[1.Q.11.RIPP] : Nombre de journées avec plusieurs actes de réunions pour un même IPP” que l’on améliore ici en produisant la variable <code>sum_same_ipp_date_acte_nature_acte_R</code> qui est le nombre d’actes de Réunion.</p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
@@ -841,9 +1401,7 @@ font-style: inherit;">library</span>(dplyr)</span>
 <span id="cb1-2"></span>
 <span id="cb1-3">same_ipp_date_acte <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> psy<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>raa<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> psy_raa<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>raa <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -891,14 +1449,21 @@ background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">distinct</span>()</span>
-<span id="cb1-9">same_ipp_date_acte</span></code></pre></div>
+<span id="cb1-9">same_ipp_date_acte</span>
+<span id="cb1-10"></span>
+<span id="cb1-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># le nombre de lignes same_ipp_date_acte</span></span>
+<span id="cb1-12"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(same_ipp_date_acte)</span></code></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Voir le contrôle Qualité OVALIDE “[1.Q.11.RIPP] : Nombre de journées avec plusieurs actes de réunions pour un même IPP”.<br>
-On améliore ici en produisant la variable <code>sum_same_ipp_date_acte_nature_acte_R</code> qui est le nombre d’actes de Réunion</p>
-<p>PMSISoft PSY Standard : voir écran <code>Requêtes PSY &gt; Requêtes RAA</code> et la requête <code>Plusieurs actes de réunions pour un même IPP et une même date [1.Q.11.RIPP]</code></p>
+<p>Ligne 3 : <code>psy_raa$raa</code> est un tibble des variables RAA</p>
+<p>Ligne 6 : nature_acte == “R” produit une valeur logique qui est sommée par <code>sum()</code> sachant que TRUE == 1 et FALSE == 0</p>
+<p>Cette requête est disponible par défaut dans l’écran <code>Requêtes PSY &gt; Requêtes RAA</code> de <a href="https://www.pmsisoft.com/acces_pmsisoft_psy" target="_blank">PMSISoft PSY</a> sous le libellé <code>Plusieurs actes de réunions pour un même IPP et une même date [1.Q.11.RIPP]</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -932,9 +1497,7 @@ font-style: inherit;">library</span>(dplyr)</span>
 <span id="cb1-2"></span>
 <span id="cb1-3">sejour_dependance_physique_maximale <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> smr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rhs<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> smr_rhs<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>rhs <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -943,11 +1506,10 @@ font-style: inherit;">%&gt;%</span> </span>
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">select</span>(nas,no_semaine,type_hospitalisation,</span>
-<span id="cb1-5">                  dependance_alimentation,dependance_deplacement,dependance_habillage,dependance_continence) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">select</span>(nas,no_semaine,type_hospitalisation,dependance_alimentation,dependance_deplacement,dependance_habillage,dependance_continence) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-6">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-5">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -958,7 +1520,7 @@ background-color: null;
 font-style: inherit;">"1"</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-7">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-6">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -971,38 +1533,39 @@ background-color: null;
 font-style: inherit;">across</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">c</span>(dependance_alimentation,dependance_deplacement,</span>
-<span id="cb1-8">                                                             dependance_habillage,dependance_continence)))) <span class="sc" style="color: #5E5E5E;
+<span id="cb1-7">                                                             dependance_habillage,dependance_continence)))) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-9">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">.by =</span> nas,</span>
-<span id="cb1-10">                  <span class="at" style="color: #657422;
+<span id="cb1-9">                  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">dependance_physique_maximale_sejour =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">max</span>(dependance_physique_rhs)</span>
-<span id="cb1-11">                  ) <span class="sc" style="color: #5E5E5E;
+<span id="cb1-10">                  ) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-12">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-11">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">distinct</span>(nas,dependance_physique_maximale_sejour)</span>
-<span id="cb1-13">sejour_dependance_physique_maximale</span></code></pre></div>
+<span id="cb1-12">sejour_dependance_physique_maximale</span></code></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 7-8 : <code>rowSums()</code> pour permettre un calcul ligne à ligne</p>
-<p>Démarche identique pour calculer la dépendance cognitive maximale d’un séjour</p>
-<p>PMSISoft SMR Standard : information calculée et affichée dans l’écran <code>RHS &gt; Base des RHS &gt; Détail RHS &gt; Dépendance</code></p>
-<p>PMSISoft SMR Professionnel : voir aussi écran <code>Séjours &gt; Séjours et dépendance</code></p>
+<p>Ligne 3 : <code>smr_rhs$rhs</code> est un tibble des variables de la partie fixe des RHS</p>
+<p>Ligne 6-7 : <code>rowSums()</code> pour permettre un calcul de somme ligne à ligne</p>
+<p>Pour aller + loin :<br>
+Démarche identique pour calculer la dépendance cognitive maximale d’un séjour</p>
+<p>La variable <code>dependance_physique_maximale_sejour</code> est calculée par défaut dans les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_ssr" target="_blank">PMSISoft SMR</a></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -1025,8 +1588,8 @@ font-style: inherit;">distinct</span>(nas,dependance_physique_maximale_sejour)</
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Rappel : l’extension documentaire est obligatoire pour les actes d’anesthésie</p>
-<p>On suppose ici que la table des actes CCAM intègre la clé d’identification des RUM (nas,no_rum) permettant de rapprocher les RUM et les actes CCAM</p>
+<p>Rappel : les actes d’anesthésie appelent le codage d’une extension documentaire</p>
+<p>On suppose ici que la table des actes CCAM intègre la clé d’identification des RUM (no_rss,no_rum) permettant de rapprocher les RUM et les actes CCAM</p>
 <p>On repère les actes d’anesthésie via activite_ccam == 4</p>
 </section>
 <section id="code" class="level2">
@@ -1038,9 +1601,7 @@ font-style: inherit;">library</span>(dplyr)</span>
 <span id="cb1-2"></span>
 <span id="cb1-3">actes_ccam_no_extension_documentaire <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span>mco<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rum<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span>mco_rum<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>ccam <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -1049,7 +1610,7 @@ font-style: inherit;">%&gt;%</span> </span>
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">select</span>(nas,no_rum,code_ccam,activite_ccam,extension_documentaire_ccam) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">select</span>(nas,no_rss,no_rum,code_ccam,activite_ccam,extension_documentaire_ccam) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
 <span id="cb1-5">    dplyr<span class="sc" style="color: #5E5E5E;
@@ -1068,8 +1629,8 @@ font-style: inherit;">is.na</span>(extension_documentaire_ccam))</span>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>PMSISoft MCO Standard : la clé (nas, no_rum) est incluse par défaut dans <code>mco$rum$ccam</code></p>
-<p>PMSISoft MCO Professionnel : écran <code>Codage CCAM &gt; Base des actes CCAM</code> et filtrage de variables <code>activite_ccam Egal à 4 ET extension_documentaire_ccam Est vide</code></p>
+<p>Ligne 3 : <code>mco_rss$ccam</code> est un tibble des actes CCAM</p>
+<p>Cette requête est réalisable dans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a> dans l’écran <code>Codage CCAM &gt; Base des actes CCAM</code> via le filtrage de variables <code>activite_ccam Egal à 4 ET extension_documentaire_ccam Est vide</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -1198,9 +1759,7 @@ font-style: inherit;">library</span>(dplyr)</span>
 <span id="cb1-2"></span>
 <span id="cb1-3">rhs_selected <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> smr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rhs<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> smr_rhs<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>rhs <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -1209,7 +1768,7 @@ font-style: inherit;">%&gt;%</span> </span>
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">select</span>(annee_import,nas,no_semaine,no_um,cm,jp_we,jp_hors_we,nb_csarr) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">select</span>(nas,no_semaine,no_um,cm,jp_we,jp_hors_we,nb_csarr) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
 <span id="cb1-5">    dplyr<span class="sc" style="color: #5E5E5E;
@@ -1258,9 +1817,9 @@ font-style: inherit;">0</span>)</span>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 5-6 : voir script “Nombre de JP par RHS”</p>
-<p>Avec le script, possibilité de varier en toute liberté les critères de filtrages (age, autres CM/GN/…, autre seuil nb_jp_rhs, ..)</p>
-<p>PMSISoft SMR Professionnel : écran <code>RHS &gt; Base des RHS</code>, filtrage de périmètre <code>cm == "08"</code> et filtrage de variable <code>nb_jp_rhs Supérieur ou égal à 5 ET nb_acte_csarr Egal à 0</code></p>
+<p>Ligne 3 : <code>smr_rhs$rhs</code> est un tibble des variables de la partie fixe des RHS</p>
+<p>Ligne 5-6 : voir script SMR “Nombre de JP par RHS”</p>
+<p>Cette requêtes est réalisable dans <a href="https://www.pmsisoft.com/acces_pmsisoft_ssr" target="_blank">PMSISoft SMR</a> dans l’écran <code>RHS &gt; Base des RHS</code> via le filtrage de périmètre <code>cm == "08"</code> et le filtrage de variable <code>nb_jp_rhs Supérieur ou égal à 5 ET nb_acte_csarr Egal à 0</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -1292,34 +1851,28 @@ font-style: inherit;">0</span>)</span>
 background-color: null;
 font-style: inherit;">library</span>(dplyr)</span>
 <span id="cb1-2"></span>
-<span id="cb1-3">raa <span class="ot" style="color: #003B4F;
+<span id="cb1-3">casemix_edgarx <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> psy<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> psy_raa<span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">$</span>raa<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>raa</span>
-<span id="cb1-4"></span>
-<span id="cb1-5">casemix_edgarx <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> raa <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">$</span>raa <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-6">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-4">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">select</span>(ipp,nature_acte,categorie_professionnelle_intervenant) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-7">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-5">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">group_by</span>(nature_acte) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-6">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1330,24 +1883,24 @@ background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">n</span>(),</span>
-<span id="cb1-9">                     <span class="at" style="color: #657422;
+<span id="cb1-7">                     <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">nb_ipp =</span> dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">n_distinct</span>(ipp),</span>
-<span id="cb1-10">                     <span class="at" style="color: #657422;
+<span id="cb1-8">                     <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">nb_categorie_professionnelle_intervenant =</span> dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">n_distinct</span>(categorie_professionnelle_intervenant)</span>
-<span id="cb1-11">                     ) <span class="sc" style="color: #5E5E5E;
+<span id="cb1-9">                     ) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-12">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-10">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1356,7 +1909,7 @@ background-color: null;
 font-style: inherit;">desc</span>(nb_acte)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-13">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-11">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1369,14 +1922,15 @@ background-color: null;
 font-style: inherit;">sum</span>(nb_acte), <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">.after =</span> nb_acte)</span>
-<span id="cb1-14">casemix_edgarx</span></code></pre></div>
+<span id="cb1-12">casemix_edgarx</span></code></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 12 : on trie sur le nombre descendant de <code>nb_acte</code></p>
-<p>Ligne 13 : avec l’argument <code>.after</code>, on positionne directement la variable <code>percent_acte</code> calculée après <code>nb_acte</code></p>
-<p>PMSISoft PSY Standard : casemix disponible dans l’écran <code>Actes ambulatoires &gt; Casemix EDGARX &gt; Casemix EDGARX</code></p>
+<p>Ligne 3 : <code>psy_raa$raa</code> est un tibble des variables RAA</p>
+<p>Ligne 10 : on trie sur le nombre descendant de <code>nb_acte</code></p>
+<p>Ligne 11 : l’argument <code>.after</code> positionne la variable <code>percent_acte</code> qui vient d’être calculée après <code>nb_acte</code></p>
+<p>Ce casemix est disponible dans l’écran <code>Actes ambulatoires &gt; Casemix EDGARX &gt; Casemix EDGARX</code> de <a href="https://www.pmsisoft.com/acces_pmsisoft_psy" target="_blank">PMSISoft PSY</a></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -1425,8 +1979,7 @@ font-style: inherit;">refpmsi</span>(csarr_code)</span>
 background-color: null;
 font-style: inherit;">&lt;-</span>  csarr_code <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-7">    dplyr<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1438,31 +1991,27 @@ font-style: inherit;">1</span>, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">by =</span> csarr_code) <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">select</span>(csarr_code,csarr_libelle)</span>
-<span id="cb1-9">csarr_libelle</span>
-<span id="cb1-10"></span>
-<span id="cb1-11">csarr_extend <span class="ot" style="color: #003B4F;
+<span id="cb1-7"></span>
+<span id="cb1-8">csarr_extend <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> smr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rhs<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> smr_rhs<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>csarr <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-12">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-9">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">select</span>(annee_import, code_csarr) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">select</span>(code_csarr) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-13">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-10">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1471,13 +2020,13 @@ background-color: null;
 font-style: inherit;">join_by</span>(code_csarr <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> csarr_code))</span>
-<span id="cb1-14">csarr_extend</span></code></pre></div>
+<span id="cb1-11">csarr_extend</span></code></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 7 : permet de ne retenir que le dernière libellé actif de l’acte CSARR</p>
-<p>PMSISoft SMR Professionnel : variables de libellé, dont comme ici <code>csarr_libelle</code> incluses dans <code>smr</code></p>
+<p>Ligne 8 : <code>smr_rhs$csarr</code> est un tibble des variables <code>csarr</code> liées à chaque RHS</p>
+<p>La variable <code>csarr_libelle</code> est rapatriée par défaut dans tous les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_ssr" target="_blank">PMSISoft SMR</a></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -1518,9 +2067,7 @@ font-style: inherit;">library</span>(dplyr)</span>
 <span id="cb1-2"></span>
 <span id="cb1-3">sejour_extended <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> mco<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rum<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> mco_rss<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>rum <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -1529,14 +2076,14 @@ font-style: inherit;">%&gt;%</span> </span>
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">select</span>(nas,no_rum,date_entree_um,date_sortie_um) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">select</span>(nas,no_rss,no_rum,date_entree_um,date_sortie_um) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
 <span id="cb1-5">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">group_by</span>(nas) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">group_by</span>(no_rss) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
 <span id="cb1-6">    dplyr<span class="sc" style="color: #5E5E5E;
@@ -1573,15 +2120,23 @@ font-style: inherit;">%&gt;%</span> </span>
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">distinct</span>(nas,date_entree_sejour,date_sortie_sejour,nb_jp_sejour,nb_rum_sejour)</span>
-<span id="cb1-11">sejour_extended</span></code></pre></div>
+font-style: inherit;">ungroup</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-11">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">distinct</span>(nas,no_rss,date_entree_sejour,date_sortie_sejour,nb_jp_sejour,nb_rum_sejour)</span>
+<span id="cb1-12">sejour_extended</span></code></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 7 : on force en integer le calcul de la différence de dates qui sinon serait une différence en journées, peu pratique à manipuler</p>
-<p>PMSISoft MCO Standard : voir écran <code>Séjours &gt; Base des séjours</code></p>
-<p>PMSISoft MCO professionnel : variable <code>nb_jp_sejour</code> et <code>nb_rum_sejour</code> présents dans <code>mco</code></p>
+<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM</p>
+<p>Ligne 7 : on force en integer le calcul de la différence de dates qui, sinon, serait une différence en journées, peu pratique à manipuler</p>
+<p>Ligne 11 : le <code>dplyr::distinct()</code> permet de ne sélectionner que des séjours via une suite de variables liées aux seuls séjours</p>
+<p>Le calcul du nombre de JP ou de venues des RUM et des séjours ainsi que le calcul du nombre de RUM par séjour est disponible dans tous les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -1623,19 +2178,14 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">refpmsi</span>(cim_libelle)</span>
 <span id="cb1-5"></span>
-<span id="cb1-6"><span class="co" style="color: #5E5E5E;
+<span id="cb1-6">rps_extended <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;"># everything() dans le select() est une façon de sélectionner toutes les variables natives du rps, dont la variable dp </span></span>
-<span id="cb1-7">rps_extended <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> psy<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rps<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> psy_rps<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>rps <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-7">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1644,7 +2194,7 @@ background-color: null;
 font-style: inherit;">everything</span>()) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-9">    dplyr<span class="sc" style="color: #5E5E5E;
+<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1661,16 +2211,17 @@ background-color: null;
 font-style: inherit;">join_by</span>(dp <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> cim_code))</span>
-<span id="cb1-10">rps_extended</span></code></pre></div>
+<span id="cb1-9">rps_extended</span></code></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 8 : <code>everything()</code> est pour <code>tidyselect::everything()</code> sachant que le package <code>tidyselect::</code> est chargé indirectement via le <code>dplyr</code></p>
-<p>Ligne 9 : on profite du <code>dplyr::select()</code> pour renommer <code>cim_libelle</code> en <code>dp_libelle</code> plus cohérent</p>
-<p>Ligne 9 : le <code>dplyr::left_join()</code> ajoute <code>dp_libelle</code> en dernière position</p>
-<p>PMSISoft PSY Standard : voir écran <code>RPS &gt; Base des RPS</code></p>
-<p>PMSISoft PSY Professionnel : <code>dp_libelle</code> est dans liste des variables de <code>psy$rps$rps</code></p>
+<p>Ligne 6 : <code>psy_rps$rps</code> est un tibble des variables de la partie fixe des RPS</p>
+<p>Ligne 7 : <code>everything()</code> est pour <code>tidyselect::everything()</code> sachant que le package <code>tidyselect::</code> est chargé via le <code>dplyr</code>.<br>
+<code>everything()</code> dans le <code>dplyr::select()</code> est une façon de sélectionner toutes les variables natives du du tibble <code>psy_rps$rps</code>, donc toutes les variables de la partie fixe d’un fichier RPS, dont, en particulier, la variable dp</p>
+<p>Ligne 8 : on profite du <code>dplyr::select()</code> pour renommer <code>cim_libelle</code> en <code>dp_libelle</code> plus cohérent.<br>
+Le <code>dplyr::left_join()</code> ajoute <code>dp_libelle</code> en dernière position</p>
+<p>Dans tous les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_psy" target="_blank">PMSISoft PSY</a>, le libellé des codages CIM-10 est rapatrié par défaut.</p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -1711,9 +2262,7 @@ font-style: inherit;">library</span>(dplyr)</span>
 <span id="cb1-2"></span>
 <span id="cb1-3">rhs_extend <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span> smr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rhs<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> smr_rhs<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>rhs <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -1744,7 +2293,7 @@ background-color: null;
 font-style: inherit;">"1"</span>)),</span>
 <span id="cb1-6">                  <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">nb_jp_rhs =</span> jp_we<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">nb_jour_rhs =</span> jp_we<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span>jp_hors_we)</span>
 <span id="cb1-7">rhs_extend</span></code></pre></div>
@@ -1752,9 +2301,9 @@ font-style: inherit;">+</span>jp_hors_we)</span>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 5 : utilisation ultra-classique de la fonction <code>àcross()</code> pour appliquer un même traitement à plusieurs variables en une seule ligne</p>
-<p>PMSISoft SMR Standard : voir écran <code>RHS &gt; Base des RHS</code></p>
-<p>PMSISoft SMR Professionnel : variable <code>nb_jp_rhs</code> présent dans <code>smr</code></p>
+<p>Ligne 3 : <code>smr_rhs$rhs</code> est un tibble des variables de la partie fixe des RHS</p>
+<p>Ligne 5 : utilisation classique de la fonction <code>dplyr::àcross()</code> pour appliquer un même traitement à plusieurs variables en une seule ligne</p>
+<p>La variable <code>nb_jour_rhs</code> est calculée par défaut dans tous les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_ssr" target="_blank">PMSISoft SMR</a></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 

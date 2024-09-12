@@ -1,0 +1,96 @@
+---
+title: "<b>Extraction partie d'une chaîne de caractères</b>"
+date: "2024-09-09"
+categories: [MCO]
+page-layout: full
+---
+
+## Introduction  
+
+string = chaîne de caractères  
+
+On distingue 3 situations (string à taille fixe, string à taille variable, string de type date) illustrées chacune par un traitement  
+
+## String à taille fixe  
+
+On repère les séjours de complexité 3 ou 4  
+
+### Code  
+
+```{r}
+#| label: code_sring_taille_fixe
+library(dplyr)
+
+sejour_niveau_3_4 <- mco_rss$rum %>% 
+    dplyr::select(nas,no_rss,no_rum,ghm) %>% 
+    dplyr::mutate(is_niveau_3_4 = stringr::str_sub(ghm, start = 6, end = 6) %in% c('3','4')) %>% 
+    dplyr::filter(is_niveau_3_4) %>% 
+    dplyr::distinct(nas,no_rss,ghm)
+sejour_niveau_3_4
+```
+
+### Commentaires  
+
+Ligne 3 : `mco_rss$rum` est un tibble des variables de la partie fixe des RUM  
+
+Ligne 5 : `stringr::str_sub(ghm, start = 6, end = 6)` isole la complexite du GHM
+
+Ligne 6 : raccourci pour `dplyr::filter(is_niveau_3_4 == TRUE)` 
+
+Ligne 7 : le `dplyr::distinct()` sur des variables liées au séjour fait passer le tibble d'un tibble de RUM à un tibble de séjours  
+
+Le script est pédagogique car, en pratique, on dispose généralement de la variable `complexite` par défaut.  
+
+Le filtrage sur la complexité est disponible dans tous les écrans [PMSISoft MCO](https://www.pmsisoft.com/acces_pmsisoft_mco){target="_blank"}  
+
+## String à taille variable  
+
+On repère les codages CIM-10 terminés par un 9  
+
+### Code  
+
+```{r}
+#| label: code_string_taille_variable
+library(dplyr)
+
+codage_das_9 <- mco_rss$das %>% 
+    dplyr::select(nas,no_rss,no_rum,das) %>% 
+    dplyr::mutate(is_das_9 = stringr::str_detect(das, pattern = "9$")) %>% 
+    dplyr::filter(is_das_9)
+codage_das_9
+```
+
+### Commentaires  
+
+Ligne 3 : `mco_rss$das` est un tibble des variables `das` associées aux RUM  
+
+Ligne 5 : le repérage des codes CIM-10 recherchés se fait via le regex très simple `9$` qui signifie "un 9 en dernière position"  
+
+Le filtrage par regex sur un codage est disponible dans tous les écrans [PMSISoft MCO](https://www.pmsisoft.com/acces_pmsisoft_mco){target="_blank"}  
+
+## String date  
+
+On produit la variable `mois_sortie_um`  
+
+### Code  
+
+```{r}
+#| label: code_string_date
+library(dplyr)
+
+rum_extended <- mco_rss$rum %>% 
+    dplyr::select(nas,no_rss,no_um,date_sortie_um) %>% 
+    dplyr::mutate(mois_sortie_um = stringr::str_sub(date_sortie_um,6,7),
+                  mois_sortie_um_label = as.character(lubridate::month(date_sortie_um, label = TRUE, abbr = FALSE, locale = Sys.getlocale("LC_TIME"))))
+rum_extended
+```
+
+### Commentaires  
+
+Ligne 3 : `mco_rss$rum` est un tibble des variables de la partie fixe des RUM  
+
+Ligne 6 : `mois_sortie_um_lable`est une alternative au code la ligne 5 permettant d'obtenir directement le mois de sortie de l'UM avec son intitulé en français (ex : "janvier")  
+
+La variable `mois_sortie_um` est calculée par défaut dans tous les écrans [PMSISoft MCO](https://www.pmsisoft.com/acces_pmsisoft_mco){target="_blank"}  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

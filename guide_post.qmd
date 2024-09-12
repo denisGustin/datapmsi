@@ -53,10 +53,11 @@ Chaque variable de ces jeux de données est supposée nettoyée[^2] et normalis�
 
 **1ere manière**  
 
-Télécharger, en tant qu'administrateur d'un accès Standard PMSISoft[^3], la liste des tibbles du champ PMSI qui vous intéresse.    
-Cette liste est un objet list, enregistré dans un fichier .rds    
+Télécharger, en tant qu'administrateur d'un accès Standard PMSISoft[^3], la liste des tibbles du champ PMSI qui vous intéresse.  
+Ces listes sont des objets `list` enregistrés dans un fichier .rds  
 
 **L'accès Standard PMSISoft est gratuit, sans limite de temps, ouvert à la demande de tout établissement qui nous en fait la demande.**  
+
 Plus d'informations :  
 [PMSISoft MCO](https://www.pmsisoft.com/acces_pmsisoft_mco){target="_blank"}  
 [PMSISoft SMR](https://www.pmsisoft.com/acces_pmsisoft_ssr){target="_blank"}  
@@ -67,16 +68,28 @@ Plus d'informations :
 ```{r}
 #| label: download_dataset_pmsi
 
-# on suppose que le .rds est déposé dans un répertoire "data" de votre projet R, sans modification de son nom
+# on suppose que les .rds sont déposés dans un répertoire "data" de votre projet R, sans modification de nom
 
-# En MCO, on récupère la liste des tibbles via
-mco <- readRDS("data/mco_AAAA-MM-JJ.rds")
+# Exemples MCO
+## on récupère la liste des tibbles liés aux RSS via
+mco_rss <- readRDS("data/mco_rss_AAAA-MM-JJ.rds")
 
-# En SMR, on récupère la liste des tibbles via
-smr <- readRDS("data/smr_AAAA-MM-JJ.rds")
+## on récupère la liste des tibbles liés aux RSA via
+mco_rsa <- readRDS("data/mco_rsa_AAAA-MM-JJ.rds")
 
-# En PSY, on récupère la liste des tibbles via
-psy <- readRDS("data/psy_AAAA-MM-JJ.rds")
+## on récupère la liste des tibbles liés aux DMI via
+mco_dmi <- readRDS("data/mco_dmi_AAAA-MM-JJ.rds")
+
+# Exemple SMR
+## on récupère la liste des tibbles liés aux RHS via
+smr_rhs <- readRDS("data/smr_rhs_AAAA-MM-JJ.rds")
+
+# Exemples PSY
+## on récupère la liste des tibbles liés aux RPS via
+psy_rps <- readRDS("data/psy_rps_AAAA-MM-JJ.rds")
+
+## on récupère la liste des tibbles liés aux RAA via
+psy_raa <- readRDS("data/psy_raa_AAAA-MM-JJ.rds")
 
 ```
 
@@ -87,22 +100,23 @@ Produire le tibble à partir du fichier concerné du .in ou du .out ou via un ex
 
 Cette sélection permet de vous "raccrocher" au script, indépendamment du nommage de votre jeu de données, car le libellé des variables utilisées est normalisé et la correspondance avec les intitulés des variables des formats de fichiers officiels est évidente.  
 
-Vous pouvez donc appliquer le script tel quel à partir de sa 3eme ligne de code, soit en renommant vos variables (via `dplyr::select()` ou `dplyr::rename()`) pour qu'elles correspondent à celles du script, soit en personnalisant le script avec vos intitulés de variables.  
+Vous pouvez donc appliquer le script tel quel à partir de sa 2eme ligne de code, soit en renommant vos variables (via `dplyr::select()` ou `dplyr::rename()`) pour qu'elles correspondent à celles du script, soit en personnalisant le script avec vos intitulés de variables.  
 
-Exemple avec le script ["Casemix basique séjours par sévérité"](posts/mco/script_mco_casemix_sejour_severite/index.qmd)
+Exemple avec le script ["Casemix basique séjours par complexité"](posts/mco/script_mco_casemix_sejour_severite/index.qmd)
 
 ```{r}
 #| label: example
 
 # récupération préalable du tibble correspondant à la partie fixe du fichier des rss groupés
-rum <- mco$rum$rum
+mco_rss$rum
 
 # les 2 premières lignes du script sont 
-casemix_severite <- rum %>% 
-    dplyr::select(nas,no_rum,ghm,severite,date_entree_um,date_sortie_um)
+casemix_severite <- mco_rss$rum %>% 
+    dplyr::select(nas,no_rss,no_rum,ghm,complexite,date_entree_um,date_sortie_um)
 
-# on a sélectionné ici 6 variables (nas, no_rum, ghm, severite, date_entree_um, date_sortie_um) dont la correspondance avec les intitulés du format est évidente :
+# on a sélectionné ici 7 variables dont la correspondance avec les intitulés du format est évidente :
 ## nas pour N° Administratif local de séjour (positions 48 à 67)
+## no_rss pour Numéro de RSS
 ## no_rum pour N° de RUM (positions 68 à 77)
 ## etc...
 ```

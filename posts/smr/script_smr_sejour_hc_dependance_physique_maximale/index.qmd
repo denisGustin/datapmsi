@@ -15,9 +15,8 @@ On calcule la dépendance physique de chaque RHS, puis, par séjour HC, on calcu
 #| label: code
 library(dplyr)
 
-sejour_dependance_physique_maximale <- smr$rhs$rhs %>% 
-    dplyr::select(nas,no_semaine,type_hospitalisation,
-                  dependance_alimentation,dependance_deplacement,dependance_habillage,dependance_continence) %>% 
+sejour_dependance_physique_maximale <- smr_rhs$rhs %>% 
+    dplyr::select(nas,no_semaine,type_hospitalisation,dependance_alimentation,dependance_deplacement,dependance_habillage,dependance_continence) %>% 
     dplyr::filter(type_hospitalisation == "1") %>% 
     dplyr::mutate(dependance_physique_rhs = rowSums(across(c(dependance_alimentation,dependance_deplacement,
                                                              dependance_habillage,dependance_continence)))) %>% 
@@ -30,13 +29,13 @@ sejour_dependance_physique_maximale
 
 ## Commentaires  
 
-Ligne 7-8 : `rowSums()` pour permettre un calcul ligne à ligne  
+Ligne 3 : `smr_rhs$rhs` est un tibble des variables de la partie fixe des RHS  
 
+Ligne 6-7 : `rowSums()` pour permettre un calcul de somme ligne à ligne  
+
+Pour aller + loin :  
 Démarche identique pour calculer la dépendance cognitive maximale d'un séjour  
 
-PMSISoft SMR Standard : information calculée et affichée dans l'écran `RHS > Base des RHS > Détail RHS > Dépendance`  
-
-PMSISoft SMR Professionnel : voir aussi écran `Séjours > Séjours et dépendance`  
+La variable `dependance_physique_maximale_sejour` est calculée par défaut dans les écrans [PMSISoft SMR](https://www.pmsisoft.com/acces_pmsisoft_ssr){target="_blank"}  
 
 [Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  
-

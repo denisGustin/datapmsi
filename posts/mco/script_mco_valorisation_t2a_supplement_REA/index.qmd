@@ -9,9 +9,9 @@ page-layout: full
 
 On suppose qu'on est en ex-DGF  
 
-On récupére `nb_supplements_rea`, variable native des `rsa` auquel on associe le tarif unitaire du suppléments REA correspondant qui est récupéré dans le référentiel annualisé `supplements_mco_public` de `refpmsi`  
+On associe au `nb_supplements_rea` (variable native des `rsa`) le tarif unitaire du supplément REA correspondant à l'année PMSI du séjour.  
 
-Remarque : `annee_sortie_sejour`, variable native `rsa`, = l'année PMSI du séjour, permettant le rapatriement des tarifs correspondant des suppléments  
+Ce tarif du supplément REA est récupéré via le référentiel annualisé `supplements_mco_public` du package `refpmsi`  
 
 ## Code  
 
@@ -22,21 +22,25 @@ library(refpmsi)
 
 supplements_mco_public <- refpmsi::refpmsi(supplements_mco_public)
 
-supplements_rea_t2a <- mco$rsa$rsa %>% 
-    dplyr::select(no_sequentiel_sejour,annee_sortie_sejour,nb_supplements_rea) %>% 
+supplements_rea_t2a <- mco_rsa$rsa %>% 
+    dplyr::select(no_sequentiel_sejour,mois_sortie_sejour,annee_sortie_sejour,nb_supplements_rea) %>% 
+    dplyr::mutate(annee_pmsi_sejour = ifelse(mois_sortie_sejour <= "02",as.character(as.integer(annee_sortie_sejour)-1L),annee_sortie_sejour)) %>% 
     dplyr::left_join(supplements_mco_public %>% dplyr::filter(supplement_mco_code == "REA"),
-                     join_by(annee_sortie_sejour == annee_pmsi)) %>% 
+                     by = join_by(annee_pmsi_sejour == annee_pmsi)) %>% 
     dplyr::mutate(supplements_rea_t2a = nb_supplements_rea*supplement_mco_tarif)
 supplements_rea_t2a
 
+# Calcul du cumul de la valorisation T2A brute des suppléments REA
 total_supplements_rea_t2a <- sum(supplements_rea_t2a$supplements_rea_t2a)
 total_supplements_rea_t2a
 ```
 
 ## Commentaires  
 
-PMSISoft MCO Standard : voir écran `Recettes T2A MCO > Suppléments` qui calcule et présente le casemix des valorisations des suppléments  
+Ligne 6 : `mco_rsa$rsa` est un tibble des variables de la partie fixe des RSA  
 
-PMSISoft MCO Professionnel : `supplements_rea_t2a` déjà calculé dans `mco$rsa$rsa_t2a`
+Ligne 8 : calcul de la variable `annee_pmsi_sejour` à partir des 2 variables `mois_sortie_sejour` et `annee_sortie_sejour` (variables natives `rsa`)  
+
+Les valorisations T2A brutes des suppléments sont calculées dans l'écran `Activité MCO > Synthèse T2A` de [PMSISoft MCO](https://www.pmsisoft.com/acces_pmsisoft_mco){target="_blank"}  
 
 [Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

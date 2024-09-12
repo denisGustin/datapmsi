@@ -1,0 +1,41 @@
+---
+title: "<b>Nombre d'actes ambulatoires identiques pour une même date</b>"
+date: "2024-09-10"
+categories: [PSY,RAA]
+page-layout: full
+---
+
+## Introduction  
+
+Pour chaque acte ambulatoire caractérisé par toutes ses variables de la partie fixe, on calcule le nombre de doublon.  
+
+On peut alors filter les situations sans doublon, avec 1 doublon, 2 doublons, etc...   
+
+Voir le contrôle qualité OVALIDE "1.Q.10.NBAI : Nombre d'actes identiques" que l'on a adapté ici de manière à la fois plus restrictive avec recherche de doublon sur la date et non sur le mois et à la fois plus riche en produisant la table de toutes les situations de doublon.  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+
+raa_idem_date <- psy_raa$raa %>% 
+    dplyr::add_count(across(c(no_ipp,age,sexe_patient,cp_residence,no_secteur_dispositif_intersectoriel,finess_geographique,no_um,
+                              date_acte,dp,indicateur_activite_liberale,
+                              forme_activite,mode_legal_soins,nb_das,modalite_realisation_acte,
+                              nb_intervenants,categorie_professionnelle_intervenant, nature_acte, lieu_acte)), name = "doublon_acte")
+raa_idem_date
+
+# les situations avec doublon_acte > 1
+raa_idem_date %>% dplyr::filter(doublon_acte > 1)
+```
+
+## Commentaires  
+
+Ligne 3 : `psy_raa$raa` est un tibble des variables RAA  
+
+Ligne 4 : joli cas d'usage de la fonction `dplyr::add_count()` qui représente un `dplyr::group_by()` + `dplyr::mutate()`  
+
+Ce requête est disponible dans l'écran `Requêtes PSY > Requêtes RAA` de [PMSISoft PSY](https://www.pmsisoft.com/acces_pmsisoft_psy){target="_blank"} sous le libellé `Actes identiques [1.Q.10.NBAI]`  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

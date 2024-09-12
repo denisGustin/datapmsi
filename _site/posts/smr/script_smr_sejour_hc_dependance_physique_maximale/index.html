@@ -268,25 +268,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>sejour_dependance_physique_maximale <span class="ot">&lt;-</span> smr<span class="sc">$</span>rhs<span class="sc">$</span>rhs <span class="sc">%&gt;%</span> </span>
-<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(nas,no_semaine,type_hospitalisation,</span>
-<span id="cb1-5"><a href="#cb1-5"></a>                  dependance_alimentation,dependance_deplacement,dependance_habillage,dependance_continence) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-6"><a href="#cb1-6"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(type_hospitalisation <span class="sc">==</span> <span class="st">"1"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-7"><a href="#cb1-7"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">dependance_physique_rhs =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">c</span>(dependance_alimentation,dependance_deplacement,</span>
-<span id="cb1-8"><a href="#cb1-8"></a>                                                             dependance_habillage,dependance_continence)))) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-9"><a href="#cb1-9"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">.by =</span> nas,</span>
-<span id="cb1-10"><a href="#cb1-10"></a>                  <span class="at">dependance_physique_maximale_sejour =</span> <span class="fu">max</span>(dependance_physique_rhs)</span>
-<span id="cb1-11"><a href="#cb1-11"></a>                  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-12"><a href="#cb1-12"></a>    dplyr<span class="sc">::</span><span class="fu">distinct</span>(nas,dependance_physique_maximale_sejour)</span>
-<span id="cb1-13"><a href="#cb1-13"></a>sejour_dependance_physique_maximale</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a>sejour_dependance_physique_maximale <span class="ot">&lt;-</span> smr_rhs<span class="sc">$</span>rhs <span class="sc">%&gt;%</span> </span>
+<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(nas,no_semaine,type_hospitalisation,dependance_alimentation,dependance_deplacement,dependance_habillage,dependance_continence) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-5"><a href="#cb1-5"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(type_hospitalisation <span class="sc">==</span> <span class="st">"1"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-6"><a href="#cb1-6"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">dependance_physique_rhs =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">c</span>(dependance_alimentation,dependance_deplacement,</span>
+<span id="cb1-7"><a href="#cb1-7"></a>                                                             dependance_habillage,dependance_continence)))) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-8"><a href="#cb1-8"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">.by =</span> nas,</span>
+<span id="cb1-9"><a href="#cb1-9"></a>                  <span class="at">dependance_physique_maximale_sejour =</span> <span class="fu">max</span>(dependance_physique_rhs)</span>
+<span id="cb1-10"><a href="#cb1-10"></a>                  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-11"><a href="#cb1-11"></a>    dplyr<span class="sc">::</span><span class="fu">distinct</span>(nas,dependance_physique_maximale_sejour)</span>
+<span id="cb1-12"><a href="#cb1-12"></a>sejour_dependance_physique_maximale</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 7-8 : <code>rowSums()</code> pour permettre un calcul ligne à ligne</p>
-<p>Démarche identique pour calculer la dépendance cognitive maximale d’un séjour</p>
-<p>PMSISoft SMR Standard : information calculée et affichée dans l’écran <code>RHS &gt; Base des RHS &gt; Détail RHS &gt; Dépendance</code></p>
-<p>PMSISoft SMR Professionnel : voir aussi écran <code>Séjours &gt; Séjours et dépendance</code></p>
+<p>Ligne 3 : <code>smr_rhs$rhs</code> est un tibble des variables de la partie fixe des RHS</p>
+<p>Ligne 6-7 : <code>rowSums()</code> pour permettre un calcul de somme ligne à ligne</p>
+<p>Pour aller + loin :<br>
+Démarche identique pour calculer la dépendance cognitive maximale d’un séjour</p>
+<p>La variable <code>dependance_physique_maximale_sejour</code> est calculée par défaut dans les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_ssr" target="_blank">PMSISoft SMR</a></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 

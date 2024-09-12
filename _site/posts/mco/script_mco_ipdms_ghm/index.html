@@ -263,8 +263,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>On se restreint aux séjours de sévérité 1,2,3 ou 4 d’au moins 1 nuitée et on suppose qu’on est en ex-DGF</p>
-<p>Pour chaque séjour, on rapatrie la DMS OVALIDE correspondant à son GHM et à son année PMSI, à partir du référentiel annualisé OVALIDE GHMinfo <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>Pour ces séjours, pour chaque GHM, on calcule le nombre de séjours, le cumul des JP de ces séjours et l’IPDMS au sens “division du nombre de journées de l’établissement par le nombre de journées théoriques pour le périmètre considéré.”</p>
+<p>Pour chaque séjour, on rapatrie la DMS OVALIDE correspondant au GHM du séjour via le référentiel <code>ovalide_ghminfo_dgf</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> du package <code>refpmsi</code></p>
+<p>Pour chaque GHM, on calcule le nombre de séjours, le cumul des JP de ces séjours, le nombre de journées théoriques et l’IPDMS au sens “nombre de journées établissement / nombre de journées théoriques pour le périmètre considéré.”</p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
@@ -274,34 +274,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3"></a></span>
 <span id="cb1-4"><a href="#cb1-4"></a>ovalide_ghminfo_dgf <span class="ot">&lt;-</span> refpmsi<span class="sc">::</span><span class="fu">refpmsi</span>(ovalide_ghminfo_dgf)</span>
 <span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>casemix_ghm_ipdms <span class="ot">&lt;-</span> mco<span class="sc">$</span>rum<span class="sc">$</span>rum <span class="sc">%&gt;%</span> </span>
-<span id="cb1-7"><a href="#cb1-7"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(annee_import,nas,ghm,severite,date_entree_um,date_sortie_um) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-8"><a href="#cb1-8"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">.by =</span> nas, <span class="at">date_entree_sejour =</span> <span class="fu">min</span>(date_entree_um), <span class="at">date_sortie_sejour =</span> <span class="fu">max</span>(date_sortie_um),</span>
-<span id="cb1-9"><a href="#cb1-9"></a>                  <span class="at">nb_jp_sejour =</span> <span class="fu">as.integer</span>(date_sortie_sejour<span class="sc">-</span>date_entree_sejour)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-10"><a href="#cb1-10"></a>    dplyr<span class="sc">::</span><span class="fu">distinct</span>(nas,ghm,severite,date_sortie_sejour,nb_jp_sejour) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-11"><a href="#cb1-11"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">annee_sortie_sejour =</span> <span class="fu">as.character</span>(lubridate<span class="sc">::</span><span class="fu">year</span>(date_sortie_sejour))) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-12"><a href="#cb1-12"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(severite <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>,<span class="st">"2"</span>,<span class="st">"3"</span>,<span class="st">"4"</span>), nb_jp_sejour <span class="sc">&gt;=</span> <span class="dv">1</span>L) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-13"><a href="#cb1-13"></a>    dplyr<span class="sc">::</span><span class="fu">left_join</span>(ovalide_ghminfo_dgf <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(annee_pmsi,ghm,<span class="at">dms_ovalide_ghm =</span> dms),</span>
-<span id="cb1-14"><a href="#cb1-14"></a>                     <span class="fu">join_by</span>(ghm <span class="sc">==</span> ghm, annee_sortie_sejour <span class="sc">==</span> annee_pmsi)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-15"><a href="#cb1-15"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">nb_jp_theorique_sejour =</span> dms_ovalide_ghm<span class="sc">*</span>nb_jp_sejour) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-16"><a href="#cb1-16"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(ghm) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-17"><a href="#cb1-17"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">nb_sejour_ghm =</span> dplyr<span class="sc">::</span><span class="fu">n</span>(),</span>
-<span id="cb1-18"><a href="#cb1-18"></a>                     <span class="at">nb_jp_sejour_ghm =</span> <span class="fu">sum</span>(nb_jp_sejour),</span>
-<span id="cb1-19"><a href="#cb1-19"></a>                     <span class="at">nb_jp_theorique_ghm =</span> <span class="fu">sum</span>(nb_jp_theorique_sejour)</span>
-<span id="cb1-20"><a href="#cb1-20"></a>                     ) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-21"><a href="#cb1-21"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">ipdms_ghm =</span> nb_jp_sejour_ghm<span class="sc">/</span>nb_jp_theorique_ghm)</span>
-<span id="cb1-22"><a href="#cb1-22"></a>casemix_ghm_ipdms</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6"></a>casemix_ghm_ipdms <span class="ot">&lt;-</span> mco_rss<span class="sc">$</span>rum <span class="sc">%&gt;%</span> </span>
+<span id="cb1-7"><a href="#cb1-7"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(nas,no_rss,ghm,complexite,date_entree_um,date_sortie_um) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-8"><a href="#cb1-8"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">.by =</span> no_rss, </span>
+<span id="cb1-9"><a href="#cb1-9"></a>                  <span class="at">date_entree_sejour =</span> <span class="fu">min</span>(date_entree_um), <span class="at">date_sortie_sejour =</span> <span class="fu">max</span>(date_sortie_um),</span>
+<span id="cb1-10"><a href="#cb1-10"></a>                  <span class="at">nb_jp_sejour =</span> <span class="fu">as.integer</span>(date_sortie_sejour<span class="sc">-</span>date_entree_sejour)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-11"><a href="#cb1-11"></a>    dplyr<span class="sc">::</span><span class="fu">distinct</span>(no_rss,ghm,complexite,date_sortie_sejour,nb_jp_sejour) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-12"><a href="#cb1-12"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">annee_sortie_sejour =</span> <span class="fu">as.character</span>(lubridate<span class="sc">::</span><span class="fu">year</span>(date_sortie_sejour)),</span>
+<span id="cb1-13"><a href="#cb1-13"></a>                  <span class="at">mois_sortie_sejour =</span> lubridate<span class="sc">::</span><span class="fu">month</span>(date_sortie_sejour),</span>
+<span id="cb1-14"><a href="#cb1-14"></a>                  <span class="at">annee_pmsi_sejour =</span> <span class="fu">ifelse</span>(mois_sortie_sejour <span class="sc">&lt;=</span> <span class="dv">2</span>,<span class="fu">as.character</span>(<span class="fu">as.integer</span>(annee_sortie_sejour)<span class="sc">-</span><span class="dv">1</span>L),annee_sortie_sejour)</span>
+<span id="cb1-15"><a href="#cb1-15"></a>                  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-16"><a href="#cb1-16"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(complexite <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>,<span class="st">"2"</span>,<span class="st">"3"</span>,<span class="st">"4"</span>), nb_jp_sejour <span class="sc">&gt;=</span> <span class="dv">1</span>L) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-17"><a href="#cb1-17"></a>    dplyr<span class="sc">::</span><span class="fu">left_join</span>(ovalide_ghminfo_dgf <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(annee_pmsi,ghm,<span class="at">dms_ovalide_ghm =</span> dms),</span>
+<span id="cb1-18"><a href="#cb1-18"></a>                     <span class="fu">join_by</span>(ghm <span class="sc">==</span> ghm, annee_pmsi_sejour <span class="sc">==</span> annee_pmsi)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-19"><a href="#cb1-19"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">nb_jp_theorique_sejour =</span> dms_ovalide_ghm<span class="sc">*</span>nb_jp_sejour) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-20"><a href="#cb1-20"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(ghm) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-21"><a href="#cb1-21"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">nb_sejour_ghm =</span> dplyr<span class="sc">::</span><span class="fu">n</span>(),</span>
+<span id="cb1-22"><a href="#cb1-22"></a>                     <span class="at">nb_jp_sejour_ghm =</span> <span class="fu">sum</span>(nb_jp_sejour),</span>
+<span id="cb1-23"><a href="#cb1-23"></a>                     <span class="at">nb_jp_theorique_ghm =</span> <span class="fu">sum</span>(nb_jp_theorique_sejour)</span>
+<span id="cb1-24"><a href="#cb1-24"></a>                     ) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-25"><a href="#cb1-25"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">ipdms_ghm =</span> nb_jp_sejour_ghm<span class="sc">/</span>nb_jp_theorique_ghm)</span>
+<span id="cb1-26"><a href="#cb1-26"></a>casemix_ghm_ipdms <span class="sc">%&gt;%</span> View</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 8-9 : voir script “Nombre de JP d’un séjour MCO” pour le calcul de <code>nb_jp_sejour</code></p>
-<p>Ligne 11 : forçage <code>annee_sortie_sejour</code> en character pour préparer la jointure avec <code>ovalide_ghminfo_dgf</code></p>
+<p>Ligne 6 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM</p>
+<p>Ligne 11 : on passe d’un tibble de RUM à un tibble de séjours via le <code>dplyr::distinct()</code> de variables liées au séjour</p>
+<p>Ligne 12 : forçage <code>annee_sortie_sejour</code> en character pour préparer la jointure avec la variable ànnee_pmsi<code>de ovalide_ghminfo_dgf</code> qui est character</p>
 <p>Pour aller + loin :<br>
 Calcul de l’écart à la moyenne en nb_jp avec nb_jp_theorique_ghm<br>
 Rapatriemeent libellé des GHM<br>
 Etc …</p>
-<p>PMSISoft MCO Professionnel : IPDMS calculée pour tous les casemix en CMD, sous-CMD, RGHM, GHM, Sévérité, DA, GA, GP. <code>ipdms_ghm</code>dans <code>mco</code></p>
+<p>L’IP-DMS est calculé dans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a> dans l’écran <code>Séjour &gt; Séjours et classification &gt; Casemix GHM</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 

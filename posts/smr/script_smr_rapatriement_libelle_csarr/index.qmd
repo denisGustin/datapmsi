@@ -20,24 +20,20 @@ library(refpmsi)
 
 csarr_code <- refpmsi::refpmsi(csarr_code)
 
-csarr_libelle <-  csarr_code %>% 
-    dplyr::slice_head(n = 1, by = csarr_code) %>% 
-    dplyr::select(csarr_code,csarr_libelle)
-csarr_libelle
+csarr_libelle <-  csarr_code %>% dplyr::slice_head(n = 1, by = csarr_code) %>% dplyr::select(csarr_code,csarr_libelle)
 
-csarr_extend <- smr$rhs$csarr %>% 
-    dplyr::select(annee_import, code_csarr) %>% 
+csarr_extend <- smr_rhs$csarr %>% 
+    dplyr::select(code_csarr) %>% 
     dplyr::left_join(csarr_libelle, join_by(code_csarr == csarr_code))
 csarr_extend
 ```
 
 ## Commentaires  
 
-Ligne 7 : permet de ne retenir que le dernière libellé actif de l'acte CSARR  
+Ligne 8 : `smr_rhs$csarr` est un tibble des variables `csarr` liées à chaque RHS  
 
-PMSISoft SMR Professionnel : variables de libellé, dont comme ici `csarr_libelle` incluses dans `smr`  
+La variable `csarr_libelle` est rapatriée par défaut dans tous les écrans [PMSISoft SMR](https://www.pmsisoft.com/acces_pmsisoft_ssr){target="_blank"}  
 
 [Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  
-
 
 [^1]: Documentation du référentiel [csarr_code](https://denisgustin.github.io/refpmsi/articles/csarr.html#csarr-code){target="_blank"}  
