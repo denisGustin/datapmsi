@@ -1,0 +1,53 @@
+---
+title: "<b>Transcodage des actes CSARR en CSAR</b>"
+date: "2024-09-13"
+categories: [SMR,CSARR,CSAR]
+page-layout: full
+---
+
+## Introduction  
+
+On transcode les actes CSARR dans le nouveau référentiel CSAR en faisant appel aux référentiels `csar_transcodage` et `csar_code` du package `refpmsi` 
+
+[Documentation ATIH CSAR 2025](https://www.atih.sante.fr/simplification-du-csarr-guide-de-codage-csar-0){target="_blank"}  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+library(refpmsi)
+
+csarr_code <- refpmsi::refpmsi(csarr_code)
+csarr_libelle <-  csarr_code %>% dplyr::slice_head(n = 1, by = csarr_code) %>% dplyr::select(csarr_code,csarr_libelle)
+
+csar_transcodage <- refpmsi::refpmsi(csar_transcodage)
+csar_code <- refpmsi::refpmsi(csar_code)
+
+base_csarr_csar <- smr_rhs$csarr %>% 
+    dplyr::select(nas,no_semaine,code_csarr) %>% 
+    dplyr::left_join(csarr_libelle, by = join_by(code_csarr == csarr_code)) %>% 
+    dplyr::left_join(csar_transcodage, by = join_by(code_csarr == csarr_code)) %>% 
+    dplyr::left_join(csar_code %>% dplyr::select(csar_code, csar_libelle), by = join_by(csar_code == csar_code))
+base_csarr_csar
+```
+
+## Commentaires  
+
+Ligne 4 : voir [Documentation ](https://denisgustin.github.io/refpmsi/articles/csarr.html#csarr-code){target="_blank"}  
+
+Lignes 7 et 8 : voir [Documentation ](https://denisgustin.github.io/refpmsi/articles/csar.html){target="_blank"}  
+
+Ligne 10 : `smr_rhs$csarr` est un tibble des variables `csarr` liées aux RHS  
+
+Ligne 13 : le transcodage proprement dit  
+
+Ligne 14 : rapatriement des libellés CSAR  
+
+Pour aller + loin :  
+Repérage des codages CSARR transcodés en ZZZ, c'est-à-dire des actes CSARR sans correspondance en CSAR  
+Calcul d'un casemix des actes CSAR (voir script ["Casemix basique Intervenant CSARR"](https://www.datapmsi.com/posts/smr/script_smr_casemix_intervenant/)  
+
+Le transcodage des actes CSARR en CSAR est disponible dans les écrans CSARR [PMSISoft SMR](https://www.pmsisoft.com/acces_pmsisoft_ssr){target="_blank"}  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

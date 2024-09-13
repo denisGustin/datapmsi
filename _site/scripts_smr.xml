@@ -10,7 +10,366 @@
 <atom:link href="https://www.datapmsi.com/scripts_smr.xml" rel="self" type="application/rss+xml"/>
 <description>Codes et formations R pour les PMSI MCO, SMR, PSY et HAD</description>
 <generator>quarto-1.4.551</generator>
-<lastBuildDate>Mon, 10 Jun 2024 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 12 Sep 2024 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Transcodage des actes CSARR en CSAR</title>
+  <dc:creator>denis Gustin</dc:creator>
+  <link>https://www.datapmsi.com/posts/smr/script_smr_transcodage_csar/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>On transcode les actes CSARR dans le nouveau référentiel CSAR en faisant appel aux référentiels <code>csar_transcodage</code> et <code>csar_code</code> du package <code>refpmsi</code></p>
+<p><a href="https://www.atih.sante.fr/simplification-du-csarr-guide-de-codage-csar-0" target="_blank">Documentation ATIH CSAR 2025</a></p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(refpmsi)</span>
+<span id="cb1-3"></span>
+<span id="cb1-4">csarr_code <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> refpmsi<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">refpmsi</span>(csarr_code)</span>
+<span id="cb1-5">csarr_libelle <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span>  csarr_code <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">slice_head</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> csarr_code) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(csarr_code,csarr_libelle)</span>
+<span id="cb1-6"></span>
+<span id="cb1-7">csar_transcodage <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> refpmsi<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">refpmsi</span>(csar_transcodage)</span>
+<span id="cb1-8">csar_code <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> refpmsi<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">refpmsi</span>(csar_code)</span>
+<span id="cb1-9"></span>
+<span id="cb1-10">base_csarr_csar <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> smr_rhs<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>csarr <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-11">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(nas,no_semaine,code_csarr) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-12">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(csarr_libelle, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">join_by</span>(code_csarr <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> csarr_code)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-13">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(csar_transcodage, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">join_by</span>(code_csarr <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> csarr_code)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-14">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(csar_code <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(csar_code, csar_libelle), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">join_by</span>(csar_code <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> csar_code))</span>
+<span id="cb1-15">base_csarr_csar</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level2">
+<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Ligne 4 : voir <a href="https://denisgustin.github.io/refpmsi/articles/csarr.html#csarr-code" target="_blank">Documentation</a></p>
+<p>Lignes 7 et 8 : voir <a href="https://denisgustin.github.io/refpmsi/articles/csar.html" target="_blank">Documentation</a></p>
+<p>Ligne 10 : <code>smr_rhs$csarr</code> est un tibble des variables <code>csarr</code> liées aux RHS</p>
+<p>Ligne 13 : le transcodage proprement dit</p>
+<p>Ligne 14 : rapatriement des libellés CSAR</p>
+<p>Le transcodage des actes CSARR en CSAR est disponible dans les écrans CSARR <a href="https://www.pmsisoft.com/acces_pmsisoft_ssr" target="_blank">PMSISoft SMR</a></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>SMR</category>
+  <category>CSARR</category>
+  <category>CSAR</category>
+  <guid>https://www.datapmsi.com/posts/smr/script_smr_transcodage_csar/</guid>
+  <pubDate>Thu, 12 Sep 2024 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Comparaison DZF, FZF et ZF entre 2023 et 2024</title>
+  <dc:creator>denis Gustin</dc:creator>
+  <link>https://www.datapmsi.com/posts/smr/script_smr_evolution_dzf_fzf_zf/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>On se restreint aux GME d’HC, les seuls pour lesquels l’analyse a un sens.</p>
+<p>On exclut les GMT “hebdomadaires” (GMT en 7) et les GMT des séjours &lt; 8 JP avec sortie transfert/mutation/décès (GMT en 8)</p>
+<p>On suppose être en ex-DGF</p>
+<p>On compare pour chaque GMT ainsi sélectionné l’évolution des valeurs des DZF, FZF et des durées de ZF entre les campagnes 2023 et 2024</p>
+<p>gmt_type_zf = (zf_1, zf_7, zf_21) où zf_1 = ZF d’une JP, zf_7 = ZF d’une semaine et zf_21 = ZF de 3 semaines</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(refpmsi)</span>
+<span id="cb1-3"></span>
+<span id="cb1-4">gme_public <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> refpmsi<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">refpmsi</span>(gme_public)</span>
+<span id="cb1-5"></span>
+<span id="cb1-6">gme_public_2023 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> gme_public <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-7">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(annee_pmsi <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2023"</span>, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span>gmt_8,gme_niveau_severite <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">gmt_2023 =</span> gmt,<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">gme_2023 =</span> gme,<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dzf_2023 =</span> dzf,<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fzf_2023 =</span> fzf,<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">gmt_type_zf_2023 =</span> gmt_type_zf)</span>
+<span id="cb1-9"></span>
+<span id="cb1-10">gme_public_2024 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> gme_public <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-11">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(annee_pmsi <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2024"</span>, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span>gmt_8, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span>gmt_7, gme_niveau_severite <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-12">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">gmt_2024 =</span> gmt,<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">gme_2024 =</span> gme,<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dzf_2024 =</span> dzf,<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fzf_2024 =</span> fzf,<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">gmt_type_zf_2024 =</span> gmt_type_zf)</span>
+<span id="cb1-13"></span>
+<span id="cb1-14">same_dzf_fzf_zf <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> gme_public_2024 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-15">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(gme_public_2023, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">join_by</span>(gmt_2024 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> gmt_2023,gme_2024 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> gme_2023)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-16">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">same_dzf =</span> dzf_2024 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> dzf_2023, </span>
+<span id="cb1-17">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">same_fzf =</span> fzf_2024 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> fzf_2023,</span>
+<span id="cb1-18">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">same_gmt_type_zf =</span> gmt_type_zf_2024 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> gmt_type_zf_2023)</span>
+<span id="cb1-19">same_dzf_fzf_zf</span>
+<span id="cb1-20"></span>
+<span id="cb1-21"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># liste des (GMT,GME) avec évolution de la durée de ZF entre 2023 et 2024 </span></span>
+<span id="cb1-22">same_dzf_fzf_zf <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span>same_gmt_type_zf)</span>
+<span id="cb1-23"></span>
+<span id="cb1-24"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># liste des (GMT,GME) avec ZF d'une semaine en 2023 qui passent à une ZF de 3 semaines en 2024</span></span>
+<span id="cb1-25">same_dzf_fzf_zf <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(gmt_type_zf_2023 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"zf_7"</span>, gmt_type_zf_2024 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"zf_21"</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level2">
+<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Ligne 4 : voir <a href="https://www.lespmsi.com/referentiel-des-gme-2024-avec-la-serie-de-gmt-associes/" target="_blank">Documentation</a> avec une version csv téléchargeable du référentiel des GME-GMT 2024</p>
+<p>Ligne 8 : renommage des variables avec le suffixe <code>_2023</code>en prévision du calcul du tibble <code>same_dzf_fzf_zf</code> pour assurer la jointure</p>
+<p>Ligne 22 : <code>dplyr::filter(!same_gmt_type_zf)</code> est un raccourci pour <code>same_gmt_type_zf == FALSE</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>SMR</category>
+  <category>GME</category>
+  <guid>https://www.datapmsi.com/posts/smr/script_smr_evolution_dzf_fzf_zf/</guid>
+  <pubDate>Wed, 11 Sep 2024 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Casemix basique Intervenant CSARR</title>
   <dc:creator>denis Gustin</dc:creator>

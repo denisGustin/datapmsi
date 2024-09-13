@@ -1,0 +1,59 @@
+---
+title: "<b>Comparaison DZF, FZF et ZF entre 2023 et 2024</b>"
+date: "2024-09-12"
+categories: [SMR,GME]
+page-layout: full
+---
+
+## Introduction  
+
+On se restreint aux GME d'HC, les seuls pour lesquels l'analyse a un sens.  
+
+On exclut les GMT "hebdomadaires" (GMT en 7) et les GMT des séjours < 8 JP avec sortie transfert/mutation/décès (GMT en 8)  
+
+On suppose être en ex-DGF  
+
+On compare pour chaque GMT ainsi sélectionné l'évolution des valeurs des DZF, FZF et des durées de ZF entre les campagnes 2023 et 2024  
+
+gmt_type_zf = (zf_1, zf_7, zf_21) où zf_1 = ZF d'une JP, zf_7 = ZF d'une semaine et zf_21 = ZF de 3 semaines  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+library(refpmsi)
+
+gme_public <- refpmsi::refpmsi(gme_public)
+
+gme_public_2023 <- gme_public %>% 
+    dplyr::filter(annee_pmsi == "2023", !gmt_8,gme_niveau_severite %in% c("1","2")) %>% 
+    dplyr::select(gmt_2023 = gmt,gme_2023 = gme,dzf_2023 = dzf,fzf_2023 = fzf,gmt_type_zf_2023 = gmt_type_zf)
+
+gme_public_2024 <- gme_public %>% 
+    dplyr::filter(annee_pmsi == "2024", !gmt_8, !gmt_7, gme_niveau_severite %in% c("1","2")) %>% 
+    dplyr::select(gmt_2024 = gmt,gme_2024 = gme,dzf_2024 = dzf,fzf_2024 = fzf,gmt_type_zf_2024 = gmt_type_zf)
+
+same_dzf_fzf_zf <- gme_public_2024 %>% 
+    dplyr::left_join(gme_public_2023, by = join_by(gmt_2024 == gmt_2023,gme_2024 == gme_2023)) %>% 
+    dplyr::mutate(same_dzf = dzf_2024 == dzf_2023, 
+                  same_fzf = fzf_2024 == fzf_2023,
+                  same_gmt_type_zf = gmt_type_zf_2024 == gmt_type_zf_2023)
+same_dzf_fzf_zf
+
+# liste des (GMT,GME) avec évolution de la durée de ZF entre 2023 et 2024 
+same_dzf_fzf_zf %>% dplyr::filter(!same_gmt_type_zf)
+
+# liste des (GMT,GME) avec ZF d'une semaine en 2023 qui passent à une ZF de 3 semaines en 2024
+same_dzf_fzf_zf %>% dplyr::filter(gmt_type_zf_2023 == "zf_7", gmt_type_zf_2024 == "zf_21")
+```
+
+## Commentaires  
+
+Ligne 4 : voir [Documentation](https://www.lespmsi.com/referentiel-des-gme-2024-avec-la-serie-de-gmt-associes/){target="_blank"} avec une version csv téléchargeable du référentiel des GME-GMT 2024  
+
+Ligne 8 : renommage des variables avec le suffixe `_2023`en prévision du calcul du tibble `same_dzf_fzf_zf` pour assurer la jointure  
+
+Ligne 22 : `dplyr::filter(!same_gmt_type_zf)` est un raccourci pour `same_gmt_type_zf == FALSE`  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

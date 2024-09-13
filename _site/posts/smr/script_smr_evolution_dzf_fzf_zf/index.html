@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="denis Gustin">
 
-<title>Data PMSI - Scripts SMR R</title>
+<title>Data PMSI - Comparaison DZF, FZF et ZF entre 2023 et 2024</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +21,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,67 +101,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Recherche"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="alternate" type="application/rss+xml" title="Data PMSI" href="scripts_smr.xml" data-external="1"></head>
+</head>
 
 <body class="nav-sidebar docked nav-fixed">
 
@@ -137,7 +112,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Data PMSI</span>
     </a>
   </div>
@@ -148,15 +123,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./prestation.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../prestation.html" aria-current="page"> 
 <span class="menu-text">Live coding PMSI R</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./guide_post.html"> 
+    <a class="nav-link" href="../../../guide_post.html"> 
 <span class="menu-text">Guide des scripts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./base_R.html"> 
+    <a class="nav-link" href="../../../base_R.html"> 
 <span class="menu-text">Pre-requis R</span></a>
   </li>  
 </ul>
@@ -167,7 +142,7 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-jeux-de-données">    
         <li>
-    <a class="dropdown-item" href="./dataset_mco.html">
+    <a class="dropdown-item" href="../../../dataset_mco.html">
  <span class="dropdown-text">Jeux PMSI MCO</span></a>
   </li>  
     </ul>
@@ -188,69 +163,93 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./scripts_smr.html">Scripts SMR</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><b>Comparaison DZF, FZF et ZF entre 2023 et 2024</b></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prestation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../prestation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Live coding PMSI R</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./guide_post.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../guide_post.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Guide des scripts</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./scripts_mco.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../scripts_mco.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scripts MCO</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./scripts_smr.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../scripts_smr.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scripts SMR</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./scripts_psy.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../scripts_psy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scripts PSY</span></a>
   </div>
 </li>
     </ul>
     </div>
-    
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sur cette page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
+  <li><a href="#commentaires" id="toc-commentaires" class="nav-link" data-scroll-target="#commentaires">Commentaires</a></li>
+  </ul>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <h5 class="quarto-listing-category-title">Catégories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Tous <span class="quarto-category-count">(7)</span></div><div class="category" data-category="CSAR">CSAR <span class="quarto-category-count">(1)</span></div><div class="category" data-category="CSARR">CSARR <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Casemix">Casemix <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Dépendance">Dépendance <span class="quarto-category-count">(1)</span></div><div class="category" data-category="GME">GME <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RHS">RHS <span class="quarto-category-count">(2)</span></div><div class="category" data-category="SMR">SMR <span class="quarto-category-count">(7)</span></div></div></div>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Scripts SMR R</span></h1>
-</div>
+<h1 class="title"><b>Comparaison DZF, FZF et ZF entre 2023 et 2024</b></h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">SMR</div>
+    <div class="quarto-category">GME</div>
+  </div>
+  </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-right">
 
+    <div>
+    <div class="quarto-title-meta-heading">Auteur·rice</div>
+    <div class="quarto-title-meta-contents">
+             <p>denis Gustin </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Date de publication</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">12 septembre 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -260,202 +259,55 @@ window.Quarto = {
 </header>
 
 
-<p>Il est conseillé de lire le <a href="./guide_post.html">Guide des scripts</a> et les <a href="./base_R.html">Pré-requis R</a> en préambule à la lecture et l’exploitation des scripts.</p>
-<section id="liste-des-scripts-smr-r" class="level2">
-<h2 class="anchored" data-anchor-id="liste-des-scripts-smr-r">Liste des scripts SMR R</h2>
-
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>On se restreint aux GME d’HC, les seuls pour lesquels l’analyse a un sens.</p>
+<p>On exclut les GMT “hebdomadaires” (GMT en 7) et les GMT des séjours &lt; 8 JP avec sortie transfert/mutation/décès (GMT en 8)</p>
+<p>On suppose être en ex-DGF</p>
+<p>On compare pour chaque GMT ainsi sélectionné l’évolution des valeurs des DZF, FZF et des durées de ZF entre les campagnes 2023 et 2024</p>
+<p>gmt_type_zf = (zf_1, zf_7, zf_21) où zf_1 = ZF d’une JP, zf_7 = ZF d’une semaine et zf_21 = ZF de 3 semaines</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(refpmsi)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>gme_public <span class="ot">&lt;-</span> refpmsi<span class="sc">::</span><span class="fu">refpmsi</span>(gme_public)</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>gme_public_2023 <span class="ot">&lt;-</span> gme_public <span class="sc">%&gt;%</span> </span>
+<span id="cb1-7"><a href="#cb1-7"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(annee_pmsi <span class="sc">==</span> <span class="st">"2023"</span>, <span class="sc">!</span>gmt_8,gme_niveau_severite <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>,<span class="st">"2"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-8"><a href="#cb1-8"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="at">gmt_2023 =</span> gmt,<span class="at">gme_2023 =</span> gme,<span class="at">dzf_2023 =</span> dzf,<span class="at">fzf_2023 =</span> fzf,<span class="at">gmt_type_zf_2023 =</span> gmt_type_zf)</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>gme_public_2024 <span class="ot">&lt;-</span> gme_public <span class="sc">%&gt;%</span> </span>
+<span id="cb1-11"><a href="#cb1-11"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(annee_pmsi <span class="sc">==</span> <span class="st">"2024"</span>, <span class="sc">!</span>gmt_8, <span class="sc">!</span>gmt_7, gme_niveau_severite <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>,<span class="st">"2"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-12"><a href="#cb1-12"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="at">gmt_2024 =</span> gmt,<span class="at">gme_2024 =</span> gme,<span class="at">dzf_2024 =</span> dzf,<span class="at">fzf_2024 =</span> fzf,<span class="at">gmt_type_zf_2024 =</span> gmt_type_zf)</span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a>same_dzf_fzf_zf <span class="ot">&lt;-</span> gme_public_2024 <span class="sc">%&gt;%</span> </span>
+<span id="cb1-15"><a href="#cb1-15"></a>    dplyr<span class="sc">::</span><span class="fu">left_join</span>(gme_public_2023, <span class="at">by =</span> <span class="fu">join_by</span>(gmt_2024 <span class="sc">==</span> gmt_2023,gme_2024 <span class="sc">==</span> gme_2023)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-16"><a href="#cb1-16"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">same_dzf =</span> dzf_2024 <span class="sc">==</span> dzf_2023, </span>
+<span id="cb1-17"><a href="#cb1-17"></a>                  <span class="at">same_fzf =</span> fzf_2024 <span class="sc">==</span> fzf_2023,</span>
+<span id="cb1-18"><a href="#cb1-18"></a>                  <span class="at">same_gmt_type_zf =</span> gmt_type_zf_2024 <span class="sc">==</span> gmt_type_zf_2023)</span>
+<span id="cb1-19"><a href="#cb1-19"></a>same_dzf_fzf_zf</span>
+<span id="cb1-20"><a href="#cb1-20"></a></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="co"># liste des (GMT,GME) avec évolution de la durée de ZF entre 2023 et 2024 </span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>same_dzf_fzf_zf <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span>same_gmt_type_zf)</span>
+<span id="cb1-23"><a href="#cb1-23"></a></span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="co"># liste des (GMT,GME) avec ZF d'une semaine en 2023 qui passent à une ZF de 3 semaines en 2024</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a>same_dzf_fzf_zf <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(gmt_type_zf_2023 <span class="sc">==</span> <span class="st">"zf_7"</span>, gmt_type_zf_2024 <span class="sc">==</span> <span class="st">"zf_21"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level2">
+<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Ligne 4 : voir <a href="https://www.lespmsi.com/referentiel-des-gme-2024-avec-la-serie-de-gmt-associes/" target="_blank">Documentation</a> avec une version csv téléchargeable du référentiel des GME-GMT 2024</p>
+<p>Ligne 8 : renommage des variables avec le suffixe <code>_2023</code>en prévision du calcul du tibble <code>same_dzf_fzf_zf</code> pour assurer la jointure</p>
+<p>Ligne 22 : <code>dplyr::filter(!same_gmt_type_zf)</code> est un raccourci pour <code>same_gmt_type_zf == FALSE</code></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
 </section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="SMR,CSARR,CSAR" data-listing-date-sort="1726178400000" data-listing-file-modified-sort="1726199890111" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="207">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/smr/script_smr_transcodage_csar/index.html" class="no-external"><b>Transcodage des actes CSARR en CSAR</b></a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/smr/script_smr_transcodage_csar/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SMR'); return false;">
-SMR
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('CSARR'); return false;">
-CSARR
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('CSAR'); return false;">
-CSAR
-</div>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/smr/script_smr_transcodage_csar/index.html" class="no-external">
-<div class="listing-date">
-vendredi 13 septembre 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="SMR,GME" data-listing-date-sort="1726092000000" data-listing-file-modified-sort="1726200693789" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="339">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/smr/script_smr_evolution_dzf_fzf_zf/index.html" class="no-external"><b>Comparaison DZF, FZF et ZF entre 2023 et 2024</b></a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/smr/script_smr_evolution_dzf_fzf_zf/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SMR'); return false;">
-SMR
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('GME'); return false;">
-GME
-</div>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/smr/script_smr_evolution_dzf_fzf_zf/index.html" class="no-external">
-<div class="listing-date">
-jeudi 12 septembre 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="SMR,CSARR,Casemix" data-listing-date-sort="1718056800000" data-listing-file-modified-sort="1726121153027" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="261">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/smr/script_smr_casemix_intervenant/index.html" class="no-external"><b>Casemix basique Intervenant CSARR</b></a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/smr/script_smr_casemix_intervenant/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SMR'); return false;">
-SMR
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('CSARR'); return false;">
-CSARR
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Casemix'); return false;">
-Casemix
-</div>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/smr/script_smr_casemix_intervenant/index.html" class="no-external">
-<div class="listing-date">
-mardi 11 juin 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="SMR,Dépendance" data-listing-date-sort="1717970400000" data-listing-file-modified-sort="1726117267366" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="245">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/smr/script_smr_sejour_hc_dependance_physique_maximale/index.html" class="no-external"><b>Dépendance physique maximale des séjours HC</b></a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/smr/script_smr_sejour_hc_dependance_physique_maximale/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SMR'); return false;">
-SMR
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Dépendance'); return false;">
-Dépendance
-</div>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/smr/script_smr_sejour_hc_dependance_physique_maximale/index.html" class="no-external">
-<div class="listing-date">
-lundi 10 juin 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="SMR,RHS" data-listing-date-sort="1717884000000" data-listing-file-modified-sort="1726116784507" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="157">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/smr/script_smr_rhs_cm08_no_acte_csarr/index.html" class="no-external"><b>RHS CM 08 d’au moins 5 JP avec 0 acte CSARR</b></a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/smr/script_smr_rhs_cm08_no_acte_csarr/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SMR'); return false;">
-SMR
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('RHS'); return false;">
-RHS
-</div>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/smr/script_smr_rhs_cm08_no_acte_csarr/index.html" class="no-external">
-<div class="listing-date">
-dimanche 9 juin 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="SMR,CSARR" data-listing-date-sort="1717797600000" data-listing-file-modified-sort="1726116557241" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="140">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/smr/script_smr_rapatriement_libelle_csarr/index.html" class="no-external"><b>Rapatriement libellé CSARR</b></a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/smr/script_smr_rapatriement_libelle_csarr/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SMR'); return false;">
-SMR
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('CSARR'); return false;">
-CSARR
-</div>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/smr/script_smr_rapatriement_libelle_csarr/index.html" class="no-external">
-<div class="listing-date">
-samedi 8 juin 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="SMR,RHS" data-listing-date-sort="1717711200000" data-listing-file-modified-sort="1726116317940" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="148">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/smr/script_smr_nombre_jp_rhs/index.html" class="no-external"><b>Nombre de JP par RHS</b></a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/smr/script_smr_nombre_jp_rhs/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('SMR'); return false;">
-SMR
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('RHS'); return false;">
-RHS
-</div>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/smr/script_smr_nombre_jp_rhs/index.html" class="no-external">
-<div class="listing-date">
-vendredi 7 juin 2024
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-Aucun article correspondant
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
