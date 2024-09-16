@@ -1,0 +1,52 @@
+---
+title: "<b>CMA SMR et CMA MCO communes</b>"
+date: "2024-09-16"
+categories: [SMR,MCO,CMA,CIM-10]
+page-layout: full
+---
+
+## Introduction  
+
+On se restreint à la campagne 2024 en SMR et en MCO.  
+
+Première analyse : pour chaque code CIM-10 CMA SMR 2024, on associe le niveau de sévérité CMA MCO 2024 du code CIM-10 si il existe.  
+
+Deuxième analyse : pour chaque code CIM-10 CMA MCO 2024, on associe une valeur logique `is_cma_smr` selon que ce code est CMA SMR 2024 ou pas.  
+
+On enrichit ces 2 listes avec le libellé CIM-10 de chaque CMA.  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+library(tidyr)
+library(refpmsi)
+
+cma_smr <- refpmsi::refpmsi(cma_smr,2024) %>% dplyr::select(cma_smr_code)
+cma_mco <- refpmsi::refpmsi(cma_mco,2024) %>% dplyr::select(cma_mco_code,cma_mco_severite)
+cim_libelle <- refpmsi::refpmsi(cim_libelle) %>% dplyr::select(cim_code,cim_libelle)
+
+cma_smr_and_mco <- cma_smr %>% 
+    dplyr::left_join(cma_mco, by = join_by(cma_smr_code == cma_mco_code)) %>% 
+    dplyr::left_join(cim_libelle, by = join_by(cma_smr_code == cim_code))
+cma_smr_and_mco
+
+cma_mco_and_smr <- cma_mco %>% 
+    dplyr::left_join(cma_smr %>% dplyr::mutate(is_cma_smr = TRUE), by = join_by(cma_mco_code == cma_smr_code)) %>% 
+    tidyr::replace_na(list(is_cma_smr = FALSE)) %>% 
+    dplyr::left_join(cim_libelle, by = join_by(cma_mco_code == cim_code))
+cma_mco_and_smr
+```
+
+## Commentaires  
+
+Ligne 5 : voir [Documentation](https://denisgustin.github.io/refpmsi/articles/cim.html#cma-smr){target="_blank"}  
+
+Ligne 6 : voir [Documentation](https://denisgustin.github.io/refpmsi/articles/cim.html#cma-mco){target="_blank"}  
+
+Ligne 7 : voir [Documentation](https://denisgustin.github.io/refpmsi/articles/cim.html#cim-libell%C3%A9){target="_blank"}  
+
+Ligne 16 : via `tidyr::replace_na()` on force les situations où `is_cma_smr` est NA suite à la ligne 15 à FALSE  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

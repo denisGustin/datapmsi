@@ -2,6 +2,9 @@
   {
     "listing": "/scripts_smr.html",
     "items": [
+      "/posts/smr/script_smr_cma_smr_cma_mco/index.html",
+      "/posts/smr/script_smr_transcodage_csar/index.html",
+      "/posts/smr/script_smr_evolution_dzf_fzf_zf/index.html",
       "/posts/smr/script_smr_casemix_intervenant/index.html",
       "/posts/smr/script_smr_sejour_hc_dependance_physique_maximale/index.html",
       "/posts/smr/script_smr_rhs_cm08_no_acte_csarr/index.html",
@@ -25,6 +28,9 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/smr/script_smr_cma_smr_cma_mco/index.html",
+      "/posts/smr/script_smr_transcodage_csar/index.html",
+      "/posts/smr/script_smr_evolution_dzf_fzf_zf/index.html",
       "/posts/mco/script_mco_reperage_accouchement/index.html",
       "/posts/mco/script_mco_sejours_raac/index.html",
       "/posts/psy/script_psy_nb_raa_idem_same_date/index.html",

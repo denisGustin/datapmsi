@@ -10,7 +10,185 @@
 <atom:link href="https://www.datapmsi.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Codes et formations R pour les PMSI MCO, SMR, PSY et HAD</description>
 <generator>quarto-1.4.551</generator>
-<lastBuildDate>Thu, 12 Sep 2024 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 15 Sep 2024 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>CMA SMR et CMA MCO communes</title>
+  <dc:creator>denis Gustin</dc:creator>
+  <link>https://www.datapmsi.com/posts/smr/script_smr_cma_smr_cma_mco/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>On se restreint à la campagne 2024 en SMR et en MCO.</p>
+<p>Première analyse : pour chaque code CIM-10 CMA SMR 2024, on associe le niveau de sévérité CMA MCO 2024 du code CIM-10 si il existe.</p>
+<p>Deuxième analyse : pour chaque code CIM-10 CMA MCO 2024, on associe une valeur logique <code>is_cma_smr</code> selon que ce code est CMA SMR 2024 ou pas.</p>
+<p>On enrichit ces 2 listes avec le libellé CIM-10 de chaque CMA.</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyr)</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(refpmsi)</span>
+<span id="cb1-4"></span>
+<span id="cb1-5">cma_smr <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> refpmsi<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">refpmsi</span>(cma_smr,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2024</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(cma_smr_code)</span>
+<span id="cb1-6">cma_mco <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> refpmsi<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">refpmsi</span>(cma_mco,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2024</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(cma_mco_code,cma_mco_severite)</span>
+<span id="cb1-7">cim_libelle <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> refpmsi<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">refpmsi</span>(cim_libelle) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(cim_code,cim_libelle)</span>
+<span id="cb1-8"></span>
+<span id="cb1-9">cma_smr_and_mco <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> cma_smr <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-10">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(cma_mco, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">join_by</span>(cma_smr_code <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> cma_mco_code)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-11">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(cim_libelle, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">join_by</span>(cma_smr_code <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> cim_code))</span>
+<span id="cb1-12">cma_smr_and_mco</span>
+<span id="cb1-13"></span>
+<span id="cb1-14">cma_mco_and_smr <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> cma_mco <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-15">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(cma_smr <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">is_cma_smr =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">join_by</span>(cma_mco_code <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> cma_smr_code)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-16">    tidyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">replace_na</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">is_cma_smr =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-17">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(cim_libelle, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">join_by</span>(cma_mco_code <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> cim_code))</span>
+<span id="cb1-18">cma_mco_and_smr</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level2">
+<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Ligne 5 : voir <a href="https://denisgustin.github.io/refpmsi/articles/cim.html#cma-smr" target="_blank">Documentation</a></p>
+<p>Ligne 6 : voir <a href="https://denisgustin.github.io/refpmsi/articles/cim.html#cma-mco" target="_blank">Documentation</a></p>
+<p>Ligne 7 : voir <a href="https://denisgustin.github.io/refpmsi/articles/cim.html#cim-libell%C3%A9" target="_blank">Documentation</a></p>
+<p>Ligne 16 : via <code>tidyr::replace_na()</code> on force les situations où <code>is_cma_smr</code> est NA suite à la ligne 15 à FALSE</p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>SMR</category>
+  <category>MCO</category>
+  <category>CMA</category>
+  <category>CIM-10</category>
+  <guid>https://www.datapmsi.com/posts/smr/script_smr_cma_smr_cma_mco/</guid>
+  <pubDate>Sun, 15 Sep 2024 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Transcodage des actes CSARR en CSAR</title>
   <dc:creator>denis Gustin</dc:creator>
@@ -2504,99 +2682,6 @@ font-style: inherit;">distinct</span>(nas,no_rss,date_entree_sejour,date_sortie_
  ]]></description>
   <category>MCO</category>
   <guid>https://www.datapmsi.com/posts/mco/script_mco_nb_jp_sejour/</guid>
-  <pubDate>Thu, 06 Jun 2024 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Rapatriement libellé CIM-10 du DP des RPS</title>
-  <dc:creator>denis Gustin</dc:creator>
-  <link>https://www.datapmsi.com/posts/psy/script_psy_rapatriement_libelle_dp_rps/</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Script très simple et très classique pour enrichir les données PMSI via le rapatriement des libellés, ici le libellé CIM-10 du DP de chaque RPS du jeu de données, à partir du référentiel <code>cim_libelle</code> <sup>1</sup></p>
-</section>
-<section id="code" class="level2">
-<h2 class="anchored" data-anchor-id="code">Code</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(dplyr)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(refpmsi)</span>
-<span id="cb1-3"></span>
-<span id="cb1-4">cim_libelle <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> refpmsi<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">refpmsi</span>(cim_libelle)</span>
-<span id="cb1-5"></span>
-<span id="cb1-6">rps_extended <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> psy_rps<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rps <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-7">    dplyr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">select</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">everything</span>()) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">left_join</span>(cim_libelle <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">select</span>(cim_code, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">dp_libelle =</span> cim_libelle), <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">join_by</span>(dp <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> cim_code))</span>
-<span id="cb1-9">rps_extended</span></code></pre></div>
-</div>
-</section>
-<section id="commentaires" class="level2">
-<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 6 : <code>psy_rps$rps</code> est un tibble des variables de la partie fixe des RPS</p>
-<p>Ligne 7 : <code>everything()</code> est pour <code>tidyselect::everything()</code> sachant que le package <code>tidyselect::</code> est chargé via le <code>dplyr</code>.<br>
-<code>everything()</code> dans le <code>dplyr::select()</code> est une façon de sélectionner toutes les variables natives du du tibble <code>psy_rps$rps</code>, donc toutes les variables de la partie fixe d’un fichier RPS, dont, en particulier, la variable dp</p>
-<p>Ligne 8 : on profite du <code>dplyr::select()</code> pour renommer <code>cim_libelle</code> en <code>dp_libelle</code> plus cohérent.<br>
-Le <code>dplyr::left_join()</code> ajoute <code>dp_libelle</code> en dernière position</p>
-<p>Dans tous les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_psy" target="_blank">PMSISoft PSY</a>, le libellé des codages CIM-10 est rapatrié par défaut.</p>
-<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
-
-
-</section>
-
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Notes de bas de page</h2>
-
-<ol>
-<li id="fn1"><p>documentation du référentiel <a href="https://denisgustin.github.io/refpmsi/articles/cim.html#cim-libell%C3%A9" target="_blank">cim_libelle</a>↩︎</p></li>
-</ol>
-</section></div> ]]></description>
-  <category>PSY</category>
-  <category>RPS</category>
-  <category>CIM</category>
-  <guid>https://www.datapmsi.com/posts/psy/script_psy_rapatriement_libelle_dp_rps/</guid>
   <pubDate>Thu, 06 Jun 2024 22:00:00 GMT</pubDate>
 </item>
 </channel>
