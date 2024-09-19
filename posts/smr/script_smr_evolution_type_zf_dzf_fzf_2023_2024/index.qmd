@@ -1,0 +1,70 @@
+---
+title: "<b>Evolution des types de ZF, DZF et FZF des GME</b>"
+date: "2024-09-18"
+categories: [SMR,GME]
+page-layout: full
+---
+
+## Introduction  
+
+On compare l'évolution des types de Zone Forfaitaire (ZF), des Débuts de Zone Forfaitaire (DZF) et des Fins de Zone Forfaitaire (FZF) des GME entre 2023 et 2024.  
+
+On se restreint au GME d'HC et aux seuls GME "pleins" (hors GMT en 8, en 7 ou d'EVC-EPR).  
+
+On se considère en ex-DAF. Pour réaliser les scripts en ex-OQN, il suffit d'appeler le référentiel `gme_prive`de refpmsi::   
+
+Le type de ZF a 3 modalités : zf_1 (ZF avec DZF = FZF), ZF_7 (les ZF d'une semaine) et ZF_21 (les ZF de 3 semaines)  
+
+Première analyse : comparaison pour chaque couple (GMT,GME) de l'évolution des types de ZF  
+
+Deuxième analyse : comparaison, pour chaque couple (GMT, GME) de l'évolution du DZF et de la FZF  
+
+Voir article ["Evolutions des types de ZF, DZF et FZF des GME entre 2023 et 2024"](https://www.lespmsi.com/evolutions-des-types-de-zf-dzf-et-fzf-des-gme-entre-2023-et-2024/){target="_blank"}  pour une analyse métier  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+library(tidyr)
+library(refpmsi)
+
+gme_hc_2024 <- refpmsi::refpmsi(gme_public,2024) %>% 
+    dplyr::filter(gme_niveau_severite %in% c("1","2"), !gmt_8, !gmt_7) %>% 
+    dplyr::select(gmt,gme,dzf,fzf,tzb,szb,tzf1,tzf2,tzf3,szh,gmt_type_zf,gme_libelle) %>% 
+    dplyr::rename_with(\(x) paste0(x,"_2024"))
+
+gme_hc_2023 <- refpmsi::refpmsi(gme_public,2023) %>% 
+    dplyr::filter(gme_niveau_severite %in% c("1","2"), !gmt_8, !(gme %in% c("0103SC1","0103SC2"))) %>% 
+    dplyr::select(gmt,gme,dzf,fzf,tzb,szb,tzf1,tzf2,tzf3,szh,gmt_type_zf) %>% 
+    dplyr::rename_with(\(x) paste0(x,"_2023"))
+
+gmt_type_zf_evolution <- gme_hc_2024 %>% 
+    dplyr::select(gmt_2024,gme_2024,gme_libelle_2024,gmt_type_zf_2024) %>% 
+    dplyr::left_join(gme_hc_2023 %>% dplyr::select(gmt_2023,gmt_type_zf_2023), by = join_by(gmt_2024 == gmt_2023))
+gmt_type_zf_evolution
+
+gmt_type_dzf_fzf_evolution <- gme_hc_2024 %>% 
+    dplyr::select(gmt_2024,gme_2024,gme_libelle_2024,gmt_type_zf_2024,dzf_2024,fzf_2024) %>% 
+    dplyr::left_join(gme_hc_2023 %>% dplyr::select(gmt_2023,gmt_type_zf_2023,dzf_2023,fzf_2023), by = join_by(gmt_2024 == gmt_2023)) %>% 
+    dplyr::mutate(same_type_zf = gmt_type_zf_2024 == gmt_type_zf_2023,
+                  same_dzf = dzf_2024 == dzf_2023,
+                  same_fzf = fzf_2024 == fzf_2023)
+gmt_type_dzf_fzf_evolution
+```
+
+## Commentaires  
+
+Ligne 6 : filtrage des GME d'HC via la sévérité, exclusion des GMT en 8 et exclusion des GMT en 7  
+
+Ligne 7 : la variable gmt_type_zf correspondant au type de ZF du couple (GMT,GME) est déjà calculé dans refpmsi::  
+
+Ligne 8 : on suffixe chaque variable par "_2024" pour préparer les jointures avec les GME 2023. On passe par la fonction `dplyr::rename_with()` pour ajouter automatiquement le suffixe à toutes les variables.  
+
+Lignes 10 à 13 : copier-coller du code pour l'année 2023. Exclusion des GME d'EVC-EPR qui n'ont plus de GMT en 2024 (cf nouveau modèle de financement 2024 du SMR)  
+
+Ligne 17 : la jointure sur les GMT est sans équivoque (clé unique)  
+
+Lignes 23 à 25 : on produit des variables logiques pour laisser l'utilisateur filtrer librement  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

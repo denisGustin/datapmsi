@@ -10,7 +10,244 @@
 <atom:link href="https://www.datapmsi.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Codes et formations R pour les PMSI MCO, SMR, PSY et HAD</description>
 <generator>quarto-1.4.551</generator>
-<lastBuildDate>Sun, 15 Sep 2024 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 17 Sep 2024 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Evolution des types de ZF, DZF et FZF des GME</title>
+  <dc:creator>denis Gustin</dc:creator>
+  <link>https://www.datapmsi.com/posts/smr/script_smr_evolution_type_zf_dzf_fzf_2023_2024/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>On compare l’évolution des types de Zone Forfaitaire (ZF), des Débuts de Zone Forfaitaire (DZF) et des Fins de Zone Forfaitaire (FZF) des GME entre 2023 et 2024.</p>
+<p>On se restreint au GME d’HC et aux seuls GME “pleins” (hors GMT en 8, en 7 ou d’EVC-EPR).</p>
+<p>On se considère en ex-DAF. Pour réaliser les scripts en ex-OQN, il suffit d’appeler le référentiel <code>gme_prive</code>de refpmsi::</p>
+<p>Le type de ZF a 3 modalités : zf_1 (ZF avec DZF = FZF), ZF_7 (les ZF d’une semaine) et ZF_21 (les ZF de 3 semaines)</p>
+<p>Première analyse : comparaison pour chaque couple (GMT,GME) de l’évolution des types de ZF</p>
+<p>Deuxième analyse : comparaison, pour chaque couple (GMT, GME) de l’évolution du DZF et de la FZF</p>
+<p>Voir article <a href="https://www.lespmsi.com/evolutions-des-types-de-zf-dzf-et-fzf-des-gme-entre-2023-et-2024/" target="_blank">“Evolutions des types de ZF, DZF et FZF des GME entre 2023 et 2024”</a> pour une analyse métier</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyr)</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(refpmsi)</span>
+<span id="cb1-4"></span>
+<span id="cb1-5">gme_hc_2024 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> refpmsi<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">refpmsi</span>(gme_public,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2024</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-6">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(gme_niveau_severite <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2"</span>), <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span>gmt_8, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span>gmt_7) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-7">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(gmt,gme,dzf,fzf,tzb,szb,tzf1,tzf2,tzf3,szh,gmt_type_zf,gme_libelle) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rename_with</span>(\(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(x,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_2024"</span>))</span>
+<span id="cb1-9"></span>
+<span id="cb1-10">gme_hc_2023 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> refpmsi<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">refpmsi</span>(gme_public,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2023</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-11">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(gme_niveau_severite <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2"</span>), <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span>gmt_8, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span>(gme <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"0103SC1"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"0103SC2"</span>))) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-12">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(gmt,gme,dzf,fzf,tzb,szb,tzf1,tzf2,tzf3,szh,gmt_type_zf) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-13">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rename_with</span>(\(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(x,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_2023"</span>))</span>
+<span id="cb1-14"></span>
+<span id="cb1-15">gmt_type_zf_evolution <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> gme_hc_2024 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-16">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(gmt_2024,gme_2024,gme_libelle_2024,gmt_type_zf_2024) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-17">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(gme_hc_2023 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(gmt_2023,gmt_type_zf_2023), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">join_by</span>(gmt_2024 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> gmt_2023))</span>
+<span id="cb1-18">gmt_type_zf_evolution</span>
+<span id="cb1-19"></span>
+<span id="cb1-20">gmt_type_dzf_fzf_evolution <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> gme_hc_2024 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-21">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(gmt_2024,gme_2024,gme_libelle_2024,gmt_type_zf_2024,dzf_2024,fzf_2024) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-22">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(gme_hc_2023 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(gmt_2023,gmt_type_zf_2023,dzf_2023,fzf_2023), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">join_by</span>(gmt_2024 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> gmt_2023)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> </span>
+<span id="cb1-23">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">same_type_zf =</span> gmt_type_zf_2024 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> gmt_type_zf_2023,</span>
+<span id="cb1-24">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">same_dzf =</span> dzf_2024 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> dzf_2023,</span>
+<span id="cb1-25">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">same_fzf =</span> fzf_2024 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> fzf_2023)</span>
+<span id="cb1-26">gmt_type_dzf_fzf_evolution</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level2">
+<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Ligne 6 : filtrage des GME d’HC via la sévérité, exclusion des GMT en 8 et exclusion des GMT en 7</p>
+<p>Ligne 7 : la variable gmt_type_zf correspondant au type de ZF du couple (GMT,GME) est déjà calculé dans refpmsi::</p>
+<p>Ligne 8 : on suffixe chaque variable par “_2024” pour préparer les jointures avec les GME 2023. On passe par la fonction <code>dplyr::rename_with()</code> pour ajouter automatiquement le suffixe à toutes les variables.</p>
+<p>Lignes 10 à 13 : copier-coller du code pour l’année 2023. Exclusion des GME d’EVC-EPR qui n’ont plus de GMT en 2024 (cf nouveau modèle de financement 2024 du SMR)</p>
+<p>Ligne 17 : la jointure sur les GMT est sans équivoque (clé unique)</p>
+<p>Lignes 23 à 25 : on produit des variables logiques pour laisser l’utilisateur filtrer librement</p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>SMR</category>
+  <category>GME</category>
+  <guid>https://www.datapmsi.com/posts/smr/script_smr_evolution_type_zf_dzf_fzf_2023_2024/</guid>
+  <pubDate>Tue, 17 Sep 2024 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>CMA SMR et CMA MCO communes</title>
   <dc:creator>denis Gustin</dc:creator>
@@ -2580,109 +2817,6 @@ font-style: inherit;">==</span> csarr_code))</span>
   <category>CSARR</category>
   <guid>https://www.datapmsi.com/posts/smr/script_smr_rapatriement_libelle_csarr/</guid>
   <pubDate>Fri, 07 Jun 2024 22:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Nombre de JP d’un séjour MCO</title>
-  <dc:creator>denis Gustin</dc:creator>
-  <link>https://www.datapmsi.com/posts/mco/script_mco_nb_jp_sejour/</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Après avoir calculé, par séjour, les variables <code>date_entree_sejour</code> et <code>date_sortie_sejour</code>, on calcule <code>nb_jp_sejour</code></p>
-<p>On en profite pour calculer aussi le nombre de RUM par séjour <code>nb_rum_sejour</code></p>
-</section>
-<section id="code" class="level2">
-<h2 class="anchored" data-anchor-id="code">Code</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(dplyr)</span>
-<span id="cb1-2"></span>
-<span id="cb1-3">sejour_extended <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> mco_rss<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>rum <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-4">    dplyr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">select</span>(nas,no_rss,no_rum,date_entree_um,date_sortie_um) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-5">    dplyr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">group_by</span>(no_rss) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-6">    dplyr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">date_entree_sejour =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">min</span>(date_entree_um), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">date_sortie_sejour =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">max</span>(date_sortie_um),</span>
-<span id="cb1-7">                  <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">nb_jp_sejour =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">as.integer</span>(date_sortie_sejour<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>date_entree_sejour),</span>
-<span id="cb1-8">                  <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">nb_rum_sejour =</span> dplyr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">n</span>()</span>
-<span id="cb1-9">                  ) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-10">    dplyr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ungroup</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> </span>
-<span id="cb1-11">    dplyr<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">distinct</span>(nas,no_rss,date_entree_sejour,date_sortie_sejour,nb_jp_sejour,nb_rum_sejour)</span>
-<span id="cb1-12">sejour_extended</span></code></pre></div>
-</div>
-</section>
-<section id="commentaires" class="level2">
-<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM</p>
-<p>Ligne 7 : on force en integer le calcul de la différence de dates qui, sinon, serait une différence en journées, peu pratique à manipuler</p>
-<p>Ligne 11 : le <code>dplyr::distinct()</code> permet de ne sélectionner que des séjours via une suite de variables liées aux seuls séjours</p>
-<p>Le calcul du nombre de JP ou de venues des RUM et des séjours ainsi que le calcul du nombre de RUM par séjour est disponible dans tous les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a></p>
-<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
-
-
-</section>
-
- ]]></description>
-  <category>MCO</category>
-  <guid>https://www.datapmsi.com/posts/mco/script_mco_nb_jp_sejour/</guid>
-  <pubDate>Thu, 06 Jun 2024 22:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
