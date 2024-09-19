@@ -264,7 +264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>On compare l’évolution des types de Zone Forfaitaire (ZF), des Débuts de Zone Forfaitaire (DZF) et des Fins de Zone Forfaitaire (FZF) des GME entre 2023 et 2024.</p>
 <p>On se restreint au GME d’HC et aux seuls GME “pleins” (hors GMT en 8, en 7 ou d’EVC-EPR).</p>
 <p>On se considère en ex-DAF. Pour réaliser les scripts en ex-OQN, il suffit d’appeler le référentiel <code>gme_prive</code>de refpmsi::</p>
-<p>Le type de ZF a 3 modalités : zf_1 (ZF avec DZF = FZF), ZF_7 (les ZF d’une semaine) et ZF_21 (les ZF de 3 semaines)</p>
+<p>Le type de ZF a 3 modalités : zf_1 (ZF avec DZF = FZF), zf_7 (les ZF d’une semaine) et zf_21 (les ZF de 3 semaines)</p>
 <p>Première analyse : comparaison pour chaque couple (GMT,GME) de l’évolution des types de ZF</p>
 <p>Deuxième analyse : comparaison, pour chaque couple (GMT, GME) de l’évolution du DZF et de la FZF</p>
 <p>Voir article <a href="https://www.lespmsi.com/evolutions-des-types-de-zf-dzf-et-fzf-des-gme-entre-2023-et-2024/" target="_blank">“Evolutions des types de ZF, DZF et FZF des GME entre 2023 et 2024”</a> pour une analyse métier</p>
@@ -273,41 +273,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="code">Code</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(refpmsi)</span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a>gme_hc_2024 <span class="ot">&lt;-</span> refpmsi<span class="sc">::</span><span class="fu">refpmsi</span>(gme_public,<span class="dv">2024</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-6"><a href="#cb1-6"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(gme_niveau_severite <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>,<span class="st">"2"</span>), <span class="sc">!</span>gmt_8, <span class="sc">!</span>gmt_7) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-7"><a href="#cb1-7"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(gmt,gme,dzf,fzf,tzb,szb,tzf1,tzf2,tzf3,szh,gmt_type_zf,gme_libelle) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-8"><a href="#cb1-8"></a>    dplyr<span class="sc">::</span><span class="fu">rename_with</span>(\(x) <span class="fu">paste0</span>(x,<span class="st">"_2024"</span>))</span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a>gme_hc_2023 <span class="ot">&lt;-</span> refpmsi<span class="sc">::</span><span class="fu">refpmsi</span>(gme_public,<span class="dv">2023</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-11"><a href="#cb1-11"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(gme_niveau_severite <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>,<span class="st">"2"</span>), <span class="sc">!</span>gmt_8, <span class="sc">!</span>(gme <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"0103SC1"</span>,<span class="st">"0103SC2"</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-12"><a href="#cb1-12"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(gmt,gme,dzf,fzf,tzb,szb,tzf1,tzf2,tzf3,szh,gmt_type_zf) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-13"><a href="#cb1-13"></a>    dplyr<span class="sc">::</span><span class="fu">rename_with</span>(\(x) <span class="fu">paste0</span>(x,<span class="st">"_2023"</span>))</span>
-<span id="cb1-14"><a href="#cb1-14"></a></span>
-<span id="cb1-15"><a href="#cb1-15"></a>gmt_type_zf_evolution <span class="ot">&lt;-</span> gme_hc_2024 <span class="sc">%&gt;%</span> </span>
-<span id="cb1-16"><a href="#cb1-16"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(gmt_2024,gme_2024,gme_libelle_2024,gmt_type_zf_2024) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-17"><a href="#cb1-17"></a>    dplyr<span class="sc">::</span><span class="fu">left_join</span>(gme_hc_2023 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(gmt_2023,gmt_type_zf_2023), <span class="at">by =</span> <span class="fu">join_by</span>(gmt_2024 <span class="sc">==</span> gmt_2023))</span>
-<span id="cb1-18"><a href="#cb1-18"></a>gmt_type_zf_evolution</span>
-<span id="cb1-19"><a href="#cb1-19"></a></span>
-<span id="cb1-20"><a href="#cb1-20"></a>gmt_type_dzf_fzf_evolution <span class="ot">&lt;-</span> gme_hc_2024 <span class="sc">%&gt;%</span> </span>
-<span id="cb1-21"><a href="#cb1-21"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(gmt_2024,gme_2024,gme_libelle_2024,gmt_type_zf_2024,dzf_2024,fzf_2024) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-22"><a href="#cb1-22"></a>    dplyr<span class="sc">::</span><span class="fu">left_join</span>(gme_hc_2023 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(gmt_2023,gmt_type_zf_2023,dzf_2023,fzf_2023), <span class="at">by =</span> <span class="fu">join_by</span>(gmt_2024 <span class="sc">==</span> gmt_2023)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-23"><a href="#cb1-23"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">same_type_zf =</span> gmt_type_zf_2024 <span class="sc">==</span> gmt_type_zf_2023,</span>
-<span id="cb1-24"><a href="#cb1-24"></a>                  <span class="at">same_dzf =</span> dzf_2024 <span class="sc">==</span> dzf_2023,</span>
-<span id="cb1-25"><a href="#cb1-25"></a>                  <span class="at">same_fzf =</span> fzf_2024 <span class="sc">==</span> fzf_2023)</span>
-<span id="cb1-26"><a href="#cb1-26"></a>gmt_type_dzf_fzf_evolution</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(refpmsi)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>gme_hc_2024 <span class="ot">&lt;-</span> refpmsi<span class="sc">::</span><span class="fu">refpmsi</span>(gme_public,<span class="dv">2024</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-5"><a href="#cb1-5"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(gme_niveau_severite <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>,<span class="st">"2"</span>), <span class="sc">!</span>gmt_8, <span class="sc">!</span>gmt_7) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-6"><a href="#cb1-6"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(gmt,gme,dzf,fzf,tzb,szb,tzf1,tzf2,tzf3,szh,gmt_type_zf,gme_libelle) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-7"><a href="#cb1-7"></a>    dplyr<span class="sc">::</span><span class="fu">rename_with</span>(\(x) <span class="fu">paste0</span>(x,<span class="st">"_2024"</span>))</span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a>gme_hc_2023 <span class="ot">&lt;-</span> refpmsi<span class="sc">::</span><span class="fu">refpmsi</span>(gme_public,<span class="dv">2023</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-10"><a href="#cb1-10"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(gme_niveau_severite <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>,<span class="st">"2"</span>), <span class="sc">!</span>gmt_8, <span class="sc">!</span>(gme <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"0103SC1"</span>,<span class="st">"0103SC2"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-11"><a href="#cb1-11"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(gmt,gme,dzf,fzf,tzb,szb,tzf1,tzf2,tzf3,szh,gmt_type_zf) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-12"><a href="#cb1-12"></a>    dplyr<span class="sc">::</span><span class="fu">rename_with</span>(\(x) <span class="fu">paste0</span>(x,<span class="st">"_2023"</span>))</span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a>gmt_type_zf_evolution <span class="ot">&lt;-</span> gme_hc_2024 <span class="sc">%&gt;%</span> </span>
+<span id="cb1-15"><a href="#cb1-15"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(gmt_2024,gme_2024,gme_libelle_2024,gmt_type_zf_2024) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-16"><a href="#cb1-16"></a>    dplyr<span class="sc">::</span><span class="fu">left_join</span>(gme_hc_2023 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(gmt_2023,gmt_type_zf_2023), <span class="at">by =</span> <span class="fu">join_by</span>(gmt_2024 <span class="sc">==</span> gmt_2023))</span>
+<span id="cb1-17"><a href="#cb1-17"></a>gmt_type_zf_evolution</span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a>gmt_type_dzf_fzf_evolution <span class="ot">&lt;-</span> gme_hc_2024 <span class="sc">%&gt;%</span> </span>
+<span id="cb1-20"><a href="#cb1-20"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(gmt_2024,gme_2024,gme_libelle_2024,gmt_type_zf_2024,dzf_2024,fzf_2024) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-21"><a href="#cb1-21"></a>    dplyr<span class="sc">::</span><span class="fu">left_join</span>(gme_hc_2023 <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(gmt_2023,gmt_type_zf_2023,dzf_2023,fzf_2023), <span class="at">by =</span> <span class="fu">join_by</span>(gmt_2024 <span class="sc">==</span> gmt_2023)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-22"><a href="#cb1-22"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">same_type_zf =</span> gmt_type_zf_2024 <span class="sc">==</span> gmt_type_zf_2023,</span>
+<span id="cb1-23"><a href="#cb1-23"></a>                  <span class="at">same_dzf =</span> dzf_2024 <span class="sc">==</span> dzf_2023,</span>
+<span id="cb1-24"><a href="#cb1-24"></a>                  <span class="at">same_fzf =</span> fzf_2024 <span class="sc">==</span> fzf_2023)</span>
+<span id="cb1-25"><a href="#cb1-25"></a>gmt_type_dzf_fzf_evolution</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 6 : filtrage des GME d’HC via la sévérité, exclusion des GMT en 8 et exclusion des GMT en 7</p>
-<p>Ligne 7 : la variable gmt_type_zf correspondant au type de ZF du couple (GMT,GME) est déjà calculé dans refpmsi::</p>
-<p>Ligne 8 : on suffixe chaque variable par “_2024” pour préparer les jointures avec les GME 2023. On passe par la fonction <code>dplyr::rename_with()</code> pour ajouter automatiquement le suffixe à toutes les variables.</p>
-<p>Lignes 10 à 13 : copier-coller du code pour l’année 2023. Exclusion des GME d’EVC-EPR qui n’ont plus de GMT en 2024 (cf nouveau modèle de financement 2024 du SMR)</p>
-<p>Ligne 17 : la jointure sur les GMT est sans équivoque (clé unique)</p>
-<p>Lignes 23 à 25 : on produit des variables logiques pour laisser l’utilisateur filtrer librement</p>
+<p>Ligne 5 : filtrage des GME d’HC via la sévérité, exclusion des GMT en 8 et exclusion des GMT en 7</p>
+<p>Ligne 6 : la variable gmt_type_zf correspondant au type de ZF du couple (GMT,GME) est déjà calculé dans refpmsi::</p>
+<p>Ligne 7 : on suffixe chaque variable par “_2024” pour préparer les jointures avec les GME 2023. On passe par la fonction <code>dplyr::rename_with()</code> pour ajouter automatiquement le suffixe à toutes les variables.</p>
+<p>Lignes 9 à 12 : copier-coller du code pour l’année 2023. Exclusion des GME d’EVC-EPR qui n’ont plus de GMT en 2024 (cf nouveau modèle de financement 2024 du SMR)</p>
+<p>Ligne 16 : la jointure sur les GMT est sans équivoque (clé unique)</p>
+<p>Lignes 22 à 24 : on produit des variables logiques pour laisser l’utilisateur filtrer librement</p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 

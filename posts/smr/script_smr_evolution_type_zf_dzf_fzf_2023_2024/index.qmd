@@ -13,7 +13,7 @@ On se restreint au GME d'HC et aux seuls GME "pleins" (hors GMT en 8, en 7 ou d'
 
 On se considère en ex-DAF. Pour réaliser les scripts en ex-OQN, il suffit d'appeler le référentiel `gme_prive`de refpmsi::   
 
-Le type de ZF a 3 modalités : zf_1 (ZF avec DZF = FZF), ZF_7 (les ZF d'une semaine) et ZF_21 (les ZF de 3 semaines)  
+Le type de ZF a 3 modalités : zf_1 (ZF avec DZF = FZF), zf_7 (les ZF d'une semaine) et zf_21 (les ZF de 3 semaines)  
 
 Première analyse : comparaison pour chaque couple (GMT,GME) de l'évolution des types de ZF  
 
@@ -26,7 +26,6 @@ Voir article ["Evolutions des types de ZF, DZF et FZF des GME entre 2023 et 2024
 ```{r}
 #| label: code
 library(dplyr)
-library(tidyr)
 library(refpmsi)
 
 gme_hc_2024 <- refpmsi::refpmsi(gme_public,2024) %>% 
@@ -55,16 +54,16 @@ gmt_type_dzf_fzf_evolution
 
 ## Commentaires  
 
-Ligne 6 : filtrage des GME d'HC via la sévérité, exclusion des GMT en 8 et exclusion des GMT en 7  
+Ligne 5 : filtrage des GME d'HC via la sévérité, exclusion des GMT en 8 et exclusion des GMT en 7  
 
-Ligne 7 : la variable gmt_type_zf correspondant au type de ZF du couple (GMT,GME) est déjà calculé dans refpmsi::  
+Ligne 6 : la variable gmt_type_zf correspondant au type de ZF du couple (GMT,GME) est déjà calculé dans refpmsi::  
 
-Ligne 8 : on suffixe chaque variable par "_2024" pour préparer les jointures avec les GME 2023. On passe par la fonction `dplyr::rename_with()` pour ajouter automatiquement le suffixe à toutes les variables.  
+Ligne 7 : on suffixe chaque variable par "_2024" pour préparer les jointures avec les GME 2023. On passe par la fonction `dplyr::rename_with()` pour ajouter automatiquement le suffixe à toutes les variables.  
 
-Lignes 10 à 13 : copier-coller du code pour l'année 2023. Exclusion des GME d'EVC-EPR qui n'ont plus de GMT en 2024 (cf nouveau modèle de financement 2024 du SMR)  
+Lignes 9 à 12 : copier-coller du code pour l'année 2023. Exclusion des GME d'EVC-EPR qui n'ont plus de GMT en 2024 (cf nouveau modèle de financement 2024 du SMR)  
 
-Ligne 17 : la jointure sur les GMT est sans équivoque (clé unique)  
+Ligne 16 : la jointure sur les GMT est sans équivoque (clé unique)  
 
-Lignes 23 à 25 : on produit des variables logiques pour laisser l'utilisateur filtrer librement  
+Lignes 22 à 24 : on produit des variables logiques pour laisser l'utilisateur filtrer librement  
 
 [Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  
