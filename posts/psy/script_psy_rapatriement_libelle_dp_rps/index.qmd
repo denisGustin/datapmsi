@@ -1,7 +1,7 @@
 ---
 title: "<b>Rapatriement libellé CIM-10 du DP des RPS</b>"
 date: "2024-06-07"
-categories: [PSY,RPS,CIM]
+categories: [PSY,RPS,CIM-10]
 page-layout: full
 ---
 

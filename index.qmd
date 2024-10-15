@@ -16,10 +16,14 @@ title-block-banner: false
 toc: false
 ---
 
-::: {.callout-important}
-## Live coding PMSI R  
-Session à l'heure pour vous accompagner dans le codage de vos scripts PMSI R.  
-[Principes, exemples de sujets, mise en oeuvre, l'expert, tarif et réservation](prestation.qmd)
+::: {.callout-tip}
+## Formation "Fichiers PMSI en dataframe R"  
+
+Produire des dataframe à partir des fichiers du PMSI pour analyser, en toute autonomie, le PMSI de mes établissements avec R  
+
+**Vendredi 6 décembre 2024 de 9h à 12h30**  
+
+[Programme, méthodologie, tarif et pré-inscription](formation.qmd)  
 :::
 
 [Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

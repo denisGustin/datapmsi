@@ -47,7 +47,7 @@ casemix_ghm_ipdms %>% View
 
 ## Commentaires  
 
-Ligne 6 : `mco_rss$rum` est un tibble des variables de la partie fixe des RUM  
+Ligne 6 : `mco_rss$rum` est un tibble des variables de la partie fixe des RUM. Voir [Guide des scripts - Jeux de données](http://localhost:3479/guide_post.html#via-pmsisoft-standard)  
 
 Ligne 11 : on passe d'un tibble de RUM à un tibble de séjours via le `dplyr::distinct()` de variables liées au séjour  
 

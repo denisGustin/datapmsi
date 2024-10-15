@@ -3,6 +3,11 @@ title: "<span style='font-family: Boska; font-size: 2.75rem; font-weight: 800;'>
 lang: fr
 ---
 
+::: {.callout-important}
+## Live coding PMSI R  
+**Session à l'heure** pour vous accompagner dans le codage de vos scripts PMSI R.  
+:::
+
 ## Principes du Live coding PMSI R  
 
 Le live coding consiste, pour un specialiste (ingénieur, data analyst, médecin DIM), à écrire et/ou commenter en direct du code PMSI R dans l'environnement de développement R de son interlocuteur. 

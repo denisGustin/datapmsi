@@ -37,7 +37,7 @@ total_supplements_rea_t2a
 
 ## Commentaires  
 
-Ligne 6 : `mco_rsa$rsa` est un tibble des variables de la partie fixe des RSA  
+Ligne 6 : `mco_rsa$rsa` est un tibble des variables de la partie fixe des RSA. Voir [Guide des scripts - Jeux de données](http://localhost:3479/guide_post.html#via-pmsisoft-standard)  
 
 Ligne 8 : calcul de la variable `annee_pmsi_sejour` à partir des 2 variables `mois_sortie_sejour` et `annee_sortie_sejour` (variables natives `rsa`)  
 

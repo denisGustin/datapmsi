@@ -31,7 +31,7 @@ sejour_niveau_3_4
 
 ### Commentaires  
 
-Ligne 3 : `mco_rss$rum` est un tibble des variables de la partie fixe des RUM  
+Ligne 3 : `mco_rss$rum` est un tibble des variables de la partie fixe des RUM. Voir [Guide des scripts - Jeux de données](http://localhost:3479/guide_post.html#via-pmsisoft-standard)  
 
 Ligne 5 : `stringr::str_sub(ghm, start = 6, end = 6)` isole la complexite du GHM
 
@@ -62,7 +62,7 @@ codage_das_9
 
 ### Commentaires  
 
-Ligne 3 : `mco_rss$das` est un tibble des variables `das` associées aux RUM  
+Ligne 3 : `mco_rss$das` est un tibble des variables `das` associées aux RUM. Voir [Guide des scripts - Jeux de données](http://localhost:3479/guide_post.html#via-pmsisoft-standard)  
 
 Ligne 5 : le repérage des codes CIM-10 recherchés se fait via le regex très simple `9$` qui signifie "un 9 en dernière position"  
 
@@ -87,7 +87,7 @@ rum_extended
 
 ### Commentaires  
 
-Ligne 3 : `mco_rss$rum` est un tibble des variables de la partie fixe des RUM  
+Ligne 3 : `mco_rss$rum` est un tibble des variables de la partie fixe des RUM. Voir [Guide des scripts - Jeux de données](http://localhost:3479/guide_post.html#via-pmsisoft-standard)  
 
 Ligne 6 : `mois_sortie_um_lable`est une alternative au code la ligne 5 permettant d'obtenir directement le mois de sortie de l'UM avec son intitulé en français (ex : "janvier")  
 

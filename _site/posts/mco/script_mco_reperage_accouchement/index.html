@@ -284,8 +284,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 4 : on se restreint ici à la seule année 2024, car la liste des actes CCAM d’accouchement ne change pas depuis au moins 2020</p>
-<p>Ligne 8 : <code>mco_rss$ccam</code> est un tibble des variables CCAM liées aux RUM</p>
+<p>Ligne 4 : on récupère le référentiel <code>ovalide_ccaminfo</code> via le package <code>refpmsi::</code> et on se restreint à la seule année 2024, car la liste des actes CCAM d’accouchement ne change pas depuis au moins 2020</p>
+<p>Ligne 6 : production du vecteur des actes CCAM d’accouchement</p>
+<p>Ligne 8 : <code>mco_rss$ccam</code> est un tibble des variables CCAM liées aux RUM. Voir <a href="http://localhost:3479/guide_post.html#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
 <p>Ligne 11 : raccourci pour <code>dplyr::filter(is_accouchement == TRUE)</code></p>
 <p>Cette requête est réalisable dans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a> dans l’écran <code>CCAM &gt; Base des actes CCAM</code> via le filtrage de variables <code>code_ccam Contient codes des actes d'accoucheemnt</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>

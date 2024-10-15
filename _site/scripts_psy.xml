@@ -676,7 +676,7 @@ Le <code>dplyr::left_join()</code> ajoute <code>dp_libelle</code> en dernière p
 </section></div> ]]></description>
   <category>PSY</category>
   <category>RPS</category>
-  <category>CIM</category>
+  <category>CIM-10</category>
   <guid>https://www.datapmsi.com/posts/psy/script_psy_rapatriement_libelle_dp_rps/</guid>
   <pubDate>Thu, 06 Jun 2024 22:00:00 GMT</pubDate>
 </item>

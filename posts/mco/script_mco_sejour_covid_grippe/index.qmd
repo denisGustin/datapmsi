@@ -1,0 +1,50 @@
+---
+title: "<b>Identification et comptage des séjours COVID-19 et grippe</b>"
+date: "2024-10-13"
+categories: [MCO,CIM-10]
+page-layout: full
+---
+
+## Introduction  
+
+On renvoie à l'article ["Hospitalisation et codage COVID-19 et grippe entre 2018 et 2022"](https://www.lespmsi.com/hospitalisation-et-codage-covid-19-et-grippe-entre-2018-et-2022/){target="_blank"} pour les enjeux et les codes d'identification des séjours COVID-19 et grippe via la CIM-10.  
+
+Ce script identifie les séjours COVID-19 et les séjours grippe, puis calcule leur nombre respectif et le ratio `nb_sejour_covid/nb_sejour_grippe`  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+
+sejours_covid_grippe <- mco_rss$rum %>% 
+    dplyr::select(no_rss,nas,dp_rum,dr_rum) %>% 
+    dplyr::mutate(across(c(dp_rum,dr_rum), ~ stringr::str_sub(.x,1,3), .names = "{col}_groupe"),
+                  across(c(dp_rum,dr_rum), ~ stringr::str_sub(.x,1,4), .names = "{col}_sous_groupe"),
+                  .keep = "unused") %>% 
+    dplyr::summarise(.by = no_rss,
+                     sejour_grippe = any(dp_rum_groupe %in% c("J09","J10","J11")|dr_rum_groupe %in% c("J09","J10","J11")),
+                     sejour_covid = any(dp_rum_sous_groupe %in% c("U071","U072")|dr_rum_sous_groupe %in% c("U071","U072"))) %>% 
+    dplyr::summarise(nb_sejour_covid = sum(sejour_covid, na.rm = TRUE),
+                     nb_sejour_grippe = sum(sejour_grippe, na.rm = TRUE)) %>% 
+    dplyr::mutate(ratio_sejour_covid_grippe = ifelse(nb_sejour_grippe != 0,nb_sejour_covid/nb_sejour_grippe,NA))
+sejours_covid_grippe
+```
+
+## Commentaires  
+
+Ligne 3 : `mco_rss$rum` est un tibble des variables de la partie fixe des RUM. Voir [Guide des scripts - Jeux de données](http://localhost:3479/guide_post.html#via-pmsisoft-standard)  
+
+Ligne 4 : les utilisateurs de l'accès PMSISoft Professionnel peuvent remplacer les 2 variables `dp_rum` et `dr_rum`par les variables `dp_sejour` et `dr_sejour` pour identifier les séjours aux niveaux des DP et DR séjour  
+
+Ligne 5 : calcul des variables `dp_rum_groupe`et `dr_rum_groupe` pour préparer l'identification des séjours grippe  
+
+Ligne 6 : calcul des variables `dp_rum_sous_groupe`et `dr_rum_sous_groupe` pour préparer l'identification des séjours COVID-19  
+
+Ligne 7 : on décide de ne pas garder les variables natives `dp_rum`et `dr_rum`  
+
+Ligne 9 : identification d'une séjours grippe via une variable logique `sejour_grippe` qui vaut `TRUE`si, par séjour, au moins un `dp_rum_groupe` des RUM du séjour, a la valeur "J09","J10","J11" ou si au moins un `dr_rum_groupe` des RUM du séjour a la valeur "J09","J10","J11"  
+
+Ligne 13 : gestion de la situation extrême où nb_sejour_grippe == 0  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

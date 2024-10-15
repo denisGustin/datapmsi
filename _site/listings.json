@@ -2,6 +2,7 @@
   {
     "listing": "/scripts_smr.html",
     "items": [
+      "/posts/smr/script_smr_evolution_type_zf_dzf_fzf_2023_2024/index.html",
       "/posts/smr/script_smr_cma_smr_cma_mco/index.html",
       "/posts/smr/script_smr_transcodage_csar/index.html",
       "/posts/smr/script_smr_evolution_dzf_fzf_zf/index.html",
@@ -15,6 +16,7 @@
   {
     "listing": "/scripts_mco.html",
     "items": [
+      "/posts/mco/script_mco_sejour_covid_grippe/index.html",
       "/posts/mco/script_mco_reperage_accouchement/index.html",
       "/posts/mco/script_mco_sejours_raac/index.html",
       "/posts/mco/script_mco_extraction_string/index.html",
@@ -28,6 +30,8 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/mco/script_mco_sejour_covid_grippe/index.html",
+      "/posts/smr/script_smr_evolution_type_zf_dzf_fzf_2023_2024/index.html",
       "/posts/smr/script_smr_cma_smr_cma_mco/index.html",
       "/posts/smr/script_smr_transcodage_csar/index.html",
       "/posts/smr/script_smr_evolution_dzf_fzf_zf/index.html",

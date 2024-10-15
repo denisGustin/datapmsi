@@ -212,7 +212,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#principes-généraux-des-scripts-pmsi-r" id="toc-principes-généraux-des-scripts-pmsi-r" class="nav-link active" data-scroll-target="#principes-généraux-des-scripts-pmsi-r">Principes généraux des scripts PMSI R</a></li>
   <li><a href="#pré-requis" id="toc-pré-requis" class="nav-link" data-scroll-target="#pré-requis">Pré-requis</a></li>
-  <li><a href="#jeux-de-données" id="toc-jeux-de-données" class="nav-link" data-scroll-target="#jeux-de-données">Jeux de données</a></li>
+  <li><a href="#jeux-de-données" id="toc-jeux-de-données" class="nav-link" data-scroll-target="#jeux-de-données">Jeux de données</a>
+  <ul class="collapse">
+  <li><a href="#via-pmsisoft-standard" id="toc-via-pmsisoft-standard" class="nav-link" data-scroll-target="#via-pmsisoft-standard">Via PMSISoft Standard</a></li>
+  <li><a href="#via-fichiers-pmsi" id="toc-via-fichiers-pmsi" class="nav-link" data-scroll-target="#via-fichiers-pmsi">Via fichiers PMSI</a></li>
+  </ul></li>
   <li><a href="#packages-r" id="toc-packages-r" class="nav-link" data-scroll-target="#packages-r">Packages R</a></li>
   <li><a href="#licence" id="toc-licence" class="nav-link" data-scroll-target="#licence">Licence</a></li>
   <li><a href="#avertissement" id="toc-avertissement" class="nav-link" data-scroll-target="#avertissement">Avertissement</a></li>
@@ -275,7 +279,8 @@ Voir notre <a href="./base_R.html">article “Pré-requis R”</a> pour plus de 
 <p>Ce jeu de données est un tibble<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p>Chaque variable de ces jeux de données est supposée nettoyée<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> et normalisée.</p>
 <p>2 manières pour disposer de ce jeu de données.</p>
-<p><strong>1ere manière</strong></p>
+<section id="via-pmsisoft-standard" class="level3">
+<h3 class="anchored" data-anchor-id="via-pmsisoft-standard">Via PMSISoft Standard</h3>
 <p>Télécharger, en tant qu’administrateur d’un accès Standard PMSISoft<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, la liste des tibbles du champ PMSI qui vous intéresse.<br>
 Ces listes sont des objets <code>list</code> enregistrés dans un fichier .rds</p>
 <p><strong>L’accès Standard PMSISoft est gratuit, sans limite de temps, ouvert à la demande de tout établissement qui nous en fait la demande.</strong></p>
@@ -308,7 +313,9 @@ Ces listes sont des objets <code>list</code> enregistrés dans un fichier .rds</
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="do">## on récupère la liste des tibbles liés aux RAA via</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>psy_raa <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/psy_raa_AAAA-MM-JJ.rds"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>2eme manière</strong></p>
+</section>
+<section id="via-fichiers-pmsi" class="level3">
+<h3 class="anchored" data-anchor-id="via-fichiers-pmsi">Via fichiers PMSI</h3>
 <p>Produire le tibble à partir du fichier concerné du .in ou du .out ou via un export à partir du SI de votre établissement.<br>
 <strong>Important : </strong> dans <em>chaque script</em>, en 2ème ligne d’instruction du script, nous codons un <code>dplyr::select()</code> qui sélectionne les variables du jeu dont on va se servir.</p>
 <p>Cette sélection permet de vous “raccrocher” au script, indépendamment du nommage de votre jeu de données, car le libellé des variables utilisées est normalisé et la correspondance avec les intitulés des variables des formats de fichiers officiels est évidente.</p>
@@ -329,6 +336,7 @@ Ces listes sont des objets <code>list</code> enregistrés dans un fichier .rds</
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="do">## etc...</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>On se base par défaut sur la dernière version des formats PMSI.</p>
+</section>
 </section>
 <section id="packages-r" class="level2">
 <h2 class="anchored" data-anchor-id="packages-r">Packages R</h2>

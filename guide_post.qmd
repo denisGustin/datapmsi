@@ -51,7 +51,7 @@ Chaque variable de ces jeux de données est supposée nettoyée[^2] et normalis�
 
 2 manières pour disposer de ce jeu de données.  
 
-**1ere manière**  
+### Via PMSISoft Standard  
 
 Télécharger, en tant qu'administrateur d'un accès Standard PMSISoft[^3], la liste des tibbles du champ PMSI qui vous intéresse.  
 Ces listes sont des objets `list` enregistrés dans un fichier .rds  
@@ -93,7 +93,7 @@ psy_raa <- readRDS("data/psy_raa_AAAA-MM-JJ.rds")
 
 ```
 
-**2eme manière**  
+### Via fichiers PMSI  
 
 Produire le tibble à partir du fichier concerné du .in ou du .out ou via un export à partir du SI de votre établissement.  
 **Important : **  dans _chaque script_, en 2ème ligne d'instruction du script, nous codons un `dplyr::select()` qui sélectionne les variables du jeu dont on va se servir.  

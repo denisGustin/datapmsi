@@ -8,6 +8,8 @@ website:
   navbar:
     background: "#447099"
     left: 
+      - href: formation.qmd
+        text: "Formations PMSI R"
       - href: prestation.qmd
         text: "Live coding PMSI R"
       - href: guide_post.qmd
@@ -24,6 +26,8 @@ website:
   sidebar: 
     style: docked
     contents: 
+      - href: formation.qmd
+        text: "Formations PMSI R"
       - href: prestation.qmd
         text: "Live coding PMSI R"
       - href: guide_post.qmd

@@ -32,9 +32,11 @@ rum_accouchement
 
 ## Commentaires  
 
-Ligne 4 : on se restreint ici à la seule année 2024, car la liste des actes CCAM d'accouchement ne change pas depuis au moins 2020  
+Ligne 4 : on récupère le référentiel `ovalide_ccaminfo` via le package `refpmsi::` et on se restreint à la seule année 2024, car la liste des actes CCAM d'accouchement ne change pas depuis au moins 2020  
 
-Ligne 8 : `mco_rss$ccam` est un tibble des variables CCAM liées aux RUM  
+Ligne 6 : production du vecteur des actes CCAM d'accouchement  
+
+Ligne 8 : `mco_rss$ccam` est un tibble des variables CCAM liées aux RUM. Voir [Guide des scripts - Jeux de données](http://localhost:3479/guide_post.html#via-pmsisoft-standard)  
 
 Ligne 11 : raccourci pour `dplyr::filter(is_accouchement == TRUE)`  
 

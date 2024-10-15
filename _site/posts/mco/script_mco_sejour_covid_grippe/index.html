@@ -8,7 +8,7 @@
 
 <meta name="author" content="denis Gustin">
 
-<title>Data PMSI - Nombre de JP d’un séjour MCO</title>
+<title>Data PMSI - Identification et comptage des séjours COVID-19 et grippe</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -123,7 +123,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../../../prestation.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../formation.html" aria-current="page"> 
+<span class="menu-text">Formations PMSI R</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../prestation.html"> 
 <span class="menu-text">Live coding PMSI R</span></a>
   </li>  
   <li class="nav-item">
@@ -163,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><b>Nombre de JP d’un séjour MCO</b></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><b>Identification et comptage des séjours COVID-19 et grippe</b></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -175,6 +179,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../formation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Formations PMSI R</span></a>
+  </div>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../prestation.html" class="sidebar-item-text sidebar-link">
@@ -226,9 +236,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><b>Nombre de JP d’un séjour MCO</b></h1>
+<h1 class="title"><b>Identification et comptage des séjours COVID-19 et grippe</b></h1>
   <div class="quarto-categories">
     <div class="quarto-category">MCO</div>
+    <div class="quarto-category">CIM-10</div>
   </div>
   </div>
 
@@ -246,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Date de publication</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">7 juin 2024</p>
+      <p class="date">13 octobre 2024</p>
     </div>
   </div>
   
@@ -260,32 +271,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Après avoir calculé, par séjour, les variables <code>date_entree_sejour</code> et <code>date_sortie_sejour</code>, on calcule <code>nb_jp_sejour</code></p>
-<p>On en profite pour calculer aussi le nombre de RUM par séjour <code>nb_rum_sejour</code></p>
+<p>On renvoie à l’article <a href="https://www.lespmsi.com/hospitalisation-et-codage-covid-19-et-grippe-entre-2018-et-2022/" target="_blank">“Hospitalisation et codage COVID-19 et grippe entre 2018 et 2022”</a> pour les enjeux et les codes d’identification des séjours COVID-19 et grippe via la CIM-10.</p>
+<p>Ce script identifie les séjours COVID-19 et les séjours grippe, puis calcule leur nombre respectif et le ratio nb_sejours_covid/nb_sejours_grippe</p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>sejour_extended <span class="ot">&lt;-</span> mco_rss<span class="sc">$</span>rum <span class="sc">%&gt;%</span> </span>
-<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(nas,no_rss,no_rum,date_entree_um,date_sortie_um) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-5"><a href="#cb1-5"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(no_rss) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-6"><a href="#cb1-6"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">date_entree_sejour =</span> <span class="fu">min</span>(date_entree_um), <span class="at">date_sortie_sejour =</span> <span class="fu">max</span>(date_sortie_um),</span>
-<span id="cb1-7"><a href="#cb1-7"></a>                  <span class="at">nb_jp_sejour =</span> <span class="fu">as.integer</span>(date_sortie_sejour<span class="sc">-</span>date_entree_sejour),</span>
-<span id="cb1-8"><a href="#cb1-8"></a>                  <span class="at">nb_rum_sejour =</span> dplyr<span class="sc">::</span><span class="fu">n</span>()</span>
-<span id="cb1-9"><a href="#cb1-9"></a>                  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-10"><a href="#cb1-10"></a>    dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb1-11"><a href="#cb1-11"></a>    dplyr<span class="sc">::</span><span class="fu">distinct</span>(nas,no_rss,date_entree_sejour,date_sortie_sejour,nb_jp_sejour,nb_rum_sejour)</span>
-<span id="cb1-12"><a href="#cb1-12"></a>sejour_extended</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a>sejours_covid_grippe <span class="ot">&lt;-</span> mco_rss<span class="sc">$</span>rum <span class="sc">%&gt;%</span> </span>
+<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(no_rss,nas,dp_rum,dr_rum) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-5"><a href="#cb1-5"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(dp_rum,dr_rum), <span class="sc">~</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(.x,<span class="dv">1</span>,<span class="dv">3</span>), <span class="at">.names =</span> <span class="st">"{col}_groupe"</span>),</span>
+<span id="cb1-6"><a href="#cb1-6"></a>                  <span class="fu">across</span>(<span class="fu">c</span>(dp_rum,dr_rum), <span class="sc">~</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(.x,<span class="dv">1</span>,<span class="dv">4</span>), <span class="at">.names =</span> <span class="st">"{col}_sous_groupe"</span>),</span>
+<span id="cb1-7"><a href="#cb1-7"></a>                  <span class="at">.keep =</span> <span class="st">"unused"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-8"><a href="#cb1-8"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">.by =</span> no_rss,</span>
+<span id="cb1-9"><a href="#cb1-9"></a>                     <span class="at">sejour_grippe =</span> <span class="fu">any</span>(dp_rum_groupe <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"J09"</span>,<span class="st">"J10"</span>,<span class="st">"J11"</span>)<span class="sc">|</span>dr_rum_groupe <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"J09"</span>,<span class="st">"J10"</span>,<span class="st">"J11"</span>)),</span>
+<span id="cb1-10"><a href="#cb1-10"></a>                     <span class="at">sejour_covid =</span> <span class="fu">any</span>(dp_rum_sous_groupe <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"U071"</span>,<span class="st">"U072"</span>)<span class="sc">|</span>dr_rum_sous_groupe <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"U071"</span>,<span class="st">"U072"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-11"><a href="#cb1-11"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">nb_sejour_covid =</span> <span class="fu">sum</span>(sejour_covid, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-12"><a href="#cb1-12"></a>                     <span class="at">nb_sejour_grippe =</span> <span class="fu">sum</span>(sejour_grippe, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-13"><a href="#cb1-13"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">ratio_sejour_covid_grippe =</span> <span class="fu">ifelse</span>(nb_sejour_grippe <span class="sc">!=</span> <span class="dv">0</span>,nb_sejour_covid<span class="sc">/</span>nb_sejour_grippe,<span class="cn">NA</span>))</span>
+<span id="cb1-14"><a href="#cb1-14"></a>sejours_covid_grippe</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM. Voir <a href="http://localhost:3479/guide_post.html#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
-<p>Ligne 7 : on force en integer le calcul de la différence de dates qui, sinon, serait une différence en journées, peu pratique à manipuler</p>
-<p>Ligne 11 : le <code>dplyr::distinct()</code> permet de ne sélectionner que des séjours via une suite de variables liées aux seuls séjours</p>
-<p>Le calcul du nombre de JP ou de venues des RUM et des séjours ainsi que le calcul du nombre de RUM par séjour est disponible dans tous les écrans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a></p>
+<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM</p>
+<p>Ligne 4 : les utilisateurs de l’accès PMSISoft Professionnel peuvent remplacer les 2 variables <code>dp_rum</code> et <code>dr_rum</code>par les variables <code>dp_sejour</code> et <code>dr_sejour</code> pour identifier les séjours aux niveaux des DP et DR séjour</p>
+<p>Ligne 5 : calcul des variables <code>dp_rum_groupe</code>et <code>dr_rum_groupe</code> pour préparer l’identification des séjours grippe</p>
+<p>Ligne 6 : calcul des variables <code>dp_rum_sous_groupe</code>et <code>dr_rum_sous_groupe</code> pour préparer l’identification des séjours COVID-19</p>
+<p>Ligne 7 : on décide de ne pas garder les variables natives <code>dp_rum</code>et <code>dr_rum</code></p>
+<p>Ligne 9 : identification d’une séjours grippe via une variable logique <code>sejour_grippe</code> qui vaut <code>TRUE</code>si, par séjour, au moins un <code>dp_rum_groupe</code> des RUM du séjour, a la valeur “J09”,“J10”,“J11” ou si au moins un <code>dr_rum_groupe</code> des RUM du séjour a la valeur “J09”,“J10”,“J11”</p>
+<p>Ligne 13 : gestion de la situation extrême où nb_sejour_grippe == 0</p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
