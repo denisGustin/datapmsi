@@ -23,7 +23,7 @@
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>On renvoie à l’article <a href="https://www.lespmsi.com/hospitalisation-et-codage-covid-19-et-grippe-entre-2018-et-2022/" target="_blank">“Hospitalisation et codage COVID-19 et grippe entre 2018 et 2022”</a> pour les enjeux et les codes d’identification des séjours COVID-19 et grippe via la CIM-10.</p>
-<p>Ce script identifie les séjours COVID-19 et les séjours grippe, puis calcule leur nombre respectif et le ratio nb_sejours_covid/nb_sejours_grippe</p>
+<p>Ce script identifie les séjours COVID-19 et les séjours grippe, puis calcule leur nombre respectif et le ratio <code>nb_sejour_covid/nb_sejour_grippe</code></p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
@@ -200,13 +200,13 @@ font-style: inherit;">NA</span>))</span>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM</p>
+<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
 <p>Ligne 4 : les utilisateurs de l’accès PMSISoft Professionnel peuvent remplacer les 2 variables <code>dp_rum</code> et <code>dr_rum</code>par les variables <code>dp_sejour</code> et <code>dr_sejour</code> pour identifier les séjours aux niveaux des DP et DR séjour</p>
 <p>Ligne 5 : calcul des variables <code>dp_rum_groupe</code>et <code>dr_rum_groupe</code> pour préparer l’identification des séjours grippe</p>
 <p>Ligne 6 : calcul des variables <code>dp_rum_sous_groupe</code>et <code>dr_rum_sous_groupe</code> pour préparer l’identification des séjours COVID-19</p>
 <p>Ligne 7 : on décide de ne pas garder les variables natives <code>dp_rum</code>et <code>dr_rum</code></p>
 <p>Ligne 9 : identification d’une séjours grippe via une variable logique <code>sejour_grippe</code> qui vaut <code>TRUE</code>si, par séjour, au moins un <code>dp_rum_groupe</code> des RUM du séjour, a la valeur “J09”,“J10”,“J11” ou si au moins un <code>dr_rum_groupe</code> des RUM du séjour a la valeur “J09”,“J10”,“J11”</p>
-<p>Ligne 13 : gestion de la situation extrême où nb_sejour_grippe == 0</p>
+<p>Ligne 13 : gestion de la situation extrême où <code>nb_sejour_grippe</code> == 0</p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
@@ -1089,7 +1089,7 @@ font-style: inherit;">distinct</span>(no_rss,nas,no_rum)</span>
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
 <p>Ligne 4 : on récupère le référentiel <code>ovalide_ccaminfo</code> via le package <code>refpmsi::</code> et on se restreint à la seule année 2024, car la liste des actes CCAM d’accouchement ne change pas depuis au moins 2020</p>
 <p>Ligne 6 : production du vecteur des actes CCAM d’accouchement</p>
-<p>Ligne 8 : <code>mco_rss$ccam</code> est un tibble des variables CCAM liées aux RUM. Voir <a href="http://localhost:3479/guide_post.html#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
+<p>Ligne 8 : <code>mco_rss$ccam</code> est un tibble des variables CCAM liées aux RUM. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
 <p>Ligne 11 : raccourci pour <code>dplyr::filter(is_accouchement == TRUE)</code></p>
 <p>Cette requête est réalisable dans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a> dans l’écran <code>CCAM &gt; Base des actes CCAM</code> via le filtrage de variables <code>code_ccam Contient codes des actes d'accoucheemnt</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
@@ -1170,7 +1170,7 @@ font-style: inherit;">distinct</span>(nas,no_rss,raac_sejour)</span>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM. Voir <a href="http://localhost:3479/guide_post.html#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
+<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
 <p>Ligne 6 : l’argument <code>na.rm = TRUE</code> de la fonction <code>àny()</code> gère le cas où la variable <code>raac</code> des RUM est NA</p>
 <p>Ligne 7 : on passe d’un tibble de RUM à un tibble de séjours via le <code>dplyr::distinct()</code> de variables liées au séjour</p>
 <p>Les séjours RAAC sont filtrables dans tous les écrans de <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a> via le filtrage de variables <code>sejour_raac TRUE</code></p>
@@ -1347,7 +1347,7 @@ font-style: inherit;">distinct</span>(nas,no_rss,ghm)</span>
 </section>
 <section id="commentaires" class="level3">
 <h3 class="anchored" data-anchor-id="commentaires">Commentaires</h3>
-<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM. Voir <a href="http://localhost:3479/guide_post.html#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
+<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
 <p>Ligne 5 : <code>stringr::str_sub(ghm, start = 6, end = 6)</code> isole la complexite du GHM</p>
 <p>Ligne 6 : raccourci pour <code>dplyr::filter(is_niveau_3_4 == TRUE)</code></p>
 <p>Ligne 7 : le <code>dplyr::distinct()</code> sur des variables liées au séjour fait passer le tibble d’un tibble de RUM à un tibble de séjours</p>
@@ -1714,7 +1714,7 @@ font-style: inherit;">%&gt;%</span> View</span></code></pre></div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 6 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM. Voir <a href="http://localhost:3479/guide_post.html#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
+<p>Ligne 6 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
 <p>Ligne 11 : on passe d’un tibble de RUM à un tibble de séjours via le <code>dplyr::distinct()</code> de variables liées au séjour</p>
 <p>Ligne 12 : forçage <code>annee_sortie_sejour</code> en character pour préparer la jointure avec la variable ànnee_pmsi<code>de ovalide_ghminfo_dgf</code> qui est character</p>
 <p>Pour aller + loin :<br>
@@ -2209,7 +2209,7 @@ font-style: inherit;">sum</span>(nb_sejour_complexite))</span>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM. Voir <a href="http://localhost:3479/guide_post.html#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
+<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
 <p>Ligne 8 : ce <code>dplyr::distinct()</code> sur des variables liées au séjour fait passer le tibble d’un tibble de RUM à un tibble de séjours</p>
 <p>Ce casemix est disponible dans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a> dans l’écran <code>Séjours &gt; Séjours et classification</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
@@ -2343,7 +2343,7 @@ font-style: inherit;">$</span>supplements_rea_t2a)</span>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 6 : <code>mco_rsa$rsa</code> est un tibble des variables de la partie fixe des RSA. Voir <a href="http://localhost:3479/guide_post.html#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
+<p>Ligne 6 : <code>mco_rsa$rsa</code> est un tibble des variables de la partie fixe des RSA. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
 <p>Ligne 8 : calcul de la variable <code>annee_pmsi_sejour</code> à partir des 2 variables <code>mois_sortie_sejour</code> et <code>annee_sortie_sejour</code> (variables natives <code>rsa</code>)</p>
 <p>Les valorisations T2A brutes des suppléments sont calculées dans l’écran <code>Activité MCO &gt; Synthèse T2A</code> de <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
@@ -2608,7 +2608,7 @@ font-style: inherit;">is.na</span>(extension_documentaire_ccam))</span>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 3 : <code>mco_rss$ccam</code> est un tibble des actes CCAM</p>
+<p>Ligne 3 : <code>mco_rss$ccam</code> est un tibble des actes CCAM. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
 <p>Cette requête est réalisable dans <a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a> dans l’écran <code>Codage CCAM &gt; Base des actes CCAM</code> via le filtrage de variables <code>activite_ccam Egal à 4 ET extension_documentaire_ccam Est vide</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 

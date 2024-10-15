@@ -123,7 +123,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../../../prestation.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../formation.html" aria-current="page"> 
+<span class="menu-text">Formations PMSI R</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../prestation.html"> 
 <span class="menu-text">Live coding PMSI R</span></a>
   </li>  
   <li class="nav-item">
@@ -175,6 +179,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../formation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Formations PMSI R</span></a>
+  </div>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../prestation.html" class="sidebar-item-text sidebar-link">
@@ -294,7 +304,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="commentaires" class="level3">
 <h3 class="anchored" data-anchor-id="commentaires">Commentaires</h3>
-<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM. Voir <a href="http://localhost:3479/guide_post.html#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
+<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
 <p>Ligne 5 : <code>stringr::str_sub(ghm, start = 6, end = 6)</code> isole la complexite du GHM</p>
 <p>Ligne 6 : raccourci pour <code>dplyr::filter(is_niveau_3_4 == TRUE)</code></p>
 <p>Ligne 7 : le <code>dplyr::distinct()</code> sur des variables liées au séjour fait passer le tibble d’un tibble de RUM à un tibble de séjours</p>

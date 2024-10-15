@@ -33,7 +33,7 @@ sejours_covid_grippe
 
 ## Commentaires  
 
-Ligne 3 : `mco_rss$rum` est un tibble des variables de la partie fixe des RUM. Voir [Guide des scripts - Jeux de données](http://localhost:3479/guide_post.html#via-pmsisoft-standard)  
+Ligne 3 : `mco_rss$rum` est un tibble des variables de la partie fixe des RUM. Voir [Guide des scripts - Jeux de données](https://www.datapmsi.com/guide_post#via-pmsisoft-standard)  
 
 Ligne 4 : les utilisateurs de l'accès PMSISoft Professionnel peuvent remplacer les 2 variables `dp_rum` et `dr_rum`par les variables `dp_sejour` et `dr_sejour` pour identifier les séjours aux niveaux des DP et DR séjour  
 
@@ -45,6 +45,6 @@ Ligne 7 : on décide de ne pas garder les variables natives `dp_rum`et `dr_rum`
 
 Ligne 9 : identification d'une séjours grippe via une variable logique `sejour_grippe` qui vaut `TRUE`si, par séjour, au moins un `dp_rum_groupe` des RUM du séjour, a la valeur "J09","J10","J11" ou si au moins un `dr_rum_groupe` des RUM du séjour a la valeur "J09","J10","J11"  
 
-Ligne 13 : gestion de la situation extrême où nb_sejour_grippe == 0  
+Ligne 13 : gestion de la situation extrême où `nb_sejour_grippe` == 0  
 
 [Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

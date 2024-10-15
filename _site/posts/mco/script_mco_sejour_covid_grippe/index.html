@@ -272,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>On renvoie à l’article <a href="https://www.lespmsi.com/hospitalisation-et-codage-covid-19-et-grippe-entre-2018-et-2022/" target="_blank">“Hospitalisation et codage COVID-19 et grippe entre 2018 et 2022”</a> pour les enjeux et les codes d’identification des séjours COVID-19 et grippe via la CIM-10.</p>
-<p>Ce script identifie les séjours COVID-19 et les séjours grippe, puis calcule leur nombre respectif et le ratio nb_sejours_covid/nb_sejours_grippe</p>
+<p>Ce script identifie les séjours COVID-19 et les séjours grippe, puis calcule leur nombre respectif et le ratio <code>nb_sejour_covid/nb_sejour_grippe</code></p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
@@ -295,13 +295,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM</p>
+<p>Ligne 3 : <code>mco_rss$rum</code> est un tibble des variables de la partie fixe des RUM. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
 <p>Ligne 4 : les utilisateurs de l’accès PMSISoft Professionnel peuvent remplacer les 2 variables <code>dp_rum</code> et <code>dr_rum</code>par les variables <code>dp_sejour</code> et <code>dr_sejour</code> pour identifier les séjours aux niveaux des DP et DR séjour</p>
 <p>Ligne 5 : calcul des variables <code>dp_rum_groupe</code>et <code>dr_rum_groupe</code> pour préparer l’identification des séjours grippe</p>
 <p>Ligne 6 : calcul des variables <code>dp_rum_sous_groupe</code>et <code>dr_rum_sous_groupe</code> pour préparer l’identification des séjours COVID-19</p>
 <p>Ligne 7 : on décide de ne pas garder les variables natives <code>dp_rum</code>et <code>dr_rum</code></p>
 <p>Ligne 9 : identification d’une séjours grippe via une variable logique <code>sejour_grippe</code> qui vaut <code>TRUE</code>si, par séjour, au moins un <code>dp_rum_groupe</code> des RUM du séjour, a la valeur “J09”,“J10”,“J11” ou si au moins un <code>dr_rum_groupe</code> des RUM du séjour a la valeur “J09”,“J10”,“J11”</p>
-<p>Ligne 13 : gestion de la situation extrême où nb_sejour_grippe == 0</p>
+<p>Ligne 13 : gestion de la situation extrême où <code>nb_sejour_grippe</code> == 0</p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 

@@ -27,7 +27,7 @@ actes_ccam_no_extension_documentaire
 
 ## Commentaires  
 
-Ligne 3 : `mco_rss$ccam` est un tibble des actes CCAM 
+Ligne 3 : `mco_rss$ccam` est un tibble des actes CCAM. Voir [Guide des scripts - Jeux de données](https://www.datapmsi.com/guide_post#via-pmsisoft-standard)  
 
 Cette requête est réalisable dans [PMSISoft MCO](https://www.pmsisoft.com/acces_pmsisoft_mco){target="_blank"} dans l'écran `Codage CCAM > Base des actes CCAM` via le filtrage de variables `activite_ccam Egal à 4 ET extension_documentaire_ccam Est vide`  
 
