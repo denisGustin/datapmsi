@@ -1,5 +1,5 @@
 ---
-title: "<b>File active avec DR et sans EGA</b>"
+title: "<b>File active avec acte DR et sans acte EGA</b>"
 date: "2024-10-15"
 categories: [PSY,RAA,IPP]
 page-layout: full
