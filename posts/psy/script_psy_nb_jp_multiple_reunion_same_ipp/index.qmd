@@ -18,8 +18,8 @@ Voir le contrôle Qualité OVALIDE "[1.Q.11.RIPP] : Nombre de journées avec plu
 library(dplyr)
 
 same_ipp_date_acte <- psy_raa$raa %>% 
-    dplyr::select(ipp,nature_acte,date_acte) %>% 
-    dplyr::mutate(.by = c(ipp,date_acte,nature_acte),
+    dplyr::select(no_ipp,nature_acte,date_acte) %>% 
+    dplyr::mutate(.by = c(no_ipp,date_acte,nature_acte),
                   sum_same_ipp_date_acte_nature_acte_R = sum(nature_acte == "R")) %>% 
     dplyr::filter(sum_same_ipp_date_acte_nature_acte_R >= 2L) %>% 
     dplyr::distinct()
@@ -31,9 +31,9 @@ nrow(same_ipp_date_acte)
 
 ## Commentaires  
 
-Ligne 3 : `psy_raa$raa` est un tibble des variables RAA 
+Ligne 3 : `psy_raa$raa` est un tibble des variables RAA. Voir [Guide des scripts - Jeux de données](https://www.datapmsi.com/guide_post#via-pmsisoft-standard) 
 
-Ligne 6 : nature_acte == "R" produit une valeur logique qui est sommée par `sum()` sachant que TRUE == 1 et FALSE == 0  
+Ligne 6 : `nature_acte` == "R" produit une valeur logique qui est sommée par `sum()` sachant que TRUE == 1 et FALSE == 0  
 
 Cette requête est disponible par défaut dans l'écran `Requêtes PSY > Requêtes RAA` de [PMSISoft PSY](https://www.pmsisoft.com/acces_pmsisoft_psy){target="_blank"} sous le libellé `Plusieurs actes de réunions pour un même IPP et une même date [1.Q.11.RIPP]`  
 

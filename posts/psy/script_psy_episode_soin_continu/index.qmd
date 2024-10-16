@@ -44,7 +44,7 @@ ipp_episode_soin_continu
 
 Ligne 3 : le vecteur `vect_fa_temps_complet` correspond aux codes des formes d'activité temps complet  
 
-Ligne 5 : `psy_rps$rps` est un tibble des variables de la partie fixe d'un fichier RPS  
+Ligne 5 : `psy_rps$rps` est un tibble des variables de la partie fixe d'un fichier RPS. Voir [Guide des scripts - Jeux de données](https://www.datapmsi.com/guide_post#via-pmsisoft-standard) 
 
 Ligne 9 : l'argument `.by_group = TRUE` dans le `dplyr::arrange()` permet de trier au sein d'un regroupement.  
 

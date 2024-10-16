@@ -123,7 +123,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../../../prestation.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../formation.html" aria-current="page"> 
+<span class="menu-text">Formations PMSI R</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../prestation.html"> 
 <span class="menu-text">Live coding PMSI R</span></a>
   </li>  
   <li class="nav-item">
@@ -175,6 +179,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../formation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Formations PMSI R</span></a>
+  </div>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../prestation.html" class="sidebar-item-text sidebar-link">
@@ -270,12 +280,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a>casemix_edgarx <span class="ot">&lt;-</span> psy_raa<span class="sc">$</span>raa <span class="sc">%&gt;%</span> </span>
-<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(ipp,nature_acte,categorie_professionnelle_intervenant) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(no_ipp,nature_acte,categorie_professionnelle_intervenant) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-5"><a href="#cb1-5"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(nature_acte) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-6"><a href="#cb1-6"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">nb_acte =</span> dplyr<span class="sc">::</span><span class="fu">n</span>(),</span>
-<span id="cb1-7"><a href="#cb1-7"></a>                     <span class="at">nb_ipp =</span> dplyr<span class="sc">::</span><span class="fu">n_distinct</span>(ipp),</span>
-<span id="cb1-8"><a href="#cb1-8"></a>                     <span class="at">nb_categorie_professionnelle_intervenant =</span> dplyr<span class="sc">::</span><span class="fu">n_distinct</span>(categorie_professionnelle_intervenant)</span>
-<span id="cb1-9"><a href="#cb1-9"></a>                     ) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-7"><a href="#cb1-7"></a>                     <span class="at">nb_ipp =</span> dplyr<span class="sc">::</span><span class="fu">n_distinct</span>(no_ipp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-8"><a href="#cb1-8"></a>                     <span class="at">nb_categorie_professionnelle_intervenant =</span> dplyr<span class="sc">::</span><span class="fu">n_distinct</span>(categorie_professionnelle_intervenant, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-9"><a href="#cb1-9"></a>    ) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-10"><a href="#cb1-10"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(nb_acte)) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-11"><a href="#cb1-11"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">percent_acte =</span> nb_acte<span class="sc">/</span><span class="fu">sum</span>(nb_acte), <span class="at">.after =</span> nb_acte)</span>
 <span id="cb1-12"><a href="#cb1-12"></a>casemix_edgarx</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -283,7 +293,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 3 : <code>psy_raa$raa</code> est un tibble des variables RAA</p>
+<p>Ligne 3 : <code>psy_raa$raa</code> est un tibble des variables RAA. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
+<p>Ligne 7 : l’option <code>na.rm = TRUE</code> de <code>dplyr::n_distinct()</code> gère les situations où aucun <code>no_ipp</code> n’est renseigné pour tous les actes d’une nature d’acte</p>
 <p>Ligne 10 : on trie sur le nombre descendant de <code>nb_acte</code></p>
 <p>Ligne 11 : l’argument <code>.after</code> positionne la variable <code>percent_acte</code> qui vient d’être calculée après <code>nb_acte</code></p>
 <p>Ce casemix est disponible dans l’écran <code>Actes ambulatoires &gt; Casemix EDGARX &gt; Casemix EDGARX</code> de <a href="https://www.pmsisoft.com/acces_pmsisoft_psy" target="_blank">PMSISoft PSY</a></p>

@@ -1,5 +1,5 @@
 ---
-title: "<b>IPDMS par GHM</b>"
+title: "<b>IP-DMS par GHM</b>"
 date: "2024-06-11"
 categories: [MCO,GHM,Casemix]
 page-layout: full

@@ -18,22 +18,23 @@ library(dplyr)
 vect_fa_temps_complet <- c('01','01D','01S','01P','02','03','04','05','06','07')
 
 sejour_selected <- psy_rps$rps %>% 
-    dplyr::distinct(no_sejour,ipp,forme_activite,nb_jours_presence,date_entree_sejour,date_sortie_sejour) %>% 
-    dplyr::filter(forme_activite %in% vect_fa_temps_complet,
-                  date_entree_sejour == date_sortie_sejour)
+    dplyr::distinct(no_sejour,no_ipp,forme_activite,nb_jours_presence,date_entree_sejour,date_sortie_sejour) %>% 
+    dplyr::filter(forme_activite %in% c('01','01D','01S','01P','02','03','04','05','06','07'),
+                  date_entree_sejour == date_sortie_sejour) %>% 
+    dplyr::distinct(no_sejour,no_ipp,date_entree_sejour,date_sortie_sejour)
 sejour_selected
 ```
 
 ## Commentaires  
 
-Ligne 3 : le vecteur `vect_fa_temps_complet` correspond aux codes des formes d'activité temps complet  
+Ligne 3 : le vecteur `vect_fa_temps_complet` est constitué des codes des formes d'activité temps complet  
 
-Ligne 5 : `psy_rps$rps` est un tibble des variables de la partie fixe d'un fichier RPS  
+Ligne 5 : `psy_rps$rps` est un tibble des variables de la partie fixe d'un fichier RPS. Voir [Guide des scripts - Jeux de données](https://www.datapmsi.com/guide_post#via-pmsisoft-standard) 
 
-Ligne 6 : on ne sélectionne que des variables liées à un séjour via un `dplyr::distinct()` qui sélectionne et dédoublonne en même temps  
+Ligne 6 : on ne sélectionne que des variables liées à un séjour. Le `dplyr::distinct()` dédoublonne et ne sélectionne donc que des séjours  
 
-Ligne 8 : en l'absence de date_sortie_sejour (donc quand date_sortie_sejour a la valeur NA), le `dplyr::fitler()` ne retient pas la ligne. Les séjours dans date de sortie ne sont donc pas retenus.  
+Ligne 8 : en l'absence de date_sortie_sejour (donc quand date_sortie_sejour a la valeur `NA`), le `dplyr::fitler()` ne retient pas la ligne. Les séjours sans date de sortie ne sont donc pas retenus.  
 
-Cette requête peut être réalisée dans [PMSISoft PSY](https://www.pmsisoft.com/acces_pmsisoft_psy){target="_blank"} dans l'écran `Séjours > Base des séjours` via le filtrage de périmètre `Forme d'activité == codes temps_complet` et le filtrage de variable `nb_jp_sejour Egal à 0`  
+Cette requête est réalisable dans [PMSISoft PSY](https://www.pmsisoft.com/acces_pmsisoft_psy){target="_blank"} dans l'écran `Séjours > Base des séjours` via le filtrage de périmètre `Forme d'activité == codes temps_complet` et le filtrage de variable `nb_jp_sejour Egal à 0`  
 
 [Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

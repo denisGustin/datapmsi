@@ -26,7 +26,7 @@ rps_extended
 
 ## Commentaires  
 
-Ligne 6 : `psy_rps$rps` est un tibble des variables de la partie fixe des RPS  
+Ligne 6 : `psy_rps$rps` est un tibble des variables de la partie fixe des RPS. Voir [Guide des scripts - Jeux de données](https://www.datapmsi.com/guide_post#via-pmsisoft-standard) 
 
 Ligne 7 : `everything()` est pour `tidyselect::everything()` sachant que le package `tidyselect::` est chargé via le `dplyr`.  
 `everything()` dans le `dplyr::select()` est une façon de sélectionner toutes les variables natives du du tibble `psy_rps$rps`, donc toutes les variables de la partie fixe d'un fichier RPS, dont, en particulier, la variable dp  

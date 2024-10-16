@@ -16,12 +16,12 @@ Pour chaque nature d'acte EDGARX du jeu de données, calcul du nombre d'actes, d
 library(dplyr)
 
 casemix_edgarx <- psy_raa$raa %>% 
-    dplyr::select(ipp,nature_acte,categorie_professionnelle_intervenant) %>% 
+    dplyr::select(no_ipp,nature_acte,categorie_professionnelle_intervenant) %>% 
     dplyr::group_by(nature_acte) %>% 
     dplyr::summarise(nb_acte = dplyr::n(),
-                     nb_ipp = dplyr::n_distinct(ipp),
-                     nb_categorie_professionnelle_intervenant = dplyr::n_distinct(categorie_professionnelle_intervenant)
-                     ) %>% 
+                     nb_ipp = dplyr::n_distinct(no_ipp, na.rm = TRUE),
+                     nb_categorie_professionnelle_intervenant = dplyr::n_distinct(categorie_professionnelle_intervenant, na.rm = TRUE)
+    ) %>% 
     dplyr::arrange(desc(nb_acte)) %>% 
     dplyr::mutate(percent_acte = nb_acte/sum(nb_acte), .after = nb_acte)
 casemix_edgarx
@@ -29,7 +29,9 @@ casemix_edgarx
 
 ## Commentaires  
 
-Ligne 3 : `psy_raa$raa` est un tibble des variables RAA  
+Ligne 3 : `psy_raa$raa` est un tibble des variables RAA. Voir [Guide des scripts - Jeux de données](https://www.datapmsi.com/guide_post#via-pmsisoft-standard) 
+
+Ligne 7 : l'option `na.rm = TRUE` de `dplyr::n_distinct()` gère les situations où aucun `no_ipp` n'est renseigné pour tous les actes d'une nature d'acte  
 
 Ligne 10 : on trie sur le nombre descendant de `nb_acte`  
 

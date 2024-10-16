@@ -1,0 +1,40 @@
+---
+title: "<b>File active avec DR et sans EGA</b>"
+date: "2024-10-15"
+categories: [PSY,RAA,IPP]
+page-layout: full
+---
+
+## Introduction  
+
+On produit sur une année (ici 2024) la file active des patients en ambulatoire avec au moins un acte D (Démarche) ou R (Réunion clinique pour un patient) **et** aucun acte E (Entretien), G (Groupe) ou A (Accompagnement).  
+
+Un contrôle qualité classique.  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+
+ipp_DR_no_EGA <- psy_raa$raa %>% 
+    dplyr::filter(annee_acte == 2024) %>% 
+    dplyr::select(no_ipp,nature_acte) %>% 
+    dplyr::filter(.by = no_ipp,
+                  any(nature_acte %in% c("D","R")),
+                  !any(nature_acte %in% c("A","E","EA","EF","G","GP"))) %>% 
+    dplyr::distinct(no_ipp)
+ipp_DR_no_EGA
+```
+
+## Commentaires  
+
+Ligne 3 : `psy_raa$raa` est un tibble des variables RAA. Voir [Guide des scripts - Jeux de données](https://www.datapmsi.com/guide_post#via-pmsisoft-standard) 
+
+Ligne 6 : regroupement par IPP dans le `dplyr::filter()`. Plus élégant qu'un `dplyr::group_by()`  
+
+Ligne 9 : le `dplyr::distinct()`produit la file active recherchée  
+
+Cette analyse est disponible dans l'écran `Requêtes PSY > Requêtes RAA` de [PMSISoft PSY](https://www.pmsisoft.com/acces_pmsisoft_psy){target="_blank"}  
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

@@ -123,7 +123,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../../../prestation.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../formation.html" aria-current="page"> 
+<span class="menu-text">Formations PMSI R</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../prestation.html"> 
 <span class="menu-text">Live coding PMSI R</span></a>
   </li>  
   <li class="nav-item">
@@ -175,6 +179,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../formation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Formations PMSI R</span></a>
+  </div>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../prestation.html" class="sidebar-item-text sidebar-link">
@@ -261,26 +271,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>On sélectionne l’activité RPS en temps complet, puis les RPS avec date_entree_sejour == date_sortie_sejour, puis on ne retient qu’une ligne par séjour.</p>
+<p>On produit un tibble de séjours, puis on retient les séjours relevant d’une forme d’activité en temps complet, puis on retient les séjours pour lesquels date_entree_sejour == date_sortie_sejour.</p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>sejour_selected <span class="ot">&lt;-</span> psy<span class="sc">$</span>rps<span class="sc">$</span>rps <span class="sc">%&gt;%</span> </span>
-<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(no_sejour,ipp,forme_activite,nb_jours_presence,date_entree_sejour,date_sortie_sejour) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-5"><a href="#cb1-5"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(forme_activite <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'01'</span>,<span class="st">'01D'</span>,<span class="st">'01S'</span>,<span class="st">'01P'</span>,<span class="st">'02'</span>,<span class="st">'03'</span>,<span class="st">'04'</span>,<span class="st">'05'</span>,<span class="st">'06'</span>,<span class="st">'07'</span>),</span>
-<span id="cb1-6"><a href="#cb1-6"></a>                  date_entree_sejour <span class="sc">==</span> date_sortie_sejour) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-7"><a href="#cb1-7"></a>    dplyr<span class="sc">::</span><span class="fu">distinct</span>(no_sejour,ipp,date_entree_sejour,date_sortie_sejour)</span>
-<span id="cb1-8"><a href="#cb1-8"></a>sejour_selected</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a>vect_fa_temps_complet <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'01'</span>,<span class="st">'01D'</span>,<span class="st">'01S'</span>,<span class="st">'01P'</span>,<span class="st">'02'</span>,<span class="st">'03'</span>,<span class="st">'04'</span>,<span class="st">'05'</span>,<span class="st">'06'</span>,<span class="st">'07'</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>sejour_selected <span class="ot">&lt;-</span> psy_rps<span class="sc">$</span>rps <span class="sc">%&gt;%</span> </span>
+<span id="cb1-6"><a href="#cb1-6"></a>    dplyr<span class="sc">::</span><span class="fu">distinct</span>(no_sejour,no_ipp,forme_activite,nb_jours_presence,date_entree_sejour,date_sortie_sejour) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-7"><a href="#cb1-7"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(forme_activite <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'01'</span>,<span class="st">'01D'</span>,<span class="st">'01S'</span>,<span class="st">'01P'</span>,<span class="st">'02'</span>,<span class="st">'03'</span>,<span class="st">'04'</span>,<span class="st">'05'</span>,<span class="st">'06'</span>,<span class="st">'07'</span>),</span>
+<span id="cb1-8"><a href="#cb1-8"></a>                  date_entree_sejour <span class="sc">==</span> date_sortie_sejour) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-9"><a href="#cb1-9"></a>    dplyr<span class="sc">::</span><span class="fu">distinct</span>(no_sejour,no_ipp,date_entree_sejour,date_sortie_sejour)</span>
+<span id="cb1-10"><a href="#cb1-10"></a>sejour_selected</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 5 : le vecteur <code>c('01','01D','01S','01P','02','03','04','05','06','07')</code> correspond aux formes d’activité temps complet</p>
-<p>Ligne 7 : on ne sélectionne que des variables liées à un séjour</p>
-<p>PMSISoft PSY Professionnel : écran <code>Séjours &gt; Base des séjours</code>, filtrage de périmètre <code>Forme d'activité == codes temps_complet</code> et filtrage de variable <code>nb_jp_sejour Egal à 0</code></p>
+<p>Ligne 3 : le vecteur <code>vect_fa_temps_complet</code> est constitué des codes des formes d’activité temps complet</p>
+<p>Ligne 5 : <code>psy_rps$rps</code> est un tibble des variables de la partie fixe d’un fichier RPS. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
+<p>Ligne 6 : on ne sélectionne que des variables liées à un séjour. Le <code>dplyr::distinct()</code> dédoublonne et ne sélectionne donc que des séjours</p>
+<p>Ligne 8 : en l’absence de date_sortie_sejour (donc quand date_sortie_sejour a la valeur <code>NA</code>), le <code>dplyr::fitler()</code> ne retient pas la ligne. Les séjours sans date de sortie ne sont donc pas retenus.</p>
+<p>Cette requête est réalisable dans <a href="https://www.pmsisoft.com/acces_pmsisoft_psy" target="_blank">PMSISoft PSY</a> dans l’écran <code>Séjours &gt; Base des séjours</code> via le filtrage de périmètre <code>Forme d'activité == codes temps_complet</code> et le filtrage de variable <code>nb_jp_sejour Egal à 0</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 

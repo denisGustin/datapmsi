@@ -32,7 +32,7 @@ raa_idem_date %>% dplyr::filter(doublon_acte > 1)
 
 ## Commentaires  
 
-Ligne 3 : `psy_raa$raa` est un tibble des variables RAA  
+Ligne 3 : `psy_raa$raa` est un tibble des variables RAA. Voir [Guide des scripts - Jeux de données](https://www.datapmsi.com/guide_post#via-pmsisoft-standard) 
 
 Ligne 4 : joli cas d'usage de la fonction `dplyr::add_count()` qui représente un `dplyr::group_by()` + `dplyr::mutate()`  
 

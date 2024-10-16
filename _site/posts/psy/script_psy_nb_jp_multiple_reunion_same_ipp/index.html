@@ -123,7 +123,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../../../prestation.html" aria-current="page"> 
+    <a class="nav-link active" href="../../../formation.html" aria-current="page"> 
+<span class="menu-text">Formations PMSI R</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../prestation.html"> 
 <span class="menu-text">Live coding PMSI R</span></a>
   </li>  
   <li class="nav-item">
@@ -175,6 +179,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../formation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Formations PMSI R</span></a>
+  </div>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../prestation.html" class="sidebar-item-text sidebar-link">
@@ -270,8 +280,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a>same_ipp_date_acte <span class="ot">&lt;-</span> psy_raa<span class="sc">$</span>raa <span class="sc">%&gt;%</span> </span>
-<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(ipp,nature_acte,date_acte) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-5"><a href="#cb1-5"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">.by =</span> <span class="fu">c</span>(ipp,date_acte,nature_acte),</span>
+<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(no_ipp,nature_acte,date_acte) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-5"><a href="#cb1-5"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">.by =</span> <span class="fu">c</span>(no_ipp,date_acte,nature_acte),</span>
 <span id="cb1-6"><a href="#cb1-6"></a>                  <span class="at">sum_same_ipp_date_acte_nature_acte_R =</span> <span class="fu">sum</span>(nature_acte <span class="sc">==</span> <span class="st">"R"</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-7"><a href="#cb1-7"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(sum_same_ipp_date_acte_nature_acte_R <span class="sc">&gt;=</span> <span class="dv">2</span>L) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-8"><a href="#cb1-8"></a>    dplyr<span class="sc">::</span><span class="fu">distinct</span>()</span>
@@ -283,8 +293,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 3 : <code>psy_raa$raa</code> est un tibble des variables RAA</p>
-<p>Ligne 6 : nature_acte == “R” produit une valeur logique qui est sommée par <code>sum()</code> sachant que TRUE == 1 et FALSE == 0</p>
+<p>Ligne 3 : <code>psy_raa$raa</code> est un tibble des variables RAA. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
+<p>Ligne 6 : <code>nature_acte</code> == “R” produit une valeur logique qui est sommée par <code>sum()</code> sachant que TRUE == 1 et FALSE == 0</p>
 <p>Cette requête est disponible par défaut dans l’écran <code>Requêtes PSY &gt; Requêtes RAA</code> de <a href="https://www.pmsisoft.com/acces_pmsisoft_psy" target="_blank">PMSISoft PSY</a> sous le libellé <code>Plusieurs actes de réunions pour un même IPP et une même date [1.Q.11.RIPP]</code></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
