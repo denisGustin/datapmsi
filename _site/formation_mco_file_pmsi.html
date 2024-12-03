@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data PMSI - Live coding PMSI R</title>
+<title>Data PMSI - [MCO - Manipuler les fichiers PMSI avec R]</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -99,11 +99,11 @@ ul.task-list li input[type="checkbox"] {
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="./prestation.html" aria-current="page"> 
+    <a class="nav-link" href="./prestation.html"> 
 <span class="menu-text">Live coding PMSI R</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./guide_post.html"> 
+    <a class="nav-link active" href="./guide_post.html" aria-current="page"> 
 <span class="menu-text">Guide des scripts</span></a>
   </li>  
   <li class="nav-item">
@@ -139,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Live coding PMSI R</span></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">[MCO - Manipuler les fichiers PMSI avec R]</span></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -181,13 +181,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Sur cette page</h2>
    
   <ul>
-  <li><a href="#principes-du-live-coding-pmsi-r" id="toc-principes-du-live-coding-pmsi-r" class="nav-link active" data-scroll-target="#principes-du-live-coding-pmsi-r">Principes du Live coding PMSI R</a></li>
-  <li><a href="#exemples-de-sujets" id="toc-exemples-de-sujets" class="nav-link" data-scroll-target="#exemples-de-sujets">Exemples de sujets</a></li>
-  <li><a href="#expert-pmsi-r" id="toc-expert-pmsi-r" class="nav-link" data-scroll-target="#expert-pmsi-r">Expert PMSI R</a></li>
-  <li><a href="#mise-en-oeuvre" id="toc-mise-en-oeuvre" class="nav-link" data-scroll-target="#mise-en-oeuvre">Mise en oeuvre</a></li>
-  <li><a href="#tarif-live-coding-pmsi-r" id="toc-tarif-live-coding-pmsi-r" class="nav-link" data-scroll-target="#tarif-live-coding-pmsi-r">Tarif Live coding PMSI R</a></li>
-  <li><a href="#autres-prestations" id="toc-autres-prestations" class="nav-link" data-scroll-target="#autres-prestations">Autres prestations</a></li>
-  <li><a href="#etat-desprit" id="toc-etat-desprit" class="nav-link" data-scroll-target="#etat-desprit">Etat d’esprit</a></li>
+  <li><a href="#objectifs" id="toc-objectifs" class="nav-link active" data-scroll-target="#objectifs">Objectifs</a></li>
+  <li><a href="#contenu-du-cours" id="toc-contenu-du-cours" class="nav-link" data-scroll-target="#contenu-du-cours">Contenu du cours</a>
+  <ul class="collapse">
+  <li><a href="#import-de-fichiers-pmsi-à-longueur-fixe" id="toc-import-de-fichiers-pmsi-à-longueur-fixe" class="nav-link" data-scroll-target="#import-de-fichiers-pmsi-à-longueur-fixe">Import de fichiers PMSI à longueur fixe</a></li>
+  <li><a href="#nettoyage-et-enrichissement" id="toc-nettoyage-et-enrichissement" class="nav-link" data-scroll-target="#nettoyage-et-enrichissement">Nettoyage et enrichissement</a></li>
+  <li><a href="#import-des-fichiers-pmsi-à-longueur-variable" id="toc-import-des-fichiers-pmsi-à-longueur-variable" class="nav-link" data-scroll-target="#import-des-fichiers-pmsi-à-longueur-variable">Import des fichiers PMSI à longueur variable</a></li>
+  <li><a href="#import-des-fichiers-csv-et-excel" id="toc-import-des-fichiers-csv-et-excel" class="nav-link" data-scroll-target="#import-des-fichiers-csv-et-excel">Import des fichiers csv et Excel</a></li>
+  <li><a href="#import-des-fichiers-json" id="toc-import-des-fichiers-json" class="nav-link" data-scroll-target="#import-des-fichiers-json">Import des fichiers JSON</a></li>
+  <li><a href="#import-des-zip" id="toc-import-des-zip" class="nav-link" data-scroll-target="#import-des-zip">Import des zip</a></li>
+  <li><a href="#export" id="toc-export" class="nav-link" data-scroll-target="#export">Export</a></li>
+  </ul></li>
+  <li><a href="#livrables" id="toc-livrables" class="nav-link" data-scroll-target="#livrables">Livrables</a></li>
+  <li><a href="#pré-requis" id="toc-pré-requis" class="nav-link" data-scroll-target="#pré-requis">Pré-requis</a></li>
+  <li><a href="#formateur" id="toc-formateur" class="nav-link" data-scroll-target="#formateur">Formateur</a></li>
+  <li><a href="#tarif-de-la-formation" id="toc-tarif-de-la-formation" class="nav-link" data-scroll-target="#tarif-de-la-formation">Tarif de la formation</a></li>
+  <li><a href="#commande" id="toc-commande" class="nav-link" data-scroll-target="#commande">Commande</a></li>
+  <li><a href="#faq" id="toc-faq" class="nav-link" data-scroll-target="#faq">FAQ</a></li>
   </ul>
 </nav>
 </nav>
@@ -200,7 +210,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">Live coding PMSI R</span></h1>
+<h1 class="title"><span style="font-family: Boska; font-size: 2.75rem; font-weight: 800;">[MCO - Manipuler les fichiers PMSI avec R]</span></h1>
 </div>
 
 
@@ -217,103 +227,123 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Live coding PMSI R
+Les cours Data PMSI
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Session à l’heure</strong> pour vous accompagner dans le codage de vos scripts PMSI R.</p>
+<p>Des années d’expérience de codage PMSI avec R condensées dans des cours pratiques</p>
+<p>Des scripts R documentés, étape par étape, régulièrement mis à jour, <strong>à exécuter avec les données de votre établissement</strong></p>
+<p>Une assistance PMSI R par email</p>
 </div>
 </div>
-<section id="principes-du-live-coding-pmsi-r" class="level2">
-<h2 class="anchored" data-anchor-id="principes-du-live-coding-pmsi-r">Principes du Live coding PMSI R</h2>
-<p>Le live coding consiste, pour un specialiste (ingénieur, data analyst, médecin DIM), à écrire et/ou commenter en direct du code PMSI R dans l’environnement de développement R de son interlocuteur.</p>
-<p>Le spécialiste explique en direct le pourquoi et les caractéristiques du code qu’il est en train de d’écrire.</p>
-<p>Il répond en direct aux questions de son interlocuteur.</p>
-<p>Il teste en direct les scripts codés.</p>
-<p>Il redirige son interlocuteur vers des ressources pertinentes (support formation, codes, packages, documentation).</p>
-<p>Le livrable d’une session de Live coding est constitué par le code écrit et documenté lors de la session et par les éventuelles notes prises par l’interlocuteur.</p>
-<p>Avantage reconnu du Live coding : intervention du spécialiste “au bon moment” pour le “bon problème”, directement sur le code de l’interlocuteur</p>
-<p>Pour aller plus loin : <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008090" target="_blank">Papier “Ten quick tips for teaching with participatory live coding”</a></p>
+<section id="objectifs" class="level2">
+<h2 class="anchored" data-anchor-id="objectifs">Objectifs</h2>
+<p><strong>1|</strong> Apprendre à manipuler les fichiers du PMSI MCO (rss, rsa, rhs, fichcomp, anohosp, Visual Valo séjours, OVALIDE, …) au format texte ou csv en R pour produire des data frames de données exploitables en analyse PMSI.</p>
+<p><strong>2|</strong> Etre autonome dans la manipulation des fichiers PMSI MCO en R</p>
 </section>
-<section id="exemples-de-sujets" class="level2">
-<h2 class="anchored" data-anchor-id="exemples-de-sujets">Exemples de sujets</h2>
-<p>Liste non exhaustive :</p>
-<ul>
-<li><p>codage de scripts répondant à des problématiques de l’interlocuteur</p>
-<ul>
-<li>requêtes détection atypies ou contrôles qualité<br>
-</li>
-<li>casemix personnalisés<br>
-</li>
-<li>production en routine d’indicateurs<br>
-</li>
-<li>mise en tibbles des fichiers du .in ou du .out<br>
-</li>
-<li>requêtes détection atypies ou contrôles qualité<br>
-</li>
-<li>récupération/nettoyage et exploitation d’export JSON ou csv OVALIDE<br>
-</li>
-<li>imports de sources de données zip, csv, txt, JSON, …<br>
-</li>
-<li>graphiques<br>
-</li>
-<li>construction de rapports ad’hoc ou automatisés en routine avec Quarto<br>
-</li>
-<li>etc …</li>
-</ul></li>
-<li><p>nettoyage de scripts de l’interlocuteur : normalisation, optimisation, documentation, bonnes pratiques</p></li>
-<li><p>audit de code PMSI R ou de sources de données PMSI</p></li>
-<li><p>debugage de scripts</p></li>
-<li><p>formation PMSI R tout niveau</p></li>
-</ul>
+<section id="contenu-du-cours" class="level2">
+<h2 class="anchored" data-anchor-id="contenu-du-cours">Contenu du cours</h2>
+<section id="import-de-fichiers-pmsi-à-longueur-fixe" class="level3">
+<h3 class="anchored" data-anchor-id="import-de-fichiers-pmsi-à-longueur-fixe">Import de fichiers PMSI à longueur fixe</h3>
+<p>Import du fichier PMSI MCO le plus basique dans un tibble : un fichier FICUM</p>
+<p>Manipulations élémentaires des variables du tibble issu de l’import du fichier FICUM</p>
+<p>Démarche générique d’imports des fichiers PMSI à longueur fixe</p>
+<p>Script générique commenté d’import des fichiers PMSI à longueur fixe</p>
+<p>Exercices : import fichiers FICHCOMP DMI, partie fixe d’un fichier RSS, fichier Visual Valo séjours</p>
 </section>
-<section id="expert-pmsi-r" class="level2">
-<h2 class="anchored" data-anchor-id="expert-pmsi-r">Expert PMSI R</h2>
-<p>Les séances de Live coding sont réalisées par denis Gustin, ingénieur, concepteur et développeur de PMSISoft, logiciel d’analyse PMSI développé principalement en R.<br>
+<section id="nettoyage-et-enrichissement" class="level3">
+<h3 class="anchored" data-anchor-id="nettoyage-et-enrichissement">Nettoyage et enrichissement</h3>
+<p>Normalisation des variables</p>
+<p>Nettoyage des variables post-import : bonnes pratiques, traitement des situations réellement rencontrées en PMSI MCO</p>
+<p>Enrichissement : libellés, données OVALIDE</p>
+</section>
+<section id="import-des-fichiers-pmsi-à-longueur-variable" class="level3">
+<h3 class="anchored" data-anchor-id="import-des-fichiers-pmsi-à-longueur-variable">Import des fichiers PMSI à longueur variable</h3>
+<p>Scripts d’import complet d’un fichier RSS dans une list de tibbles (rum, das, dad, ccam)</p>
+<p>Généralisation aux autres fichiers à longueur variable : RSA, …</p>
+</section>
+<section id="import-des-fichiers-csv-et-excel" class="level3">
+<h3 class="anchored" data-anchor-id="import-des-fichiers-csv-et-excel">Import des fichiers csv et Excel</h3>
+<p>Scripts génériques d’import des fichiers csv et Excel</p>
+<p>Nettoyage spécifique des variabes post-import fichiers csv et Excel</p>
+<p>Exercices : fichiers OVALIDE, HospiDiag, Plage</p>
+</section>
+<section id="import-des-fichiers-json" class="level3">
+<h3 class="anchored" data-anchor-id="import-des-fichiers-json">Import des fichiers JSON</h3>
+<p>Script générique d’import des fichiers JSON</p>
+</section>
+<section id="import-des-zip" class="level3">
+<h3 class="anchored" data-anchor-id="import-des-zip">Import des zip</h3>
+<p>Script générique d’import d’un zip de fichiers</p>
+<p>Exercice : fichier zip OVALIDE</p>
+</section>
+<section id="export" class="level3">
+<h3 class="anchored" data-anchor-id="export">Export</h3>
+<p>Scrips d’export de tibbles en csv et en fichier texte</p>
+</section>
+</section>
+<section id="livrables" class="level2">
+<h2 class="anchored" data-anchor-id="livrables">Livrables</h2>
+<p>Fichiers de scripts R commentés : plus de 1 000 lignes de codes PMSI R</p>
+<p>Exercices gradués et corrigés</p>
+<p>Jeux de données type “fake” aux formats PMSI MCO 2024</p>
+<p>Assistance codage pendant 1 année par email par le concepteur du cours</p>
+<p>Mises à jour et enrichissements des scripts R pendant 1 année</p>
+</section>
+<section id="pré-requis" class="level2">
+<h2 class="anchored" data-anchor-id="pré-requis">Pré-requis</h2>
+<p>Maîtrise du PMSI, des formats et des logiques des fichiers de production du PMSI</p>
+<p>Manipulations de base en R avec le Tidyverse</p>
+<p>Environnement de travail avec un IDE R : R Studio ou VS Code</p>
+</section>
+<section id="formateur" class="level2">
+<h2 class="anchored" data-anchor-id="formateur">Formateur</h2>
+<p>Le cours <strong>“MCO - Manipuler les fichiers PMSI avec R”</strong> a été conçu et est maintenu par denis Gustin, ingénieur, concepteur et développeur de PMSISoft, logiciel d’analyse PMSI développé principalement en R.<br>
 Il est spécialiste en données PMSI avec plus de 15 ans d’expérience dans les différents PMSI et intervient régulièrement, en tant que formateur et consultant, dans des établissements de santé sur des problématiques d’analyses PMSI et de données de santé.</p>
 <p>Il développe et maintient le package R de données PMSI <a href="https://denisgustin.github.io/refpmsi/index.html" target="_blank">refpmsi::</a>.</p>
 <p>Il anime le blog <a href="https://www.lespmsi.com" target="_blank">lespmsi.com</a></p>
 </section>
-<section id="mise-en-oeuvre" class="level2">
-<h2 class="anchored" data-anchor-id="mise-en-oeuvre">Mise en oeuvre</h2>
-<p>L’interlocuteur a identifié une ou plusieurs problématiques PMSI R, ponctuelles ou récurrentes.</p>
-<p>L’interlocuteur nous contacte en choisissant un nombre d’heures (engagement minimum : 2 heures), en exposant succinctement sa problématique et en proposant un ou 2 créneaux pour une session.</p>
-<p><strong><a href="https://www.lespmsi.com/contact-live-coding-pmsi-r">Réservation session PMSI R</a></strong></p>
-<p>Nous répondons sous 24 heures (validation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, demande de précision, contre-proposition éventuelle de créneaux).</p>
-<p>Les sessions se font via Zoom : nous envoyons un lien de connexion en début de session.</p>
-<p>Chacune de nos interventions se fait avec l’accord et sous le contrôle du médecin DIM et de la politique de gestion des données de l’établissement.</p>
-<p>Les sessions de Live coding sont des prestations d’engagement de moyens, correspondant au temps d’expertise des sessions.</p>
+<section id="tarif-de-la-formation" class="level2">
+<h2 class="anchored" data-anchor-id="tarif-de-la-formation">Tarif de la formation</h2>
+<p>350 € HT (420 € TTC) / stagiaire</p>
+<p>Pour un accès multi-stagiaires ou établissement : <a href="https://www.lespmsi.com/contact-pmsisoft" target="_blank">nous contacter</a> en sélectionnant l’objet “Cours Data PMSI - question”</p>
 </section>
-<section id="tarif-live-coding-pmsi-r" class="level2">
-<h2 class="anchored" data-anchor-id="tarif-live-coding-pmsi-r">Tarif Live coding PMSI R</h2>
-<p>150€ HT / heure</p>
+<section id="commande" class="level2">
+<h2 class="anchored" data-anchor-id="commande">Commande</h2>
+<p><a href="https://www.lespmsi.com/contact-pmsisoft" target="_blank">Commander</a> en sélectionnant l’objet “Cours Data PMSI - commande” et en précisant l’intitulé du cours.</p>
+<p>A réception de votre commande, nous vous recontactons sous 24 heures pour :<br>
+1| valider avec vous votre commande<br>
+2| envoyer le bon de commande à nous retourner signé<br>
+3| à réception du bon de commande signé, vous envoyer les fichiers composant le cours</p>
 </section>
-<section id="autres-prestations" class="level2">
-<h2 class="anchored" data-anchor-id="autres-prestations">Autres prestations</h2>
-<p>Au cas par car, nous pouvons réaliser des formations PMSI R pour un établissement ou un regroupement d’établissements. Dans ce cadre, via un entretien amont, nous personnalisons les exercices et les exemples au contexte du ou des établissements.</p>
-<p><a href="https://www.lespmsi.com/contact-pmsisoft" target="_blank">Contact</a> (avec l’objet “Question formation Data PMSI avec R”)</p>
-</section>
-<section id="etat-desprit" class="level2">
-<h2 class="anchored" data-anchor-id="etat-desprit">Etat d’esprit</h2>
-<p>Le rythme des sessions de Live coding ou de formations PMSI R est soutenu. Elles s’adressent à des professionnels entraînés, à l’aise avec un exercice intellectuel prolongé.</p>
-<p>L’export et les interlocuteurs partagent une approche exigeante, curieuse et ouverte des problématiques traitées.</p>
+<section id="faq" class="level2">
+<h2 class="anchored" data-anchor-id="faq">FAQ</h2>
+<p><strong>Puis-je apprendre et coder seul, sans utiliser ce cours, les scripts R de manipulation des fichiers PMSI MCO ? </strong></p>
+<p>Oui. Il est bien sûr possible d’apprendre seul et de réussir à coder les scripts R du cours. Il existe de nombreuses ressources pour apprendre et s’exercer en data manipulation avec R et de plus en plus de scripts PMSI R, à commencer par notre site <a href="https://www.datapmsi.com">datapmsi.com</a></p>
+<p>Mais cela demande des centaines d’heures de recherche en ligne, de pratiques, de tests, de bugs à corriger, de réflexions, avec son lot de découragements et de fausses pistes.</p>
+<p>Ce cours condense et présente de manière didactique et graduée les meilleurs pratiques éprouvées de scripts R pour manipuler les fichiers PMSI MCO avec R pour vous offrir une expérience d’apprentissage efficace avec des résultats rapides.</p>
+<p><strong>Ai-je besoin d’une grande expérience de R pour bénéficier de ce cours ?</strong></p>
+<p>Le cours suppose acquis ces <a href="https://www.datapmsi.com/base_r">pré-requis R</a>.</p>
+<p><strong>Ai-je besoin de connaître le PMSI MCO pour bénéficier de ce cours ?</strong></p>
+<p>Oui. Le cours suppose une maîtrise professionnelle des fichiers PMSI MCO, tant du point de vue technique (types de fichiers, localisation de ces fichiers dans le SI de l’établissement, variables des fichiers) que fonctionnel (significations PMSI des fichiers et des variables).</p>
+<p><strong>Combien de temps pour pratiquer le cours ?</strong></p>
+<p>Il n’y a pas de réponse universelle à cette question.</p>
+<p>Nous invitons à pratiquer le cours de manière régulière sur plusieurs semaines, quelques heures par semaine, dans le contexte des fichiers de votre établissement.<br>
+Un travail régulier pendant 4 semaines devrait permettre un acquis raisonnable du cours.</p>
+<p>Les scripts du cours consituent aussi pour vous une bibliothèque de bonnes pratiques et de “bouts” de code à reprendre pour vos scripts PMSI avec R.</p>
+<p><strong>Que se passera-t-il après une année ?</strong></p>
+<p>Nous proposerons une offre à tarif réduit aux stagiaires qui souhaiteront bénéficier d’une nouvelle année d’assistance (assistance email, mises à jour et nouveaux scripts R)</p>
 
 
 </section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notes de bas de page</h2>
-
-<ol>
-<li id="fn1"><p>nous nous laissons le droit de ne pas donner suite à une demande.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -147,16 +147,23 @@ window.Quarto = {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link active" href="./formation.html" aria-current="page"> 
-<span class="menu-text">Formations PMSI R</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-cours-pmsi-et-r" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Cours PMSI et R</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-cours-pmsi-et-r">    
+        <li>
+    <a class="dropdown-item" href="./formation_mco_file_pmsi.html">
+ <span class="dropdown-text">MCO - Manipuler les fichiers PMSI avec R</span></a>
   </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./prestation.html"> 
 <span class="menu-text">Live coding PMSI R</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./guide_post.html"> 
+    <a class="nav-link active" href="./guide_post.html" aria-current="page"> 
 <span class="menu-text">Guide des scripts</span></a>
   </li>  
   <li class="nav-item">
@@ -206,24 +213,6 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./formation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Formations PMSI R</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./prestation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Live coding PMSI R</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./guide_post.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Guide des scripts</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./scripts_mco.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scripts MCO</span></a>
   </div>
@@ -238,6 +227,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./scripts_psy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scripts PSY</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./guide_post.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guide des scripts</span></a>
   </div>
 </li>
     </ul>
@@ -260,13 +255,12 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Formation “Fichiers PMSI en dataframe R”
+<strong>NOUVEAU</strong> cours [MCO - Manipuler les fichiers PMSI en R]
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Produire des dataframe à partir des fichiers du PMSI pour analyser, en toute autonomie, le PMSI de mes établissements avec R</p>
-<p><strong>Vendredi 6 décembre 2024 de 9h à 12h30</strong></p>
-<p><a href="./formation.html">Programme, méthodologie, tarif et pré-inscription</a></p>
+<p>Un cours pour importer, nettoyer et exploiter vos fichiers PMSI MCO en R en toute autonomie.</p>
+<p><a href="./formation_mco_file_pmsi.html">Programme détaillé, livrables et tarif</a></p>
 </div>
 </div>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>

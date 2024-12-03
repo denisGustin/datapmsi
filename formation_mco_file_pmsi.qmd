@@ -1,0 +1,145 @@
+---
+title: "<span style='font-family: Boska; font-size: 2.75rem; font-weight: 800;'>[MCO - Manipuler les fichiers PMSI avec R]</span>"
+lang: fr
+---
+
+::: {.callout-tip}
+## Les cours Data PMSI 
+
+Des années d'expérience de codage PMSI avec R condensées dans des cours pratiques  
+
+Des scripts R documentés, étape par étape, régulièrement mis à jour, **à exécuter avec les données de votre établissement**  
+
+Une assistance PMSI R par email  
+:::
+
+## Objectifs  
+
+**1|** Apprendre à manipuler les fichiers du PMSI MCO (rss, rsa, rhs, fichcomp, anohosp, Visual Valo séjours, OVALIDE, ...) au format texte ou csv en R pour produire des data frames de données exploitables en analyse PMSI.  
+
+**2|** Etre autonome dans la manipulation des fichiers PMSI MCO en R  
+
+## Contenu du cours   
+
+### Import de fichiers PMSI à longueur fixe  
+
+Import du fichier PMSI MCO le plus basique dans un tibble : un fichier FICUM  
+
+Manipulations élémentaires des variables du tibble issu de l'import du fichier FICUM  
+
+Démarche générique d'imports des fichiers PMSI à longueur fixe  
+
+Script générique commenté d'import des fichiers PMSI à longueur fixe  
+
+Exercices : import fichiers FICHCOMP DMI, partie fixe d'un fichier RSS, fichier Visual Valo séjours  
+
+### Nettoyage et enrichissement  
+
+Normalisation des variables  
+
+Nettoyage des variables post-import : bonnes pratiques, traitement des situations réellement rencontrées en PMSI MCO  
+
+Enrichissement : libellés, données OVALIDE  
+
+### Import des fichiers PMSI à longueur variable   
+
+Scripts d'import complet d'un fichier RSS dans une list de tibbles (rum, das, dad, ccam)  
+
+Généralisation aux autres fichiers à longueur variable : RSA, ...  
+
+### Import des fichiers csv et Excel  
+
+Scripts génériques d'import des fichiers csv et Excel
+
+Nettoyage spécifique des variabes post-import fichiers csv et Excel  
+
+Exercices : fichiers OVALIDE, HospiDiag, Plage  
+
+### Import des fichiers JSON  
+
+Script générique d'import des fichiers JSON  
+
+### Import des zip  
+
+Script générique d'import d'un zip de fichiers  
+
+Exercice : fichier zip OVALIDE  
+
+### Export 
+
+Scrips d'export de tibbles en csv et en fichier texte  
+
+## Livrables  
+
+Fichiers de scripts R commentés : plus de 1 000 lignes de codes PMSI R  
+
+Exercices gradués et corrigés  
+
+Jeux de données type "fake" aux formats PMSI MCO 2024  
+
+Assistance codage pendant 1 année par email par le concepteur du cours  
+
+Mises à jour et enrichissements des scripts R pendant 1 année  
+
+## Pré-requis  
+
+Maîtrise du PMSI, des formats et des logiques des fichiers de production du PMSI  
+
+Manipulations de base en R avec le Tidyverse  
+
+Environnement de travail avec un IDE R : R Studio ou VS Code  
+
+## Formateur  
+
+Le cours **"MCO - Manipuler les fichiers PMSI avec R"** a été conçu et est maintenu par denis Gustin, ingénieur, concepteur et développeur de PMSISoft, logiciel d’analyse PMSI développé principalement en R.  
+Il est spécialiste en données PMSI avec plus de 15 ans d’expérience dans les différents PMSI et intervient régulièrement, en tant que formateur et consultant, dans des établissements de santé sur des problématiques d’analyses PMSI et de données de santé.  
+
+Il développe et maintient le package R de données PMSI [refpmsi::](https://denisgustin.github.io/refpmsi/index.html){target="_blank"}.  
+
+Il anime le blog [lespmsi.com](https://www.lespmsi.com){target="_blank"}  
+
+## Tarif de la formation   
+
+350 € HT (420 € TTC) / stagiaire  
+
+Pour un accès multi-stagiaires ou établissement : [nous contacter](https://www.lespmsi.com/contact-pmsisoft){target="_blank"} en sélectionnant l'objet "Cours Data PMSI - question"  
+
+## Commande  
+
+[Commander](https://www.lespmsi.com/contact-pmsisoft){target="_blank"} en sélectionnant l'objet "Cours Data PMSI - commande" et en précisant l'intitulé du cours.  
+
+A réception de votre commande, nous vous recontactons sous 24 heures pour :  
+1| valider avec vous votre commande  
+2| envoyer le bon de commande à nous retourner signé  
+3| à réception du bon de commande signé, vous envoyer les fichiers composant le cours  
+
+## FAQ  
+
+**Puis-je apprendre et coder seul, sans utiliser ce cours, les scripts R de manipulation des fichiers PMSI MCO ?  **  
+
+Oui. Il est bien sûr possible d'apprendre seul et de réussir à coder les scripts R du cours. Il existe de nombreuses ressources pour apprendre et s'exercer en data manipulation avec R et de plus en plus de scripts PMSI R, à commencer par notre site [datapmsi.com](https://www.datapmsi.com)  
+
+Mais cela demande des centaines d'heures de recherche en ligne, de pratiques, de tests, de bugs à corriger, de réflexions, avec son lot de découragements et de fausses pistes.  
+
+Ce cours condense et présente de manière didactique et graduée les meilleurs pratiques éprouvées de scripts R pour manipuler les fichiers PMSI MCO avec R pour vous offrir une expérience d'apprentissage efficace avec des résultats rapides.  
+
+**Ai-je besoin d'une grande expérience de R pour bénéficier de ce cours ?**  
+
+Le cours suppose acquis ces [pré-requis R](https://www.datapmsi.com/base_r).  
+
+**Ai-je besoin de connaître le PMSI MCO pour bénéficier de ce cours ?**  
+
+Oui. Le cours suppose une maîtrise professionnelle des fichiers PMSI MCO, tant du point de vue technique (types de fichiers, localisation de ces fichiers dans le SI de l'établissement, variables des fichiers) que fonctionnel (significations PMSI des fichiers et des variables).  
+
+**Combien de temps pour pratiquer le cours ?**  
+
+Il n'y a pas de réponse universelle à cette question.  
+
+Nous invitons à pratiquer le cours de manière régulière sur plusieurs semaines, quelques heures par semaine, dans le contexte des fichiers de votre établissement.  
+Un travail régulier pendant 4 semaines devrait permettre un acquis raisonnable du cours.  
+
+Les scripts du cours consituent aussi pour vous une bibliothèque de bonnes pratiques et de "bouts" de code à reprendre pour vos scripts PMSI avec R.  
+
+**Que se passera-t-il après une année ?**  
+
+Nous proposerons une offre à tarif réduit aux stagiaires qui souhaiteront bénéficier d'une nouvelle année d'assistance (assistance email, mises à jour et nouveaux scripts R)  

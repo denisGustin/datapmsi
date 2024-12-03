@@ -8,8 +8,10 @@ website:
   navbar:
     background: "#447099"
     left: 
-      - href: formation.qmd
-        text: "Formations PMSI R"
+      - text: "Cours PMSI et R"
+        menu:
+          - href: "formation_mco_file_pmsi.qmd"
+            text: "MCO - Manipuler les fichiers PMSI avec R"
       - href: prestation.qmd
         text: "Live coding PMSI R"
       - href: guide_post.qmd
@@ -26,18 +28,14 @@ website:
   sidebar: 
     style: docked
     contents: 
-      - href: formation.qmd
-        text: "Formations PMSI R"
-      - href: prestation.qmd
-        text: "Live coding PMSI R"
-      - href: guide_post.qmd
-        text: "Guide des scripts"
       - href: scripts_mco.qmd
         text: "Scripts MCO"
       - href: scripts_smr.qmd
         text: "Scripts SMR"
       - href: scripts_psy.qmd
         text: "Scripts PSY"
+      - href: guide_post.qmd
+        text: "Guide des scripts"
   page-footer:
     left: "Blog codé avec [Quarto](https://quarto.org/)"
     right: "[Mentions légales](../about.html) | &copy; Copyright 2023-2024 - DATAMIS"
