@@ -22,14 +22,14 @@
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Pour chaque couple (journée, patient), calcul du nombre d’actes ambulatoires codés.<br>
-Puis mise en casemix, selon le nombre d’actes par (journée, patient) rencontré, avec pour chacune de ces situations, le calcul du nombre d’actes ambulatoires concernés, le nombre de patients différents concernés et le pourcentage représenté par le nombre d’actes par rapport au total des actes.</p>
+<p>Pour chaque couple (journée, patient), calcul du nombre d’actes ambulatoires codés.</p>
+<p>Puis mise en casemix, selon le nombre d’actes par (journée, patient) rencontré, avec pour chacune de ces situations, le calcul du nombre d’actes ambulatoires concernés, le nombre de patients différents concernés et le pourcentage représenté par le nombre d’actes par rapport au total des actes.</p>
 <p>Les journées sont identifiées via la variable <code>date_acte</code> et les patients via la variable <code>no_ipp</code></p>
 <p>Ce casemix permet ainsi de répondre à des questions comme celles-ci :<br>
 1| Quelle est la part des actes ambulatoires codés 1 seule fois par (journée, patient) ?<br>
 2| Combien d’actes ambulatoires sont-ils codés dans des situations de 2 actes par (journée, patient) ?<br>
-2| Quel est le nombre de patients ayant bénéficié au moins 1 journée de 5 actes dans une journée ?<br>
-3| Y-a-t-il des situations avec &gt; 15 actes codés pour un patient ? (cf motif d’exclusion de la DFA)</p>
+3| Quel est le nombre de patients ayant bénéficié au moins 1 journée de 5 actes dans une journée ?<br>
+4| Y-a-t-il des situations avec &gt; 15 actes codés pour un patient ? (cf motif d’exclusion de la DFA)</p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>

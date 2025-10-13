@@ -16,8 +16,8 @@ Les journées sont identifiées via la variable `date_acte` et les patients via 
 Ce casemix permet ainsi de répondre à des questions comme celles-ci :  
 1| Quelle est la part des actes ambulatoires codés 1 seule fois par (journée, patient) ?  
 2| Combien d'actes ambulatoires sont-ils codés dans des situations de 2 actes par (journée, patient) ?  
-2| Quel est le nombre de patients ayant bénéficié au moins 1 journée de 5 actes dans une journée ?  
-3| Y-a-t-il des situations avec > 15 actes codés pour un patient ? (cf motif d'exclusion de la DFA)  
+3| Quel est le nombre de patients ayant bénéficié au moins 1 journée de 5 actes dans une journée ?  
+4| Y-a-t-il des situations avec > 15 actes codés pour un patient ? (cf motif d'exclusion de la DFA)  
 
 ## Code  
 
