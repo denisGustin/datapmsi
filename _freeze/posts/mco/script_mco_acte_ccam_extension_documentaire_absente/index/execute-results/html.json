@@ -1,0 +1,15 @@
+{
+  "hash": "8a128410624d47fae10adb9f08ea9791",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b>Actes CCAM avec extension documentaire obligatoire mais absente</b>\"\ndate: \"2024-06-09\"\ncategories: [MCO,CCAM]\npage-layout: full\n---\n\n\n## Introduction  \n\nRappel : les actes d'anesthésie appelent le codage d'une extension documentaire  \n\nOn suppose ici que la table des actes CCAM intègre la clé d'identification des RUM (no_rss,no_rum) permettant de rapprocher les RUM et les actes CCAM  \n\nOn repère les actes d'anesthésie via activite_ccam == 4  \n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\n\nactes_ccam_no_extension_documentaire <-mco_rum$ccam %>% \n    dplyr::select(nas,no_rss,no_rum,code_ccam,activite_ccam,extension_documentaire_ccam) %>% \n    dplyr::filter(activite_ccam == \"4\", is.na(extension_documentaire_ccam))\nactes_ccam_no_extension_documentaire\n```\n:::\n\n\n## Commentaires  \n\nLigne 3 : `mco_rss$ccam` est un tibble des actes CCAM. Voir [Guide des scripts - Jeux de données](https://www.datapmsi.com/guide_post#via-pmsisoft-standard)  \n\nCette requête est réalisable dans [PMSISoft MCO](https://www.pmsisoft.com/acces_pmsisoft_mco){target=\"_blank\"} dans l'écran `Codage CCAM > Base des actes CCAM` via le filtrage de variables `activite_ccam Egal à 4 ET extension_documentaire_ccam Est vide`  \n\n[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target=\"_blank\"}  \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

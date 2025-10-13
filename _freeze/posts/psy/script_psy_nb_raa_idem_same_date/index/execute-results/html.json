@@ -1,0 +1,15 @@
+{
+  "hash": "deb5a5d6e32e73c16d20edf083eb108b",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b>Nombre d'actes ambulatoires identiques pour une même date</b>\"\ndate: \"2024-09-10\"\ncategories: [PSY,RAA]\npage-layout: full\n---\n\n\n## Introduction  \n\nPour chaque acte ambulatoire caractérisé par toutes ses variables de la partie fixe, on calcule le nombre de doublon.  \n\nOn peut alors filter les situations sans doublon, avec 1 doublon, 2 doublons, etc...   \n\nVoir le contrôle qualité OVALIDE \"1.Q.10.NBAI : Nombre d'actes identiques\" que l'on a adapté ici de manière à la fois plus restrictive avec recherche de doublon sur la date et non sur le mois et à la fois plus riche en produisant la table de toutes les situations de doublon.  \n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\n\nraa_idem_date <- psy_raa$raa %>% \n    dplyr::add_count(across(c(no_ipp,age,sexe_patient,cp_residence,no_secteur_dispositif_intersectoriel,finess_geographique,no_um,\n                              date_acte,dp,indicateur_activite_liberale,\n                              forme_activite,mode_legal_soins,nb_das,modalite_realisation_acte,\n                              nb_intervenants,categorie_professionnelle_intervenant, nature_acte, lieu_acte)), name = \"doublon_acte\")\nraa_idem_date\n\n# les situations avec doublon_acte > 1\nraa_idem_date %>% dplyr::filter(doublon_acte > 1)\n```\n:::\n\n\n## Commentaires  \n\nLigne 3 : `psy_raa$raa` est un tibble des variables RAA. Voir [Guide des scripts - Jeux de données](https://www.datapmsi.com/guide_post#via-pmsisoft-standard) \n\nLigne 4 : joli cas d'usage de la fonction `dplyr::add_count()` qui représente un `dplyr::group_by()` + `dplyr::mutate()`  \n\nCe requête est disponible dans l'écran `Requêtes PSY > Requêtes RAA` de [PMSISoft PSY](https://www.pmsisoft.com/acces_pmsisoft_psy){target=\"_blank\"} sous le libellé `Actes identiques [1.Q.10.NBAI]`  \n\n[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target=\"_blank\"}  \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -17,11 +17,11 @@ toc: false
 ---
 
 ::: {.callout-tip}
-## **NOUVEAU** cours [MCO - Manipuler les fichiers PMSI en R]  
+## **Live coding PMSI R**  
 
-Un cours pour importer, nettoyer et exploiter vos fichiers PMSI MCO en R en toute autonomie.  
+Session à l’heure pour vous accompagner dans le codage, l'analyse et la documentation de vos scripts PMSI R  
 
-[Programme détaillé, livrables et tarif](formation_mco_file_pmsi.qmd)  
+[Programme détaillé, livrables et tarif](prestation.qmd)  
 :::
 
 [Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  

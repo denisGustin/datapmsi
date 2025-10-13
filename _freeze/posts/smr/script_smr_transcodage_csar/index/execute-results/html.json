@@ -1,0 +1,15 @@
+{
+  "hash": "b2fc80258c99e3cd27001b101a52c1db",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b>Transcodage des actes CSARR en CSAR</b>\"\ndate: \"2024-09-13\"\ncategories: [SMR,CSARR,CSAR]\npage-layout: full\n---\n\n\n## Introduction  \n\nOn transcode les actes CSARR dans le nouveau référentiel CSAR en faisant appel aux référentiels `csar_transcodage` et `csar_code` du package `refpmsi` \n\n[Documentation ATIH CSAR 2025](https://www.atih.sante.fr/simplification-du-csarr-guide-de-codage-csar-0){target=\"_blank\"}  \n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\nlibrary(refpmsi)\n\ncsarr_code <- refpmsi::refpmsi(csarr_code)\ncsarr_libelle <-  csarr_code %>% dplyr::slice_head(n = 1, by = csarr_code) %>% dplyr::select(csarr_code,csarr_libelle)\n\ncsar_transcodage <- refpmsi::refpmsi(csar_transcodage)\ncsar_code <- refpmsi::refpmsi(csar_code)\n\nbase_csarr_csar <- smr_rhs$csarr %>% \n    dplyr::select(nas,no_semaine,code_csarr) %>% \n    dplyr::left_join(csarr_libelle, by = join_by(code_csarr == csarr_code)) %>% \n    dplyr::left_join(csar_transcodage, by = join_by(code_csarr == csarr_code)) %>% \n    dplyr::left_join(csar_code %>% dplyr::select(csar_code, csar_libelle), by = join_by(csar_code == csar_code))\nbase_csarr_csar\n```\n:::\n\n\n## Commentaires  \n\nLigne 4 : voir [Documentation ](https://denisgustin.github.io/refpmsi/articles/csarr.html#csarr-code){target=\"_blank\"}  \n\nLignes 7 et 8 : voir [Documentation ](https://denisgustin.github.io/refpmsi/articles/csar.html){target=\"_blank\"}  \n\nLigne 10 : `smr_rhs$csarr` est un tibble des variables `csarr` liées aux RHS  \n\nLigne 13 : le transcodage proprement dit  \n\nLigne 14 : rapatriement des libellés CSAR  \n\nLe transcodage des actes CSARR en CSAR est disponible dans les écrans CSARR [PMSISoft SMR](https://www.pmsisoft.com/acces_pmsisoft_ssr){target=\"_blank\"}  \n\n[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target=\"_blank\"}  \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

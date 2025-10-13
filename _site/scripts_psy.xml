@@ -10,7 +10,153 @@
 <atom:link href="https://www.datapmsi.com/scripts_psy.xml" rel="self" type="application/rss+xml"/>
 <description>Codes et formations R pour les PMSI MCO, SMR, PSY et HAD</description>
 <generator>quarto-1.4.551</generator>
-<lastBuildDate>Mon, 14 Oct 2024 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 11 Oct 2025 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Casemix nombre d’actes ambulatoires et patients par (journée, patient)</title>
+  <dc:creator>denis Gustin</dc:creator>
+  <link>https://www.datapmsi.com/posts/psy/script_psy_nb_acte_patient_same_day/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Pour chaque couple (journée, patient), calcul du nombre d’actes ambulatoires codés.<br>
+Puis mise en casemix, selon le nombre d’actes par (journée, patient) rencontré, avec pour chacune de ces situations, le calcul du nombre d’actes ambulatoires concernés, le nombre de patients différents concernés et le pourcentage représenté par le nombre d’actes par rapport au total des actes.</p>
+<p>Les journées sont identifiées via la variable <code>date_acte</code> et les patients via la variable <code>no_ipp</code></p>
+<p>Ce casemix permet ainsi de répondre à des questions comme celles-ci :<br>
+1| Quelle est la part des actes ambulatoires codés 1 seule fois par (journée, patient) ?<br>
+2| Combien d’actes ambulatoires sont-ils codés dans des situations de 2 actes par (journée, patient) ?<br>
+2| Quel est le nombre de patients ayant bénéficié au moins 1 journée de 5 actes dans une journée ?<br>
+3| Y-a-t-il des situations avec &gt; 15 actes codés pour un patient ? (cf motif d’exclusion de la DFA)</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"></span>
+<span id="cb1-3">casemix_nb_actes_same_day <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> psy_raa<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>raa <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-4">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(no_ipp,date_acte) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-5">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.by =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(no_ipp,date_acte),</span>
+<span id="cb1-6">                     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">categorie_acte_same_ipp_date =</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>()</span>
+<span id="cb1-7">                     ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.by =</span> categorie_acte_same_ipp_date,</span>
+<span id="cb1-9">                     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nb_categorie_acte_same_ipp_date =</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>(),</span>
+<span id="cb1-10">                     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nb_ipp_same_ipp_date =</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n_distinct</span>(no_ipp, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb1-11">                     ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-12">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nb_acte_categorie_acte_same_ipp_date =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(nb_categorie_acte_same_ipp_date<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>categorie_acte_same_ipp_date),</span>
+<span id="cb1-13">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">percent_categorie_acte_same_ipp_date =</span> nb_categorie_acte_same_ipp_date<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>nb_acte_categorie_acte_same_ipp_date) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-14">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(categorie_acte_same_ipp_date) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-15">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(categorie_acte_same_ipp_date,nb_categorie_acte_same_ipp_date,percent_categorie_acte_same_ipp_date,</span>
+<span id="cb1-16">                  nb_ipp_same_ipp_date)</span>
+<span id="cb1-17">casemix_nb_actes_same_day</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level2">
+<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Ligne 3 : <code>psy_raa$raa</code> est un tibble des variables RAA. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
+<p>Lignes 5-7 : calcul par (journée, patient) du nombre d’actes ambulatoires codés</p>
+<p>Ligne 8 : <code>.by = c(no_ipp,date_acte)</code> permet de grouper directement dans le <code>summarise()</code> sans avoir à passer par un <code>group_by()</code></p>
+<p>Ligne 10 : l’option <code>na.rm = TRUE</code> de <code>dplyr::n_distinct()</code> gère les situations où aucun <code>no_ipp</code> n’est renseigné</p>
+<p>Ligne 12 : le calcul de <code>nb_acte_categorie_acte_same_ipp_date</code> comme <code>sum(nb_categorie_acte_same_ipp_date*categorie_acte_same_ipp_date)</code> est une manière de faire. Il y en a d’autres.</p>
+<p>Ligne 15-16 : sélection des seules variables intéressantes pour le casemix</p>
+</section>
+<section id="pmsisoft-psy" class="level2">
+<h2 class="anchored" data-anchor-id="pmsisoft-psy">PMSISoft PSY</h2>
+<p>En extrayant la base des RAA à partir de l’écran <code>Base des RAA</code>, possibilité de filtrer en amont les RAA (par exemple les seuls actes réalisés par une catégorie professionnelle d’intervenant)</p>
+<p><a href="https://www.pmsisoft.com/acces_pmsisoft_psy" target="_blank">PMSISoft PSY</a></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>PSY</category>
+  <category>RAA</category>
+  <guid>https://www.datapmsi.com/posts/psy/script_psy_nb_acte_patient_same_day/</guid>
+  <pubDate>Sat, 11 Oct 2025 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>File active avec acte DR et sans acte EGA</title>
   <dc:creator>denis Gustin</dc:creator>

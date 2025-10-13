@@ -1,0 +1,14 @@
+{
+  "hash": "4c698e5febeb96c9d85e5ab2290eff26",
+  "result": {
+    "markdown": "---\ntitle: \"Enrichissement de données MCO\"\ndescription: |\n  Série de scripts relatifs à la production de variables calculées\nauthor: denis G\ndate: \"2024-02-02\"\ncategories: [MCO]\npage-layout: full\n---\n\n\n## Calcul mode_entree_sejour et provenance_sejour et sortie et destination  \n\nDe\n\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 2\n```\n:::\n:::\n\n\n## Ajout libellé CIM-10 aux DP RUM  \n\nDe",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

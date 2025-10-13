@@ -1,0 +1,15 @@
+{
+  "hash": "b5eeebcc21b2a455a06c936a15cbe464",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b>Séjours RAAC</b>\"\ndate: \"2024-09-11\"\ncategories: [MCO]\npage-layout: full\n---\n\n\n## Introduction  \n\nRappel : la variable `raac` (variable de la partie fixe des RUM) a 3 valeurs possibles (NA, 1 \"Prise en charge RAAC\", 2 \"Pas de prise en charge RAAC\")  \n\nOn calcule une variable logique `sejour_raac`par séjour qui vaut TRUE si le séjour a au moins 1 RUM avec la variable `raac` == 1 et FALSE sinon.  \n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\n\nsejour_raac <- mco_rss$rum %>% \n    dplyr::select(nas,no_rss,no_rum,raac) %>% \n    dplyr::mutate(.by = no_rss,\n                  raac_sejour = any(raac == \"1\", na.rm = TRUE)) %>% \n    dplyr::distinct(nas,no_rss,raac_sejour)\nsejour_raac\n```\n:::\n\n\n## Commentaires  \n\nLigne 3 : `mco_rss$rum` est un tibble des variables de la partie fixe des RUM. Voir [Guide des scripts - Jeux de données](https://www.datapmsi.com/guide_post#via-pmsisoft-standard)  \n\nLigne 6 : l'argument `na.rm = TRUE` de la fonction `àny()` gère le cas où la variable `raac` des RUM est NA  \n\nLigne 7 : on passe d'un tibble de RUM à un tibble de séjours via le `dplyr::distinct()` de variables liées au séjour  \n\nLes séjours RAAC sont filtrables dans tous les écrans de [PMSISoft MCO](https://www.pmsisoft.com/acces_pmsisoft_mco){target=\"_blank\"} via le filtrage de variables `sejour_raac TRUE`  \n\n[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target=\"_blank\"}  \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

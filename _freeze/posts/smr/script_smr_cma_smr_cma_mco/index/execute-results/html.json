@@ -1,0 +1,15 @@
+{
+  "hash": "f8a4144f48417916aaf7825eb6a0130a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b>CMA SMR et CMA MCO communes</b>\"\ndate: \"2024-09-16\"\ncategories: [SMR,MCO,CMA,CIM-10]\npage-layout: full\n---\n\n\n## Introduction  \n\nOn se restreint à la campagne 2024 en SMR et en MCO.  \n\nPremière analyse : pour chaque code CIM-10 CMA SMR 2024, on associe le niveau de sévérité CMA MCO 2024 du code CIM-10 si il existe.  \n\nDeuxième analyse : pour chaque code CIM-10 CMA MCO 2024, on associe une valeur logique `is_cma_smr` selon que ce code est CMA SMR 2024 ou pas.  \n\nOn enrichit ces 2 listes avec le libellé CIM-10 de chaque CMA.  \n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\nlibrary(tidyr)\nlibrary(refpmsi)\n\ncma_smr <- refpmsi::refpmsi(cma_smr,2024) %>% dplyr::select(cma_smr_code)\ncma_mco <- refpmsi::refpmsi(cma_mco,2024) %>% dplyr::select(cma_mco_code,cma_mco_severite)\ncim_libelle <- refpmsi::refpmsi(cim_libelle) %>% dplyr::select(cim_code,cim_libelle)\n\ncma_smr_and_mco <- cma_smr %>% \n    dplyr::left_join(cma_mco, by = join_by(cma_smr_code == cma_mco_code)) %>% \n    dplyr::left_join(cim_libelle, by = join_by(cma_smr_code == cim_code))\ncma_smr_and_mco\n\ncma_mco_and_smr <- cma_mco %>% \n    dplyr::left_join(cma_smr %>% dplyr::mutate(is_cma_smr = TRUE), by = join_by(cma_mco_code == cma_smr_code)) %>% \n    tidyr::replace_na(list(is_cma_smr = FALSE)) %>% \n    dplyr::left_join(cim_libelle, by = join_by(cma_mco_code == cim_code))\ncma_mco_and_smr\n```\n:::\n\n\n## Commentaires  \n\nLigne 5 : voir [Documentation](https://denisgustin.github.io/refpmsi/articles/cim.html#cma-smr){target=\"_blank\"}  \n\nLigne 6 : voir [Documentation](https://denisgustin.github.io/refpmsi/articles/cim.html#cma-mco){target=\"_blank\"}  \n\nLigne 7 : voir [Documentation](https://denisgustin.github.io/refpmsi/articles/cim.html#cim-libell%C3%A9){target=\"_blank\"}  \n\nLigne 16 : via `tidyr::replace_na()` on force les situations où `is_cma_smr` est NA suite à la ligne 15 à FALSE  \n\n[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target=\"_blank\"}  \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
