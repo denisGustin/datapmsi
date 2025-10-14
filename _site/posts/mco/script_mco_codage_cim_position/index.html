@@ -256,8 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Il est intéressant et courant de vouloir travailler sur la base de l’ensemble des codages CIM-10, indépendamment de la position de codage (DP, DR, DAS ou DAD).</p>
-<p>Pour ce faire, nous allons constituer un tibble des codages CIM-10 pour chacune des 4 positions possibles de codage, en faisant en sorte que ces 4 tibbles aient les mêmes variables. Puis, nous “empilerons” les 4 tibbles.</p>
+<p>Pour construire la base de l’ensemble des codages CIM-10, indépendamment de la position de codage (DP, DR, DAS ou DAD). nous allons créer un tibble des codages CIM-10 pour chacune des 4 positions possibles de codage, en faisant en sorte que ces 4 tibbles aient les mêmes variables. Puis, nous “empilerons” les 4 tibbles.</p>
 <p>Le tibble calculé <code>codage_cim</code> comprend les variable d’identification du RUM (<code>nas</code>,<code>no_rss</code>,<code>no_rum</code>), le code CIM-10, son libellé et sa position.</p>
 <p>L’exploitation classique de ce tibble des codages CIM est le repérage des séjours avec présence d’une pathologie qualifiée par un ou plusieurs code CIM-10.</p>
 </section>
