@@ -8,7 +8,7 @@
 
 <meta name="author" content="denis Gustin">
 
-<title>Data PMSI - Casemix nombre d’actes ambulatoires et patients par (journée, patient)</title>
+<title>Data PMSI - Actes CSARR ASS hors préparation ou suivi de dossier</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -163,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><b>Casemix nombre d’actes ambulatoires et patients par (journée, patient)</b></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><b>Actes CSARR ASS hors préparation ou suivi de dossier</b></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -208,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
   <li><a href="#commentaires" id="toc-commentaires" class="nav-link" data-scroll-target="#commentaires">Commentaires</a></li>
-  <li><a href="#pmsisoft-psy" id="toc-pmsisoft-psy" class="nav-link" data-scroll-target="#pmsisoft-psy">PMSISoft PSY</a></li>
+  <li><a href="#pmsisoft-smr" id="toc-pmsisoft-smr" class="nav-link" data-scroll-target="#pmsisoft-smr">PMSISoft SMR</a></li>
   </ul>
 </nav>
 </nav>
@@ -221,10 +221,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><b>Casemix nombre d’actes ambulatoires et patients par (journée, patient)</b></h1>
+<h1 class="title"><b>Actes CSARR ASS hors préparation ou suivi de dossier</b></h1>
   <div class="quarto-categories">
-    <div class="quarto-category">PSY</div>
-    <div class="quarto-category">RAA</div>
+    <div class="quarto-category">SMR</div>
+    <div class="quarto-category">CSARR</div>
+    <div class="quarto-category">CSAR</div>
   </div>
   </div>
 
@@ -256,56 +257,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Pour chaque couple (journée, patient), calcul du nombre d’actes ambulatoires codés.</p>
-<p>Puis mise en casemix, selon le nombre d’actes par (journée, patient) rencontré, avec pour chacune de ces situations, le calcul du nombre d’actes ambulatoires concernés, le nombre de patients différents concernés et le pourcentage représenté par le nombre d’actes par rapport au total des actes.</p>
-<p>Les journées sont identifiées via la variable <code>date_acte</code> et les patients via la variable <code>no_ipp</code></p>
-<p>Ce casemix permet ainsi de répondre à des questions comme celles-ci :<br>
-1| Quelle est la part des actes ambulatoires codés 1 seule fois par (journée, patient) ?<br>
-2| Combien d’actes ambulatoires sont-ils codés dans des situations de 2 actes par (journée, patient) ?<br>
-3| Quel est le nombre de patients ayant bénéficié au moins 1 journée de 5 actes dans une journée ?<br>
-4| Y-a-t-il des situations avec &gt;= 15 actes codés pour un patient ? (cf motif d’exclusion de la DFA)</p>
+<p>Le nouveau CSAR 1R identifie les actes de préparation ou de suivi de dossier via la lettre P en 3eme position (exemple : 11P02 <em>Préparation et/ou suivi de l’avancement d’un dossier de demande de prestation sociale ou d’une démarche administrative</em>)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Pour repérer les actes ASS hors préparation ou suivi de dossier, nous allons donc successivement :<br>
+1| isoler les actes de préparation ou suivi de dossier en CSARR et CSAR<br>
+2| filtrer les actes réalisés par les Assistant de Service Social (code 62)<br>
+3| repérer les actes qui NE sont PAS des actes de préparation ou de suivi de dossier<br>
+4| enrichir avec les libellés CSARR</p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>casemix_nb_actes_same_day <span class="ot">&lt;-</span> psy_raa<span class="sc">$</span>raa <span class="sc">|&gt;</span> </span>
-<span id="cb1-4"><a href="#cb1-4"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(no_ipp,date_acte) <span class="sc">|&gt;</span> </span>
-<span id="cb1-5"><a href="#cb1-5"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">.by =</span> <span class="fu">c</span>(no_ipp,date_acte),</span>
-<span id="cb1-6"><a href="#cb1-6"></a>                     <span class="at">categorie_acte_same_ipp_date =</span> dplyr<span class="sc">::</span><span class="fu">n</span>()</span>
-<span id="cb1-7"><a href="#cb1-7"></a>                     ) <span class="sc">|&gt;</span> </span>
-<span id="cb1-8"><a href="#cb1-8"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">.by =</span> categorie_acte_same_ipp_date,</span>
-<span id="cb1-9"><a href="#cb1-9"></a>                     <span class="at">nb_categorie_acte_same_ipp_date =</span> dplyr<span class="sc">::</span><span class="fu">n</span>(),</span>
-<span id="cb1-10"><a href="#cb1-10"></a>                     <span class="at">nb_ipp_same_ipp_date =</span> dplyr<span class="sc">::</span><span class="fu">n_distinct</span>(no_ipp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-11"><a href="#cb1-11"></a>                     ) <span class="sc">|&gt;</span> </span>
-<span id="cb1-12"><a href="#cb1-12"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">nb_acte_categorie_acte_same_ipp_date =</span> <span class="fu">sum</span>(nb_categorie_acte_same_ipp_date<span class="sc">*</span>categorie_acte_same_ipp_date),</span>
-<span id="cb1-13"><a href="#cb1-13"></a>                  <span class="at">percent_categorie_acte_same_ipp_date =</span> nb_categorie_acte_same_ipp_date<span class="sc">/</span>nb_acte_categorie_acte_same_ipp_date) <span class="sc">|&gt;</span> </span>
-<span id="cb1-14"><a href="#cb1-14"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(categorie_acte_same_ipp_date) <span class="sc">|&gt;</span> </span>
-<span id="cb1-15"><a href="#cb1-15"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(categorie_acte_same_ipp_date,nb_categorie_acte_same_ipp_date,percent_categorie_acte_same_ipp_date,</span>
-<span id="cb1-16"><a href="#cb1-16"></a>                  nb_ipp_same_ipp_date)</span>
-<span id="cb1-17"><a href="#cb1-17"></a>casemix_nb_actes_same_day</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(refpmsi)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>csarr_code <span class="ot">&lt;-</span> refpmsi<span class="sc">::</span><span class="fu">refpmsi</span>(csarr_code)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>csar_transcodage <span class="ot">&lt;-</span> refpmsi<span class="sc">::</span><span class="fu">refpmsi</span>(csar_transcodage)</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>csar_transcodage_is_P <span class="ot">&lt;-</span> csar_transcodage <span class="sc">|&gt;</span> </span>
+<span id="cb1-8"><a href="#cb1-8"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">is_acte_csar_P =</span> <span class="fu">ifelse</span>(stringr<span class="sc">::</span><span class="fu">str_sub</span>(csar_code,<span class="dv">3</span>,<span class="dv">3</span>) <span class="sc">==</span> <span class="st">"P"</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-9"><a href="#cb1-9"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(is_acte_csar_P) <span class="sc">|&gt;</span> </span>
+<span id="cb1-10"><a href="#cb1-10"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(csarr_code,csar_code,is_acte_csar_P)</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a>codage_ass_no_preparations_suivi_dossier <span class="ot">&lt;-</span> smr_rhs<span class="sc">$</span>csarr <span class="sc">|&gt;</span> </span>
+<span id="cb1-13"><a href="#cb1-13"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(nas,no_sejour_smr,code_csarr,code_intervenant_csarr) <span class="sc">|&gt;</span> </span>
+<span id="cb1-14"><a href="#cb1-14"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(code_intervenant_csarr <span class="sc">==</span> <span class="st">"62"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-15"><a href="#cb1-15"></a>    dplyr<span class="sc">::</span><span class="fu">anti_join</span>(csar_transcodage_is_P, <span class="fu">join_by</span>(code_csarr <span class="sc">==</span> csarr_code)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-16"><a href="#cb1-16"></a>    dplyr<span class="sc">::</span><span class="fu">left_join</span>(csarr_code <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(annee_pmsi <span class="sc">==</span> <span class="st">"2025"</span>) <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">distinct</span>(csarr_code, csarr_libelle),</span>
+<span id="cb1-17"><a href="#cb1-17"></a>                     <span class="fu">join_by</span>(code_csarr <span class="sc">==</span> csarr_code))</span>
+<span id="cb1-18"><a href="#cb1-18"></a>codage_ass_no_preparations_suivi_dossier</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="commentaires" class="level2">
 <h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
-<p>Ligne 3 : <code>psy_raa$raa</code> est un tibble des variables RAA. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
-<p>Lignes 5-7 : calcul par (journée, patient) du nombre d’actes ambulatoires codés</p>
-<p>Ligne 8 : <code>.by = c(no_ipp,date_acte)</code> permet de grouper directement dans le <code>summarise()</code> sans avoir à passer par un <code>group_by()</code></p>
-<p>Ligne 10 : l’option <code>na.rm = TRUE</code> de <code>dplyr::n_distinct()</code> gère les situations où aucun <code>no_ipp</code> n’est renseigné</p>
-<p>Ligne 12 : le calcul de <code>nb_acte_categorie_acte_same_ipp_date</code> comme <code>sum(nb_categorie_acte_same_ipp_date*categorie_acte_same_ipp_date)</code> est une manière de faire. Il y en a d’autres.</p>
-<p>Ligne 15-16 : sélection des seules variables intéressantes pour le casemix</p>
+<p>Lignes 4-5 : rapatriement des référentiels dont on a besoin à partir du package de données PMSI <a href="https://wwww.refpmsi.com">refpmsi::</a></p>
+<p>Ligne 7-10 : on créée le tibble des seuls actes CSAR en P</p>
+<p>Ligne 12 : <code>smr_rhs$csarr</code> est un tibble des actes CSARR issus des RHS. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
+<p>Ligne 15 : <code>dplyr::ànti_join()</code> filtre les actes CSARR qui ne sont pas les actes de préparation ou de suivi de dossier</p>
+<p>Ligne 16 : le code <code>csarr_code |&gt; dplyr::filter(annee_pmsi == "2025") |&gt; dplyr::distinct(csarr_code, csarr_libelle)</code> génère un référentiel des libellés CSARR</p>
 </section>
-<section id="pmsisoft-psy" class="level2">
-<h2 class="anchored" data-anchor-id="pmsisoft-psy">PMSISoft PSY</h2>
-<p>En extrayant la base des RAA à partir de l’écran <code>Base des RAA</code>, possibilité de filtrer en amont les RAA (par exemple les seuls actes réalisés par une catégorie professionnelle d’intervenant)</p>
-<p><a href="https://www.pmsisoft.com/acces_pmsisoft_psy" target="_blank">PMSISoft PSY</a></p>
+<section id="pmsisoft-smr" class="level2">
+<h2 class="anchored" data-anchor-id="pmsisoft-smr">PMSISoft SMR</h2>
+<p>On obtient cette liste dans l’écran <code>Base des actes CSARR</code> en filtrant <code>acte_csarr Regex ZGM+105|ZGM+247|ZZE+026|ZZM+066|ZZM+161|ZZM+159|ZZM+143 ET intervenant Est exactement 62</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p><a href="https://www.pmsisoft.com/acces_pmsisoft_ssr" target="_blank">PMSISoft SMR</a></p>
 <p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
 
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notes de bas de page</h2>
+
+<ol>
+<li id="fn1"><p><a href="https://www.atih.sante.fr/simplification-du-csarr-guide-de-codage-csar-0" target="_blank">Guide du CSAR</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>le vecteur des actes CSARR de préparation ou de suivi de dossier peut s’obtenir à partir du tibble <code>csar_transcodage_is_P</code> via le code : <code>vect_csarr_preparations_suivi_dossier &lt;- csar_transcodage_is_P |&gt; dplyr::pull(csarr_code) |&gt; paste0(collapse = "|")</code> `<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

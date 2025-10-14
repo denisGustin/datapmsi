@@ -1,0 +1,15 @@
+{
+  "hash": "52dbf810fcd7d473220f5aebd90b9e7f",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"<b>Codage CIM par position</b>\"\ndate: \"2025-10-13\"\ncategories: [MCO,CIM-10]\npage-layout: full\n---\n\n\n## Introduction  \n\nIl est intéressant et courant de vouloir travailler sur la base de l'ensemble des codages CIM-10, indépendamment de la position de codage (DP, DR, DAS ou DAD).  \n\nPour ce faire, nous allons constituer un tibble des codages CIM-10 pour chacune des 4 positions possibles de codage, en faisant en sorte que ces 4 tibbles aient les mêmes variables. Puis, nous \"empilerons\" les 4 tibbles.  \n\nLe tibble calculé `codage_cim` comprend les variable d'identification du RUM (`nas`,`no_rss`,`no_rum`), le code CIM-10, son libellé et sa position.  \n\nL'exploitation classique de ce tibble des codages CIM est le repérage des séjours avec présence d'une pathologie qualifiée par un ou plusieurs code CIM-10.  \n\n## Code  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\nlibrary(tidyr)\nlibrary(refpmsi)\n\ncim_only_libelle <- refpmsi::refpmsi(cim_libelle) %>% dplyr::select(cim_code,cim_libelle)\n\ncodage_dp_dr <- mco_rss$rum |> \n    dplyr::select(nas,no_rss,no_rum,dp_rum,dr_rum) |> \n    tidyr::pivot_longer(cols = c(dp_rum,dr_rum), names_to = \"position\", values_to = \"codage\") |> \n    dplyr::filter(!is.na(codage))\n\ncodage_das <- mco_rss$das |> \n    dplyr::select(nas,no_rss,no_rum,codage = das) |> \n    dplyr::mutate(position = \"das\")\n\ncodage_dad <- mco_rss$dad |> \n    dplyr::select(nas,no_rss,no_rum,codage = dad) |> \n    dplyr::mutate(position = \"dad\")\n\ncodage_cim <- dplyr::bind_rows(codage_dp_dr,codage_das,codage_dad) |> \n    dplyr::arrange(across(c(nas,no_rss,no_rum))) |> \n    dplyr::left_join(cim_only_libelle, by = join_by(codage == cim_code))\ncodage_cim\n```\n:::\n\n\n## Commentaires  \n\nLigne 5 : création d'un référentiel minimal des libellés CIM-10 via [refpmsi::](https://www.refpmsi.com)  \n\nLignes 7-10 : génération du tibble des codages CIM issus des positons DP et DR en créant une variable `position` avec `tidyr::pivot_longer()` \n\nLigne 7,12,15 : `mco_rss$rum`, `mco_rss$das`, `mco_rss$dad`  sont des tibbles issus des RUM. Voir [Guide des scripts - Jeux de données](https://www.datapmsi.com/guide_post#via-pmsisoft-standard)  \n\nLigne 20 : on réarrange pour que tous les codages CIM des RUM d'un même séjour soient regroupés  \n\n## PMSISoft MCO  \n\nCette table est extractable nativement par exemple à partir de l'écran `Base des codes CIM`  \n\n[PMSISoft MCO](https://www.pmsisoft.com/acces_pmsisoft_mco){target=\"_blank\"} \n\n[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target=\"_blank\"}  \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

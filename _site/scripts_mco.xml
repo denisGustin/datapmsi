@@ -10,7 +10,201 @@
 <atom:link href="https://www.datapmsi.com/scripts_mco.xml" rel="self" type="application/rss+xml"/>
 <description>Codes et formations R pour les PMSI MCO, SMR, PSY et HAD</description>
 <generator>quarto-1.4.551</generator>
-<lastBuildDate>Sat, 12 Oct 2024 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 12 Oct 2025 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Codage CIM par position</title>
+  <dc:creator>denis Gustin</dc:creator>
+  <link>https://www.datapmsi.com/posts/mco/script_mco_codage_cim_position/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Il est intéressant et courant de vouloir travailler sur la base de l’ensemble des codages CIM-10, indépendamment de la position de codage (DP, DR, DAS ou DAD).</p>
+<p>Pour ce faire, nous allons constituer un tibble des codages CIM-10 pour chacune des 4 positions possibles de codage, en faisant en sorte que ces 4 tibbles aient les mêmes variables. Puis, nous “empilerons” les 4 tibbles.</p>
+<p>Le tibble calculé <code>codage_cim</code> comprend les variable d’identification du RUM (<code>nas</code>,<code>no_rss</code>,<code>no_rum</code>), le code CIM-10, son libellé et sa position.</p>
+<p>L’exploitation classique de ce tibble des codages CIM est le repérage des séjours avec présence d’une pathologie qualifiée par un ou plusieurs code CIM-10.</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyr)</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(refpmsi)</span>
+<span id="cb1-4"></span>
+<span id="cb1-5">cim_only_libelle <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> refpmsi<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">refpmsi</span>(cim_libelle) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(cim_code,cim_libelle)</span>
+<span id="cb1-6"></span>
+<span id="cb1-7">codage_dp_dr <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> mco_rss<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>rum <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(nas,no_rss,no_rum,dp_rum,dr_rum) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-9">    tidyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pivot_longer</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cols =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(dp_rum,dr_rum), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">names_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"position"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"codage"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-10">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(codage))</span>
+<span id="cb1-11"></span>
+<span id="cb1-12">codage_das <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> mco_rss<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>das <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-13">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(nas,no_rss,no_rum,<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">codage =</span> das) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-14">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"das"</span>)</span>
+<span id="cb1-15"></span>
+<span id="cb1-16">codage_dad <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> mco_rss<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>dad <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-17">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(nas,no_rss,no_rum,<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">codage =</span> dad) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-18">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dad"</span>)</span>
+<span id="cb1-19"></span>
+<span id="cb1-20">codage_cim <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">bind_rows</span>(codage_dp_dr,codage_das,codage_dad) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-21">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">across</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(nas,no_rss,no_rum))) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-22">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(cim_only_libelle, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">join_by</span>(codage <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> cim_code))</span>
+<span id="cb1-23">codage_cim</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level2">
+<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Ligne 5 : création d’un référentiel minimal des libellés CIM-10 via <a href="https://www.refpmsi.com">refpmsi::</a></p>
+<p>Lignes 7-10 : génération du tibble des codages CIM issus des positons DP et DR en créant une variable <code>position</code> avec <code>tidyr::pivot_longer()</code></p>
+<p>Ligne 7,12,15 : <code>mco_rss$rum</code>, <code>mco_rss$das</code>, <code>mco_rss$dad</code> sont des tibbles issus des RUM. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
+<p>Ligne 20 : on réarrange pour que tous les codages CIM des RUM d’un même séjour soient regroupés</p>
+</section>
+<section id="pmsisoft-mco" class="level2">
+<h2 class="anchored" data-anchor-id="pmsisoft-mco">PMSISoft MCO</h2>
+<p>Cette table est extractable nativement par exemple à partir de l’écran <code>Base des codes CIM</code></p>
+<p><a href="https://www.pmsisoft.com/acces_pmsisoft_mco" target="_blank">PMSISoft MCO</a></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>MCO</category>
+  <category>CIM-10</category>
+  <guid>https://www.datapmsi.com/posts/mco/script_mco_codage_cim_position/</guid>
+  <pubDate>Sun, 12 Oct 2025 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Identification et comptage des séjours COVID-19 et grippe</title>
   <dc:creator>denis Gustin</dc:creator>

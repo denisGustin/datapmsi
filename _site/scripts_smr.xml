@@ -10,7 +10,191 @@
 <atom:link href="https://www.datapmsi.com/scripts_smr.xml" rel="self" type="application/rss+xml"/>
 <description>Codes et formations R pour les PMSI MCO, SMR, PSY et HAD</description>
 <generator>quarto-1.4.551</generator>
-<lastBuildDate>Tue, 17 Sep 2024 22:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 11 Oct 2025 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>Actes CSARR ASS hors préparation ou suivi de dossier</title>
+  <dc:creator>denis Gustin</dc:creator>
+  <link>https://www.datapmsi.com/posts/smr/script_smr_csarr_ass_hors_suivi_dossier/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Le nouveau CSAR 1R identifie les actes de préparation ou de suivi de dossier via la lettre P en 3eme position (exemple : 11P02 <em>Préparation et/ou suivi de l’avancement d’un dossier de demande de prestation sociale ou d’une démarche administrative</em>)<sup>1</sup></p>
+<p>Pour repérer les actes ASS hors préparation ou suivi de dossier, nous allons donc successivement :<br>
+1| isoler les actes de préparation ou suivi de dossier en CSARR et CSAR<br>
+2| filtrer les actes réalisés par les Assistant de Service Social (code 62)<br>
+3| repérer les actes qui NE sont PAS des actes de préparation ou de suivi de dossier<br>
+4| enrichir avec les libellés CSARR</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(refpmsi)</span>
+<span id="cb1-3"></span>
+<span id="cb1-4">csarr_code <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> refpmsi<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">refpmsi</span>(csarr_code)</span>
+<span id="cb1-5">csar_transcodage <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> refpmsi<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">refpmsi</span>(csar_transcodage)</span>
+<span id="cb1-6"></span>
+<span id="cb1-7">csar_transcodage_is_P <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> csar_transcodage <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-8">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">is_acte_csar_P =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_sub</span>(csar_code,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"P"</span>, <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-9">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(is_acte_csar_P) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-10">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(csarr_code,csar_code,is_acte_csar_P)</span>
+<span id="cb1-11"></span>
+<span id="cb1-12">codage_ass_no_preparations_suivi_dossier <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> smr_rhs<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>csarr <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-13">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(nas,no_sejour_smr,code_csarr,code_intervenant_csarr) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-14">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(code_intervenant_csarr <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"62"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-15">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">anti_join</span>(csar_transcodage_is_P, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">join_by</span>(code_csarr <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> csarr_code)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb1-16">    dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(csarr_code <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(annee_pmsi <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2025"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">distinct</span>(csarr_code, csarr_libelle),</span>
+<span id="cb1-17">                     <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">join_by</span>(code_csarr <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> csarr_code))</span>
+<span id="cb1-18">codage_ass_no_preparations_suivi_dossier</span></code></pre></div>
+</div>
+</section>
+<section id="commentaires" class="level2">
+<h2 class="anchored" data-anchor-id="commentaires">Commentaires</h2>
+<p>Lignes 4-5 : rapatriement des référentiels dont on a besoin à partir du package de données PMSI <a href="https://wwww.refpmsi.com">refpmsi::</a></p>
+<p>Ligne 7-10 : on créée le tibble des seuls actes CSAR en P</p>
+<p>Ligne 12 : <code>smr_rhs$csarr</code> est un tibble des actes CSARR issus des RHS. Voir <a href="https://www.datapmsi.com/guide_post#via-pmsisoft-standard">Guide des scripts - Jeux de données</a></p>
+<p>Ligne 15 : <code>dplyr::ànti_join()</code> filtre les actes CSARR qui ne sont pas les actes de préparation ou de suivi de dossier</p>
+<p>Ligne 16 : le code <code>csarr_code |&gt; dplyr::filter(annee_pmsi == "2025") |&gt; dplyr::distinct(csarr_code, csarr_libelle)</code> génère un référentiel des libellés CSARR</p>
+</section>
+<section id="pmsisoft-smr" class="level2">
+<h2 class="anchored" data-anchor-id="pmsisoft-smr">PMSISoft SMR</h2>
+<p>On obtient cette liste dans l’écran <code>Base des actes CSARR</code> en filtrant <code>acte_csarr Regex ZGM+105|ZGM+247|ZZE+026|ZZM+066|ZZM+161|ZZM+159|ZZM+143 ET intervenant Est exactement 62</code><sup>2</sup></p>
+<p><a href="https://www.pmsisoft.com/acces_pmsisoft_ssr" target="_blank">PMSISoft SMR</a></p>
+<p><a href="http://www.lespmsi.com/scripts-pmsi-r/" target="_blank">Etre tenu au courant de la publication des nouveaux scripts PMSI R</a></p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Notes de bas de page</h2>
+
+<ol>
+<li id="fn1"><p><a href="https://www.atih.sante.fr/simplification-du-csarr-guide-de-codage-csar-0" target="_blank">Guide du CSAR</a>↩︎</p></li>
+<li id="fn2"><p>le vecteur des actes CSARR de préparation ou de suivi de dossier peut s’obtenir à partir du tibble <code>csar_transcodage_is_P</code> via le code : <code>vect_csarr_preparations_suivi_dossier &lt;- csar_transcodage_is_P |&gt; dplyr::pull(csarr_code) |&gt; paste0(collapse = "|")</code> `↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>SMR</category>
+  <category>CSARR</category>
+  <category>CSAR</category>
+  <guid>https://www.datapmsi.com/posts/smr/script_smr_csarr_ass_hors_suivi_dossier/</guid>
+  <pubDate>Sat, 11 Oct 2025 22:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Evolution des types de ZF, DZF et FZF des GME</title>
   <dc:creator>denis Gustin</dc:creator>

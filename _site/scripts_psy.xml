@@ -29,7 +29,7 @@
 1| Quelle est la part des actes ambulatoires codés 1 seule fois par (journée, patient) ?<br>
 2| Combien d’actes ambulatoires sont-ils codés dans des situations de 2 actes par (journée, patient) ?<br>
 3| Quel est le nombre de patients ayant bénéficié au moins 1 journée de 5 actes dans une journée ?<br>
-4| Y-a-t-il des situations avec &gt; 15 actes codés pour un patient ? (cf motif d’exclusion de la DFA)</p>
+4| Y-a-t-il des situations avec &gt;= 15 actes codés pour un patient ? (cf motif d’exclusion de la DFA)</p>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>

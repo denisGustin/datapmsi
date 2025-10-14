@@ -1,0 +1,63 @@
+---
+title: "<b>Codage CIM par position</b>"
+date: "2025-10-13"
+categories: [MCO,CIM-10]
+page-layout: full
+---
+
+## Introduction  
+
+Il est intéressant et courant de vouloir travailler sur la base de l'ensemble des codages CIM-10, indépendamment de la position de codage (DP, DR, DAS ou DAD).  
+
+Pour ce faire, nous allons constituer un tibble des codages CIM-10 pour chacune des 4 positions possibles de codage, en faisant en sorte que ces 4 tibbles aient les mêmes variables. Puis, nous "empilerons" les 4 tibbles.  
+
+Le tibble calculé `codage_cim` comprend les variable d'identification du RUM (`nas`,`no_rss`,`no_rum`), le code CIM-10, son libellé et sa position.  
+
+L'exploitation classique de ce tibble des codages CIM est le repérage des séjours avec présence d'une pathologie qualifiée par un ou plusieurs code CIM-10.  
+
+## Code  
+
+```{r}
+#| label: code
+library(dplyr)
+library(tidyr)
+library(refpmsi)
+
+cim_only_libelle <- refpmsi::refpmsi(cim_libelle) %>% dplyr::select(cim_code,cim_libelle)
+
+codage_dp_dr <- mco_rss$rum |> 
+    dplyr::select(nas,no_rss,no_rum,dp_rum,dr_rum) |> 
+    tidyr::pivot_longer(cols = c(dp_rum,dr_rum), names_to = "position", values_to = "codage") |> 
+    dplyr::filter(!is.na(codage))
+
+codage_das <- mco_rss$das |> 
+    dplyr::select(nas,no_rss,no_rum,codage = das) |> 
+    dplyr::mutate(position = "das")
+
+codage_dad <- mco_rss$dad |> 
+    dplyr::select(nas,no_rss,no_rum,codage = dad) |> 
+    dplyr::mutate(position = "dad")
+
+codage_cim <- dplyr::bind_rows(codage_dp_dr,codage_das,codage_dad) |> 
+    dplyr::arrange(across(c(nas,no_rss,no_rum))) |> 
+    dplyr::left_join(cim_only_libelle, by = join_by(codage == cim_code))
+codage_cim
+```
+
+## Commentaires  
+
+Ligne 5 : création d'un référentiel minimal des libellés CIM-10 via [refpmsi::](https://www.refpmsi.com)  
+
+Lignes 7-10 : génération du tibble des codages CIM issus des positons DP et DR en créant une variable `position` avec `tidyr::pivot_longer()` 
+
+Ligne 7,12,15 : `mco_rss$rum`, `mco_rss$das`, `mco_rss$dad`  sont des tibbles issus des RUM. Voir [Guide des scripts - Jeux de données](https://www.datapmsi.com/guide_post#via-pmsisoft-standard)  
+
+Ligne 20 : on réarrange pour que tous les codages CIM des RUM d'un même séjour soient regroupés  
+
+## PMSISoft MCO  
+
+Cette table est extractable nativement par exemple à partir de l'écran `Base des codes CIM`  
+
+[PMSISoft MCO](https://www.pmsisoft.com/acces_pmsisoft_mco){target="_blank"} 
+
+[Etre tenu au courant de la publication des nouveaux scripts PMSI R](http://www.lespmsi.com/scripts-pmsi-r/){target="_blank"}  
