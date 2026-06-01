@@ -34,7 +34,7 @@ website:
         text: "Guide des scripts"
   page-footer:
     left: "Blog codé avec [Quarto](https://quarto.org/)"
-    right: "[Mentions légales](../about.html) | &copy; Copyright 2024-2025 - DATAMIS"
+    right: "[Mentions légales](../about.html) | &copy; Copyright 2024-2026 - DATAMIS"
     
 format:
   html:
