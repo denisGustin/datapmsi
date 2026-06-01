@@ -20,6 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { line-height: 1.25; }
@@ -122,11 +123,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./prestation.html" aria-current="page"> 
+    <a class="nav-link" href="./prestation.html"> 
 <span class="menu-text">Live coding PMSI R</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./guide_post.html"> 
+    <a class="nav-link active" href="./guide_post.html" aria-current="page"> 
 <span class="menu-text">Guide des scripts</span></a>
   </li>  
   <li class="nav-item">
@@ -176,18 +177,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prestation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Live coding PMSI R</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./guide_post.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Guide des scripts</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./scripts_mco.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scripts MCO</span></a>
   </div>
@@ -202,6 +191,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./scripts_psy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scripts PSY</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./guide_post.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guide des scripts</span></a>
   </div>
 </li>
     </ul>
@@ -276,33 +271,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 30
 Columns: 27
-$ ghm                                        &lt;chr&gt; "06M041", "04M05T", "04M203~
-$ code_retour                                &lt;chr&gt; "000", "000", "000", "000",~
-$ nas                                        &lt;chr&gt; "1740", "435", "1684", "125~
-$ no_rum                                     &lt;chr&gt; "1", "1", "1", "1", "1", "1~
-$ age                                        &lt;int&gt; 72, 58, 59, 55, 71, 87, 65,~
-$ sexe                                       &lt;chr&gt; "F", "F", "H", "F", "F", "H~
-$ no_um                                      &lt;chr&gt; "um01", "um01", "um01", "um~
-$ type_aut_lit_dedie                         &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
-$ mode_entree_um                             &lt;chr&gt; "8", "8", "8", "8", "8", "8~
-$ provenance_um                              &lt;chr&gt; "5", "5", "5", "5", "5", "5~
-$ mode_sortie_um                             &lt;chr&gt; "6", "8", "6", "8", "8", "6~
-$ destination_um                             &lt;chr&gt; "1", "NA", "1", "NA", "NA",~
-$ nb_seances                                 &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, ~
-$ nb_das                                     &lt;int&gt; 1, 3, 1, 0, 0, 0, 0, 1, 1, ~
-$ nb_ccam                                    &lt;int&gt; 0, 3, 3, 3, 3, 5, 2, 3, 1, ~
-$ dp                                         &lt;chr&gt; "K625", "J181", "J9600", "N~
-$ dr                                         &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
-$ igs_2                                      &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, ~
-$ confirmation_codage_rss                    &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
-$ conversion_hc                              &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
-$ raac                                       &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
-$ contexte_patient_surveillance_particuliere &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
-$ admin_produit_rh                           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
-$ rescrit_tarifaire                          &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
-$ cat_nb_inter_tot                           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,~
-$ date_entree_um                             &lt;chr&gt; "2022-07-01", "2022-03-01",~
-$ date_sortie_um                             &lt;chr&gt; "2022-07-02", "2022-03-02",~</code></pre>
+$ ghm                                        &lt;chr&gt; "06M041", "04M05T", "04M203…
+$ code_retour                                &lt;chr&gt; "000", "000", "000", "000",…
+$ nas                                        &lt;chr&gt; "1740", "435", "1684", "125…
+$ no_rum                                     &lt;chr&gt; "1", "1", "1", "1", "1", "1…
+$ age                                        &lt;int&gt; 72, 58, 59, 55, 71, 87, 65,…
+$ sexe                                       &lt;chr&gt; "F", "F", "H", "F", "F", "H…
+$ no_um                                      &lt;chr&gt; "um01", "um01", "um01", "um…
+$ type_aut_lit_dedie                         &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,…
+$ mode_entree_um                             &lt;chr&gt; "8", "8", "8", "8", "8", "8…
+$ provenance_um                              &lt;chr&gt; "5", "5", "5", "5", "5", "5…
+$ mode_sortie_um                             &lt;chr&gt; "6", "8", "6", "8", "8", "6…
+$ destination_um                             &lt;chr&gt; "1", "NA", "1", "NA", "NA",…
+$ nb_seances                                 &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ nb_das                                     &lt;int&gt; 1, 3, 1, 0, 0, 0, 0, 1, 1, …
+$ nb_ccam                                    &lt;int&gt; 0, 3, 3, 3, 3, 5, 2, 3, 1, …
+$ dp                                         &lt;chr&gt; "K625", "J181", "J9600", "N…
+$ dr                                         &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,…
+$ igs_2                                      &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ confirmation_codage_rss                    &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,…
+$ conversion_hc                              &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,…
+$ raac                                       &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,…
+$ contexte_patient_surveillance_particuliere &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,…
+$ admin_produit_rh                           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,…
+$ rescrit_tarifaire                          &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,…
+$ cat_nb_inter_tot                           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA,…
+$ date_entree_um                             &lt;chr&gt; "2022-07-01", "2022-03-01",…
+$ date_sortie_um                             &lt;chr&gt; "2022-07-02", "2022-03-02",…</code></pre>
 </div>
 </div>
 </section>
@@ -793,7 +788,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>
     <div class="nav-footer-right">
-<p><a href="../about.html">Mentions légales</a> | © Copyright 2023-2024 - DATAMIS</p>
+<p><a href="../about.html">Mentions légales</a> | © Copyright 2024-2025 - DATAMIS</p>
 </div>
   </div>
 </footer>

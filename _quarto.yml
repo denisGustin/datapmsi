@@ -38,6 +38,7 @@ website:
     
 format:
   html:
+    html-math-method: plain
     theme: 
       - cosmo
       - style.css
